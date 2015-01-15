@@ -12,7 +12,21 @@
 
 <c:forEach var="photoList" items="${photoLists}">
 
-	<photo:photoListLazyLoading photoList="${photoList}" />
+	<%--<c:if test="${empty photoList.selectedPhotoListViewMode}">
+		<photo:photoListLazyLoading photoList="${photoList}" />
+	</c:if>--%>
+
+	<%--<c:if test="${not empty photoList.selectedPhotoListViewMode}">--%>
+
+		<c:if test="${photoList.selectedPhotoListViewModeType == 'VIEW_MODE_PREVIEW'}">
+			<photo:photoListLazyLoading photoList="${photoList}" />
+		</c:if>
+
+		<c:if test="${photoList.selectedPhotoListViewModeType == 'VIEW_MODE_DETAILS'}">
+			<photo:photoListDetails photoList="${photoList}" />
+		</c:if>
+
+	<%--</c:if>--%>
 
 	<div style="float: left; width: 100%; border-bottom: 1px dashed #848078; margin-bottom: 15px;"></div>
 

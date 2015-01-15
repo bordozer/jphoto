@@ -26,6 +26,8 @@ import core.services.utils.sql.PhotoListQueryBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
+import ui.viewModes.PhotoListViewMode;
+import ui.viewModes.PhotoListViewModeType;
 
 import java.util.*;
 
@@ -879,6 +881,16 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 				return getPhotoGroupOperationMenuContainerForUserCard( user );
+			}
+
+			@Override
+			public List<PhotoListViewMode> getAccessiblePhotoListViewModes() {
+				final String photosLink = services.getUrlUtilsService().getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
+
+				final PhotoListViewMode preview = PhotoListViewMode.preview( String.format( "%s?mode=%s", photosLink, PhotoListViewModeType.VIEW_MODE_PREVIEW.getKey() ) );
+				final PhotoListViewMode details = PhotoListViewMode.details( String.format( "%s?mode=%s", photosLink, PhotoListViewModeType.VIEW_MODE_DETAILS.getKey() ) );
+
+				return newArrayList( preview, details );
 			}
 		};
 	}

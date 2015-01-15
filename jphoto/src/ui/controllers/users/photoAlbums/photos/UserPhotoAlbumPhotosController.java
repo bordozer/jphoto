@@ -19,6 +19,7 @@ import ui.context.EnvironmentContext;
 import ui.elements.PhotoList;
 import ui.services.UtilsService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
+import ui.viewModes.PhotoListViewModeType;
 import utils.NumberUtils;
 import utils.PagingUtils;
 
@@ -71,7 +72,8 @@ public class UserPhotoAlbumPhotosController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String albumPhotos( final @PathVariable( "userId" ) String _userId, final @PathVariable( "albumId" ) int albumId, final @ModelAttribute( MODEL_NAME ) UserPhotoAlbumPhotosModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String albumPhotos( final @PathVariable( "userId" ) String _userId, final @PathVariable( "albumId" ) int albumId, final @ModelAttribute( MODEL_NAME ) UserPhotoAlbumPhotosModel model
+			, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final HttpServletRequest request ) {
 
 		securityService.assertUserExists( _userId );
 
@@ -84,6 +86,8 @@ public class UserPhotoAlbumPhotosController {
 
 		final PhotoList photoList = photoListFactoryService.userAlbumPhotos( user, photoAlbum, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() )
 														   .getPhotoList( photoAlbum.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
+
+		photoList.setSelectedPhotoListViewModeType( PhotoListViewModeType.getById( request.getParameter( "mode" ) ) );
 
 		model.setPhotoList( photoList );
 

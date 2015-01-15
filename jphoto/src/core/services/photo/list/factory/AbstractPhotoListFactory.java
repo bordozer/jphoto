@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.elements.PhotoList;
+import ui.viewModes.PhotoListViewMode;
 import utils.UserUtils;
 
 import java.util.Date;
@@ -54,6 +55,8 @@ public abstract class AbstractPhotoListFactory {
 
 		photoList.setPhotosCount( metrics.getPhotosCount() );
 
+		photoList.setAccessiblePhotoListViewModes( getAccessiblePhotoListViewModes() );
+
 		return photoList;
 	}
 
@@ -75,6 +78,10 @@ public abstract class AbstractPhotoListFactory {
 
 	public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	}
+
+	public List<PhotoListViewMode> getAccessiblePhotoListViewModes() {
+		return newArrayList();
 	}
 
 	protected int getTopListPhotosCount() {

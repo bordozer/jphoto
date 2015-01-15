@@ -2,6 +2,8 @@ package ui.elements;
 
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import org.apache.commons.lang.StringUtils;
+import ui.viewModes.PhotoListViewMode;
+import ui.viewModes.PhotoListViewModeType;
 
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class PhotoList {
 	private PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
 
 	private int photosCount;
+
+	private PhotoListViewModeType selectedPhotoListViewModeType = PhotoListViewModeType.VIEW_MODE_PREVIEW;
+	private List<PhotoListViewMode> accessiblePhotoListViewModes;
 
 	public PhotoList( final List<Integer> photoIds, final String photoListTitle ) {
 		this( photoIds, photoListTitle, true );
@@ -118,5 +123,21 @@ public class PhotoList {
 
 	public void setPhotosCount( final int photosCount ) {
 		this.photosCount = photosCount;
+	}
+
+	public PhotoListViewModeType getSelectedPhotoListViewModeType() {
+		return selectedPhotoListViewModeType;
+	}
+
+	public void setSelectedPhotoListViewModeType( final PhotoListViewModeType selectedPhotoListViewModeType ) {
+		this.selectedPhotoListViewModeType = selectedPhotoListViewModeType;
+	}
+
+	public List<PhotoListViewMode> getAccessiblePhotoListViewModes() {
+		return accessiblePhotoListViewModes;
+	}
+
+	public void setAccessiblePhotoListViewModes( final List<PhotoListViewMode> accessiblePhotoListViewModes ) {
+		this.accessiblePhotoListViewModes = accessiblePhotoListViewModes;
 	}
 }
