@@ -3,13 +3,16 @@ package rest.photo.list.bigPreview;
 public class PhotoBigEntryDTO {
 
 	private String photoName;
-	private String photoImage;
+	private String photoImageUrl;
 	private String photoUploadDate;
 	private String photoCategory;
 	private String photoLink;
 	private String photoCardLink;
 	private String photoAuthorLink;
 	private String photoDescription;
+
+	private int photoImageWidth;
+	private int photoImageHeight;
 
 	public String getPhotoUploadDate() {
 		return photoUploadDate;
@@ -27,12 +30,12 @@ public class PhotoBigEntryDTO {
 		this.photoCategory = photoCategory;
 	}
 
-	public String getPhotoImage() {
-		return photoImage;
+	public String getPhotoImageUrl() {
+		return photoImageUrl;
 	}
 
-	public void setPhotoImage( final String photoImage ) {
-		this.photoImage = photoImage;
+	public void setPhotoImageUrl( final String photoImageUrl ) {
+		this.photoImageUrl = photoImageUrl;
 	}
 
 	public String getPhotoName() {
@@ -73,5 +76,21 @@ public class PhotoBigEntryDTO {
 
 	public void setPhotoDescription( final String photoDescription ) {
 		this.photoDescription = photoDescription;
+	}
+
+	public int getPhotoImageWidth() {
+		return photoImageWidth;
+	}
+
+	public void setPhotoImageWidth( final int photoImageWidth ) {
+		this.photoImageWidth = photoImageWidth;
+	}
+
+	public int getPhotoImageHeight() {
+		return photoImageHeight;
+	}
+
+	public void setPhotoImageHeight( final int photoImageHeight ) {
+		this.photoImageHeight = photoImageHeight;
 	}
 }
