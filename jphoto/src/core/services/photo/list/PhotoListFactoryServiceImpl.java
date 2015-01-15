@@ -888,7 +888,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				final String photosLink = services.getUrlUtilsService().getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
 
 				final PhotoListViewMode preview = PhotoListViewMode.preview( String.format( "%s?mode=%s", photosLink, PhotoListViewModeType.VIEW_MODE_PREVIEW.getKey() ) );
-				final PhotoListViewMode details = PhotoListViewMode.details( String.format( "%s?mode=%s", photosLink, PhotoListViewModeType.VIEW_MODE_DETAILS.getKey() ) );
+				final PhotoListViewMode details = PhotoListViewMode.details( String.format( "%s?mode=%s", photosLink, PhotoListViewModeType.VIEW_MODE_BIG_PREVIEW.getKey() ) );
 
 				return newArrayList( preview, details );
 			}

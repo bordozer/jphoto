@@ -23,7 +23,7 @@ public class PhotoListViewMode {
 	}
 
 	public static PhotoListViewMode details( final String viewModeLink ) {
-		return new PhotoListViewMode( PhotoListViewModeType.VIEW_MODE_DETAILS, viewModeLink );
+		return new PhotoListViewMode( PhotoListViewModeType.VIEW_MODE_BIG_PREVIEW, viewModeLink );
 	}
 
 	@Override

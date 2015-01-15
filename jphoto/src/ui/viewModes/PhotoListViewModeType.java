@@ -3,7 +3,7 @@ package ui.viewModes;
 public enum PhotoListViewModeType {
 
 	VIEW_MODE_PREVIEW( "preview", "PhotoListViewMode: Preview", "layouts_preview.png" )
-	, VIEW_MODE_DETAILS( "details", "PhotoListViewMode: Details", "layouts_details.png" );
+	, VIEW_MODE_BIG_PREVIEW( "details", "PhotoListViewMode: Details", "layouts_details.png" );
 
 	private final String key;
 	private final String name;
