@@ -20,6 +20,7 @@ import ui.context.EnvironmentContext;
 import ui.elements.PhotoList;
 import ui.services.UtilsService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
+import ui.viewModes.PhotoListViewModeType;
 import utils.NumberUtils;
 import utils.PagingUtils;
 
@@ -77,7 +78,8 @@ public class UserTeamMemberCardController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{userTeamMemberId}/" )
-	public String userTeamMemberCard( final @PathVariable( "userId" ) String _userId, final @PathVariable( "userTeamMemberId" ) int userTeamMemberId, final @ModelAttribute( MODEL_NAME ) UserTeamMemberCardModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String userTeamMemberCard( final @PathVariable( "userId" ) String _userId, final @PathVariable( "userTeamMemberId" ) int userTeamMemberId
+			, final @ModelAttribute( MODEL_NAME ) UserTeamMemberCardModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final HttpServletRequest request ) {
 
 		securityService.assertUserExists( _userId );
 
@@ -89,6 +91,7 @@ public class UserTeamMemberCardController {
 		model.setUserTeamMember( userTeamMember );
 
 		final PhotoList photoList = photoListFactoryService.userTeamMemberPhotos( user, userTeamMember, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ).getPhotoList( userTeamMember.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
+		photoList.setSelectedPhotoListViewModeType( PhotoListViewModeType.getById( request.getParameter( "mode" ) ) );
 
 		model.setPhotoLists( newArrayList( photoList ) );
 

@@ -176,3 +176,10 @@
 	padding: 1px;
 	background-image: url('/images/photo-list-entry-album.png');
 }
+
+.photo-list-separator {
+	float: left;
+	width: 100%;
+	border-bottom: 1px dashed #848078;
+	margin-bottom: 15px;
+}

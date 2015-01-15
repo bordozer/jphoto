@@ -20,6 +20,6 @@
 		<photo:photoListDetails photoList="${photoList}"/>
 	</c:if>
 
-	<div style="float: left; width: 100%; border-bottom: 1px dashed #848078; margin-bottom: 15px;"></div>
+	<div class="photo-list-separator"></div>
 
 </c:forEach>

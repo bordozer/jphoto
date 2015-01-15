@@ -30,6 +30,8 @@
 
 			<div class="photo-container-${photoList.photoListId}-${photoId}"></div>
 
+			<div class="photo-list-separator"></div>
+
 		</c:forEach>
 	</div>
 
