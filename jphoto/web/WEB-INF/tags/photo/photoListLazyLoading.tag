@@ -10,7 +10,6 @@
 
 <%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
 
-<c:set var="photoListTitle" value="${photoList.photoListTitle}"/>
 <c:set var="totalPhotos" value="${photoList.photosCountToShow}"/>
 
 <c:set var="groupOperationForm" value="groupOperationForm" />
@@ -35,21 +34,7 @@
 	<a name="${photoList.photoListId}"></a>
 	<div class="photo-list-container">
 
-		<div class="photo-list-title block-background block-border block-shadow">
-
-			<c:if test="${not empty photoListTitle}">
-				${photoListTitle}
-			</c:if>
-
-			<c:if test="${not empty photoList.accessiblePhotoListViewModes}">
-				<div style="float: right; width: 100px; text-align: right; padding-right: 10px;">
-					<c:forEach var="viewMode" items="${photoList.accessiblePhotoListViewModes}" >
-						<a href="${viewMode.viewModeLink}"><html:img24 src="${viewMode.viewModeType.icon}" alt="" /></a>
-						&nbsp;
-					</c:forEach>
-				</div>
-			</c:if>
-		</div>
+		<photo:photoListHeader photoList="${photoList}" />
 
 		<div class="empty-photo-list-text">
 			<c:if test="${totalPhotos == 0}">
