@@ -3,7 +3,6 @@ package rest.photo.list;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
-import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
@@ -49,10 +48,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
-public class PhotoListEntryController {
-
-	@Autowired
-	private PhotoService photoService;
+public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 	@Autowired
 	private PhotoCommentService photoCommentService;
@@ -61,40 +57,13 @@ public class PhotoListEntryController {
 	private PhotoPreviewService photoPreviewService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private GenreService genreService;
-
-	@Autowired
-	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
-
-	@Autowired
 	private ConfigurationService configurationService;
-
-	@Autowired
-	private UrlUtilsService urlUtilsService;
 
 	@Autowired
 	private PhotoVotingService photoVotingService;
 
 	@Autowired
-	private TranslatorService translatorService;
-
-	@Autowired
 	private UserRankService userRankService;
-
-	@Autowired
-	private SecurityService securityService;
-
-	@Autowired
-	private SecurityUIService securityUIService;
 
 	@Autowired
 	private FavoritesService favoritesService;
@@ -126,7 +95,7 @@ public class PhotoListEntryController {
 		dto.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		dto.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
 		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
-		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language ) );
+		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
 		dto.setPhotoCardLink( urlUtilsService.getPhotoCardLink( photo.getId() ) );
 		setNudeContent( photo, accessor, dto, language );
 
@@ -136,7 +105,7 @@ public class PhotoListEntryController {
 			dto.setPhotoName( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
 			dto.setPhotoLink( "" );
 		} else {
-			dto.setPhotoName( photo.getName() ); // escaping!
+			dto.setPhotoName( photo.getName() ); // TODO: escaping!
 			dto.setPhotoLink( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
 		}
 		dto.setPhotoAuthorLink( getPhotoAuthorLink( photo, accessor, language ) );
@@ -205,18 +174,6 @@ public class PhotoListEntryController {
 		}
 
 		dto.setSpecialRestrictionIcons( result );
-	}
-
-	private String getPhotoUploadDate( final Photo photo, final Language language ) {
-		final Date uploadTime = photo.getUploadTime();
-
-		final String shownTime = dateUtilsService.isItToday( uploadTime ) ? dateUtilsService.formatTimeShort( uploadTime ) : dateUtilsService.formatDateTimeShort( uploadTime );
-
-		return String.format( "<a href='%s' title='%s'>%s</a>"
-			, urlUtilsService.getPhotosUploadedOnDateUrl( uploadTime )
-			, translatorService.translate( "Photo preview: show all photos uploaded at $1", language, dateUtilsService.formatDate( uploadTime ) )
-			, shownTime
-		);
 	}
 
 	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry, final boolean doesPreviewHasToBeHidden, final Language language ) {
@@ -300,35 +257,6 @@ public class PhotoListEntryController {
 	private String getGroupOperationCheckbox( final Photo photo ) {
 		final String id = PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS;
 		return String.format( "<input type='checkbox' id='%s' name='%s' class='%s' value='%s' />", id, id, id, photo.getId() );
-	}
-
-	private String getPhotoCategory( final int genreId, Language language ) {
-		final Genre genre = genreService.load( genreId );
-		return entityLinkUtilsService.getPhotosByGenreLink( genre, language );
-	}
-
-	private String getPhotoPreview( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language ) {
-
-		if ( doesPreviewHasToBeHidden ) {
-			return String.format( "<img src='%s/hidden_picture.png' class='photo-preview-image' title='%s'/>"
-				, urlUtilsService.getSiteImagesPath()
-				, translatorService.translate( "Photo preview: The photo is within anonymous period", language )
-			);
-		}
-
-		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, accessor ) ) {
-			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
-				, urlUtilsService.getPhotoCardLink( photo.getId() )
-				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", language ) )
-				, urlUtilsService.getSiteImagesPath()
-			);
-		}
-
-		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image block-border'/></a>"
-			, urlUtilsService.getPhotoCardLink( photo.getId() )
-			, photo.getNameEscaped()
-			, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo )
-		);
 	}
 
 	private String getPhotoAuthorLink( final Photo photo, final User accessor, final Language language ) {
@@ -449,9 +377,5 @@ public class PhotoListEntryController {
 
 	public void setUserPhotoAlbumService( final UserPhotoAlbumService userPhotoAlbumService ) {
 		this.userPhotoAlbumService = userPhotoAlbumService;
-	}
-
-	private Language getLanguage() {
-		return EnvironmentContext.getLanguage();
 	}
 }

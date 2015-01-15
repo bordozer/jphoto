@@ -23,13 +23,15 @@
 		</c:if>
 	</div>
 
-	<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
+	<div style="width: 100%; text-align: center;">
+		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
 
-		<c:set var="photoId" value="${photoId}"/>
+			<c:set var="photoId" value="${photoId}"/>
 
-		<div class="photo-container-${photoList.photoListId}-${photoId}"></div>
+			<div class="photo-container-${photoList.photoListId}-${photoId}"></div>
 
-	</c:forEach>
+		</c:forEach>
+	</div>
 
 </div>
 

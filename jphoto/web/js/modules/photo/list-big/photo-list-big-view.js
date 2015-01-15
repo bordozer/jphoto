@@ -5,7 +5,7 @@ define( ["backbone", "jquery", "underscore"
 		, "modules/icon/entry-icon-model"
 		, "modules/icon/entry-icon-view"
 		], function ( Backbone, $, _
-		, photoListEntryContainer
+		, template
 		, ContextMenuModel, ContextMenuView
 		, EntryIconModel, EntryIconView
 		) {
@@ -14,6 +14,19 @@ define( ["backbone", "jquery", "underscore"
 
 	var PhotoListEntryModelView = Backbone.View.extend( {
 
+		template:_.template( template ),
+
+		initialize: function() {
+			this.listenTo( this.model, "sync", this.render );
+		},
+
+		render:function () {
+			var modelJSON = this.model.toJSON();
+
+			var photoId = this.model.get( 'photoId' );
+
+			this.$el.html( this.template( modelJSON ) );
+		}
 	} );
 
 	return { PhotoListEntryModelView:PhotoListEntryModelView };
