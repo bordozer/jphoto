@@ -19,7 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 public class PhotoListBigPreviewEntryController extends AbstractPhotoListEntryController {
 
-	private static final int PHOTO_MAX_WIDTH = 1200;
+	private static final int PHOTO_MAX_WIDTH = 1000;
 	private static final int PHOTO_MAX_HEIGHT = 500;
 
 	@Autowired
@@ -48,6 +48,8 @@ public class PhotoListBigPreviewEntryController extends AbstractPhotoListEntryCo
 		final Dimension dimension = imageFileUtilsService.resizePhotoImage( photo.getImageDimension(), new Dimension( PHOTO_MAX_WIDTH, PHOTO_MAX_HEIGHT ) );
 		dto.setPhotoImageWidth( dimension.getWidth() );
 		dto.setPhotoImageHeight( dimension.getHeight() );
+
+		dto.setMinContainerWidth( PHOTO_MAX_WIDTH + 20 );
 
 		return dto;
 	}

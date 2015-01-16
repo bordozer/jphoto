@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="${baseUrl}/css/photo-list.css" type="text/css"/>
 
-<c:forEach var="photoList" items="${photoLists}">
+<c:forEach var="photoList" items="${photoLists}" varStatus="status">
 
 	<c:if test="${photoList.selectedPhotoListViewModeType == 'VIEW_MODE_PREVIEW'}">
 		<photo:photoListLazyLoading photoList="${photoList}"/>
@@ -20,6 +20,8 @@
 		<photo:photoListDetails photoList="${photoList}"/>
 	</c:if>
 
-	<div class="photo-list-separator"></div>
+	<c:if test="${not status.last}">
+		<div class="photo-list-separator"></div>
+	</c:if>
 
 </c:forEach>

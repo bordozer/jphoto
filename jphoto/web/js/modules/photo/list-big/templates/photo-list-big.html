@@ -1,14 +1,20 @@
-<div style="padding-bottom: 40px;">
-    <a href="<%=photoCardLink%>">
-        <img src="<%=photoImageUrl%>" class="photo-preview-image block-border" width="<%=photoImageWidth%>" height="<%=photoImageHeight%>" alt="<%=photoName%>" title="<%=photoName%>">
-    </a>
-    <br />
-    <%=photoLink%> ( <%=photoCategory%> )
-    <br /><br />
-    <%=photoDescription%>
-    <div class="context-menu-photo-<%=photoId%>">
-        <a href="#" onclick="return false;">
-		    <img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick="" />
-	    </a>
-    </div>
+<div class="block-shadow block-border block-background" style="width: 70%; margin: 20px auto; padding: 15px; min-width: <%=minContainerWidth%>px;">
+
+	<a href="<%=photoCardLink%>">
+		<img src="<%=photoImageUrl%>" class="photo-preview-image block-border" width="<%=photoImageWidth%>" height="<%=photoImageHeight%>" alt="<%=photoName%>" title="<%=photoName%>">
+	</a>
+
+	<br/>
+
+	<%=photoLink%> ( <%=photoCategory%> )
+	<br/><br/>
+
+	<%=photoDescription%>
+
+	<div class="context-menu-photo-<%=photoId%>">
+		<a href="#" onclick="return false;">
+			<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick=""/>
+		</a>
+	</div>
+
 </div>

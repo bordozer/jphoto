@@ -13,6 +13,7 @@ public class PhotoBigEntryDTO {
 
 	private int photoImageWidth;
 	private int photoImageHeight;
+	private int minContainerWidth;
 
 	public String getPhotoUploadDate() {
 		return photoUploadDate;
@@ -92,5 +93,13 @@ public class PhotoBigEntryDTO {
 
 	public void setPhotoImageHeight( final int photoImageHeight ) {
 		this.photoImageHeight = photoImageHeight;
+	}
+
+	public void setMinContainerWidth( final int minContainerWidth ) {
+		this.minContainerWidth = minContainerWidth;
+	}
+
+	public int getMinContainerWidth() {
+		return minContainerWidth;
 	}
 }

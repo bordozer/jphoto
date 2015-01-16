@@ -23,15 +23,9 @@
 		</c:if>
 	</div>
 
-	<div style="width: 100%; text-align: center;">
+	<div style="float: left; width: 100%; text-align: center;">
 		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
-
-			<c:set var="photoId" value="${photoId}"/>
-
 			<div class="photo-container-${photoList.photoListId}-${photoId}"></div>
-
-			<div class="photo-list-separator"></div>
-
 		</c:forEach>
 	</div>
 
