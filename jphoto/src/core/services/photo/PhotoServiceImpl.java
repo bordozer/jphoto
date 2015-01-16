@@ -59,6 +59,9 @@ public class PhotoServiceImpl implements PhotoService {
 	private PhotoCommentService photoCommentService;
 
 	@Autowired
+	private PhotoCommentArchService photoCommentArchService;
+
+	@Autowired
 	private NotificationService notificationService;
 
 	@Autowired
@@ -209,6 +212,8 @@ public class PhotoServiceImpl implements PhotoService {
 		photoPreviewService.deletePreviews( entryId );
 
 		photoCommentService.deletePhotoComments( entryId );
+
+		photoCommentArchService.deletePhotoComments( entryId );
 
 		photoVotingService.deletePhotoVoting( entryId );
 
