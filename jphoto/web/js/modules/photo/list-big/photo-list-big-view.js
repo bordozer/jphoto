@@ -16,6 +16,10 @@ define( ["backbone", "jquery", "underscore"
 
 		template:_.template( template ),
 
+		events: {
+			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
+		},
+
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
 		},
@@ -26,6 +30,22 @@ define( ["backbone", "jquery", "underscore"
 			var photoId = this.model.get( 'photoId' );
 
 			this.$el.html( this.template( modelJSON ) );
+		},
+
+		photoContextMenuIconClick: function() {
+			var photoId = this.model.get( 'photoId' );
+
+			var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
+
+			var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, contextMenuEntryModel : this.model, contextMenuEntryView : this } );
+			var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
+
+			photoContextMenuModel.fetch( { cache: false } );
+		},
+
+		onPhotoContextMenuIconClick: function( evt ) {
+			evt.stopPropagation();
+			this.photoContextMenuIconClick();
 		}
 	} );
 

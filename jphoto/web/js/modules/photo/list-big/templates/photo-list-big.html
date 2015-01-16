@@ -1,9 +1,14 @@
 <div style="padding-bottom: 40px;">
-    <a href="<%=photoCardLink%>"
-            ><img src="<%=photoImageUrl%>" class="photo-preview-image block-border" width="<%=photoImageWidth%>" height="<%=photoImageHeight%>" alt="<%=photoName%>" title="<%=photoName%>">
+    <a href="<%=photoCardLink%>">
+        <img src="<%=photoImageUrl%>" class="photo-preview-image block-border" width="<%=photoImageWidth%>" height="<%=photoImageHeight%>" alt="<%=photoName%>" title="<%=photoName%>">
     </a>
     <br />
     <%=photoLink%> ( <%=photoCategory%> )
     <br /><br />
     <%=photoDescription%>
+    <div class="context-menu-photo-<%=photoId%>">
+        <a href="#" onclick="return false;">
+		    <img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick="" />
+	    </a>
+    </div>
 </div>

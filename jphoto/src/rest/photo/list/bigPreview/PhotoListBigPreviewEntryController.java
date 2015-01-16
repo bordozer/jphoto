@@ -52,4 +52,9 @@ public class PhotoListBigPreviewEntryController extends AbstractPhotoListEntryCo
 		return dto;
 	}
 
+	@RequestMapping( method = RequestMethod.DELETE, value = "/big-preview/", produces = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public void deletePhoto( final @PathVariable( "photoId" ) int photoId ) {
+		photoService.delete( photoId );
+	}
 }
