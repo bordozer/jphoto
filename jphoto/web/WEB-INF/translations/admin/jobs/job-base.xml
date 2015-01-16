@@ -348,8 +348,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job is stopped because of error in child job #$1</nerd>
+		<ru><![CDATA[Задача была прервана т.к. выполнение подзадачи #$1 завершилось ошибкой]]></ru>
 	</translation>
 
 	<translation>
