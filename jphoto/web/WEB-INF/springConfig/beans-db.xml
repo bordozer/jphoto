@@ -32,6 +32,7 @@
 			<tx:method name="sendNotificationAboutErrorToAdmins"/>
 			<tx:method name="saveActivity"/>
 			<tx:method name="archivePhoto"/>
+			<tx:method name="deletePhotoComments"/>
 		</tx:attributes>
 	</tx:advice>
 
@@ -103,6 +104,11 @@
 	<aop:config>
 		<aop:pointcut id="archivePhoto" expression="execution(* core.services.archiving.ArchivingService.archivePhoto(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="archivePhoto"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="deletePhotoComments" expression="execution(* core.services.photo.PhotoCommentService.deletePhotoComments(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="deletePhotoComments"/>
 	</aop:config>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
