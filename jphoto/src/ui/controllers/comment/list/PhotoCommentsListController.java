@@ -95,6 +95,7 @@ public class PhotoCommentsListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/received/" )
 	public String commentsToUser( final @ModelAttribute( MODEL_NAME ) PhotoCommentsListModel model, final @ModelAttribute( PAGING_MODEL_NAME ) PagingModel pagingModel ) {
+
 		final User user = model.getUser();
 
 		final List<Integer> commentIds = photoCommentService.loadCommentsToUserPhotosIds( user.getId() );

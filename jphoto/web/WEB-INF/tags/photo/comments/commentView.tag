@@ -66,7 +66,7 @@
 
 		<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}" />
 
-		<div class="floatleft block-border" style="margin-left: 10px; padding: 5px;">
+		<div class="block-border" style="margin: 10px; padding: 5px;">
 
 			<c:if test="${hasAvatar}">
 				<div style="display: inline-block; width: 90px;">
@@ -79,7 +79,12 @@
 				<br />
 				${eco:formatPhotoCommentText(comment.commentText)}
 			</div>
+
+			<c:forEach var="childrenPommentInfo" items="${commentInfo.childrenComments}">
+				<comments:commentView commentInfo="${childrenPommentInfo}" useAnimation="${useAnimation}" />
+			</c:forEach>
 		</div>
+
 	</c:if>
 
 <c:if test="${not photo.archived}">

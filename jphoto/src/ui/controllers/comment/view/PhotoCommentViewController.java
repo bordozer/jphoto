@@ -58,7 +58,10 @@ public class PhotoCommentViewController {
 
 	private PhotoCommentInfo loadRootCommentChildren( final Photo photo, final PhotoComment rootComment ) {
 		final PhotoCommentInfo child = getPhotoCommentService( photo ).getPhotoCommentInfoWithChild( rootComment, EnvironmentContext.getCurrentUser() );
-		markCommentAsReadIfNecessary( photo, rootComment );
+
+		if ( ! photo.isArchived() ) {
+			markCommentAsReadIfNecessary( photo, rootComment );
+		}
 
 		return child;
 	}

@@ -86,7 +86,7 @@ public class ArchivingJob extends AbstractJob {
 
 		logPhotosToArchiveCount( photoIdsToArchive );
 
-		archivePhoto( 351678 );
+//		archivePhoto( 351678 );
 
 		for ( final int photoId : photoIdsToArchive ) {
 
