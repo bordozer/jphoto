@@ -85,13 +85,23 @@ public class ArchivingJob extends AbstractJob {
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 		jobExecutionHistoryService.updateTotalJobSteps( historyEntry.getId(), photoIdsToArchive.size() + 2 );
 
+		final TranslatableMessage message = new TranslatableMessage( "ArchivingJob: $1 photos are going to be archived", services )
+			.addIntegerParameter( photoIdsToArchive.size() )
+			;
+		addJobRuntimeLogMessage( message );
+
+		log.debug( String.format( "%d photos are going to be archived", photoIdsToArchive.size() ) );
+
 		for ( final int photoId : photoIdsToArchive ) {
 
 			final Photo photo = photoService.load( photoId );
 
-			if ( ! photo.isArchived() ) {
-				archivingService.archivePhoto( photo );
-			}
+			archivingService.archivePhoto( photo );
+
+			final TranslatableMessage photoIsArchivedMessage = new TranslatableMessage( "ArchivingJob: Photo $1 has been archived", services )
+				.addPhotoCardLinkParameter( photo )
+				;
+			addJobRuntimeLogMessage( photoIsArchivedMessage );
 
 			log.debug( String.format( "Photo %s has been archived", photo ) );
 

@@ -48,42 +48,35 @@ public class ArchivingServiceImpl implements ArchivingService {
 
 		log.debug( String.format( "Archiving photo %s", photo ) );
 
-		final List<Integer> commentsToArchive = newArrayList();
-
 		final List<Integer> rootCommentsIds = photoCommentService.loadRootCommentsIds( photo.getId() );
 		for ( final int rootCommentsId : rootCommentsIds ) {
-
-			commentsToArchive.add( rootCommentsId );
 
 			final PhotoComment comment = photoCommentService.load( rootCommentsId );
 			comment.setId( 0 );
 
 			photoCommentArchDao.archive( comment );
 
-			processAnswers( rootCommentsId, commentsToArchive );
+			archiveAnswers( rootCommentsId );
 		}
 
-		for ( final int photoCommentId : commentsToArchive ) {
-			photoCommentService.delete( photoCommentId );
-		}
+		photoCommentService.deletePhotoComments( photo.getId() );
 
 		photo.setArchived( true );
 
 		photoService.save( photo );
 	}
 
-	private void processAnswers( final Integer parentCommentsId, final List<Integer> commentsToArchive ) {
+	private void archiveAnswers( final int parentCommentsId ) {
 
 		final List<PhotoComment> answers = photoCommentService.loadAnswersOnComment( parentCommentsId );
 
 		for ( final PhotoComment answer : answers ) {
-			commentsToArchive.add( answer.getId() );
 			answer.setId( 0 );
 			answer.setReplyToCommentId( parentCommentsId );
 
 			photoCommentArchDao.archive( answer );
 
-			processAnswers( parentCommentsId, commentsToArchive );
+			archiveAnswers( answer.getId() );
 		}
 	}
 

@@ -23,6 +23,16 @@
 	</translation>
 
 	<translation>
+		<nerd>ArchivingJob: $1 photos are going to be archived</nerd>
+		<ru><![CDATA[$1 работ(ы) будут архивированы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ArchivingJob: Photo $1 has been archived</nerd>
+		<ru><![CDATA[Работа $1 была успешно архивирована]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
