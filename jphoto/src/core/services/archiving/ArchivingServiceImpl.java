@@ -49,12 +49,12 @@ public class ArchivingServiceImpl implements ArchivingService {
 		final List<Integer> rootCommentsIds = photoCommentService.loadRootCommentsIds( photo.getId() );
 		for ( final int rootCommentsId : rootCommentsIds ) {
 
-			final PhotoComment comment = photoCommentService.load( rootCommentsId );
-			comment.setId( 0 );
+			final PhotoComment archivedComment = photoCommentService.load( rootCommentsId );
+			archivedComment.setId( 0 );
 
-			photoCommentArchDao.archive( comment );
+			photoCommentArchDao.archive( archivedComment );
 
-			archiveAnswers( rootCommentsId );
+			archiveAnswers( rootCommentsId, archivedComment.getId() );
 		}
 
 		photoCommentService.deletePhotoComments( photo.getId() );
@@ -64,17 +64,19 @@ public class ArchivingServiceImpl implements ArchivingService {
 		photoService.save( photo );
 	}
 
-	private void archiveAnswers( final int parentCommentsId ) {
+	private void archiveAnswers( final int originalCommentsId, final int archivedCommentsId ) {
 
-		final List<PhotoComment> answers = photoCommentService.loadAnswersOnComment( parentCommentsId );
+		final List<PhotoComment> answers = photoCommentService.loadAnswersOnComment( originalCommentsId );
 
 		for ( final PhotoComment answer : answers ) {
+			final int answerId = answer.getId();
+
 			answer.setId( 0 );
-			answer.setReplyToCommentId( parentCommentsId );
+			answer.setReplyToCommentId( archivedCommentsId );
 
 			photoCommentArchDao.archive( answer );
 
-			archiveAnswers( answer.getId() );
+			archiveAnswers( answerId, answer.getId() );
 		}
 	}
 

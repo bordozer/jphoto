@@ -54,6 +54,7 @@
 	}
 
 	function replyToComment( commentId ) {
+
 		if ( isUserCanNOTCommentPhoto() ) {
 			showMessageAboutDelayToNextComment();
 			return;

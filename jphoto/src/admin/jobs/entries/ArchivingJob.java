@@ -73,7 +73,6 @@ public class ArchivingJob extends AbstractJob {
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final ArchivingService archivingService = services.getArchivingService();
-		final PhotoService photoService = services.getPhotoService();
 		final JobExecutionHistoryService jobExecutionHistoryService = services.getJobExecutionHistoryService();
 
 		final Date time = archivingService.getArchiveStartDate( archivePhotosOlderThen );
@@ -87,13 +86,11 @@ public class ArchivingJob extends AbstractJob {
 
 		logPhotosToArchiveCount( photoIdsToArchive );
 
+		archivePhoto( 351678 );
+
 		for ( final int photoId : photoIdsToArchive ) {
 
-			final Photo photo = photoService.load( photoId );
-
-			archivingService.archivePhoto( photo );
-
-			logPhotoIsArchived( photo );
+			archivePhoto( photoId );
 
 			increment();
 
@@ -101,6 +98,22 @@ public class ArchivingJob extends AbstractJob {
 				break;
 			}
 		}
+	}
+
+	private void archivePhoto( final int photoId ) {
+
+		final PhotoService photoService = services.getPhotoService();
+		final ArchivingService archivingService = services.getArchivingService();
+
+		final Photo photo = photoService.load( photoId );
+
+		if ( photo == null ) {
+			return;
+		}
+
+		archivingService.archivePhoto( photo );
+
+		logPhotoIsArchived( photo );
 	}
 
 	@Override

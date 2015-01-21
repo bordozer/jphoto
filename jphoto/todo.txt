@@ -41,6 +41,7 @@ ADMIN functions
 
 2. Archiving
 	- Photo voting history (split saving on 'latest' and 'old' and moving old records to archive)
+	- Archived photo can not be edited
 
 3. Clean up:
 	- Voting for user rank in genre history (if necessary)
