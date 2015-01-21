@@ -85,12 +85,7 @@ public class ArchivingJob extends AbstractJob {
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 		jobExecutionHistoryService.updateTotalJobSteps( historyEntry.getId(), photoIdsToArchive.size() + 2 );
 
-		final TranslatableMessage message = new TranslatableMessage( "ArchivingJob: $1 photos are going to be archived", services )
-			.addIntegerParameter( photoIdsToArchive.size() )
-			;
-		addJobRuntimeLogMessage( message );
-
-		log.debug( String.format( "%d photos are going to be archived", photoIdsToArchive.size() ) );
+		logPhotosToArchiveCount( photoIdsToArchive );
 
 		for ( final int photoId : photoIdsToArchive ) {
 
@@ -98,12 +93,7 @@ public class ArchivingJob extends AbstractJob {
 
 			archivingService.archivePhoto( photo );
 
-			final TranslatableMessage photoIsArchivedMessage = new TranslatableMessage( "ArchivingJob: Photo $1 has been archived", services )
-				.addPhotoCardLinkParameter( photo )
-				;
-			addJobRuntimeLogMessage( photoIsArchivedMessage );
-
-			log.debug( String.format( "Photo %s has been archived", photo ) );
+			logPhotoIsArchived( photo );
 
 			increment();
 
@@ -169,6 +159,24 @@ public class ArchivingJob extends AbstractJob {
 	@Override
 	public SavedJobType getJobType() {
 		return SavedJobType.ARCHIVING;
+	}
+
+	private void logPhotosToArchiveCount( final List<Integer> photoIdsToArchive ) {
+		final TranslatableMessage message = new TranslatableMessage( "ArchivingJob: $1 photos are going to be archived", services )
+				.addIntegerParameter( photoIdsToArchive.size() )
+				;
+		addJobRuntimeLogMessage( message );
+
+		log.debug( String.format( "%d photos are going to be archived", photoIdsToArchive.size() ) );
+	}
+
+	private void logPhotoIsArchived( final Photo photo ) {
+		final TranslatableMessage photoIsArchivedMessage = new TranslatableMessage( "ArchivingJob: Photo $1 has been archived", services )
+				.addPhotoCardLinkParameter( photo )
+				;
+		addJobRuntimeLogMessage( photoIsArchivedMessage );
+
+		log.debug( String.format( "Photo %s has been archived", photo ) );
 	}
 
 	public void setArchivePreviewsOlderThen( int archivePreviewsOlderThen ) {
