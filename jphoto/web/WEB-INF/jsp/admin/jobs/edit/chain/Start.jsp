@@ -23,6 +23,21 @@
 
 <tags:page pageModel="${jobChainJobModel.pageModel}">
 
+	<style type="text/css">
+
+		.sort-highlight {
+			border: 1px dashed #9ea2a5;
+			background: #fdfdfd;
+		}
+
+		.job-item-container {
+			display: block;
+			cursor: move;
+			background: url('${eco:imageFolderURL()}/job_move.png') no-repeat;
+		}
+
+	</style>
+
 	<admin:jobEditData jobModel="${jobChainJobModel}">
 
 			<jsp:attribute name="jobForm">
@@ -40,11 +55,16 @@
 					<table:tr>
 						<table:tdtext text_t="Jobs chain: Jobs to execute" isMandatory="true"/>
 						<table:td>
-							<c:forEach var="savedJob" items="${savedRealJobs}">
-								<form:checkbox path="${selectedSavedJobsIdsControl}" value="${savedJob.id}"/>
-								<links:savedJobEdit savedJob="${savedJob}"/>
-								<br/>
-							</c:forEach>
+							<div class="connectedSortable">
+								<c:forEach var="savedJob" items="${savedRealJobs}">
+									<div class="job-item-container">
+										<div style="padding-left: 20px; width: 450px;">
+											<form:checkbox path="${selectedSavedJobsIdsControl}" value="${savedJob.id}"/>
+											<links:savedJobEdit savedJob="${savedJob}"/>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
 						</table:td>
 					</table:tr>
 
@@ -70,7 +90,13 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery' ], function( $ ) {
+		require( [ 'jquery', 'jquery_ui' ], function( $, ui ) {
+
+			$( '.connectedSortable' ).sortable( {
+				connectWith: ".connectedSortable"
+				, placeholder: "sort-highlight"
+				, forcePlaceholderSize: true
+			});
 
 			$( document ).ready( function () {
 				setErrorHandlingVisibility();
