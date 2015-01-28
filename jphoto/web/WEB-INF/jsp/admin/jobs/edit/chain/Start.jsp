@@ -51,7 +51,7 @@
 								<c:forEach var="savedJob" items="${savedRealJobs}">
 									<div style="padding-left: 20px; width: 450px;">
 										<form:checkbox path="${selectedSavedJobsIdsControl}" value="${savedJob.id}"/>
-										<links:savedJobEdit savedJob="${savedJob}"/>
+										<links:savedJobEdit savedJob="${savedJob}" showIcon="true"/>
 									</div>
 								</c:forEach>
 							</div>
