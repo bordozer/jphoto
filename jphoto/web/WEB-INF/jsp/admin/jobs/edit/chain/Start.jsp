@@ -24,18 +24,10 @@
 <tags:page pageModel="${jobChainJobModel.pageModel}">
 
 	<style type="text/css">
-
 		.sort-highlight {
 			border: 1px dashed #9ea2a5;
 			background: #fdfdfd;
 		}
-
-		.job-item-container {
-			display: block;
-			cursor: move;
-			background: url('${eco:imageFolderURL()}/job_move.png') no-repeat;
-		}
-
 	</style>
 
 	<admin:jobEditData jobModel="${jobChainJobModel}">
@@ -57,11 +49,9 @@
 						<table:td>
 							<div class="connectedSortable">
 								<c:forEach var="savedJob" items="${savedRealJobs}">
-									<div class="job-item-container">
-										<div style="padding-left: 20px; width: 450px;">
-											<form:checkbox path="${selectedSavedJobsIdsControl}" value="${savedJob.id}"/>
-											<links:savedJobEdit savedJob="${savedJob}"/>
-										</div>
+									<div style="padding-left: 20px; width: 450px;">
+										<form:checkbox path="${selectedSavedJobsIdsControl}" value="${savedJob.id}"/>
+										<links:savedJobEdit savedJob="${savedJob}"/>
 									</div>
 								</c:forEach>
 							</div>
