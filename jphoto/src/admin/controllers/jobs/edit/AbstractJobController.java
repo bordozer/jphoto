@@ -203,6 +203,7 @@ public abstract class AbstractJobController {
 
 		final SavedJob savedJob = new SavedJob();
 
+
 		if ( ! model.isSaveAsCopy() ) {
 			savedJob.setId( model.getSavedJobId() );
 		}

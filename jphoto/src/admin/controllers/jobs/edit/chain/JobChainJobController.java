@@ -20,9 +20,7 @@ import utils.ListUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -124,17 +122,53 @@ public class JobChainJobController extends AbstractJobController {
 	protected void initModelFromSavedJob( final AbstractAdminJobModel model, final int savedJobId ) {
 		final JobChainJobModel aModel = ( JobChainJobModel ) model;
 
-		final List<SavedJob> savedJobs = getSavedJobList( aModel );
-		aModel.setSavedJobs( savedJobs );
-
 		final Map<SavedJobParameterKey,CommonProperty> savedJobParametersMap = savedJobService.getSavedJobParametersMap( savedJobId );
 
-		final List<Integer> savedJobIds = savedJobParametersMap.get( SavedJobParameterKey.PARAM_SAVED_JOB_CHAIN ).getValueListInt();
+		final List<Integer> selectedSavedJobIds = savedJobParametersMap.get( SavedJobParameterKey.PARAM_SAVED_JOB_CHAIN ).getValueListInt();
 
-		aModel.setSelectedSavedJobsIds( ListUtils.convertIntegerListToString( savedJobIds ) );
+		aModel.setSelectedSavedJobsIds( ListUtils.convertIntegerListToString( selectedSavedJobIds ) );
+
+		final List<SavedJob> savedJobs = getSavedJobList( aModel );
+
+		final List<SavedJob> selectedJobs = newArrayList();
+		for ( final int jobId : selectedSavedJobIds ) {
+			final SavedJob job = getJobById( jobId, savedJobs );
+			if ( job != null ) {
+				selectedJobs.add( job );
+			}
+		}
+
+		final List<SavedJob> unselectedJobs = newArrayList();
+		for ( final SavedJob job : savedJobs ) {
+			if ( selectedSavedJobIds.contains( job.getId() ) ) {
+				continue;
+			}
+			unselectedJobs.add( job );
+		}
+		Collections.sort( unselectedJobs, new Comparator<SavedJob>() {
+			@Override
+			public int compare( final SavedJob o1, final SavedJob o2 ) {
+				return o1.getName().compareToIgnoreCase( o2.getName() );
+			}
+		} );
+
+		final List<SavedJob> jobListOrdered = newArrayList();
+		jobListOrdered.addAll( selectedJobs );
+		jobListOrdered.addAll( unselectedJobs );
+		aModel.setSavedJobs( jobListOrdered );
 
 		aModel.setJobRunModeId( savedJobParametersMap.get( SavedJobParameterKey.JOB_RUN_MODE_ID ).getValueInt() );
 		aModel.setBreakChainExecutionIfError( savedJobParametersMap.get( SavedJobParameterKey.BREAK_CHAIN_EXECUTION_IF_ERROR ).getValueBoolean() ? "ON" : "" );
+	}
+
+	private SavedJob getJobById( final int jobId, final List<SavedJob> jobs ) {
+		for ( final SavedJob job : jobs ) {
+			if ( job.getId() == jobId ) {
+				return job;
+			}
+		}
+
+		return null;
 	}
 
 	private List<SavedJob> getSavedJobList( final JobChainJobModel aModel ) {
