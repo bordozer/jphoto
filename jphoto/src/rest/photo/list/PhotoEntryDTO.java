@@ -1,5 +1,7 @@
 package rest.photo.list;
 
+import core.general.configuration.ConfigurationKey;
+
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +58,7 @@ public class PhotoEntryDTO {
 	protected Map<String, SpecialIconDTO> specialRestrictionIcons;
 
 	private boolean memberOfAlbum;
+	private ConfigurationKey showPhotoListPreviewFooter;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -348,5 +351,13 @@ public class PhotoEntryDTO {
 
 	public void setMemberOfAlbum( final boolean memberOfAlbum ) {
 		this.memberOfAlbum = memberOfAlbum;
+	}
+
+	public void setShowPhotoListPreviewFooter( final ConfigurationKey showPhotoListPreviewFooter ) {
+		this.showPhotoListPreviewFooter = showPhotoListPreviewFooter;
+	}
+
+	public ConfigurationKey getShowPhotoListPreviewFooter() {
+		return showPhotoListPreviewFooter;
 	}
 }
