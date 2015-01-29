@@ -57,8 +57,8 @@
 				</div>
 			<%}%>
 
-			<% if( showStatistics ) {%>
-				<div class="row text-center">
+			<div class="row text-center" style="height: 20px;">
+				<% if( showStatistics ) {%>
 					<div class="col-lg-6">
 						<div class="col-lg-1 text-center" title="<%=todayMarksTitle%>"><%=todayMarks%></div>
 						<div class="col-lg-1 text-center" title="<%=periodMarksTitle%>"><%=periodMarks%></div>
@@ -69,8 +69,8 @@
 						<div class="col-lg-6 text-right" title=""><%=previewsIcon%> <%=previewsCount%></div>
 						<div class="col-lg-6 text-left" title=""><%=commentsIcon%> <%=commentsCount%></div>
 					</div>
-				</div>
-			<%}%>
+				<%}%>
+			</div>
 
 			<div class="row margin-left-5" style="height: 40px;"><%=photoLink%></div>
 			<div class="row margin-left-5"><%=photoAuthorLink%></div>
