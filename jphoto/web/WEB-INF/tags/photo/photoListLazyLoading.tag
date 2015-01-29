@@ -26,10 +26,6 @@
 <c:set var="photoGroupOperationMenues" value="<%=photoList.getPhotoGroupOperationMenuContainer().getGroupOperationMenus()%>" />
 <c:set var="isGroupOperationEnabled" value="${not empty photoGroupOperationMenues}" />
 
-<c:if test="${showPaging}">
-	<tags:paging showSummary="false"/>
-</c:if>
-
 <eco:form action="${formAction}" formName="${groupOperationForm}">
 
 	<a name="${photoList.photoListId}"></a>
@@ -40,11 +36,13 @@
 
 		<div class="panel-body">
 
-			<div class="empty-photo-list-text">
-				<c:if test="${totalPhotos == 0}">
-					${eco:translate(photoList.noPhotoText)}
-				</c:if>
-			</div>
+			<c:if test="${totalPhotos == 0}">
+				${eco:translate(photoList.noPhotoText)}
+			</c:if>
+
+			<c:if test="${showPaging and totalPhotos > 0}">
+				<tags:paging showSummary="false"/>
+			</c:if>
 
 			<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
 
@@ -61,7 +59,12 @@
 		</div>
 
 		<div class="panel-footer">
-			<div class="row">
+
+			<c:if test="${showPaging and totalPhotos > 0}">
+				<tags:paging showSummary="true"/>
+			</c:if>
+
+			<div class="row row-bottom-padding-10">
 				<div class="col-lg-10">
 					<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
 				</div>
@@ -73,37 +76,9 @@
 				</div>
 			</div>
 
-			<c:if test="${showPaging}">
-				<tags:paging showSummary="true"/>
-			</c:if>
-
-
-			<script type="text/javascript">
-
-				var photosToRender = [];
-
-				<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
-					photosToRender.push( ${photoId} );
-				</c:forEach>
-
-				renderPhotos( photosToRender );
-
-				function renderPhotos( photosToRender ) {
-
-					require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
-						for ( var i = 0; i < photosToRender.length; i++ ) {
-							var photoId = photosToRender[i];
-							var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
-							photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, $( '.' + photoUniqueClass ) );
-						}
-					} );
-				}
-
-			</script>
-
 			<c:if test="${isGroupOperationEnabled}">
 
-				<div class="row">
+				<div class="row row-bottom-padding-10">
 
 					<js:confirmAction />
 
@@ -124,35 +99,58 @@
 
 					<html:submitButton id="ok" caption_t="Photo list: Do group operations" onclick="return submitForm();" />
 
-				</div>
+					<script type="text/javascript">
 
-				<script type="text/javascript">
+						function submitForm() {
+							var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
+							if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
+								showUIMessage_Error( '${eco:translate("Photo list: Please, select group operation first")}' );
+								return false;
+							}
 
-					function submitForm() {
-						var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
-						if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
-							showUIMessage_Error( '${eco:translate("Photo list: Please, select group operation first")}' );
-							return false;
+							var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
+							if ( controlSelectedPhotoIds.length == 0 ) {
+								showUIMessage_Error( '${eco:translate("Photo list: Please, select at least one photo first")}' );
+								return false;
+							}
+
+							var form = $( '#${groupOperationForm}' );
+							form.submit();
+
+							return true;
 						}
 
-						var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
-						if ( controlSelectedPhotoIds.length == 0 ) {
-							showUIMessage_Error( '${eco:translate("Photo list: Please, select at least one photo first")}' );
-							return false;
-						}
+					</script>
 
-						var form = $( '#${groupOperationForm}' );
-						form.submit();
-
-						return true;
-					}
-
-				</script>
+				</div> <%-- / group operations --%>
 
 			</c:if>
 
 		</div> <%-- / panel footer--%>
 
-	</div>
+	</div> <%-- / panel--%>
+
+	<script type="text/javascript">
+
+		var photosToRender = [];
+
+		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
+			photosToRender.push( ${photoId} );
+		</c:forEach>
+
+		renderPhotos( photosToRender );
+
+		function renderPhotos( photosToRender ) {
+
+			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
+				for ( var i = 0; i < photosToRender.length; i++ ) {
+					var photoId = photosToRender[i];
+					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
+					photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, $( '.' + photoUniqueClass ) );
+				}
+			} );
+		}
+
+	</script>
 
 </eco:form>

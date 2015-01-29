@@ -21,9 +21,9 @@
 
 <c:set var="delimeter" value="&nbsp;&nbsp;&nbsp;"/>
 
-<div class="row">
+<div class="row row-bottom-padding-10">
 
-	<div class="col-lg-3">
+	<div class="col-lg-4">
 		<c:if test="${showSummary}">
 				${eco:translate('Paging: Items total')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Paging: Pages total')}: ${totalPages} ${delimeter}
 				<c:if test="${pagingModel.totalItems > 0}">

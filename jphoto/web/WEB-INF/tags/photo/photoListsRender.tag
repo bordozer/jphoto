@@ -20,8 +20,4 @@
 		<photo:photoListDetails photoList="${photoList}"/>
 	</c:if>
 
-	<c:if test="${not status.last}">
-		<div class="photo-list-separator"></div>
-	</c:if>
-
 </c:forEach>
