@@ -58,6 +58,8 @@ public class PhotoEntryDTO {
 	protected Map<String, SpecialIconDTO> specialRestrictionIcons;
 
 	private boolean memberOfAlbum;
+	private String photoAlbumLink;
+
 	private boolean showPhotoListPreviewFooter;
 
 	private String iconTitlePhotoIsInAlbum;
@@ -355,6 +357,14 @@ public class PhotoEntryDTO {
 
 	public void setMemberOfAlbum( final boolean memberOfAlbum ) {
 		this.memberOfAlbum = memberOfAlbum;
+	}
+
+	public String getPhotoAlbumLink() {
+		return photoAlbumLink;
+	}
+
+	public void setPhotoAlbumLink( final String photoAlbumLink ) {
+		this.photoAlbumLink = photoAlbumLink;
 	}
 
 	public void setShowPhotoListPreviewFooter( final boolean showPhotoListPreviewFooter ) {

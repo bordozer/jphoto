@@ -6,6 +6,7 @@ import core.general.data.TimeRange;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import core.log.LogHelper;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
@@ -146,7 +147,12 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		}
 		dto.setPhotoBookmarkIcons( photoBookmarkIcons );
 
-		dto.setMemberOfAlbum( ! userPhotoAlbumService.loadPhotoAlbums( photo.getId() ).isEmpty() );
+		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photo.getId() );
+		final boolean isPhotoInAlbum = !userPhotoAlbums.isEmpty();
+		dto.setMemberOfAlbum( isPhotoInAlbum );
+		if ( isPhotoInAlbum ) {
+			dto.setPhotoAlbumLink( urlUtilsService.getUserPhotoAlbumPhotosLink( photo.getUserId(), userPhotoAlbums.get( 0 ).getId() ) );
+		}
 
 		log.debug( String.format( "Rendering photo list entry #%d: %s", photo.getId(), photo.getName() ) );
 

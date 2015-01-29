@@ -17,7 +17,7 @@
 
 	<photo:photoListHeader photoList="${photoList}"/>
 
-	<div class="empty-photo-list-text">
+	<div>
 		<c:if test="${totalPhotos == 0}">
 			${eco:translate(photoList.noPhotoText)}
 		</c:if>

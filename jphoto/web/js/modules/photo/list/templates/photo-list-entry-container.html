@@ -19,17 +19,15 @@
 
 		<div class="panel-body">
 
-			<div class="row">
+			<div class="row text-center" style="height: 300px;">
 
 				<% if( ! hidePreviewBecauseOfNudeContent ) {%>
-					<div class="text-center" style="height: 300px;">
-						<%=photoImage%>
-					</div>
+					<%=photoImage%>
 				<%}%>
 
 				<% if( hidePreviewBecauseOfNudeContent ) {%>
 					<a href="<%=photoCardLink%>">
-					<div>
+					<h4>
 						<%=nudeContentWarning0%>
 						<br />
 						<span class="nude-content-warning-1"><%=nudeContentWarning1%></span>
@@ -39,7 +37,7 @@
 						<span class="nude-content-warning-1"><%=nudeContentWarning3%></span>
 						<br />
 						<%=nudeContentWarning4%>
-					</div>
+					</h4>
 							</a>
 				<%}%>
 
@@ -90,7 +88,9 @@
 
 				<div class="col-lg-1">
 					<% if( memberOfAlbum ) {%>
-						<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon" title="<%=iconTitlePhotoIsInAlbum%>">
+						<a href="<%=photoAlbumLink%>">
+							<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon" title="<%=iconTitlePhotoIsInAlbum%>">
+						</a>
 					<%}%>
 				</div>
 
