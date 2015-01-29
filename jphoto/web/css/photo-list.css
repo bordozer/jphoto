@@ -137,19 +137,19 @@
 }
 
 .admin-special-flag-anonymous-posting {
-	width: 24px;
-	height: 24px;
+	width: 16px;
+	height: 16px;
 	background-image:url('/images/icons24/admin-special-flag-anonymous-posting.png');
 	background-repeat:no-repeat;
-	background-size: 24px 24px;
-	background-position: 250px 410px;
+	background-size: 16px 16px;
+	/*background-position: 250px 410px;*/
 	/*background: green;*/
 	/*border: 1px solid green;*/
 }
 
 .admin-special-flag-nude-content {
-	width: 24px;
-	height: 24px;
+	width: 16px;
+	height: 16px;
 	background-image:url('/images/icons24/admin-special-flag-nude-content.png');
 	background-repeat:no-repeat;
 	background-size: 16px 16px;
@@ -160,9 +160,9 @@
 
 .admin-special-flag-restriction {
 	/*position: relative;*/
-	position: absolute;
+	/*position: absolute;*/
 	/*display: inline-block;*/
-	left: 290px;
+	/*left: 290px;*/
 	/*top: 370px;*/
 	width: 16px;
 	height: 16px;
@@ -175,18 +175,11 @@
 }
 
 .photo-is-in-album {
-	width: 32px;
-	height: 24px;
+	width: 16px;
+	height: 16px;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	/*margin: 1px;*/
 	/*padding-left: 2px;*/
 	background-image: url('/images/photo-list-entry-album.png');
-}
-
-.photo-list-separator {
-	float: left;
-	width: 100%;
-	border-bottom: 1px dashed #848078;
-	margin-bottom: 15px;
 }

@@ -633,8 +633,8 @@ table.formtable {
 }
 
 .nude-content-warning {
-	float: left;
-	width: 98%;
+	/*float: left;*/
+	/*width: 98%;*/
 	color: #888888;
 	height: 235px;
 	margin-top: 60px;

@@ -28,8 +28,8 @@
 				<%}%>
 
 				<% if( hidePreviewBecauseOfNudeContent ) {%>
-						<a href="<%=photoCardLink%>">
-					<div class="nude-content-warning">
+					<a href="<%=photoCardLink%>">
+					<div>
 						<%=nudeContentWarning0%>
 						<br />
 						<span class="nude-content-warning-1"><%=nudeContentWarning1%></span>
@@ -98,6 +98,12 @@
 				<% if( showAdminFlag_Nude ) {%>
 					<div class="col-lg-1 admin-special-flag-nude-content" title="TODO: the photo has nude content"></div>
 				<%}%>
+
+				<% _.each( specialRestrictionIcons, function( iconDTO ) {%>
+					<div class='admin-special-flag-restriction'>
+						<img src="<%=iconDTO.icon%>" alt="<%=iconDTO.restrictionTypeName%>" title="<%=iconDTO.restrictionTypeName%>" width="16" height="16">
+					</div>
+				<%} );%>
 
 			</div>
 
