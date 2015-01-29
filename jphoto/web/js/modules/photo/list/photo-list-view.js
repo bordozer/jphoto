@@ -24,6 +24,7 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 
 //			var photoId = this.model.get( 'photoId' );
+//			console.log( modelJSON );
 
 			this.$el.html( this.photoListEntryContainer( modelJSON ) );
 

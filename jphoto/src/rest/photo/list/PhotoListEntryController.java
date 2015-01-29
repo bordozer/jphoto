@@ -97,7 +97,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
 		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
 		dto.setPhotoCardLink( urlUtilsService.getPhotoCardLink( photo.getId() ) );
-		dto.setShowPhotoListPreviewFooter( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER );
+		dto.setShowPhotoListPreviewFooter( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER ) );
 		setNudeContent( photo, accessor, dto, language );
 
 		dto.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );

@@ -58,7 +58,7 @@ public class PhotoEntryDTO {
 	protected Map<String, SpecialIconDTO> specialRestrictionIcons;
 
 	private boolean memberOfAlbum;
-	private ConfigurationKey showPhotoListPreviewFooter;
+	private boolean showPhotoListPreviewFooter;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -353,11 +353,11 @@ public class PhotoEntryDTO {
 		this.memberOfAlbum = memberOfAlbum;
 	}
 
-	public void setShowPhotoListPreviewFooter( final ConfigurationKey showPhotoListPreviewFooter ) {
+	public void setShowPhotoListPreviewFooter( final boolean showPhotoListPreviewFooter ) {
 		this.showPhotoListPreviewFooter = showPhotoListPreviewFooter;
 	}
 
-	public ConfigurationKey getShowPhotoListPreviewFooter() {
+	public boolean isShowPhotoListPreviewFooter() {
 		return showPhotoListPreviewFooter;
 	}
 }
