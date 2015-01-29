@@ -33,27 +33,31 @@
 	</div>
 
 	<div class="col-lg-8">
-		<c:forEach var="pageItem" items="${pageItems}">
+		<ul class="pagination">
+			<c:forEach var="pageItem" items="${pageItems}">
 
-			<c:if test="${currentPage == pageItem.number}">
-				<span class="todo">${pageItem.number}</span>
-			</c:if>
-
-			<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
-
-			<c:if test="${currentPage != pageItem.number}">
-
-				<c:if test="${pageItem.number == 0}">
-					<span title="${pageItemTitle}">&nbsp;...&nbsp;</span>
+				<c:if test="${currentPage == pageItem.number}">
+					<li class="active"><a href="#" onclick="return false;">${pageItem.number}</a></li>
 				</c:if>
 
-				<c:if test="${pageItem.number != 0}">
-					<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
-						<span class="todo">${pageItem.number}</span>
-					</a>
-				</c:if>
-			</c:if>
+				<c:if test="${currentPage != pageItem.number}">
 
-		</c:forEach>
+					<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
+
+					<c:if test="${pageItem.number == 0}">
+						<li title="${pageItemTitle}"><a href="#" onclick="return false;">&nbsp;...&nbsp;</a></li>
+					</c:if>
+
+					<c:if test="${pageItem.number != 0}">
+						<li>
+							<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
+								${pageItem.number}
+							</a>
+						</li>
+					</c:if>
+				</c:if>
+
+			</c:forEach>
+		</ul>
 	</div>
 </div>
