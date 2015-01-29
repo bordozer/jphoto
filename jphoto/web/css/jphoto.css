@@ -1,3 +1,7 @@
+/*.row {
+	border: 1px dotted grey;
+}*/
+
 body {
 	margin: 0 20px 0 0;
 	padding: 0;
@@ -14,6 +18,4 @@ a {
 	color: #003366;
 }
 
-/*.row {
-	border: 1px dotted grey;
-}*/
+

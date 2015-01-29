@@ -1,5 +1,4 @@
 
-
 	#if ( $showLoginForm && $loggedUserId <= 0 )
 		<form id="loginform" method="POST" action="$loginFormAction">
 

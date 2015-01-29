@@ -42,15 +42,15 @@
 
 			<div class="col-lg-2 text-center">
 
-				<div class="row">
-					<h1><a href="$portalpageurl">$progectname</a></h1>
+				<div class="row" style="height: 50px;">
+					<h3><a href="$portalpageurl">$progectname</a></h3>
 				</div>
 
-				<div class="row">
+				<div class="row" style="height: 30px;">
 					<h5><a href="$portalpageurl">$slogan</a></h5>
 				</div>
 
-				<div class="row">
+				<div class="row" style="height: 30px;">
 					#foreach( $uiLanguage in $uiLanguages )
 						<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
 							<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title"
