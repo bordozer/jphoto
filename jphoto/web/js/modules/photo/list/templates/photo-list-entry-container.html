@@ -1,5 +1,5 @@
 <div class="photo-list-entry-container col-lg-3">
-	<div class="panel panel-success">
+	<div class="panel panel-default">
 
 		<div class="panel-heading">
 			<div class="row">
@@ -57,6 +57,36 @@
 						<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick="" />
 					</a>
 				</div>
+			<%}%>
+
+			<% if( showStatistics ) {%>
+				<div class="row text-center context-menu-photo context-menu-photo-<%=photoId%>">
+
+					<div class="col-lg-6">
+						<div class="col-lg-1 text-center" title="<%=todayMarksTitle%>"><%=todayMarks%></div>
+						<div class="col-lg-1 text-center" title="<%=periodMarksTitle%>"><%=periodMarks%></div>
+						<div class="col-lg-1 text-center"><%=totalMarks%></div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="col-lg-6 text-right" title=""><%=previewsIcon%> <%=previewsCount%></div>
+						<div class="col-lg-6 text-left" title=""><%=commentsIcon%> <%=commentsCount%></div>
+					</div>
+				</div>
+			<%}%>
+
+			<div class="row margin-left-5"><%=photoLink%></div>
+
+			<% if( showUserRank ) {%>
+				<div class="row margin-left-5"><%=photoAuthorRank%></div>
+			<%}%>
+
+			<% if( showPhotoContextMenu ) {%>
+
+			<%}%>
+
+			<% if( showPhotoContextMenu ) {%>
+
 			<%}%>
 
 		</div> <!-- / panel footer -->

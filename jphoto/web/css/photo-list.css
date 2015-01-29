@@ -10,9 +10,13 @@
 	box-shadow: 3px 3px 10px #848078;
 }
 
+.margin-left-5 {
+	margin-left: 5px;
+}
+
 .photo-list-entry-container {
 	/*font-size: 10px;*/
-	color: #dd8888;
+	/*color: #dd8888;*/
 	/*width: 330px; *//* MATTER OF DIMENSION */
 	min-height: 440px; /* MATTER OF DIMENSION */
 }
