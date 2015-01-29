@@ -37,31 +37,9 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			var photoId = this.model.get( 'photoId' );
+//			var photoId = this.model.get( 'photoId' );
 
-			var element = this.photoListEntryContainer( modelJSON );
-
-			/*if ( this.model.get( 'showPhotoContextMenu' ) ) {
-				element.append( this.contextMenuTemplate( modelJSON ) );
-			}
-
-			if ( this.model.get( 'showStatistics' ) ) {
-				element.append( this.statisticsTemplate( modelJSON ) );
-			}
-
-			element.append( this.photoNameTemplate( modelJSON ) );
-
-			element.append( this.authorLinkTemplate( modelJSON ) );
-
-			if ( this.model.get( 'showUserRank' ) ) {
-				element.append( this.authorRankTemplate( modelJSON ) );
-			}
-
-			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
-				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
-			}*/
-
-			this.$el.html( element );
+			this.$el.html( this.photoListEntryContainer( modelJSON ) );
 
 			/*if ( this.model.get( 'userOwnThePhoto' ) ) {
 				this.$el.addClass( 'block-user-photo' );

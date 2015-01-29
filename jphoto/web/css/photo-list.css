@@ -137,7 +137,8 @@
 }
 
 .admin-special-flag-anonymous-posting {
-	/*width: 220px;*/
+	width: 24px;
+	height: 24px;
 	background-image:url('/images/icons24/admin-special-flag-anonymous-posting.png');
 	background-repeat:no-repeat;
 	background-size: 24px 24px;
@@ -147,11 +148,12 @@
 }
 
 .admin-special-flag-nude-content {
-	/*width: 240px;*/
+	width: 24px;
+	height: 24px;
 	background-image:url('/images/icons24/admin-special-flag-nude-content.png');
 	background-repeat:no-repeat;
 	background-size: 16px 16px;
-	background-position: 290px 413px;
+	/*background-position: 290px 413px;*/
 	/*background: red;*/
 	/*border: 1px solid red;*/
 }
@@ -173,16 +175,12 @@
 }
 
 .photo-is-in-album {
-	position: absolute;
-	left: 273px;
-	top: 10px;
 	width: 32px;
 	height: 24px;
 	background-repeat: no-repeat;
-	background-size: 32px 24px;
-	/*z-index: 10;*/
-	margin: 1px;
-	padding: 1px;
+	background-size: 16px 16px;
+	/*margin: 1px;*/
+	/*padding-left: 2px;*/
 	background-image: url('/images/photo-list-entry-album.png');
 }
 

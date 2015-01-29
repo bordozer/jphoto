@@ -60,21 +60,22 @@
 
 		<div class="panel-footer">
 
-			<c:if test="${showPaging and totalPhotos > 0}">
-				<tags:paging showSummary="true"/>
+			<c:if test="${totalPhotos > 0}">
+
+				<c:if test="${showPaging}">
+					<tags:paging showSummary="true"/>
+				</c:if>
+
+				<div class="row row-bottom-padding-10">
+					<div class="col-lg-10">
+						<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
+					</div>
+
+					<div class="col-lg-2 text-right">
+							<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
+					</div>
+				</div>
 			</c:if>
-
-			<div class="row row-bottom-padding-10">
-				<div class="col-lg-10">
-					<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
-				</div>
-
-				<div class="col-lg-2 text-right">
-					<c:if test="${totalPhotos > 0}">
-						<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
-					</c:if>
-				</div>
-			</div>
 
 			<c:if test="${isGroupOperationEnabled}">
 
