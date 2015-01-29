@@ -28,11 +28,7 @@
 	</c:if>
 
 	<c:if test="${photoListModel.showPhotoSearchForm}">
-		<div class="floatleft">
-			<photo:photoFilter />
-		</div>
+		<photo:photoFilter />
 	</c:if>
-
-	<div class="footerseparator"></div>
 
 </tags:page>

@@ -7,6 +7,6 @@
 
 <tr <c:if test="${not empty height}">height="${height}"</c:if>>
 	<td colspan=${colspan}>
-		<div class='separator block-border base-font-color'><c:if test="${not empty title_t}">${eco:translate(title_t)}</c:if></div>
+		<div class='separator'><c:if test="${not empty title_t}">${eco:translate(title_t)}</c:if></div>
 	</td>
 </tr>

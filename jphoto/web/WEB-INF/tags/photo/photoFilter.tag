@@ -14,73 +14,90 @@
 
 <jsp:useBean id="photoFilterModel" type="ui.controllers.photos.list.PhotoFilterModel" scope="request"/>
 
-<c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
-<c:set var="photoFilterSortColumnsValues" value="<%=GenericTranslatableList.photoFilterSortColumnTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
-<c:set var="photoFilterSortOrderValues" value="<%=GenericTranslatableList.photoFilterSortOrderTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+<c:set var="membershipTypeListValues"
+	   value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+<c:set var="photoFilterSortColumnsValues"
+	   value="<%=GenericTranslatableList.photoFilterSortColumnTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+<c:set var="photoFilterSortOrderValues"
+	   value="<%=GenericTranslatableList.photoFilterSortOrderTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrl()}/photos/filter/">
 
-	<table:table width="600">
+	<div class="panel panel-default" style="width: 700px;">
 
-		<table:separatorInfo colspan="2" title="${eco:translate('Photo search: Photo search')}" />
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				${eco:translate('Photo search: Photo search')}
+			</h3>
+		</div>
 
-		<table:tr>
-			<table:tdtext text_t="Photo search: Photo name contains"/>
-			<table:tddata>
-				<form:input path="filterPhotoName"/>
-			</table:tddata>
-		</table:tr>
+		<div class="panel-body">
 
-		<table:tr>
-			<table:tdtext text_t="Photo search: Photo category"/>
-			<table:tddata>
-				<form:select path="filterGenreId" >
-					<form:option value="-1" label="- - - - - -"/>
-					<form:options items="${photoFilterModel.genreWrappers}" itemValue="genre.id" itemLabel="genreNameTranslated"/>
-				</form:select>
-			</table:tddata>
-		</table:tr>
+			<table:table width="600">
 
-		<table:tr>
-			<table:tdtext text_t="Photo search: Show photos with nude content" />
-			<table:tddata>
-				<form:checkbox path="showPhotosWithNudeContent"/>
-			</table:tddata>
-		</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Photo search: Photo name contains"/>
+					<table:tddata>
+						<form:input path="filterPhotoName"/>
+					</table:tddata>
+				</table:tr>
 
-		<table:separator colspan="2" />
+				<table:tr>
+					<table:tdtext text_t="Photo search: Photo category"/>
+					<table:tddata>
+						<form:select path="filterGenreId">
+							<form:option value="-1" label="- - - - - -"/>
+							<form:options items="${photoFilterModel.genreWrappers}" itemValue="genre.id"
+										  itemLabel="genreNameTranslated"/>
+						</form:select>
+					</table:tddata>
+				</table:tr>
 
-		<table:tr>
-			<table:tdtext text_t="Photo search: Author name contains"/>
-			<table:tddata>
-				<form:input path="filterAuthorName"/>
-			</table:tddata>
-		</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Photo search: Show photos with nude content"/>
+					<table:tddata>
+						<form:checkbox path="showPhotosWithNudeContent"/>
+					</table:tddata>
+				</table:tr>
 
-		<table:tr>
-			<table:tdtext text_t="Photo search: Author membership type"/>
-			<table:tddata>
-				<form:checkboxes path="photoAuthorMembershipTypeIds" items="${membershipTypeListValues}" itemValue="id" itemLabel="name" delimiter="<br />"/>
-			</table:tddata>
-		</table:tr>
+				<table:separator colspan="2"/>
 
-		<table:separator colspan="2" />
+				<table:tr>
+					<table:tdtext text_t="Photo search: Author name contains"/>
+					<table:tddata>
+						<form:input path="filterAuthorName"/>
+					</table:tddata>
+				</table:tr>
 
-		<table:tr>
-			<table:tdtext text_t="Photo search: Photo filter: Sort by"/>
-			<table:tddata>
-				<form:select path="photosSortColumn" items="${photoFilterSortColumnsValues}" itemValue="id" itemLabel="name" />
-				<br />
-				<form:radiobuttons path="photosSortOrder" items="${photoFilterSortOrderValues}" itemValue="id" itemLabel="name" delimiter="<br />" />
-			</table:tddata>
-		</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Photo search: Author membership type"/>
+					<table:tddata>
+						<form:checkboxes path="photoAuthorMembershipTypeIds" items="${membershipTypeListValues}"
+										 itemValue="id" itemLabel="name" delimiter="<br />"/>
+					</table:tddata>
+				</table:tr>
 
-		<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-		<table:trok text_t="Photo search: Do search photos button" />
+				<table:tr>
+					<table:tdtext text_t="Photo search: Photo filter: Sort by"/>
+					<table:tddata>
+						<form:select path="photosSortColumn" items="${photoFilterSortColumnsValues}" itemValue="id" itemLabel="name"/>
+						<br/>
+						<form:radiobuttons path="photosSortOrder" items="${photoFilterSortOrderValues}" itemValue="id" itemLabel="name" delimiter="<br />"/>
+					</table:tddata>
+				</table:tr>
 
-	</table:table>
+			</table:table>
 
-	<tags:springErrorHighliting bindingResult="${photoFilterModel.bindingResult}" />
 
+		</div>
+
+		<div class="panel-footer">
+			<html:submitButton id="submit_photos_search" caption_t="Photo search: Do search photos button" />
+		</div>
+
+		<tags:springErrorHighliting bindingResult="${photoFilterModel.bindingResult}"/>
+
+	</div>
 </form:form>
