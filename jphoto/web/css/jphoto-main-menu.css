@@ -1,6 +1,20 @@
+.menu-block-background {
+	background: #e7e4d3;
+}
+
+.menu-block-border {
+	border: solid 1px #848078;
+}
+
+.menu-font-color {
+	color: #888888;
+}
+
+.menu-block-shadow {
+	box-shadow: 3px 3px 10px #848078;
+}
+
 #cssmenu {
-	/*position: relative;*/
-	/*background: #2b2f3a;*/
 	float: left;
 	display: inline;
 	margin-left: 10px;

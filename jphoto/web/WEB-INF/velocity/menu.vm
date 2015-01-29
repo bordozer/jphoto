@@ -1,4 +1,4 @@
-<div id='cssmenu' class="block-background block-border">
+<div id='cssmenu' class="menu-block-background menu-block-border">
 
 	<ul>
 		#foreach( $menuItem in $menuElements.entrySet() )
@@ -6,7 +6,7 @@
 			<li class='has-sub'><a href='$menuItem.key.link'><span>$menuItem.key.caption</span></a>
 				<ul>
 					#foreach( $subMenuItem in $menuItem.value )
-						<li class="base-font-color block-background block-shadow">
+						<li class="menu-font-color menu-block-background menu-block-shadow">
 							<a href='$subMenuItem.link' onclick='$subMenuItem.jsFunction'>
 									<span>
 

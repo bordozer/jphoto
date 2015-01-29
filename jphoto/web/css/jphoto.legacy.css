@@ -1,13 +1,13 @@
-/*body {
+body {
 	margin: 0 20px 0 0;
 	padding: 0;
 	font: normal 90% Helvetica;
 	background: #fcfcfc;
-}*/
+}
 
-/*.base-font-color {
+.base-font-color {
 	color: #888888;
-}*/
+}
 
 h1, h2, h3, h4, h5, h6 {
 	text-transform: uppercase;

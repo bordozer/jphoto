@@ -6,7 +6,7 @@
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
 
-	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto1.css" />
+	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.css" />
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto-main-menu.css" />
 
 	<script type="text/javascript" src="$baseUrl/js/require-config.js.jsp"></script>
@@ -92,69 +92,16 @@
 		</div>
 	</div>
 
-##	<div class="floatleft block-border" style="border-left: none; border-top: none; border-right: none; margin: 3px 3px 7px 7px; padding: 5px; height: 90px;">
-
-		#*<div class="header block-border">
-			<a href="$portalpageurl">$progectname</a>
-			<br />
-			<a href="$portalpageurl">$slogan</a>
-			<div class="floatleft" style="margin-top: 2px;">
-				#foreach( $uiLanguage in $uiLanguages )
-					<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
-						<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title" class="language $uiLanguage.style">
-					</a>
-				#end
-				<script type="text/javascript">
-					function changeUiLanguage( languageCode ) {
-						$.ajax( {
-									type:'GET',
-									url:'$baseUrl/language/' + languageCode + '/',
-									success:function ( response ) {
-										document.location.reload();
-									},
-									error:function () {
-										alert( 'Error changing UI language :' );
-									}
-								} );
-					}
-				</script>
-			</div>
-		</div>*#
-
-		#*<div class="pagehat" style="max-width: $pageHatMaxWidth;">
-
-			<h2 class="page-title">$pageHeader</h2>
-
-			<div class="breadcrumbs breadcrumbs-color">$breadcrumbs</div>
-			<div class="infoLayer">
-
-				#foreach( $titleIcon in $titleIcons )
-					<span style="float: left; width: auto; padding-right: 5px;">$titleIcon.icon</span>
-				#end
-
-				#if ( $hiMessage )
-					<script type="text/javascript">
-						require( [ 'jquery' ], function( $ ) {
-							$( document ).ready( function() {
-								showUIMessage_Notification( "$hiMessage" );
-							});
-						});
-					</script>
-				#end
-
-			</div>
-
-		</div>*#
-
-##		#parse( "loginForm.vm" )
-##	</div>
-
-	#parse( "menu.vm" )
+	<div>
+		#parse( "menu.vm" )
+	</div>
 
 	#if ( $showPhotoCategoriesToolbar )
-		#parse( "genrelist.vm" )
+		<div>
+			#parse( "genrelist.vm" )
+		</div>
 	#end
 
-	<div class="floatleft" style="margin-top: 20px;">
-		<div style="margin-bottom: 20px; padding-bottom: 20px;padding-left: 20px;">
+##	<div class="floatleft" style="margin-top: 20px;">
+##		<div style="margin-bottom: 20px; padding-bottom: 20px;padding-left: 20px;">
 
