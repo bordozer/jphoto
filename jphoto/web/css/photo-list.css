@@ -89,19 +89,6 @@
 	/*background: #BAC8D9;*/
 }
 
-.photo-list-entry-preview {
-	position: relative;
-	/*float: left;*/
-	top: 3px;
-	left: 1px;
-	width: 100%;
-	height: 322px; /* MATTER OF DIMENSION */
-	text-align: center;
-	/*display:table-cell;
-	vertical-align:middle;*/
-	/*background: #BAC8D9;*/
-}
-
 .photo-preview-image {
 	/*padding: 1px;*/
 }
