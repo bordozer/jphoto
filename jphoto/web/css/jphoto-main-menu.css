@@ -6,12 +6,12 @@
 	border: solid 1px #848078;
 }
 
-.menu-font-color {
-	color: #888888;
-}
-
 .menu-block-shadow {
 	box-shadow: 3px 3px 10px #848078;
+}
+
+.menu-font-color {
+	color: #888888;
 }
 
 #cssmenu {

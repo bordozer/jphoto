@@ -38,82 +38,90 @@
 
 	<div class="container-fluid">
 
-		<div class="row">
+		<div class="panel panel-default">
 
-			<div class="col-lg-2 text-center">
+			<div class="panel-body">
 
-				<div class="row" style="height: 50px;">
-					<h3><a href="$portalpageurl">$progectname</a></h3>
-				</div>
+				<div class="col-lg-2 text-center">
 
-				<div class="row" style="height: 30px;">
-					<h5><a href="$portalpageurl">$slogan</a></h5>
-				</div>
+					<div class="row" style="height: 30px;">
+						<h3><a href="$portalpageurl">$progectname</a></h3>
+					</div>
 
-				<div class="row" style="height: 30px;">
-					#foreach( $uiLanguage in $uiLanguages )
-						<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
-							<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title"
-								 class="language $uiLanguage.style">
-						</a>
-					#end
+					<div class="row" style="height: 30px;">
+						<h5><a href="$portalpageurl">$slogan</a></h5>
+					</div>
 
-					<script type="text/javascript">
-						function changeUiLanguage( languageCode ) {
-							$.ajax( {
-								type: 'GET',
-								url: '$baseUrl/language/' + languageCode + '/',
-								success: function ( response ) {
-									document.location.reload();
-								},
-								error: function () {
-									alert( 'Error changing UI language :' );
-								}
-							} );
-						}
-					</script>
-				</div>
+					<div class="row" style="height: 30px;">
+						#foreach( $uiLanguage in $uiLanguages )
+							<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
+								<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title"
+									 class="language $uiLanguage.style">
+							</a>
+						#end
 
-			</div>
-
-			<div class="col-lg-8">
-
-				<div class="row">
-					<h3>$pageHeader</h3>
-				</div>
-
-				<div class="row">
-					$breadcrumbs
-				</div>
-
-				<div class="row">
-					#foreach( $titleIcon in $titleIcons )
-						<div class="col-md-1">$titleIcon.icon</div>
-					#end
-
-					#if ( $hiMessage )
 						<script type="text/javascript">
-							require( [ 'jquery' ], function ( $ ) {
-								$( document ).ready( function () {
-									showUIMessage_Notification( "$hiMessage" );
+							function changeUiLanguage( languageCode ) {
+								$.ajax( {
+									type: 'GET',
+									url: '$baseUrl/language/' + languageCode + '/',
+									success: function ( response ) {
+										document.location.reload();
+									},
+									error: function () {
+										alert( 'Error changing UI language :' );
+									}
 								} );
-							} );
+							}
 						</script>
-					#end
+					</div>
+
 				</div>
-			</div>
-			<div class="col-lg-2">
-				#parse( "loginForm.vm" )
+
+				<div class="col-lg-8">
+
+					<div class="row">
+						<h3>$pageHeader</h3>
+					</div>
+
+					<div class="row">
+						$breadcrumbs
+					</div>
+
+					<div class="row">
+						#foreach( $titleIcon in $titleIcons )
+							<div class="col-md-1">$titleIcon.icon</div>
+						#end
+
+						#if ( $hiMessage )
+							<script type="text/javascript">
+								require( [ 'jquery' ], function ( $ ) {
+									$( document ).ready( function () {
+										showUIMessage_Notification( "$hiMessage" );
+									} );
+								} );
+							</script>
+						#end
+					</div>
+				</div>
+				<div class="col-lg-2">
+					#parse( "loginForm.vm" )
+				</div>
+
+			</div> #* / panel body *#
+
+		</div> #* / panel *#
+
+		<div class="panel panel-default">
+
+			<div class="panel-body">
+
+				#parse( "menu.vm" )
+
+				#if ( $showPhotoCategoriesToolbar )
+					#parse( "genrelist.vm" )
+				#end
+
 			</div>
 
 		</div>
-
-		<div class="row">
-			#parse( "menu.vm" )
-		</div>
-
-		#if ( $showPhotoCategoriesToolbar )
-			<div class="row">
-				#parse( "genrelist.vm" )
-			</div>
-		#end

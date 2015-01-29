@@ -1,3 +1,14 @@
+.photo-list-block-background {
+	background: #e7e4d3;
+}
+
+.photo-list-block-border {
+	border: solid 1px #848078;
+}
+
+.photo-list-block-shadow {
+	box-shadow: 3px 3px 10px #848078;
+}
 
 .photo-list-container {
 	float: left;
@@ -29,8 +40,6 @@
 	font-weight: bold;
 }
 
-
-
 .photo-container {
 	width: 310px; /* MATTER OF DIMENSION */
 	height: auto;
@@ -42,7 +51,6 @@
 	padding-right: 5px;
 	border-radius: 5px;
 }
-
 
 .photo-list-entry-checkbox {
 	display: inline-block;

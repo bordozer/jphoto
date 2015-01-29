@@ -18,4 +18,14 @@ a {
 	color: #003366;
 }
 
+.block-background {
+	background: #e7e4d3;
+}
 
+.block-border {
+	border: solid 1px #848078;
+}
+
+.block-shadow {
+	box-shadow: 3px 3px 10px #848078;
+}

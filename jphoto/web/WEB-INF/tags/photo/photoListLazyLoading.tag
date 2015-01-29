@@ -31,42 +31,53 @@
 </c:if>
 
 <eco:form action="${formAction}" formName="${groupOperationForm}">
+
 	<a name="${photoList.photoListId}"></a>
-	<div class="photo-list-container">
 
-		<photo:photoListHeader photoList="${photoList}" />
+	<%--<div class="row">--%>
 
-		<div class="empty-photo-list-text">
-			<c:if test="${totalPhotos == 0}">
-				${eco:translate(photoList.noPhotoText)}
-			</c:if>
-		</div>
+		<div class="panel panel-primary">
 
-		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
+			<photo:photoListHeader photoList="${photoList}" />
 
-			<c:set var="photoId" value="${photoId}" />
+			<div class="panel-body">
 
-			<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
-				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
-					<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
+				<div class="empty-photo-list-text">
+					<c:if test="${totalPhotos == 0}">
+						${eco:translate(photoList.noPhotoText)}
+					</c:if>
 				</div>
+
+				<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
+
+					<c:set var="photoId" value="${photoId}" />
+
+					<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
+						<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
+							<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
+						</div>
+					</div>
+
+				</c:forEach>
+
 			</div>
 
-		</c:forEach>
+			<div class="panel-footer">
 
-		<div class="floatleft">
-			<c:if test="${totalPhotos > 0}">
-				<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
-			</c:if>
+				<c:if test="${totalPhotos > 0}">
+					<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
+				</c:if>
 
-			<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
+				<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
+
+				<c:if test="${showPaging}">
+					<tags:paging showSummary="true"/>
+				</c:if>
+			</div>
+
 		</div>
 
-	</div>
-
-	<c:if test="${showPaging}">
-		<tags:paging showSummary="true"/>
-	</c:if>
+	<%--</div>--%>
 
 	<script type="text/javascript">
 
