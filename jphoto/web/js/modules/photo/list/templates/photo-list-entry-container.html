@@ -90,19 +90,19 @@
 
 				<div class="col-lg-1">
 					<% if( memberOfAlbum ) {%>
-						<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon" title="TODO: the photo is in album">
+						<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon" title="<%=iconTitlePhotoIsInAlbum%>">
 					<%}%>
 				</div>
 
 				<div class="col-lg-1">
 					<% if( showAdminFlag_Anonymous ) {%>
-						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="TODO: anonymous posting">
+						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="<%=iconTitleAnonymousPosting%>">
 					<%}%>
 				</div>
 
 				<div class="col-lg-1" class="photo-list-entry-icon">
 					<% if( showAdminFlag_Nude ) {%>
-						<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon" title="TODO: the photo has nude content">
+						<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon" title="<%=iconTitleNudeContent%>">
 					<%}%>
 				</div>
 

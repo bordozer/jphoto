@@ -60,6 +60,10 @@ public class PhotoEntryDTO {
 	private boolean memberOfAlbum;
 	private boolean showPhotoListPreviewFooter;
 
+	private String iconTitlePhotoIsInAlbum;
+	private String iconTitleAnonymousPosting;
+	private String iconTitleNudeContent;
+
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
 		this.photoId = photoId;
@@ -359,5 +363,29 @@ public class PhotoEntryDTO {
 
 	public boolean isShowPhotoListPreviewFooter() {
 		return showPhotoListPreviewFooter;
+	}
+
+	public String getIconTitlePhotoIsInAlbum() {
+		return iconTitlePhotoIsInAlbum;
+	}
+
+	public void setIconTitlePhotoIsInAlbum( final String iconTitlePhotoIsInAlbum ) {
+		this.iconTitlePhotoIsInAlbum = iconTitlePhotoIsInAlbum;
+	}
+
+	public String getIconTitleNudeContent() {
+		return iconTitleNudeContent;
+	}
+
+	public void setIconTitleNudeContent( final String iconTitleNudeContent ) {
+		this.iconTitleNudeContent = iconTitleNudeContent;
+	}
+
+	public String getIconTitleAnonymousPosting() {
+		return iconTitleAnonymousPosting;
+	}
+
+	public void setIconTitleAnonymousPosting( final String iconTitleAnonymousPosting ) {
+		this.iconTitleAnonymousPosting = iconTitleAnonymousPosting;
 	}
 }

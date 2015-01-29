@@ -98,6 +98,11 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
 		dto.setPhotoCardLink( urlUtilsService.getPhotoCardLink( photo.getId() ) );
 		dto.setShowPhotoListPreviewFooter( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER ) );
+
+		dto.setIconTitlePhotoIsInAlbum( translatorService.translate( "Photo preview: The photo is in album admin icon", language ) );
+		dto.setIconTitleAnonymousPosting( translatorService.translate( "Photo preview: Anonymous posting admin icon", language ) );
+		dto.setIconTitleNudeContent( translatorService.translate( "Photo preview: The photo has nude content admin icon", language ) );
+
 		setNudeContent( photo, accessor, dto, language );
 
 		dto.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
