@@ -10,14 +10,11 @@
 	box-shadow: 3px 3px 10px #848078;
 }
 
-.photo-list-container {
-	float: left;
-	width: 98%;
-	padding-top: 20px;
-	padding-right: 20px;
-	padding-left: 20px;
-	padding-bottom: 20px;
-	/*border: 1px solid #880000;*/
+.photo-list-entry-container {
+	/*font-size: 10px;*/
+	color: #dd8888;
+	/*width: 330px; *//* MATTER OF DIMENSION */
+	min-height: 440px; /* MATTER OF DIMENSION */
 }
 
 .empty-photo-list-text {
@@ -40,17 +37,17 @@
 	font-weight: bold;
 }
 
-.photo-container {
-	width: 310px; /* MATTER OF DIMENSION */
+/*.photo-container {
+	width: 310px; *//* MATTER OF DIMENSION *//*
 	height: auto;
-	min-height: 440px; /* MATTER OF DIMENSION */
+	min-height: 440px; *//* MATTER OF DIMENSION *//*
 	display: inline-block;
 	margin: 20px;
 	padding-top: 10px;
 	padding-left: 5px;
 	padding-right: 5px;
 	border-radius: 5px;
-}
+}*/
 
 .photo-list-entry-checkbox {
 	display: inline-block;

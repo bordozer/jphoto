@@ -6,14 +6,16 @@
 
 <div class="panel-heading">
 
-	<h3 class="panel-title">
+	<div class="row">
 
-		<c:if test="${not empty photoList.photoListTitle}">
-			${photoList.photoListTitle}
-		</c:if>
+		<h3 class="panel-title col-lg-10">
+			<c:if test="${not empty photoList.photoListTitle}">
+				${photoList.photoListTitle}
+			</c:if>
+		</h3>
 
 		<c:if test="${not empty photoList.accessiblePhotoListViewModes}">
-			<div style="float: right; width: 100px; text-align: right; padding-right: 10px;">
+			<div class="col-lg-2">
 				<c:forEach var="viewMode" items="${photoList.accessiblePhotoListViewModes}">
 					<a href="${viewMode.viewModeLink}"><html:img24 src="${viewMode.viewModeType.icon}" alt=""/></a>
 					&nbsp;
@@ -21,6 +23,6 @@
 			</div>
 		</c:if>
 
-	</h3>
+	</div>
 
 </div>

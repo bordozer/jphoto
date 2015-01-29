@@ -2,6 +2,10 @@
 	border: 1px dotted grey;
 }*/
 
+/*div {
+	border: 1px dotted red;
+}*/
+
 body {
 	margin: 0 20px 0 0;
 	padding: 0;
@@ -18,6 +22,10 @@ a {
 	color: #003366;
 }
 
+.row-bottom-padding-10 {
+	padding-bottom: 10px;
+}
+
 /*.block-background {
 	background: #e7e4d3;
 }*/
@@ -29,7 +37,3 @@ a {
 /*.block-shadow {
 	box-shadow: 3px 3px 10px #848078;
 }*/
-
-.row-bottom-padding-10 {
-	padding-bottom: 10px;
-}

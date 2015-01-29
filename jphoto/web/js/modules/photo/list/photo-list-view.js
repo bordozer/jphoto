@@ -39,11 +39,35 @@ define( ["backbone", "jquery", "underscore"
 
 			var photoId = this.model.get( 'photoId' );
 
-			if ( this.model.get( 'userOwnThePhoto' ) ) {
+			var element = this.photoListEntryContainer( modelJSON );
+
+			/*if ( this.model.get( 'showPhotoContextMenu' ) ) {
+				element.append( this.contextMenuTemplate( modelJSON ) );
+			}
+
+			if ( this.model.get( 'showStatistics' ) ) {
+				element.append( this.statisticsTemplate( modelJSON ) );
+			}
+
+			element.append( this.photoNameTemplate( modelJSON ) );
+
+			element.append( this.authorLinkTemplate( modelJSON ) );
+
+			if ( this.model.get( 'showUserRank' ) ) {
+				element.append( this.authorRankTemplate( modelJSON ) );
+			}
+
+			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
+				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
+			}*/
+
+			this.$el.html( element );
+
+			/*if ( this.model.get( 'userOwnThePhoto' ) ) {
 				this.$el.addClass( 'block-user-photo' );
 			}
 
-			var element = $( "<div class='admin-special-empty-flag'></div>" );
+			var element = $( "<div class='panel panel-primary photo-list-entry-container admin-special-empty-flag'></div>" );
 
 			var element_admin_flag_1 = $( "<div class='admin-special-empty-flag'></div>" );
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
@@ -93,7 +117,7 @@ define( ["backbone", "jquery", "underscore"
 				element_admin_flag_2.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
-			this.$el.html( element );
+			this.$el.html( element );*/
 
 			this.renderBookmarkIcons( this.$( '.photo-icons' ) );
 		}

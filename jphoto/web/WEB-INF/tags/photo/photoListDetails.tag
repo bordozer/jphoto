@@ -13,7 +13,7 @@
 	<tags:paging showSummary="false"/>
 </c:if>
 
-<div class="photo-list-container">
+<div class="row">
 
 	<photo:photoListHeader photoList="${photoList}"/>
 
