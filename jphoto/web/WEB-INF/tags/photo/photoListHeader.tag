@@ -15,7 +15,7 @@
 		</h3>
 
 		<c:if test="${not empty photoList.accessiblePhotoListViewModes}">
-			<div class="col-lg-2">
+			<div class="col-lg-2 text-right">
 				<c:forEach var="viewMode" items="${photoList.accessiblePhotoListViewModes}">
 					<a href="${viewMode.viewModeLink}"><html:img24 src="${viewMode.viewModeType.icon}" alt=""/></a>
 					&nbsp;
