@@ -7,6 +7,8 @@
 	<meta name="description" content=""/>
 
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.css"/>
+	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.context-menu.css"/>
+##	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.legacy.css"/>
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto-main-menu.css"/>
 
 	<script type="text/javascript" src="$baseUrl/js/require-config.js.jsp"></script>
