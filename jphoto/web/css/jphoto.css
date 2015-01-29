@@ -8,3 +8,12 @@ body {
 .base-font-color {
 	color: #888888;
 }
+
+a {
+	text-decoration: none;
+	color: #003366;
+}
+
+.row {
+	border: 1px dotted grey;
+}
