@@ -45,7 +45,7 @@
 					<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
 
 					<c:if test="${pageItem.number == 0}">
-						<li title="${pageItemTitle}"><a href="#" onclick="return false;">&nbsp;...&nbsp;</a></li>
+						<li class="disabled"><a href="#" onclick="return false;">&nbsp;...&nbsp;</a></li>
 					</c:if>
 
 					<c:if test="${pageItem.number != 0}">
