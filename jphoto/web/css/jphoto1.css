@@ -1,0 +1,11 @@
+body {
+	margin: 0 20px 0 0;
+	padding: 0;
+	font: normal 90% Helvetica;
+	background: #fcfcfc;
+	color: #888888;
+}
+
+.base-font-color {
+	color: #888888;
+}

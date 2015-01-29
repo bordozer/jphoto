@@ -23,6 +23,8 @@ var require = {
 		, backbone: "lib/front-end/backbone"
 		, text: "lib/front-end/text"
 
+		, bootstrap: "lib/bootstrap-3.3.2-dist/js/bootstrap.min"
+
 		, jsonrpc: "lib/jsonrpc"
 
 		, jquery_form: "lib/jquery/jquery.form" <%-- TODO: IS it used somewhere? --%>
@@ -96,10 +98,13 @@ var require = {
 		},
 		photosight: {
 			deps: [ 'jquery' ]
+		},
+		bootstrap: {
+			deps: [ 'jquery' ]
 		}
 	},
 
-	deps: [ "jquery", "backbone", "underscore", "text", "core.jphoto", 'jsonrpc' ],
+	deps: [ "jquery", "backbone", "underscore", "text", "core.jphoto", 'jsonrpc', 'bootstrap' ],
 
 	callback: function ( $, Backbone, _, text, core, jsonrpc ) {
 

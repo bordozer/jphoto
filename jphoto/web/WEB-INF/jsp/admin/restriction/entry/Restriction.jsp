@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="${baseUrl}/js/lib/jquery/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="${baseUrl}/js/lib/date.format.js"></script>
 
-	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
+	<link href="${baseUrl}/css/DEL_jphoto.css" rel="stylesheet" type="text/css"/>
 	<link href="${baseUrl}/css/restriction.css" rel="stylesheet" type="text/css"/>
 
 </head>

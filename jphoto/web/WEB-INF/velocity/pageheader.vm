@@ -6,7 +6,7 @@
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
 
-	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.css" />
+	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto1.css" />
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto-main-menu.css" />
 
 	<script type="text/javascript" src="$baseUrl/js/require-config.js.jsp"></script>
@@ -24,6 +24,8 @@
 
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/toastmessage/resources/css/jquery.toastmessage.css" />
 
+	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/bootstrap-3.3.2-dist/css/bootstrap.min.css" />
+
 	<style type="text/css">
 		.language {
 			padding: 2px;
@@ -33,11 +35,69 @@
 </head>
 <body class="base-font-color">
 
-	<div class="floatleft block-border" style="border-left: none; border-top: none; border-right: none; margin: 3px 3px 7px 7px; padding: 5px; height: 90px;">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2">
+				<div>
+					<a href="$portalpageurl">$progectname</a>
+				</div>
+				<div>
+					<a href="$portalpageurl">$slogan</a>
+				</div>
+				<div>
+					#foreach( $uiLanguage in $uiLanguages )
+						<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
+							<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title" class="language $uiLanguage.style">
+						</a>
+					#end
 
-		<div class="header block-border">
-			<h1><a href="$portalpageurl">$progectname</a></h1>
-			<h2><a href="$portalpageurl">$slogan</a></h2>
+					<script type="text/javascript">
+						function changeUiLanguage( languageCode ) {
+							$.ajax( {
+										type:'GET',
+										url:'$baseUrl/language/' + languageCode + '/',
+										success:function ( response ) {
+											document.location.reload();
+										},
+										error:function () {
+											alert( 'Error changing UI language :' );
+										}
+									} );
+						}
+					</script>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div>$pageHeader</div>
+				<div>$breadcrumbs</div>
+				<div>
+					#foreach( $titleIcon in $titleIcons )
+						<div class="col-md-1">$titleIcon.icon</div>
+					#end
+
+					#if ( $hiMessage )
+						<script type="text/javascript">
+							require( [ 'jquery' ], function( $ ) {
+								$( document ).ready( function() {
+									showUIMessage_Notification( "$hiMessage" );
+								});
+							});
+						</script>
+					#end
+				</div>
+			</div>
+			<div class="col-lg-2">
+				#parse( "loginForm.vm" )
+			</div>
+		</div>
+	</div>
+
+##	<div class="floatleft block-border" style="border-left: none; border-top: none; border-right: none; margin: 3px 3px 7px 7px; padding: 5px; height: 90px;">
+
+		#*<div class="header block-border">
+			<a href="$portalpageurl">$progectname</a>
+			<br />
+			<a href="$portalpageurl">$slogan</a>
 			<div class="floatleft" style="margin-top: 2px;">
 				#foreach( $uiLanguage in $uiLanguages )
 					<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
@@ -59,9 +119,9 @@
 					}
 				</script>
 			</div>
-		</div>
+		</div>*#
 
-		<div class="pagehat" style="max-width: $pageHatMaxWidth;">
+		#*<div class="pagehat" style="max-width: $pageHatMaxWidth;">
 
 			<h2 class="page-title">$pageHeader</h2>
 
@@ -84,10 +144,10 @@
 
 			</div>
 
-		</div>
+		</div>*#
 
-		#parse( "loginForm.vm" )
-	</div>
+##		#parse( "loginForm.vm" )
+##	</div>
 
 	#parse( "menu.vm" )
 

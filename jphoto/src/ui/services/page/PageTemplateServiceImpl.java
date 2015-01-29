@@ -162,7 +162,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "showPhotoCategoriesToolbar", configurationService.getBoolean( ConfigurationKey.SYSTEM_UI_SHOW_PHOTO_CATEGORIES_TOOLBAR ) );
 
-		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  ); // TODO: should be a separate view for mobile devices
+//		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  ); // TODO: should be a separate view for mobile devices
 
 		fillUiLanguages( language, model );
 

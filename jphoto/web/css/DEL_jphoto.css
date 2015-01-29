@@ -1,16 +1,13 @@
-body {
+/*body {
 	margin: 0 20px 0 0;
 	padding: 0;
 	font: normal 90% Helvetica;
 	background: #fcfcfc;
-	/*font-family: "Open Sans", sans-serif;*/
-	/*font-size: 12px;*/
-	/*font-weight: 400;*/
-}
+}*/
 
-.base-font-color {
+/*.base-font-color {
 	color: #888888;
-}
+}*/
 
 h1, h2, h3, h4, h5, h6 {
 	text-transform: uppercase;
