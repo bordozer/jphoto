@@ -76,6 +76,7 @@
 			<%}%>
 
 			<div class="row margin-left-5" style="height: 40px;"><%=photoLink%></div>
+			<div class="row margin-left-5"><%=photoAuthorLink%></div>
 
 			<% if( showUserRank ) {%>
 				<div class="row margin-left-5"><%=photoAuthorRank%></div>
@@ -87,21 +88,27 @@
 
 			<div class="row" style="height: 20px; margin-left: 1px;">
 
-				<% if( memberOfAlbum ) {%>
-					<div class="col-lg-1 photo-is-in-album" title="TODO: the photo is in album"></div>
-				<%}%>
+				<div class="col-lg-1">
+					<% if( memberOfAlbum ) {%>
+						<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon" title="TODO: the photo is in album">
+					<%}%>
+				</div>
 
-				<% if( showAdminFlag_Anonymous ) {%>
-					<div class="col-lg-1 admin-special-flag-anonymous-posting" title="TODO: anonymous posting"></div>
-				<%}%>
+				<div class="col-lg-1">
+					<% if( showAdminFlag_Anonymous ) {%>
+						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="TODO: anonymous posting">
+					<%}%>
+				</div>
 
-				<% if( showAdminFlag_Nude ) {%>
-					<div class="col-lg-1 admin-special-flag-nude-content" title="TODO: the photo has nude content"></div>
-				<%}%>
+				<div class="col-lg-1" class="photo-list-entry-icon">
+					<% if( showAdminFlag_Nude ) {%>
+						<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon" title="TODO: the photo has nude content">
+					<%}%>
+				</div>
 
 				<% _.each( specialRestrictionIcons, function( iconDTO ) {%>
-					<div class='admin-special-flag-restriction'>
-						<img src="<%=iconDTO.icon%>" alt="<%=iconDTO.restrictionTypeName%>" title="<%=iconDTO.restrictionTypeName%>" width="16" height="16">
+					<div class="col-lg-1">
+						<img src="/images/<%=iconDTO.icon%>" alt="<%=iconDTO.restrictionTypeName%>" class="photo-list-entry-icon" title="<%=iconDTO.restrictionTypeName%>">
 					</div>
 				<%} );%>
 

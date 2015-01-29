@@ -1,18 +1,11 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/list/templates/photo-list-entry-container.html"
-		, "text!modules/photo/list/templates/group-operations.html"
-		, "text!modules/photo/list/templates/context-menu.html"
-		, "text!modules/photo/list/templates/statistics.html"
-		, "text!modules/photo/list/templates/photo-name.html"
-		, "text!modules/photo/list/templates/author-link.html"
-		, "text!modules/photo/list/templates/author-rank.html"
-		, "text!modules/photo/list/templates/anonymous-period-expiration-time.html"
 		, "components/menu/context-menu-model"
 		, "components/menu/context-menu-view"
 		, "modules/icon/entry-icon-model"
 		, "modules/icon/entry-icon-view"
 		], function ( Backbone, $, _
-		, photoListEntryContainer, groupOperationsTemplate, contextMenuTemplate, statisticsTemplate, photoNameTemplate, authorLinkTemplate, authorRankTemplate, anonymousPeriodExpirationTimeTemplate
+		, photoListEntryContainer
 		, ContextMenuModel, ContextMenuView
 		, EntryIconModel, EntryIconView
 		) {
@@ -22,13 +15,6 @@ define( ["backbone", "jquery", "underscore"
 	var PhotoListEntryModelView = Backbone.View.extend( {
 
 		photoListEntryContainer:_.template( photoListEntryContainer ),
-		groupOperationsTemplate:_.template( groupOperationsTemplate ),
-		contextMenuTemplate:_.template( contextMenuTemplate ),
-		statisticsTemplate:_.template( statisticsTemplate ),
-		photoNameTemplate:_.template( photoNameTemplate ),
-		authorLinkTemplate:_.template( authorLinkTemplate ),
-		authorRankTemplate:_.template( authorRankTemplate ),
-		anonymousPeriodExpirationTimeTemplate:_.template( anonymousPeriodExpirationTimeTemplate ),
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
