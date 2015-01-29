@@ -34,125 +34,125 @@
 
 	<a name="${photoList.photoListId}"></a>
 
-	<%--<div class="row">--%>
+	<div class="panel panel-primary">
 
-		<div class="panel panel-primary">
+		<photo:photoListHeader photoList="${photoList}" />
 
-			<photo:photoListHeader photoList="${photoList}" />
+		<div class="panel-body">
 
-			<div class="panel-body">
+			<div class="empty-photo-list-text">
+				<c:if test="${totalPhotos == 0}">
+					${eco:translate(photoList.noPhotoText)}
+				</c:if>
+			</div>
 
-				<div class="empty-photo-list-text">
-					<c:if test="${totalPhotos == 0}">
-						${eco:translate(photoList.noPhotoText)}
-					</c:if>
+			<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
+
+				<c:set var="photoId" value="${photoId}" />
+
+				<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
+					<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
+						<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
+					</div>
 				</div>
 
+			</c:forEach>
+
+		</div>
+
+		<div class="panel-footer">
+			<div class="row">
+				<div class="col-lg-10">
+					<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
+				</div>
+
+				<div class="col-lg-2 text-right">
+					<c:if test="${totalPhotos > 0}">
+						<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
+					</c:if>
+				</div>
+			</div>
+
+			<c:if test="${showPaging}">
+				<tags:paging showSummary="true"/>
+			</c:if>
+
+
+			<script type="text/javascript">
+
+				var photosToRender = [];
+
 				<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
-
-					<c:set var="photoId" value="${photoId}" />
-
-					<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
-						<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
-							<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
-						</div>
-					</div>
-
+					photosToRender.push( ${photoId} );
 				</c:forEach>
 
-			</div>
+				renderPhotos( photosToRender );
 
-			<div class="panel-footer">
+				function renderPhotos( photosToRender ) {
 
-				<c:if test="${totalPhotos > 0}">
-					<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
-				</c:if>
-
-				<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
-
-				<c:if test="${showPaging}">
-					<tags:paging showSummary="true"/>
-				</c:if>
-			</div>
-
-		</div>
-
-	<%--</div>--%>
-
-	<script type="text/javascript">
-
-		var photosToRender = [];
-
-		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
-			photosToRender.push( ${photoId} );
-		</c:forEach>
-
-		renderPhotos( photosToRender );
-
-		function renderPhotos( photosToRender ) {
-
-			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
-				for ( var i = 0; i < photosToRender.length; i++ ) {
-					var photoId = photosToRender[i];
-					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
-					photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, $( '.' + photoUniqueClass ) );
-				}
-			} );
-		}
-
-	</script>
-
-	<js:confirmAction />
-
-	<c:set var="controlSelectedPhotoIds" value="<%=PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS%>"/>
-
-	<c:if test="${isGroupOperationEnabled}">
-
-		<div class="footerseparatorverysmall"></div>
-
-		<c:set var="controlPhotoGroupOperationId" value="<%=PhotoGroupOperationModel.FORM_CONTROL_PHOTO_GROUP_OPERATION_ID%>" />
-
-		<div style="float: left; width: 90%; padding-left: 50px;">
-
-			<js:checkboxMassChecker checkboxClass="${controlSelectedPhotoIds}" />
-
-			<label for="${controlPhotoGroupOperationId}">${eco:translate('Photo list: Group operations with selected photos')}</label>
-
-			<select id="${controlPhotoGroupOperationId}" name="${controlPhotoGroupOperationId}">
-				<option value="" selected="selected"></option>
-				<c:forEach var="photoGroupOperationMenu" items="${photoGroupOperationMenues}">
-					<c:set var="photoGroupOperation" value="${photoGroupOperationMenu.photoGroupOperation}"/>
-					<option value="${photoGroupOperation.id}">${eco:translate(photoGroupOperation.name)}</option>
-				</c:forEach>
-			</select>
-
-			<html:submitButton id="ok" caption_t="Photo list: Do group operations" onclick="return submitForm();" />
-		</div>
-
-		<script type="text/javascript">
-
-			function submitForm() {
-				var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
-				if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
-					showUIMessage_Error( '${eco:translate("Photo list: Please, select group operation first")}' );
-					return false;
+					require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
+						for ( var i = 0; i < photosToRender.length; i++ ) {
+							var photoId = photosToRender[i];
+							var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
+							photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, $( '.' + photoUniqueClass ) );
+						}
+					} );
 				}
 
-				var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
-				if ( controlSelectedPhotoIds.length == 0 ) {
-					showUIMessage_Error( '${eco:translate("Photo list: Please, select at least one photo first")}' );
-					return false;
-				}
+			</script>
 
-				var form = $( '#${groupOperationForm}' );
-				form.submit();
+			<c:if test="${isGroupOperationEnabled}">
 
-				return true;
-			}
+				<div class="row">
 
-		</script>
+					<js:confirmAction />
 
-		<div class="footerseparatorsmall"></div>
-	</c:if>
+					<c:set var="controlSelectedPhotoIds" value="<%=PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS%>"/>
+					<c:set var="controlPhotoGroupOperationId" value="<%=PhotoGroupOperationModel.FORM_CONTROL_PHOTO_GROUP_OPERATION_ID%>" />
+
+					<js:checkboxMassChecker checkboxClass="${controlSelectedPhotoIds}" />
+
+					<label for="${controlPhotoGroupOperationId}">${eco:translate('Photo list: Group operations with selected photos')}</label>
+
+					<select id="${controlPhotoGroupOperationId}" name="${controlPhotoGroupOperationId}">
+						<option value="" selected="selected"></option>
+						<c:forEach var="photoGroupOperationMenu" items="${photoGroupOperationMenues}">
+							<c:set var="photoGroupOperation" value="${photoGroupOperationMenu.photoGroupOperation}"/>
+							<option value="${photoGroupOperation.id}">${eco:translate(photoGroupOperation.name)}</option>
+						</c:forEach>
+					</select>
+
+					<html:submitButton id="ok" caption_t="Photo list: Do group operations" onclick="return submitForm();" />
+
+				</div>
+
+				<script type="text/javascript">
+
+					function submitForm() {
+						var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
+						if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
+							showUIMessage_Error( '${eco:translate("Photo list: Please, select group operation first")}' );
+							return false;
+						}
+
+						var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
+						if ( controlSelectedPhotoIds.length == 0 ) {
+							showUIMessage_Error( '${eco:translate("Photo list: Please, select at least one photo first")}' );
+							return false;
+						}
+
+						var form = $( '#${groupOperationForm}' );
+						form.submit();
+
+						return true;
+					}
+
+				</script>
+
+			</c:if>
+
+		</div> <%-- / panel footer--%>
+
+	</div>
 
 </eco:form>

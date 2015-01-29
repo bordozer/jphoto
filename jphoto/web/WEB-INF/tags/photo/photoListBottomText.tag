@@ -8,15 +8,13 @@
 <%@ attribute name="bottomText" required="true" type="java.lang.String" %>
 <%@ attribute name="photosCriteriasDescription" required="true" type="java.lang.String" %>
 
-<div style="float: left;">
-	<div class="small-text" style="width: 95%;height: auto;float: left; padding-left: 20px;">
-		${photosCriteriasDescription}
-	</div>
+<div class="small-text" style="width: 95%;height: auto;float: left; padding-left: 20px;">
+	${photosCriteriasDescription}
+</div>
 
-	<div style="width: 95%; float: left; padding-left: 20px; text-align: justify">
-		<c:if test="${not empty bottomText}">
-			<br/>
-			${bottomText}
-		</c:if>
-	</div>
+<div style="width: 95%; float: left; padding-left: 20px; text-align: justify">
+	<c:if test="${not empty bottomText}">
+		<br/>
+		${bottomText}
+	</c:if>
 </div>

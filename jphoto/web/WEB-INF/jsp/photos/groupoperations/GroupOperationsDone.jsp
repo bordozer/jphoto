@@ -29,6 +29,4 @@
 
 	</div>
 
-	<div class="footerseparatorsmall"></div>
-
 </tags:page>

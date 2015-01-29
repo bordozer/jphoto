@@ -21,40 +21,39 @@
 
 <c:set var="delimeter" value="&nbsp;&nbsp;&nbsp;"/>
 
-<c:if test="${showSummary}">
-	<div class="floatleft pagingsummary" style="margin-bottom: 20px; margin-left: 20px;">
+<div class="row">
 
-		${eco:translate('Paging: Items total')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Paging: Pages total')}: ${totalPages} ${delimeter}
-
-		<c:if test="${pagingModel.totalItems > 0}">
-			/ ${delimeter} ${eco:translate('Paging: Items on page')}: ${pagingModel.itemsOnPage} ${delimeter}
+	<div class="col-lg-3">
+		<c:if test="${showSummary}">
+				${eco:translate('Paging: Items total')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Paging: Pages total')}: ${totalPages} ${delimeter}
+				<c:if test="${pagingModel.totalItems > 0}">
+					/ ${delimeter} ${eco:translate('Paging: Items on page')}: ${pagingModel.itemsOnPage} ${delimeter}
+				</c:if>
 		</c:if>
-
 	</div>
-</c:if>
 
-<div class="floatleft" style="text-align: center; padding: 10px;">
+	<div class="col-lg-8">
+		<c:forEach var="pageItem" items="${pageItems}">
 
-	<c:forEach var="pageItem" items="${pageItems}">
-
-		<c:if test="${currentPage == pageItem.number}">
-			<span class="page selectedPage block-border">${pageItem.number}</span>
-		</c:if>
-
-		<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
-
-		<c:if test="${currentPage != pageItem.number}">
-
-			<c:if test="${pageItem.number == 0}">
-				<span title="${pageItemTitle}">&nbsp;...&nbsp;</span>
+			<c:if test="${currentPage == pageItem.number}">
+				<span class="todo">${pageItem.number}</span>
 			</c:if>
 
-			<c:if test="${pageItem.number != 0}">
-				<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
-					<span class="page block-background block-border block-shadow">${pageItem.number}</span>
-				</a>
-			</c:if>
-		</c:if>
+			<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
 
-	</c:forEach>
+			<c:if test="${currentPage != pageItem.number}">
+
+				<c:if test="${pageItem.number == 0}">
+					<span title="${pageItemTitle}">&nbsp;...&nbsp;</span>
+				</c:if>
+
+				<c:if test="${pageItem.number != 0}">
+					<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
+						<span class="todo">${pageItem.number}</span>
+					</a>
+				</c:if>
+			</c:if>
+
+		</c:forEach>
+	</div>
 </div>

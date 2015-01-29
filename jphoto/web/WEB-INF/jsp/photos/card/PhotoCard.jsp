@@ -61,8 +61,6 @@
 
 	<div class="photoCardPhotoName">${photoNameEscaped}</div>
 
-	<div class="footerseparatorsmall"></div>
-
 	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? photo.bgColor : 'transparent'};">
 
 		<div style="width: ${shownDimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
@@ -70,8 +68,6 @@
 				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
 			</a>
 		</div>
-
-		<div class="footerseparatorverysmall"></div>
 
 	</div>
 
@@ -93,8 +89,6 @@
 	</div>
 
 	<js:confirmAction/>
-
-	<div class="footerseparatorverysmall"></div>
 
 	<div class="commentsAndVotingDiv">
 
@@ -151,7 +145,6 @@
 			</c:if>
 
 			<c:if test="${photoCardModel.commentingValidationResult.validationFailed}">
-				<div class="footerseparatorsmall"></div>
 				<tags:validationResult title_t="ValidationResult: You can not comment the photo" validationMessage="${photoCardModel.commentingValidationResult.validationMessage}" />
 			</c:if>
 

@@ -13,6 +13,4 @@
 
 	<tags:springErrorHighliting bindingResult="${photoGroupOperationModel.bindingResult}" />
 
-	<div class="footerseparatorsmall"></div>
-
 </tags:page>
