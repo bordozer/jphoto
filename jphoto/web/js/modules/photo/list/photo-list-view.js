@@ -20,12 +20,20 @@ define( ["backbone", "jquery", "underscore"
 			this.listenTo( this.model, "sync", this.render );
 		},
 
-		render:function () {
+		render: function () {
 			var modelJSON = this.model.toJSON();
 
 			this.$el.html( this.photoListEntryContainer( modelJSON ) );
 
 			this.renderBookmarkIcons( this.$( '.photo-icons' ) );
+
+			var hasNude = this.model.get( 'showAdminFlag_Nude' );
+			var photoCategoryCanContainNudeContent = this.model.get( 'photoCategoryCanContainNudeContent' );
+
+			if ( ! photoCategoryCanContainNudeContent && hasNude ) {
+				console.log( 'invalid!' );
+				this.$( '.photo-list-entry-icon-nude-content' ).addClass( 'invalid-nude-content' );
+			}
 		}
 
 		, events: {
@@ -51,17 +59,25 @@ define( ["backbone", "jquery", "underscore"
 		, nudeContentIconClick: function() {
 			var photoId = this.model.get( 'photoId' );
 			var hasNude = this.model.get( 'showAdminFlag_Nude' );
+
+			var photoCategoryCanContainNudeContent = this.model.get( 'photoCategoryCanContainNudeContent' );
+			var photoCategoryContainsNudeContent = this.model.get( 'photoCategoryContainsNudeContent' );
+
 			var refresh = _.bind( this.refreshPreview, this );
 
 			if ( hasNude ) {
-				if ( confirm( 'Remove nude?' ) ) {
+				if ( confirm( this.model.get( 'textConfirmRemovingNudeContent' ) ) ) {
 					adminPhotoNudeContentRemove( photoId, refresh );
 				}
 
 				return;
 			}
 
-			if ( confirm( 'Set nude?' ) ) {
+			if ( ! photoCategoryCanContainNudeContent ) {
+				showUIMessage_Information( this.model.get( 'textCategoryCanNotContainNudeContent' ) );
+			}
+
+			if ( confirm( this.model.get( 'textConfirmSettingNudeContent' ) ) ) {
 				adminPhotoNudeContentSet( photoId, refresh );
 			}
 		}

@@ -438,13 +438,23 @@ z
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo preview: Remove nude content property for photo?</nerd>
+		<ru><![CDATA[Убрать пометку о НЮ контенте?]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo preview: Set nude content property for photo?</nerd>
+		<ru><![CDATA[Раздел для фотографии наличие НЮ контента?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: Category $1 can not contains nude content</nerd>
+		<ru><![CDATA[Раздел '$1' не может содержать НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: Category $1 can not contain NUDE but it does!!!</nerd>
+		<ru><![CDATA[Раздел '$1' не предусмотрен для размещения НЮ контента, но работа помечена как содержащая оный!!!]]></ru>
 	</translation>
 
 	<translation>

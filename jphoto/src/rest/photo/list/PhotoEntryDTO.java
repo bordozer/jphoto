@@ -69,6 +69,10 @@ public class PhotoEntryDTO {
 	private boolean photoCategoryCanContainNudeContent;
 	private boolean photoCategoryContainsNudeContent;
 
+	private String textConfirmSettingNudeContent;
+	private String textConfirmRemovingNudeContent;
+	private String textCategoryCanNotContainNudeContent;
+
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
 		this.photoId = photoId;
@@ -416,5 +420,29 @@ public class PhotoEntryDTO {
 
 	public boolean isPhotoCategoryContainsNudeContent() {
 		return photoCategoryContainsNudeContent;
+	}
+
+	public void setTextConfirmSettingNudeContent( final String textConfirmSettingNudeContent ) {
+		this.textConfirmSettingNudeContent = textConfirmSettingNudeContent;
+	}
+
+	public String getTextConfirmSettingNudeContent() {
+		return textConfirmSettingNudeContent;
+	}
+
+	public void setTextConfirmRemovingNudeContent( final String textConfirmRemovingNudeContent ) {
+		this.textConfirmRemovingNudeContent = textConfirmRemovingNudeContent;
+	}
+
+	public String getTextConfirmRemovingNudeContent() {
+		return textConfirmRemovingNudeContent;
+	}
+
+	public void setTextCategoryCanNotContainNudeContent( final String textCategoryCanNotContainNudeContent ) {
+		this.textCategoryCanNotContainNudeContent = textCategoryCanNotContainNudeContent;
+	}
+
+	public String getTextCategoryCanNotContainNudeContent() {
+		return textCategoryCanNotContainNudeContent;
 	}
 }

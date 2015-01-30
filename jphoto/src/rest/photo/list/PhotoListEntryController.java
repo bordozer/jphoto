@@ -92,14 +92,20 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 	public PhotoEntryDTO photoListEntry( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language ) {
 
+		final boolean isSuperAdminUser = securityService.isSuperAdminUser( accessor );
+		final boolean showAdminFlag_nude = isSuperAdminUser && photo.isContainsNudeContent();
+
+		final Genre genre = genreService.load( photo.getGenreId() );
+		final String genreName = translatorService.translateGenre( genre, language );
+		final boolean canContainNudeContent = genre.isCanContainNudeContent();
+
 		final PhotoEntryDTO dto = new PhotoEntryDTO( accessor.getId(), photo.getId() );
 
 		dto.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		dto.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
 		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
 
-		final Genre genre = genreService.load( photo.getGenreId() );
-		dto.setPhotoCategoryCanContainNudeContent( genre.isCanContainNudeContent() );
+		dto.setPhotoCategoryCanContainNudeContent( canContainNudeContent );
 		dto.setPhotoCategoryContainsNudeContent( genre.isContainsNudeContent() );
 
 		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
@@ -108,7 +114,12 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 		dto.setIconTitlePhotoIsInAlbum( translatorService.translate( "Photo preview: The photo is in album admin icon", language ) );
 		dto.setIconTitleAnonymousPosting( translatorService.translate( "Photo preview: Anonymous posting admin icon", language ) );
-		dto.setIconTitleNudeContent( translatorService.translate( "Photo preview: The photo has nude content admin icon", language ) );
+		dto.setIconTitleNudeContent( showAdminFlag_nude && ! canContainNudeContent ? translatorService.translate( "Photo preview: Category $1 can not contain NUDE but it does!!!", language, genreName ) : translatorService.translate( "Photo preview: The photo has nude content admin icon", language ) );
+
+		dto.setTextConfirmSettingNudeContent( translatorService.translate( "Photo preview: Set nude content property for photo?", language ) );
+		dto.setTextConfirmRemovingNudeContent( translatorService.translate( "Photo preview: Remove nude content property for photo?", language ) );
+
+		dto.setTextCategoryCanNotContainNudeContent( translatorService.translate( "Photo preview: Category $1 can not contains nude content", language, genreName ) );
 
 		setNudeContent( photo, accessor, dto, language );
 
@@ -130,11 +141,10 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		setPhotoAnonymousPeriodExpiration( photo, accessor, dto, language );
 
 		final boolean userOwnThePhoto = securityService.userOwnThePhoto( accessor, photo );
-		final boolean isSuperAdminUser = securityService.isSuperAdminUser( accessor );
 
 		dto.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
 
-		dto.setShowAdminFlag_Nude( isSuperAdminUser && photo.isContainsNudeContent() );
+		dto.setShowAdminFlag_Nude( showAdminFlag_nude );
 
 		if ( securityService.isSuperAdminUser( accessor ) || securityService.userOwnThePhoto( accessor, photo ) ) {
 			setSpecialRestrictedIcons( photo, dto );

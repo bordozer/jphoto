@@ -84,7 +84,7 @@
 				<div class="row margin-left-5"><%=photoAnonymousPeriodExpirationInfo%></div>
 			<%}%>
 
-			<div class="row" style="height: 20px; margin-left: 1px;">
+			<div class="row text-center" style="height: 20px; margin-left: 1px;">
 
 				<div class="col-lg-1">
 					<% if( memberOfAlbum ) {%>
@@ -101,7 +101,7 @@
 				</div>
 
 				<div class="col-lg-1 photo-list-entry-icon-nude-content">
-					<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon <%= showAdminFlag_Nude ? '' : 'img-grayscale' %>" title="<%=iconTitleNudeContent%>">
+					<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon <%= showAdminFlag_Nude ? '' : ( photoCategoryCanContainNudeContent ? 'img-grayscale' : 'invisible' ) %>" title="<%=iconTitleNudeContent%>">
 				</div>
 
 				<% _.each( specialRestrictionIcons, function( iconDTO ) {%>

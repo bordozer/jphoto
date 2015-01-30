@@ -23,3 +23,11 @@
 	opacity: 0.3;
 	filter: alpha(opacity=30);
 }
+
+.invisible {
+	display: none;
+}
+
+.invalid-nude-content {
+	background: #dd8888;
+}
