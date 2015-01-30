@@ -40,6 +40,11 @@ public class DataHandlerController {
 
 		assertUserCanEditPhoto( photo );
 
+		final Genre genre = genreService.load( photo.getGenreId() );
+		if ( isNudeContent && ! genre.isCanContainNudeContent() ) {
+			return false;
+		}
+
 		photo.setContainsNudeContent( isNudeContent );
 
 		return photoService.save( photo );
