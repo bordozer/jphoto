@@ -23,8 +23,11 @@
 		<div class="panel-body">
 
 			<div class="row row-bottom-padding-10">
-				<userCard:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}"
-									  selectedTab="${userCardModel.selectedUserCardTab}"/>
+				<userCard:userCardTab user="${user}"
+									  userCardTabDTOs="${userCardModel.userCardTabDTOs}"
+									  selectedTab="${userCardModel.selectedUserCardTab}"
+									  albums="${userCardModel.userPhotoAlbums}"
+						/>
 			</div>
 
 			<div class="row row-bottom-padding-10">
@@ -33,7 +36,8 @@
 					<userCardTabs:userPersonalData user="${user}"
 												   editingUserDataIsAccessible="${editingUserDataIsAccessible}"
 												   lastUserActivityTime="${userCardModel.lastUserActivityTime}"
-												   entryMenu="${userCardModel.entryMenu}"/>
+												   entryMenu="${userCardModel.entryMenu}"
+							/>
 
 					<div class="user-card-block block-background block-border justify-font"
 						 style="width: 500px; margin-top: 20px;">
@@ -54,36 +58,29 @@
 				</c:if>
 
 				<c:if test="${selectedUserCardTab == 'TEAM'}">
-					<div class="divPadd">
-						<userCard:customPhotoLists photoLists="${userCardModel.userTeamMemberPhotoLists}"/>
-					</div>
+					<userCard:customPhotoLists photoLists="${userCardModel.userTeamMemberPhotoLists}"/>
 				</c:if>
 
 				<c:if test="${selectedUserCardTab == 'ALBUMS'}">
-					<div class="divPadd">
-						<c:set var="userPhotosCountByAlbums" value="${userCardModel.userPhotosCountByAlbums}"/>
-							${eco:translate('User photo albums')}:
-						<select id="userAlbums" onchange="scrollToAlbum();">
-							<option value="0"></option>
-							<c:forEach var="userPhotoAlbum" items="${userCardModel.userPhotoAlbums}">
-								<option value="${userPhotoAlbum.id}">${eco:escapeHtml(userPhotoAlbum.name)}</option>
-							</c:forEach>
-						</select>
-						<script type="text/javascript">
-							function scrollToAlbum() {
-								this.document.location.href = "#" + $( '#userAlbums' ).find( ":selected" ).val();
-							}
-						</script>
+					<c:set var="userPhotosCountByAlbums" value="${userCardModel.userPhotosCountByAlbums}"/>
+					${eco:translate('User photo albums')}:
+					<select id="userAlbums" onchange="scrollToAlbum();">
+						<option value="0"></option>
+						<c:forEach var="userPhotoAlbum" items="${userCardModel.userPhotoAlbums}">
+							<option value="${userPhotoAlbum.id}">${eco:escapeHtml(userPhotoAlbum.name)}</option>
+						</c:forEach>
+					</select>
+					<script type="text/javascript">
+						function scrollToAlbum() {
+							this.document.location.href = "#" + $( '#userAlbums' ).find( ":selected" ).val();
+						}
+					</script>
 
-						<userCard:customPhotoLists photoLists="${userCardModel.userPhotoAlbumsPhotoLists}"/>
-					</div>
+					<userCard:customPhotoLists photoLists="${userCardModel.userPhotoAlbumsPhotoLists}"/>
 				</c:if>
 
 				<c:if test="${selectedUserCardTab == 'ACTIVITY_STREAM'}">
-					<div class="divPadd">
-						<userCard:userActivityStream user="${user}" activities="${userCardModel.userLastActivities}"
-													 filterActivityTypeId="${userCardModel.filterActivityTypeId}"/>
-					</div>
+						<userCard:userActivityStream user="${user}" activities="${userCardModel.userLastActivities}" filterActivityTypeId="${userCardModel.filterActivityTypeId}"/>
 				</c:if>
 
 			</div>

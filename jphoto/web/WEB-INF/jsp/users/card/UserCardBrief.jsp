@@ -23,7 +23,12 @@
 		<div class="panel-body">
 
 			<div class="row row-bottom-padding-10">
-				<user:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
+				<user:userCardTab
+						user="${user}"
+						userCardTabDTOs="${userCardModel.userCardTabDTOs}"
+						selectedTab="${userCardModel.selectedUserCardTab}"
+						albums="${userCardModel.userPhotosCountByAlbums}"
+						/>
 			</div>
 
 			<div class="row row-bottom-padding-10">
