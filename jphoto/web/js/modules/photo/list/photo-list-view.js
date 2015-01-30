@@ -23,66 +23,7 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-//			var photoId = this.model.get( 'photoId' );
-//			console.log( modelJSON );
-
 			this.$el.html( this.photoListEntryContainer( modelJSON ) );
-
-			/*if ( this.model.get( 'userOwnThePhoto' ) ) {
-				this.$el.addClass( 'block-user-photo' );
-			}
-
-			var element = $( "<div class='panel panel-primary photo-list-entry-container admin-special-empty-flag'></div>" );
-
-			var element_admin_flag_1 = $( "<div class='admin-special-empty-flag'></div>" );
-			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				element_admin_flag_1 = $( "<div class='admin-special-empty-flag admin-special-flag-nude-content'></div>" );
-			}
-			element.append( element_admin_flag_1 );
-
-			var element_admin_flag_2 = $( "<div class='admin-special-empty-flag'></div>" );
-			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				element_admin_flag_2 = $( "<div class='admin-special-empty-flag admin-special-flag-anonymous-posting'></div>" );
-			}
-			element_admin_flag_1.append( element_admin_flag_2 );
-
-			if ( this.model.get( 'memberOfAlbum' ) ) {
-				element_admin_flag_2.append( $( "<div class='photo-is-in-album'></div>" ) );
-			}
-
-			var top = 280;
-			_.each( this.model.get( 'specialRestrictionIcons' ), function( iconDTO ) {
-				top = top + 20;
-				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='top: " + top + "px; background-image: url(" + Backbone.JPhoto.imageFolder() + "/" + iconDTO.icon + ");'></div>" ) );
-			} );
-
-			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
-				element_admin_flag_2.append( this.groupOperationsTemplate( modelJSON ) );
-			}
-
-			element_admin_flag_2.append( this.photoListEntryContainer( modelJSON ) );
-
-			if ( this.model.get( 'showPhotoContextMenu' ) ) {
-				element_admin_flag_2.append( this.contextMenuTemplate( modelJSON ) );
-			}
-
-			if ( this.model.get( 'showStatistics' ) ) {
-				element_admin_flag_2.append( this.statisticsTemplate( modelJSON ) );
-			}
-
-			element_admin_flag_2.append( this.photoNameTemplate( modelJSON ) );
-
-			element_admin_flag_2.append( this.authorLinkTemplate( modelJSON ) );
-
-			if ( this.model.get( 'showUserRank' ) ) {
-				element_admin_flag_2.append( this.authorRankTemplate( modelJSON ) );
-			}
-
-			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
-				element_admin_flag_2.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
-			}
-
-			this.$el.html( element );*/
 
 			this.renderBookmarkIcons( this.$( '.photo-icons' ) );
 		}
