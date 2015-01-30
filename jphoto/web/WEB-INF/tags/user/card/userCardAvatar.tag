@@ -40,9 +40,9 @@
 <c:set var="resultDimension" value="<%=resultDimension%>"/>
 <c:set var="userAvatarLink" value="<%=userAvatarLink%>"/>
 
-<c:set var="fullAvatarDivId" value="avatar_${user.id}" />
+<c:set var="fullAvatarDivId" value="avatar_${user.id}"/>
 
-<div class="user-card-block">
+<div class="row">
 
 	<c:if test="${userHasAvatar}">
 		<c:set var="avatarTitle" value="${eco:translate('User card avatar: Click to see full size')}"/>
@@ -55,9 +55,11 @@
 			<c:set var="noAvatar" value="noAvatarGirl.png"/>
 		</c:if>
 
-		<c:set var="avatarHint" value="${eco:translate('User card avatar: The member has not downloaded avatar yet...')}"/>
+		<c:set var="avatarHint"
+			   value="${eco:translate('User card avatar: The member has not downloaded avatar yet...')}"/>
 		<c:set var="avatarOnClick" value="alert('${avatarHint}');"/>
-		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
+		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}"
+				  alt="${avatarHint}"/>
 	</c:if>
 
 	<%-- TODO: move this link to the user's context menu --%>
@@ -70,12 +72,12 @@
 </div>
 
 <div id="${fullAvatarDivId}" style="display: none;">
-	<img src="${userAvatarFileUrl}" alt="${eco:escapeHtml(user.name)}" width="${dimension.width}" height="${dimension.height}" onclick="closeMessageBox( '${fullAvatarDivId}' )">
+	<img src="${userAvatarFileUrl}" alt="${eco:escapeHtml(user.name)}" width="${dimension.width}"
+		 height="${dimension.height}" onclick="closeMessageBox( '${fullAvatarDivId}' )">
 </div>
 
 <script type="text/javascript">
 	function showAvatarInFullSize() {
-//		var parameters = { closeClick:true, closeEsc:true, centered:true, showOverlay:true, overlayCSS:{background: 'black',opacity: .70} };
 		showMessage_CustomDiv( '${fullAvatarDivId}' );
 	}
 </script>

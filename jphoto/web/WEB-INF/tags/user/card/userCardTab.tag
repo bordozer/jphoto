@@ -10,36 +10,19 @@
 <%@ attribute name="userCardTabDTOs" required="true" type="java.util.List" %>
 <%@ attribute name="selectedTab" required="true" type="core.enums.UserCardTab" %>
 
-<c:set var="userCardLink" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserCardLink( user.getId() )%>" />
-<c:set var="userCardTabsLen" value="<%=userCardTabDTOs.size()%>" />
+<c:set var="userCardLink" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserCardLink( user.getId() )%>"/>
+<c:set var="userCardTabsLen" value="<%=userCardTabDTOs.size()%>"/>
 
-<style type="text/css">
-	.userCardTab {
-		float: left;
-		width: ${eco:floor(99 / userCardTabsLen)}%;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		text-align: center;
-		height: 19px;
-		border-radius: 12px 12px 0 0;
-	}
-
-</style>
-
-<div class="block-border tabHeader">
-
+<ul id="myTab" class="nav nav-tabs">
 	<c:forEach var="userCardTabDTO" items="${userCardTabDTOs}">
 
-		<c:set var="userCardTab" value="${userCardTabDTO.userCardTab}" />
-		<c:set var="isSelectedTab" value="${selectedTab == userCardTab}" />
+		<c:set var="userCardTab" value="${userCardTabDTO.userCardTab}"/>
+		<c:set var="isSelectedTab" value="${selectedTab == userCardTab}"/>
 
-		<div class="userCardTab block-border${isSelectedTab ? " block-background" : ""}">
-			<a href="${userCardLink}${userCardTab.key}/">${eco:translate(userCardTab.name)}</a>
-			<c:if test="${userCardTabDTO.itemsOnTab > 0}">
-				( ${userCardTabDTO.itemsOnTab} )
-			</c:if>
-		</div>
+		<li class="${isSelectedTab ? "active" : ""}">
+			<a href="${userCardLink}${userCardTab.key}/">${eco:translate(userCardTab.name)} <c:if
+					test="${userCardTabDTO.itemsOnTab > 0}">( ${userCardTabDTO.itemsOnTab} )</c:if></a>
+		</li>
 
 	</c:forEach>
-
-</div>
+</ul>

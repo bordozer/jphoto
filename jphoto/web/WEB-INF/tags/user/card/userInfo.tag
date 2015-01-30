@@ -27,8 +27,7 @@
 
 <tags:contextMenuJs />
 
-<div class="user-card-block">
-	<table:table border="0" width="500px" oddEven="true">
+	<table:table>
 
 		<table:separatorInfo colspan="2" height="50" title="${eco:translate('User edit data tab: Personal information')}"/>
 
@@ -82,8 +81,6 @@
 			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_EMAIL%>"/>
 			<table:td>
 				${eco:escapeHtml(user.email)}
-				<%--<br />--%>
-				<%--<a href="" title="${eco:translate("Send email")}" onclick="alert( '${eco:translate('This functionality has not been implemented yet...')}' ); return false;">${eco:translate("Send email")}</a>--%>
 			</table:td>
 		</table:trinfo>
 
@@ -110,4 +107,3 @@
 			${eco:translate('User card: Edit member personal data')}
 		</links:userEdit>
 	</c:if>
-</div>

@@ -18,15 +18,29 @@
 
 	<tags:contextMenuJs />
 
-	<user:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
+	<div class="panel">
 
-	<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
+		<div class="panel-body">
 
-	<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
+			<div class="row row-bottom-padding-10">
+				<user:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
+			</div>
 
-	<photo:photoListsRender photoLists="${userCardModel.photoLists}" />
+			<div class="row row-bottom-padding-10">
+				<div class="col-lg-6">
+					<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
+				</div>
+				<div class="col-lg-6">
+					<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
+				</div>
+			</div>
 
-	<div class="footerseparator"></div>
+			<div class="row">
+				<photo:photoListsRender photoLists="${userCardModel.photoLists}" />
+			</div>
+		</div>
+
+	</div>
 
 	<tags:devMode>
 		<input type="hidden" id="dev_mode_user_card" value="${user.id}">

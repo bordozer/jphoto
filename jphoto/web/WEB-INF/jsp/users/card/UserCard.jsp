@@ -19,9 +19,11 @@
 
 	<tags:contextMenuJs />
 
-	<userCard:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
+	<div class="row">
+		<userCard:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
+	</div>
 
-	<div class="floatleft" style="margin: 0 auto; margin-top: 30px;">
+	<div class="row">
 
 		<c:if test="${selectedUserCardTab == 'PERSONAL_DATA'}">
 			<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}"/>

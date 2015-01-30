@@ -9,6 +9,10 @@
 <%@ attribute name="lastUserActivityTime" required="true" type="java.util.Date" %>
 <%@ attribute name="entryMenu" required="true" type="ui.services.menu.entry.items.EntryMenu" %>
 
-<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+<div class="col-lg-3">
+	<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+</div>
 
-<user:userInfo user="${user}" lastUserActivityTime="${lastUserActivityTime}" entryMenu="${entryMenu}" isEditable="${editingUserDataIsAccessible}"/>
+<div class="col-lg-9">
+	<user:userInfo user="${user}" lastUserActivityTime="${lastUserActivityTime}" entryMenu="${entryMenu}" isEditable="${editingUserDataIsAccessible}"/>
+</div>
