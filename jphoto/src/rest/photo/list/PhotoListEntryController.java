@@ -3,6 +3,7 @@ package rest.photo.list;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
@@ -96,6 +97,11 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		dto.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		dto.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
 		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
+
+		final Genre genre = genreService.load( photo.getGenreId() );
+		dto.setPhotoCategoryCanContainNudeContent( genre.isCanContainNudeContent() );
+		dto.setPhotoCategoryContainsNudeContent( genre.isContainsNudeContent() );
+
 		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
 		dto.setPhotoCardLink( urlUtilsService.getPhotoCardLink( photo.getId() ) );
 		dto.setShowPhotoListPreviewFooter( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER ) );

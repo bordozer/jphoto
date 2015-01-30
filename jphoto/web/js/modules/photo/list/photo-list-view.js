@@ -30,6 +30,7 @@ define( ["backbone", "jquery", "underscore"
 
 		, events: {
 			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
+			, "click .photo-list-entry-icon-nude-content": 'onNudeContentIconClick'
 		}
 
 		, photoContextMenuIconClick: function() {
@@ -41,6 +42,28 @@ define( ["backbone", "jquery", "underscore"
 			var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
 
 			photoContextMenuModel.fetch( { cache: false } );
+		}
+
+		, refreshPreview: function() {
+			this.model.refresh();
+		}
+
+		, nudeContentIconClick: function() {
+			var photoId = this.model.get( 'photoId' );
+			var hasNude = this.model.get( 'showAdminFlag_Nude' );
+			var refresh = _.bind( this.refreshPreview, this );
+
+			if ( hasNude ) {
+				if ( confirm( 'Remove nude?' ) ) {
+					adminPhotoNudeContentRemove( photoId, refresh );
+				}
+
+				return;
+			}
+
+			if ( confirm( 'Set nude?' ) ) {
+				adminPhotoNudeContentSet( photoId, refresh );
+			}
 		}
 
 		, renderBookmarkIcons: function( iconsContainer ) {
@@ -63,6 +86,11 @@ define( ["backbone", "jquery", "underscore"
 		, onPhotoContextMenuIconClick: function( evt ) {
 			evt.stopPropagation();
 			this.photoContextMenuIconClick();
+		}
+
+		, onNudeContentIconClick: function( evt ) {
+			evt.stopPropagation();
+			this.nudeContentIconClick();
 		}
 	} );
 

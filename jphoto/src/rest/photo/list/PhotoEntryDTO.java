@@ -66,6 +66,9 @@ public class PhotoEntryDTO {
 	private String iconTitleAnonymousPosting;
 	private String iconTitleNudeContent;
 
+	private boolean photoCategoryCanContainNudeContent;
+	private boolean photoCategoryContainsNudeContent;
+
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
 		this.photoId = photoId;
@@ -397,5 +400,21 @@ public class PhotoEntryDTO {
 
 	public void setIconTitleAnonymousPosting( final String iconTitleAnonymousPosting ) {
 		this.iconTitleAnonymousPosting = iconTitleAnonymousPosting;
+	}
+
+	public void setPhotoCategoryCanContainNudeContent( final boolean photoCategoryCanContainNudeContent ) {
+		this.photoCategoryCanContainNudeContent = photoCategoryCanContainNudeContent;
+	}
+
+	public boolean isPhotoCategoryCanContainNudeContent() {
+		return photoCategoryCanContainNudeContent;
+	}
+
+	public void setPhotoCategoryContainsNudeContent( final boolean photoCategoryContainsNudeContent ) {
+		this.photoCategoryContainsNudeContent = photoCategoryContainsNudeContent;
+	}
+
+	public boolean isPhotoCategoryContainsNudeContent() {
+		return photoCategoryContainsNudeContent;
 	}
 }

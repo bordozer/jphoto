@@ -100,10 +100,8 @@
 					<%}%>
 				</div>
 
-				<div class="col-lg-1" class="photo-list-entry-icon">
-					<% if( showAdminFlag_Nude ) {%>
-						<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon" title="<%=iconTitleNudeContent%>">
-					<%}%>
+				<div class="col-lg-1 photo-list-entry-icon-nude-content">
+					<img src="/images/icons24/admin-special-flag-nude-content.png" class="photo-list-entry-icon <%= showAdminFlag_Nude ? '' : 'img-grayscale' %>" title="<%=iconTitleNudeContent%>">
 				</div>
 
 				<% _.each( specialRestrictionIcons, function( iconDTO ) {%>
