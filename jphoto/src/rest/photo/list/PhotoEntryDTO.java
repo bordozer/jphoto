@@ -72,6 +72,7 @@ public class PhotoEntryDTO {
 	private String textConfirmSettingNudeContent;
 	private String textConfirmRemovingNudeContent;
 	private String textCategoryCanNotContainNudeContent;
+	private boolean userSuperAdmin;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -444,5 +445,13 @@ public class PhotoEntryDTO {
 
 	public String getTextCategoryCanNotContainNudeContent() {
 		return textCategoryCanNotContainNudeContent;
+	}
+
+	public void setUserSuperAdmin( final boolean userSuperAdmin ) {
+		this.userSuperAdmin = userSuperAdmin;
+	}
+
+	public boolean isUserSuperAdmin() {
+		return userSuperAdmin;
 	}
 }

@@ -101,6 +101,8 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 		final PhotoEntryDTO dto = new PhotoEntryDTO( accessor.getId(), photo.getId() );
 
+		dto.setUserSuperAdmin( isSuperAdminUser );
+
 		dto.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		dto.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
 		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
