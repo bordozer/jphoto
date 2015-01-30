@@ -32,32 +32,35 @@
 		</c:if>
 	</div>
 
-	<div class="col-lg-8">
-		<ul class="pagination">
-			<c:forEach var="pageItem" items="${pageItems}">
+	<c:if test="${totalPages > pagingModel.itemsOnPage}">
+		<div class="col-lg-8">
+			<ul class="pagination">
+				<c:forEach var="pageItem" items="${pageItems}">
 
-				<c:if test="${currentPage == pageItem.number}">
-					<li class="active"><a href="#" onclick="return false;">${pageItem.number}</a></li>
-				</c:if>
-
-				<c:if test="${currentPage != pageItem.number}">
-
-					<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
-
-					<c:if test="${pageItem.number == 0}">
-						<li class="disabled"><a href="#" onclick="return false;">&nbsp;...&nbsp;</a></li>
+					<c:if test="${currentPage == pageItem.number}">
+						<li class="active"><a href="#" onclick="return false;">${pageItem.number}</a></li>
 					</c:if>
 
-					<c:if test="${pageItem.number != 0}">
-						<li>
-							<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
-								${pageItem.number}
-							</a>
-						</li>
-					</c:if>
-				</c:if>
+					<c:if test="${currentPage != pageItem.number}">
 
-			</c:forEach>
-		</ul>
-	</div>
+						<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
+
+						<c:if test="${pageItem.number == 0}">
+							<li class="disabled"><a href="#" onclick="return false;">&nbsp;...&nbsp;</a></li>
+						</c:if>
+
+						<c:if test="${pageItem.number != 0}">
+							<li>
+								<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
+									${pageItem.number}
+								</a>
+							</li>
+						</c:if>
+					</c:if>
+
+				</c:forEach>
+			</ul>
+		</div>
+	</c:if>
+
 </div>
