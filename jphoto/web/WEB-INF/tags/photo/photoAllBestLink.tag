@@ -11,7 +11,7 @@
 	<c:set var="text" value="${linkToFullListText}"/>
 
 	<a href="${linkToFullList}" title="${eco:translate('Show all photos of the list')}">
-			${text} &nbsp; <html:img id="forward" src="forward16x16.png" width="16" height="16" alt="${text}"/>
+		${text}
 	</a>
 
 </c:if>

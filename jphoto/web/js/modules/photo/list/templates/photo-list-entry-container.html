@@ -47,18 +47,20 @@
 
 		<div class="panel-footer" style="display: <%=showPhotoListPreviewFooter ? 'block' : 'none'%>;">
 
-			<div class="row text-center photo-icons"></div>
+			<div class="row">
+				<div class="col-lg-5 margin-left-5"><%=photoAuthorLink%></div>
+				<% if( showPhotoContextMenu ) {%>
+					<div class="col-lg-1 text-center context-menu-photo context-menu-photo-<%=photoId%>">
+						<a href="#" onclick="return false;">
+							<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick="" />
+						</a>
+					</div>
+				<%}%>
+				<div class="col-lg-5 text-right photo-icons"></div>
+			</div>
 
-			<% if( showPhotoContextMenu ) {%>
-				<div class="row text-center context-menu-photo context-menu-photo-<%=photoId%>">
-					<a href="#" onclick="return false;">
-						<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick="" />
-					</a>
-				</div>
-			<%}%>
-
-			<div class="row text-center" style="height: 20px;">
-				<% if( showStatistics ) {%>
+			<% if( showStatistics ) {%>
+				<div class="row text-center" style="height: 20px;">
 					<div class="col-lg-6">
 						<div class="col-lg-1 text-center" title="<%=todayMarksTitle%>"><%=todayMarks%></div>
 						<div class="col-lg-1 text-center" title="<%=periodMarksTitle%>"><%=periodMarks%></div>
@@ -69,11 +71,10 @@
 						<div class="col-lg-6 text-right" title=""><%=previewsIcon%> <%=previewsCount%></div>
 						<div class="col-lg-6 text-left" title=""><%=commentsIcon%> <%=commentsCount%></div>
 					</div>
-				<%}%>
-			</div>
+				</div>
+			<%}%>
 
-			<div class="row margin-left-5" style="height: 40px;"><%=photoLink%></div>
-			<div class="row margin-left-5"><%=photoAuthorLink%></div>
+			<div class="row margin-left-5"><%=photoLink%></div>
 
 			<% if( showUserRank ) {%>
 				<div class="row margin-left-5"><%=photoAuthorRank%></div>
