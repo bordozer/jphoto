@@ -18,34 +18,16 @@
 <c:set var="userTeam" value="${userCardModel.userTeam}"/>
 <c:set var="teamMemberPhotosQtyMap" value="${userCardModel.teamMemberPhotosQtyMap}"/>
 
-<style type="text/css">
-	.vlaign {
-		vertical-align: top;
-	}
-</style>
+<div class="col-lg-5">
+	<userCard:userStatistics user="${user}" userStatistic="${userStatistic}"/>
+</div>
 
-<c:set var="width" value="20%"/>
+<div class="col-lg-4">
+	<userCard:userMarks user="${user}" marksByCategoryInfos="${marksByCategoryInfos}"/>
+</div>
 
-<table:table width="95%">
+<div class="col-lg-3">
+	<userCard:userTeamShort userTeam="${userTeam}" teamMemberPhotosQtyMap="${teamMemberPhotosQtyMap}"/>
 
-	<table:tr>
-
-		<table:td width="${width}" cssClass="vlaign">
-			<userCard:userStatistics user="${user}" userStatistic="${userStatistic}"/>
-		</table:td>
-
-		<table:td width="${width}" cssClass="vlaign">
-			<userCard:userMarks user="${user}" marksByCategoryInfos="${marksByCategoryInfos}"/>
-		</table:td>
-
-		<table:td width="${width}" cssClass="vlaign">
-			<userCard:userTeamShort userTeam="${userTeam}" teamMemberPhotosQtyMap="${teamMemberPhotosQtyMap}" />
-		</table:td>
-
-		<table:td width="${width}" cssClass="vlaign">
-			<userCard:userPhotoAlbumShort userPhotoAlbums="${userPhotoAlbums}" userPhotoAlbumsQtyMap="${userPhotoAlbumsQtyMap}" />
-		</table:td>
-
-	</table:tr>
-
-</table:table>
+	<userCard:userPhotoAlbumShort userPhotoAlbums="${userPhotoAlbums}" userPhotoAlbumsQtyMap="${userPhotoAlbumsQtyMap}"/>
+</div>
