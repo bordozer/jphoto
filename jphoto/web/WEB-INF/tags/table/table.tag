@@ -14,7 +14,7 @@
 <table class="table table-bordered table-striped table-hover <c:if test="${not empty oddEven}">oddEven</c:if> " id="${id}" cellpadding="0" cellspacing="2" <c:if test="${not empty width}">width="${width}"</c:if> border="${border}">
 
 	<c:if test="${not empty(thead)}">
-		<thead class="block-background base-font-color">
+		<thead class="">
 		<jsp:invoke fragment="thead"/>
 		</thead>
 	</c:if>

@@ -10,7 +10,7 @@
 <%@ attribute name="showUserActivityLink" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="hideTextForAdmin" required="false" type="java.lang.Boolean" %>
 
-<table:table>
+<table:table width="70%;">
 
 	<c:forEach var="activity" items="${activities}">
 
