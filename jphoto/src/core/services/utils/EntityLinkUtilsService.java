@@ -45,6 +45,8 @@ public interface EntityLinkUtilsService {
 
 	String getPhotoCardLink( final Photo photo, final Language language );
 
+//	String getPhotoCardLink( final Photo photo, final int cutNameTo, final Language language );
+
 	String getUsersRootLink( final Language language );
 
 	String getUserTeamMemberListLink( int userId, final Language language );

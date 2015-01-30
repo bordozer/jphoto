@@ -121,6 +121,18 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		);
 	}
 
+	/*@Override
+	public String getPhotoCardLink( final Photo photo, final int cutNameTo, final Language language ) {
+		final String photoName = photo.getName().length() <= cutNameTo ? photo.getName() : photo.getName().substring( 0, cutNameTo );
+		final String photoNameEscaped = StringUtilities.escapeHtml( photoName );
+
+		return String.format( "<a class=\"photo-link\" href=\"%s\" title=\"%s\">%s</a>"
+			, urlUtilsService.getPhotoCardLink( photo.getId() )
+			, translatorService.translate( "EntityLinkUtilsService: $1: photo card link title", language, photoNameEscaped )
+			, photoNameEscaped
+		);
+	}*/
+
 	@Override
 	public String getUsersRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllUsersLink() );
