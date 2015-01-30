@@ -26,6 +26,10 @@ a {
 	padding-bottom: 10px;
 }
 
+/*.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #f00;
+}*/
+
 /*.block-background {
 	background: #e7e4d3;
 }*/
