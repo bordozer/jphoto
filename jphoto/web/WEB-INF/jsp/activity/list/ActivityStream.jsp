@@ -10,25 +10,14 @@
 
 <tags:page pageModel="${activityStreamModel.pageModel}">
 
-	<div class="floatleft">
-		<tags:activityStreamFilter activityTypeValues="<%=ActivityType.SYSTEM_ACTIVITIES%>"
-								   filterActivityTypeId="${activityStreamModel.filterActivityTypeId}"
-								   url="${eco:baseUrl()}/activityStream/"/>
+	<tags:activityStreamFilter activityTypeValues="<%=ActivityType.SYSTEM_ACTIVITIES%>"
+							   filterActivityTypeId="${activityStreamModel.filterActivityTypeId}"
+							   url="${eco:baseUrl()}/activityStream/"/>
 
-		<tags:paging showSummary="false"/>
+	<tags:paging showSummary="false"/>
 
-		<table:table width="1000">
-			<table:tr>
-				<table:td>
-					<tags:activityStream activities="${activityStreamModel.activities}" showUserActivityLink="true"/>
-				</table:td>
-			</table:tr>
-		</table:table>
+	<tags:activityStream activities="${activityStreamModel.activities}" showUserActivityLink="true"/>
 
-		<tags:paging showSummary="true"/>
-
-	</div>
-
-	<div class="footerseparator"></div>
+	<tags:paging showSummary="true"/>
 
 </tags:page>
