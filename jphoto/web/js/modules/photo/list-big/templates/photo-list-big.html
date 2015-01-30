@@ -1,20 +1,28 @@
-<div class="row text-center" >
+<div class="row text-center" style="width: <%=minContainerWidth%>px; margin-left: auto; margin-right: auto;" >
 
-	<a href="<%=photoCardLink%>">
-		<img src="<%=photoImageUrl%>" class="photo-preview-image block-border" width="<%=photoImageWidth%>" height="<%=photoImageHeight%>" alt="<%=photoName%>" title="<%=photoName%>">
-	</a>
+	<div class="panel panel-default">
 
-	<br/>
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<%=photoLink%> ( <%=photoCategory%> )
+			</h3>
+		</div>
 
-	<%=photoLink%> ( <%=photoCategory%> )
-	<br/><br/>
+		<div class="panel-body">
+			<a href="<%=photoCardLink%>">
+				<img src="<%=photoImageUrl%>" class="photo-preview-image block-border" width="<%=photoImageWidth%>" height="<%=photoImageHeight%>" alt="<%=photoName%>" title="<%=photoName%>">
+			</a>
+		</div>
 
-	<%=photoDescription%>
+		<div class="panel-footer">
+			<%=photoDescription%>
 
-	<div class="context-menu-photo-<%=photoId%>">
-		<a href="#" onclick="return false;">
-			<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick=""/>
-		</a>
+			<div class="context-menu-photo-<%=photoId%>">
+				<a href="#" onclick="return false;">
+					<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick=""/>
+				</a>
+			</div>
+		</div>
 	</div>
 
 </div>
