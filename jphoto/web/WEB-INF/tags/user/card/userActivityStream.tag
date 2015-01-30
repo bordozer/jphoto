@@ -10,25 +10,27 @@
 <%@ attribute name="filterActivityTypeId" required="true" type="java.lang.Integer" %>
 
 <div class="col-lg-12">
-<div class="row">
-	<tags:activityStreamFilter activityTypeValues="<%=ActivityType.USER_ACTIVITIES%>"
-							   filterActivityTypeId="${filterActivityTypeId}"
-							   url="${eco:baseUrl()}/members/${user.id}/card/activity/"
-			/>
-</div>
-
-<c:if test="${not empty activities}">
-
-	<tags:paging showSummary="false"/>
 
 	<div class="row">
-		<tags:activityStream activities="${activities}" hideUser="true"/>
+		<tags:activityStreamFilter activityTypeValues="<%=ActivityType.USER_ACTIVITIES%>"
+								   filterActivityTypeId="${filterActivityTypeId}"
+								   url="${eco:baseUrl()}/members/${user.id}/card/activity/"
+				/>
 	</div>
 
-	<tags:paging showSummary="true"/>
+	<c:if test="${not empty activities}">
 
-</c:if>
+		<tags:paging showSummary="false"/>
 
-<c:if test="${empty activities}">
-	<h3>${eco:translate('There is no any activity yet')}</h3>
-</c:if>
+		<div class="row">
+			<tags:activityStream activities="${activities}" hideUser="true"/>
+		</div>
+
+		<tags:paging showSummary="true"/>
+
+	</c:if>
+
+	<c:if test="${empty activities}">
+		<h3>${eco:translate('Activity stream: There is no any activity yet')}</h3>
+	</c:if>
+</div>
