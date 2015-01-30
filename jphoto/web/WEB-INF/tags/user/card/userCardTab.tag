@@ -21,8 +21,7 @@
 		<c:set var="userCardTab" value="${userCardTabDTO.userCardTab}"/>
 		<c:set var="isSelectedTab" value="${selectedTab == userCardTab}"/>
 
-		<li id="tab-${userCardTabDTO.userCardTab.key}" class="${isSelectedTab ? "active" : ""}">
-
+		<li class="${isSelectedTab ? "active" : ""}">
 			<a href="${userCardLink}${userCardTab.key}/">${eco:translate(userCardTab.name)}
 				<c:if test="${userCardTabDTO.itemsOnTab > 0}">( ${userCardTabDTO.itemsOnTab} )</c:if>
 			</a>
