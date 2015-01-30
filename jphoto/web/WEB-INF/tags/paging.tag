@@ -25,10 +25,10 @@
 
 	<div class="col-lg-4">
 		<c:if test="${showSummary}">
-				${eco:translate('Paging: Items total')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Paging: Pages total')}: ${totalPages} ${delimeter}
-				<c:if test="${pagingModel.totalItems > 0}">
-					/ ${delimeter} ${eco:translate('Paging: Items on page')}: ${pagingModel.itemsOnPage} ${delimeter}
-				</c:if>
+			${eco:translate('Paging: Items total')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Paging: Pages total')}: ${totalPages} ${delimeter}
+			<c:if test="${pagingModel.totalItems > 0}">
+				/ ${delimeter} ${eco:translate('Paging: Items on page')}: ${pagingModel.itemsOnPage} ${delimeter}
+			</c:if>
 		</c:if>
 	</div>
 

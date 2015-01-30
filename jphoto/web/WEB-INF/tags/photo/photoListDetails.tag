@@ -13,27 +13,27 @@
 	<tags:paging showSummary="false"/>
 </c:if>
 
-<div class="row">
+<div class="panel panel-primary">
 
 	<photo:photoListHeader photoList="${photoList}"/>
 
-	<div>
+	<div class="panel-body">
 		<c:if test="${totalPhotos == 0}">
 			${eco:translate(photoList.noPhotoText)}
 		</c:if>
-	</div>
 
-	<div style="float: left; width: 100%; text-align: center;">
 		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
 			<div class="photo-container-${photoList.photoListId}-${photoId}"></div>
 		</c:forEach>
 	</div>
 
-</div>
+	<div class="panel-footer">
+		<c:if test="${showPaging}">
+			<tags:paging showSummary="true"/>
+		</c:if>
+	</div>
 
-<c:if test="${showPaging}">
-	<tags:paging showSummary="true"/>
-</c:if>
+</div>
 
 <script type="text/javascript">
 
