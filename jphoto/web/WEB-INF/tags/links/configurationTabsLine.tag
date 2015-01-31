@@ -12,15 +12,11 @@
 <c:set var="configurationTabs" value="<%=ConfigurationTab.values()%>"/>
 <c:set var="systemConfigurationId" value="${systemConfiguration.id}"/>
 
-<c:set var="splitter" value="&nbsp;<br />"/>
-
-<div style="float: left; width: 350px; text-align: left; height: auto; line-height: 30px; margin-left: 30px; margin-top: 30px; border-right: solid 1px #C4C4C4;">
+<ul class="nav nav-pills nav-stacked">
 
 	<c:if test="${isEdit}">
 
-		<c:if test="${empty activeConfigurationTab}"><b></c:if>
-			<a href="#" onclick="submitProperties();">${eco:translate('Configuration tabs: Properties')}</a>
-		<c:if test="${empty activeConfigurationTab}"></b></c:if>
+		<li role="presentation" class="${empty activeConfigurationTab ? 'active' : ''}"><a href="#" onclick="submitProperties();">${eco:translate('Configuration tabs: Properties')}</a></li>
 
 		<script type="text/javascript">
 			function submitProperties() {
@@ -36,43 +32,35 @@
 			}
 		</script>
 
-		${splitter}
 	</c:if>
 
 	<c:forEach var="configurationTab" items="${configurationTabs}" varStatus="status">
 
 		<c:if test="${not ( systemConfiguration.defaultConfiguration and configurationTab == 'CHANGES_ONLY' )}">
 
-			<c:if test="${configurationTab == activeConfigurationTab}">
-				<b>
-			</c:if>
+			<c:set var="isSelectedTab" value="${configurationTab == activeConfigurationTab}" />
 
-			<c:if test="${not isEdit}">
-				<links:configurationTabEdit systemConfigurationId="${systemConfiguration.id}" configurationTab="${configurationTab}">
-					<html:img8 src="edit16.png" alt="${eco:translate1('Links: Edit configuration tab: $1', configurationTab.name)}"/>
-				</links:configurationTabEdit>
+			<li role="presentation" class="${isSelectedTab ? 'active' : ''}">
+				<c:if test="${not isEdit}">
+					<%--<links:configurationTabEdit systemConfigurationId="${systemConfiguration.id}" configurationTab="${configurationTab}">
+						<html:img8 src="edit16.png" alt="${eco:translate1('Links: Edit configuration tab: $1', configurationTab.name)}"/>
+					</links:configurationTabEdit>--%>
 
-				<links:configurationInfo systemConfigurationId="${systemConfigurationId}" configurationTab="${configurationTab}">
-					${eco:translate(configurationTab.name)}
-				</links:configurationInfo>
-			</c:if>
 
-			<c:if test="${isEdit}">
-				<links:configurationTabEditPost systemConfigurationId="${systemConfigurationId}" configurationTab="${configurationTab}">
-					${eco:translate(configurationTab.name)}
-				</links:configurationTabEditPost>
-			</c:if>
+						<links:configurationInfo systemConfigurationId="${systemConfigurationId}" configurationTab="${configurationTab}">
+							${eco:translate(configurationTab.name)}
+						</links:configurationInfo>
+				</c:if>
 
-			<c:if test="${configurationTab == activeConfigurationTab}">
-				</b>
-			</c:if>
+				<c:if test="${isEdit}">
+					<links:configurationTabEditPost systemConfigurationId="${systemConfigurationId}" configurationTab="${configurationTab}">
+						${eco:translate(configurationTab.name)}
+					</links:configurationTabEditPost>
+				</c:if>
 
-			<c:if test="${not status.last}">
-				${splitter}
-			</c:if>
-
+			</li>
 		</c:if>
 
 	</c:forEach>
 
-</div>
+</ul>

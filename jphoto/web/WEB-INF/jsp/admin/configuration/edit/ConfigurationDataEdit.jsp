@@ -16,65 +16,71 @@
 
 <tags:page pageModel="${configurationEditModel.pageModel}">
 
-	<links:configurationTabsLine systemConfiguration="${systemConfiguration}"
+	<div class="row">
+
+		<div class="col-lg-3">
+
+			<links:configurationTabsLine systemConfiguration="${systemConfiguration}"
 								 activeConfigurationTab="${configurationEditModel.configurationTab}"
 								 isEdit="true"
 			/>
+		</div>
 
-	<div class="configuration">
+		<div class="col-lg-9">
 
-		<form:form method="POST" action="${configurationEditUrl}" modelAttribute="configurationEditModel">
+			<form:form method="POST" action="${configurationEditUrl}" modelAttribute="configurationEditModel">
 
-			<form:hidden path="saveConfiguration"  />
-			<form:hidden path="configurationTabKey" />
+				<form:hidden path="saveConfiguration"  />
+				<form:hidden path="configurationTabKey" />
 
-			<table:table border="0" width="300">
+				<table:table border="0" width="300">
 
-				<table:tr>
-					<table:td colspan="4">
-						<h3>
-							${eco:translate1('Edit configuration: $1', systemConfiguration.name)}
-							<c:if test="${systemConfiguration.defaultConfiguration}">
-								- <span style="color: red">${eco:translate('default')}</span>
-							</c:if>
-						</h3>
-					</table:td>
-				</table:tr>
+					<table:tr>
+						<table:td colspan="4">
+							<h3>
+								${eco:translate1('Edit configuration: $1', systemConfiguration.name)}
+								<c:if test="${systemConfiguration.defaultConfiguration}">
+									- <span style="color: red">${eco:translate('default')}</span>
+								</c:if>
+							</h3>
+						</table:td>
+					</table:tr>
 
-				<table:tr>
-					<table:td>
-						${eco:translate('Name')}
-					</table:td>
-					<table:td colspan="3">
-						<form:input path="systemConfigurationName" size="60" />
-					</table:td>
-				</table:tr>
+					<table:tr>
+						<table:td>
+							${eco:translate('Name')}
+						</table:td>
+						<table:td colspan="3">
+							<form:input path="systemConfigurationName" size="60" />
+						</table:td>
+					</table:tr>
 
-				<table:tr>
-					<table:td>
-						${eco:translate('Description')}
-					</table:td>
-					<table:td colspan="3">
-						<form:textarea path="description" cols="50" rows="4" />
-					</table:td>
-				</table:tr>
+					<table:tr>
+						<table:td>
+							${eco:translate('Description')}
+						</table:td>
+						<table:td colspan="3">
+							<form:textarea path="description" cols="50" rows="4" />
+						</table:td>
+					</table:tr>
 
-			</table:table>
+				</table:table>
 
-			<br />
+				<br />
 
-			<html:submitButton id="save" caption_t="Configuration edit: Save configuration" onclick="submitAndSaveConfiguration();"/>
+				<html:submitButton id="save" caption_t="Configuration edit: Save configuration" onclick="submitAndSaveConfiguration();"/>
 
-			<script type="text/javascript">
-				function submitAndSaveConfiguration() {
-					var form = $( '#configurationEditModel' );
-					form.attr( 'action', '${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/save/' );
-					form.submit();
-				}
-			</script>
+				<script type="text/javascript">
+					function submitAndSaveConfiguration() {
+						var form = $( '#configurationEditModel' );
+						form.attr( 'action', '${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/save/' );
+						form.submit();
+					}
+				</script>
 
-		</form:form>
+			</form:form>
 
+		</div>
 	</div>
 
 	<tags:springErrorHighliting bindingResult="${configurationEditModel.bindingResult}"/>
