@@ -79,9 +79,15 @@ public class UserAvatarController {
 		securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), user );
 
 		final UserAvatarModel model = new UserAvatarModel();
-
 		model.setUser( user );
 		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarBreadcrumbs( model.getUser() ) );
+
+
+		final File userAvatarFile = userPhotoFilePathUtilsService.getUserAvatarFile( user.getId() );
+		if ( userAvatarFile.exists() ) {
+			model.setCurrentAvatarFile( userAvatarFile );
+		}
+
 		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 
 		return model;
@@ -89,17 +95,6 @@ public class UserAvatarController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showAvatar( final @ModelAttribute( MODEL_NAME ) UserAvatarModel model ) {
-
-
-		final File userAvatarFile = userPhotoFilePathUtilsService.getUserAvatarFile( model.getUser().getId() );
-		if ( userAvatarFile.exists() ) {
-			model.setCurrentAvatarFile( userAvatarFile );
-		}
-
-		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarBreadcrumbs( model.getUser() ) );
-
-		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
-
 		return VIEW;
 	}
 
