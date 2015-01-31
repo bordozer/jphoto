@@ -162,7 +162,11 @@
 
 	</c:if>
 
-	<jsp:doBody/>
+	<%--<div class="row">--%>
+		<%--<div class="col-lg-12" style="margin-left: auto; margin-right: auto;">--%>
+			<jsp:doBody/>
+		<%--</div>--%>
+	<%--</div>--%>
 
 	<tags:devMode>
 		<input type="hidden" id="the_end_of_the_page_content">

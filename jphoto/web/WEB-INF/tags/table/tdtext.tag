@@ -5,7 +5,7 @@
 <%@ attribute name="labelFor" type="java.lang.String" required="false" description="Column text" %>
 <%@ attribute name="isMandatory" type="java.lang.Boolean" required="false" description="Column text" %>
 
-<td class="titlecolumn">
+<td class="column-title">
 
 	<c:if test="${not empty labelFor}">
 		<label for="${labelFor}">

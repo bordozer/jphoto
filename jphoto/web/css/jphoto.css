@@ -30,6 +30,20 @@ a {
 	padding-bottom: 10px;
 }
 
+.block-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td.column-title {
+	text-align: right;
+	width: 45%;
+}
+
+td.column-data {
+	text-align: left;
+}
+
 /*.table-striped > tbody > tr:nth-child(odd) > th {
 	background-color: #f00;
 }*/

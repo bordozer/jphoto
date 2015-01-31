@@ -14,7 +14,7 @@
 
 <jsp:useBean id="userAvatarModel" type="ui.controllers.users.avatar.UserAvatarModel" scope="request"/>
 
-<c:set var="avatarFileControl" value="<%=UserAvatarModel.AVATAR_FILE_FORM_CONTROL%>" />
+<c:set var="avatarFileControl" value="<%=UserAvatarModel.AVATAR_FILE_FORM_CONTROL%>"/>
 
 <%
 	final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService = ApplicationContextHelper.getBean( UserPhotoFilePathUtilsService.BEAN_NAME );
@@ -22,56 +22,64 @@
 	final String userAvatarFileUrl = userPhotoFilePathUtilsService.getUserAvatarFileUrl( userAvatarModel.getUser().getId() );
 %>
 
-<c:set var="user" value="<%=userAvatarModel.getUser()%>" />
-<c:set var="dimension" value="<%=userAvatarModel.getDimension()%>" />
-<c:set var="userAvatarFileUrl" value="<%=userAvatarFileUrl%>" />
-<c:set var="doesAvatarExist" value="${not empty dimension}" />
+<c:set var="user" value="<%=userAvatarModel.getUser()%>"/>
+<c:set var="dimension" value="<%=userAvatarModel.getDimension()%>"/>
+<c:set var="userAvatarFileUrl" value="<%=userAvatarFileUrl%>"/>
+<c:set var="doesAvatarExist" value="${not empty dimension}"/>
 
 <tags:page pageModel="${userAvatarModel.pageModel}">
 
 	<eco:form action="${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
 
-		<table:table width="800" border="0">
+		<div class="panel panel-default block-center" style="width: 400px;">
 
-			<table:separatorInfo colspan="2" height="50" title="${eco:translate('User avatar: Avatar section title')}"/>
+			<div class="panel-heading">
+				<h3 class="panel-title">${eco:translate('User avatar: Avatar section title')}</h3>
+			</div>
 
-			<c:if test="${doesAvatarExist}">
-				<table:tr>
-					<table:td colspan="2" cssClass="text-centered">
-						${eco:userAvatarImage(user.id, dimension.width, dimension.height, '', '', '')}
-					</table:td>
-				</table:tr>
+			<div class="panel-body">
 
-				<table:separator colspan="2" />
-			</c:if>
+				<table:table width="800">
 
-			<table:tredit>
-				<table:tdtext text_t="User avatar: Avatar file field"/>
+					<c:if test="${doesAvatarExist}">
+						<table:tr>
+							<table:td colspan="2" cssClass="text-centered">
+								${eco:userAvatarImage(user.id, dimension.width, dimension.height, '', '', '')}
+							</table:td>
+						</table:tr>
+					</c:if>
 
-				<table:tddata>
-					<form:input path="userAvatarModel.avatarFile" type="file" id="${avatarFileControl}" />
-				</table:tddata>
-			</table:tredit>
+					<table:tredit>
+						<table:tdtext text_t="User avatar: Avatar file field"/>
 
-			<c:if test="${doesAvatarExist}">
-				<table:tr>
-					<table:td colspan="2">
-						<a href="#" onclick="return deleteAvatar();">${eco:translate('User avatar: Delete avatar')}</a>
-						<script type="text/javascript">
-							function deleteAvatar() {
-								if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
-									document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
-								}
-								return false;
-							}
-						</script>
-					</table:td>
-				</table:tr>
-			</c:if>
+						<table:tddata>
+							<form:input path="userAvatarModel.avatarFile" type="file" id="${avatarFileControl}"/>
+						</table:tddata>
+					</table:tredit>
 
-			<table:trok text_t="User avatar: Save" />
+					<c:if test="${doesAvatarExist}">
+						<table:tr>
+							<table:td colspan="2">
+								<a href="#" onclick="return deleteAvatar();">${eco:translate('User avatar: Delete avatar')}</a>
+								<script type="text/javascript">
+									function deleteAvatar() {
+										if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
+											document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
+										}
+										return false;
+									}
+								</script>
+							</table:td>
+						</table:tr>
+					</c:if>
 
-		</table:table>
+				</table:table>
+
+			</div>
+			<div class="panel-footer">
+				<html:submitButton id="submit_avatar" caption_t="User avatar: Save"/>
+			</div>
+		</div>
 
 	</eco:form>
 

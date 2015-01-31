@@ -11,7 +11,7 @@
 	<c:set var="border" value="0"/>
 </c:if>
 
-<table class="table table-bordered table-striped table-hover <c:if test="${not empty oddEven}">oddEven</c:if> " id="${id}" cellpadding="0" cellspacing="2" <c:if test="${not empty width}">width="${width}"</c:if> border="${border}">
+<table class="table <c:if test="${border > 0}">table-bordered</c:if> <c:if test="${not empty oddEven}">table-striped table-hover</c:if> " id="${id}" cellpadding="0" cellspacing="2" <c:if test="${not empty width}">width="${width}"</c:if> border="${border}">
 
 	<c:if test="${not empty(thead)}">
 		<thead class="">
