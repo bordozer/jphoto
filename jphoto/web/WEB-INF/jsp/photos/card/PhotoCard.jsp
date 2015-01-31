@@ -111,41 +111,43 @@
 				</div>
 			</c:if>
 
-			<div class="row" id="commentList">
+			<div class="row">
+				<div class="col-lg-12" id="commentList">
+					<%-- all comments are going to be places here by JS --%>
+					<div class="${commentsEndAnchor}"></div>
+				</div>
+			</div>
 
-				<script type="text/javascript">
+			<script type="text/javascript">
 
-					var rootComments = [ <c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}" varStatus="status">${commentId}<c:if test="${not status.last}">, </c:if></c:forEach> ];
+				var rootComments = [ <c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}" varStatus="status">${commentId}<c:if test="${not status.last}">, </c:if></c:forEach> ];
 
-					require( [ 'jquery' ], function ( $ ) {
+				require( [ 'jquery' ], function ( $ ) {
 
-						function renderComment( index ) {
+					function renderComment( index ) {
 
-							var commentId = rootComments[ index ];
-							if ( commentId == undefined ) {
-								return;
-							}
-
-							$.ajax( {
-										type:'GET',
-										url:'${eco:baseUrl()}/photo/${photoId}/comment/' + commentId + "/",
-										success:function ( response ) {
-											$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
-											renderComment( index + 1 ); // TOD
-										},
-										error:function () {
-											showUIMessage_Error( '${eco:translate('Photo card: Error getting photo comment')}' + ' ' + commentId );
-										}
-									} );
+						var commentId = rootComments[ index ];
+						if ( commentId == undefined ) {
+							return;
 						}
 
-						renderComment( 0 );
-					} );
+						$.ajax( {
+									type:'GET',
+									url:'${eco:baseUrl()}/photo/${photoId}/comment/' + commentId + "/",
+									success:function ( response ) {
+										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
+										renderComment( index + 1 ); // TOD
+									},
+									error:function () {
+										showUIMessage_Error( '${eco:translate('Photo card: Error getting photo comment')}' + ' ' + commentId );
+									}
+								} );
+					}
 
-				</script>
+					renderComment( 0 );
+				} );
 
-				<div class="${commentsEndAnchor}"></div>
-			</div> <%-- / commentList --%>
+			</script>
 
 			<c:if test="${photoCardModel.commentingValidationResult.validationPassed}">
 				<comments:commentForm photo="${photo}" minCommentLength="${photoCardModel.minCommentLength}" maxCommentLength="${photoCardModel.maxCommentLength}" usedDelayBetweenComments="${photoCardModel.usedDelayBetweenComments}" />
@@ -247,7 +249,9 @@
 		<div class="col-lg-4">
 
 			<div class="row">
-				<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
+				<div class="col-lg-12">
+					<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
+				</div>
 			</div>
 
 			<div class="row votingDiv photo-appraisal-form-div">

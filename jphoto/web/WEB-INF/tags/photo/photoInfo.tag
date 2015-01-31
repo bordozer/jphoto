@@ -36,9 +36,9 @@
 <c:set var="originalDimension" value="<%=originalDimension%>" />
 <c:set var="resizedDimension" value="<%=shownDimension%>" />
 
-<div id="photoInfoDiv">
+<%--<div id="photoInfoDiv">--%>
 
-	<div class="votingDiv">
+	<%--<div class="votingDiv">--%>
 
 		<js:genreRankVotingJS />
 
@@ -247,5 +247,5 @@
 
 				</table:table>
 		</div>
-	</div>
-</div>
+	<%--</div>--%>
+<%--</div>--%>
