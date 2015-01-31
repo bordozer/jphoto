@@ -1,42 +1,8 @@
 
-<style type="text/css">
-	.photo-appraisal-container {
-		float: left;
-		width: 99%;
-		padding: 3px;
-		/*border: 1px solid red;*/
-	}
-
-	.photo-appraisal-category {
-		float: left;
-		font-size: 12px;
-		width: 65%;
-		text-align: right;
-		/*border: 1px solid red;*/
-	}
-
-	.photo-appraisal-mark {
-		float: left;
-		font-size: 12px;
-		/*border: 1px solid red;*/
-	}
-
-	.appraise-photo-button {
-		width: 120px;
-	}
-
-	.appraise-photo-button-container {
-		float: left;
-		width: 33%;
-		/*border: 1px solid red;*/
-	}
-</style>
-
-
 <% _.each( photoAppraisalForm.appraisalSections, function( section ) { %>
-	<div class="photo-appraisal-container">
+	<div class="row row-bottom-padding-10">
 
-		<div class="photo-appraisal-category">
+		<div class="col-lg-7 text-right">
 			<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
 				<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
 					<option value="<%=category.id%>"<%= section.selectedCategoryId == category.id ? ' selected' : ''%>><%=category.nameTranslated%></option>
@@ -44,10 +10,7 @@
 			</select>
 		</div>
 
-		<div class="photo-appraisal-mark">
-			<!--<% _.each( section.accessibleMarks, function( mark ) { %>
-				<input type="radio" name="photo-appraisal-mark-<%=section.number%>" value="<%=mark.value%>" <%= mark.selected ? ' checked' : ''%> /> <%=mark.text%>
-			<% }) %>-->
+		<div class="col-5 text-left">
 			<select class="photo-appraisal-mark-<%=section.number%>">
 				<% _.each( section.accessibleMarks, function( mark ) { %>
 					<option value="<%=mark.value%>"<%= section.selectedMark == mark.value ? ' selected' : ''%>><%=mark.text%></option>
@@ -58,8 +21,14 @@
 	</div>
 <% }) %>
 
-<div class="photo-appraisal-container block-border" style="border-bottom: none; border-right: none; margin-top: 10px; border-left: none; padding-top: 10px; padding-bottom: 10px;">
-	<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button custom-marks-button" value="<%=photoAppraisalForm.customButtonText%>" title="<%=photoAppraisalForm.customButtonTitle%>" /></div>
-	<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button good-button" value="<%=photoAppraisalForm.goodButtonText%>" title="<%=photoAppraisalForm.goodButtonTitle%>" /></div>
-	<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button excellent-button" value="<%=photoAppraisalForm.excellentButtonText%>" title="<%=photoAppraisalForm.excellentButtonTitle%>" /></div>
+<div class="row text-center">
+	<div class="col-lg-4">
+		<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button custom-marks-button" value="<%=photoAppraisalForm.customButtonText%>" title="<%=photoAppraisalForm.customButtonTitle%>" /></div>
+	</div>
+	<div class="col-lg-4">
+		<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button good-button" value="<%=photoAppraisalForm.goodButtonText%>" title="<%=photoAppraisalForm.goodButtonTitle%>" /></div>
+	</div>
+	<div class="col-lg-4">
+		<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button excellent-button" value="<%=photoAppraisalForm.excellentButtonText%>" title="<%=photoAppraisalForm.excellentButtonTitle%>" /></div>
+	</div>
 </div>

@@ -180,18 +180,16 @@ define( ["backbone", "jquery", "underscore"
 
 		renderView: function( view ) {
 
-			var container = $( '<div></div>' );
+			var panel = $( "<div class='panel panel-default'></div>" );
 
-			var header = $( "<div class='block-background block-border' style='padding: 7px; border-radius: 7px 7px 0 0'></div>" );
-			header.html( "<div class='separatorInfo base-font-color'>" + this.model.get( 'appraisalBlockTitle' ) + "</div>" );
-			container.html( header );
+			panel.html( $( "<div class='panel-heading'><h3 class='panel-title'>" + this.model.get( 'appraisalBlockTitle' ) + "</h3></div>" ) );
 
-			var body = $( "<div class='floatleft block-background block-border' style='width: 418px; height: auto;'></div>" );
+			var body = $( "<div class='panel-body'><div class='col-lg-12'></div></div>" );
 			body.html( view.render().$el );
 
-			container.append( body );
+			panel.append( body );
 
-			this.$el.html( container );
+			this.$el.html( panel );
 
 			return this;
 		}

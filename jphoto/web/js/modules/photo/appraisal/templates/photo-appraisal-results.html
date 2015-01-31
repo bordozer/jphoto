@@ -1,10 +1,10 @@
 <table style="font-size: 18px;">
 	<% _.each( photoAppraisalResults, function( result ) { %>
 		<tr style="height: 30px;">
-			<td style="text-align: right; width: 220px;">
+			<td style="text-align: right; width: 240px;">
 				<%=result.appraisalCategoryNameTranslated%>:
 			</td>
-			<td><%=result.mark%></td>
+			<td> &nbsp; <%=result.mark%></td>
 			<td>/</td>
 			<td><%=result.maxAccessibleMark%></td>
 		</tr>

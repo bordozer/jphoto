@@ -247,5 +247,5 @@
 
 				</table:table>
 		</div>
-	<%--</div>--%>
+	</div>
 <%--</div>--%>

@@ -254,24 +254,24 @@
 				</div>
 			</div>
 
-			<div class="row votingDiv photo-appraisal-form-div">
-
-				<div style="text-align: center;">
+			<div class="row votingDiv">
+				<div class="col-lg-12 text-center photo-appraisal-form-container">
 					<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
 				</div>
-
-				<script type="text/javascript">
-					require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
-						photoAppraisal( ${photoId}, ${loggedUser.id}, $( '.photo-appraisal-form-div' ) );
-					} );
-				</script>
 			</div>
+
+			<script type="text/javascript">
+				require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
+					photoAppraisal( ${photoId}, ${loggedUser.id}, $( '.photo-appraisal-form-container' ) );
+				} );
+			</script>
 
 		</div>
 
 	</div> <%-- / comments, info, voting --%>
 
 	<c:if test="${isLoggedUser}">
+
 		<%--<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jcrop/js/jquery.Jcrop.js"></script>--%>
 		<%--<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>--%>
 
