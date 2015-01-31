@@ -1,3 +1,4 @@
+<%@ page import="ui.services.menu.entry.items.EntryMenuType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -36,13 +37,14 @@
 
 				<div class="col-lg-2">
 
-					<div class="row row-bottom-padding-10">
-						${eco:escapeHtml(user.name)}
-						<icons:userIcons user="${user}" hideIconSendPrivateMessage="true"/>
+					<div class="row text-center row-bottom-padding-10">
+						<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
 					</div>
 
 					<div class="row text-center">
-						<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+						<h2>${eco:escapeHtml(user.name)}</h2>
+						<icons:userIcons user="${user}" hideIconSendPrivateMessage="true"/>
+						<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>"/>
 					</div>
 
 				</div>
