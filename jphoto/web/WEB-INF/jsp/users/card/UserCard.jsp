@@ -8,6 +8,7 @@
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user/card" %>
 
 <jsp:useBean id="userCardModel" type="ui.controllers.users.card.UserCardModel" scope="request"/>
 
@@ -33,33 +34,48 @@
 			<div class="row row-bottom-padding-10">
 
 				<c:if test="${selectedUserCardTab == 'PERSONAL_DATA'}">
-					<userCardTabs:userPersonalData user="${user}"
-												   editingUserDataIsAccessible="${editingUserDataIsAccessible}"
-												   lastUserActivityTime="${userCardModel.lastUserActivityTime}"
-												   entryMenu="${userCardModel.entryMenu}"
-							/>
 
-					<div class="user-card-block block-background block-border justify-font"
-						 style="width: 500px; margin-top: 20px;">
-						<b>${eco:translate('User card: Member self description')}:</b>
-						<br/>
-							${eco:formatPhotoCommentText(user.selfDescription)}
+					<div class="col-lg-2">
+						<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+					</div>
+
+					<div class="col-lg-4">
+						<user:userInfo user="${user}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" isEditable="${editingUserDataIsAccessible}"/>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="row">
+								${eco:translate('User card: Member self description')}:
+							</div>
+							<div class="row">
+								${eco:formatPhotoCommentText(user.selfDescription)}
+							</div>
+						</div>
 					</div>
 
 				</c:if>
+
+
 
 				<c:if test="${selectedUserCardTab == 'PHOTOS_OVERVIEW'}">
 					<userCardTabs:photosOverview user="${user}" userPhotosByGenres="${userCardModel.userPhotosByGenres}"
 												 photoLists="${userCardModel.photoLists}"/>
 				</c:if>
 
+
+
 				<c:if test="${selectedUserCardTab == 'STATISTICS'}">
 					<userCardTabs:statistics userCardModel="${userCardModel}"/>
 				</c:if>
 
+
+
 				<c:if test="${selectedUserCardTab == 'TEAM'}">
 					<userCard:customPhotoLists photoLists="${userCardModel.userTeamMemberPhotoLists}"/>
 				</c:if>
+
+
 
 				<c:if test="${selectedUserCardTab == 'ALBUMS'}">
 					<c:set var="userPhotosCountByAlbums" value="${userCardModel.userPhotosCountByAlbums}"/>
@@ -78,6 +94,8 @@
 
 					<userCard:customPhotoLists photoLists="${userCardModel.userPhotoAlbumsPhotoLists}"/>
 				</c:if>
+
+
 
 				<c:if test="${selectedUserCardTab == 'ACTIVITY_STREAM'}">
 					<userCard:userActivityStream user="${user}" activities="${userCardModel.userLastActivities}" filterActivityTypeId="${userCardModel.filterActivityTypeId}"/>

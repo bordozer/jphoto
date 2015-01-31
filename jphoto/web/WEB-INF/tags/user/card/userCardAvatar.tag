@@ -42,7 +42,7 @@
 
 <c:set var="fullAvatarDivId" value="avatar_${user.id}"/>
 
-<div class="row">
+<%--<div class="row">--%>
 
 	<c:if test="${userHasAvatar}">
 		<c:set var="avatarTitle" value="${eco:translate('User card avatar: Click to see full size')}"/>
@@ -69,7 +69,7 @@
 			<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
 		</div>
 	</c:if>
-</div>
+<%--</div>--%>
 
 <div id="${fullAvatarDivId}" style="display: none;">
 	<img src="${userAvatarFileUrl}" alt="${eco:escapeHtml(user.name)}" width="${dimension.width}"

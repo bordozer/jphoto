@@ -25,85 +25,85 @@
 <c:set var="isSuperAdminUser" value="<%=securityService.isSuperAdminUser( EnvironmentContext.getCurrentUserId() )%>"/>
 <c:set var="isLastUserActivityTime" value="<%=! dateUtilsService.isEmptyTime( lastUserActivityTime )%>"/>
 
-<tags:contextMenuJs />
+<tags:contextMenuJs/>
 
-	<table:table>
+<table:table>
 
-		<table:separatorInfo colspan="2" height="50" title="${eco:translate('User edit data tab: Personal information')}"/>
+	<table:separatorInfo colspan="2" height="50" title="${eco:translate('User edit data tab: Personal information')}"/>
 
+	<table:trinfo>
+		<table:tdtext text_t="id"/>
+		<table:td>${user.id}</table:td>
+	</table:trinfo>
+
+	<c:if test="${isSuperAdminUser}">
 		<table:trinfo>
-			<table:tdtext text_t="id"/>
-			<table:td>${user.id}</table:td>
-		</table:trinfo>
-
-		<c:if test="${isSuperAdminUser}">
-			<table:trinfo>
-				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LOGIN%>"/>
-				<table:td>
-					${eco:escapeHtml(user.login)}
-				</table:td>
-			</table:trinfo>
-		</c:if>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_NAME%>"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LOGIN%>"/>
 			<table:td>
-				${eco:escapeHtml(user.name)}
-				<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" />
-				<%--<tags:entryMenu entryMenu="${entryMenu}" />--%>
-				<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>" />
+				${eco:escapeHtml(user.login)}
 			</table:td>
 		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LAST_ACTIVITY_TIME%>"/>
-			<table:td>
-				<c:if test="${isLastUserActivityTime}">
-					${eco:formatDateTimeShort(lastUserActivityTime)}
-				</c:if>
-				&nbsp;
-			</table:td>
-		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_STATUS%>"/>
-			<table:td>${eco:translate(user.userStatus.name)}</table:td>
-		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_GENDER%>"/>
-			<table:td>
-				<icons:userGender user="${user}" />
-			</table:td>
-		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_EMAIL%>"/>
-			<table:td>
-				${eco:escapeHtml(user.email)}
-			</table:td>
-		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_BIRTHDAY%>"/>
-			<table:td>${eco:formatDate(user.dateOfBirth)}</table:td>
-		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_MEMBERSHIP_TYPE%>"/>
-			<table:td>${eco:translate(user.membershipType.name)}</table:td>
-		</table:trinfo>
-
-		<table:trinfo>
-			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_REGISTRATION_TIME%>"/>
-			<table:td>${eco:formatDateTimeShort(user.registrationTime)}</table:td>
-		</table:trinfo>
-
-	</table:table>
-
-	<%-- TODO: move this link to the user's context menu --%>
-	<c:if test="${isEditable}">
-		<links:userEdit user="${user}">
-			${eco:translate('User card: Edit member personal data')}
-		</links:userEdit>
 	</c:if>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_NAME%>"/>
+		<table:td>
+			${eco:escapeHtml(user.name)}
+			<icons:userIcons user="${user}" hideIconSendPrivateMessage="true"/>
+			<%--<tags:entryMenu entryMenu="${entryMenu}" />--%>
+			<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>"/>
+		</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LAST_ACTIVITY_TIME%>"/>
+		<table:td>
+			<c:if test="${isLastUserActivityTime}">
+				${eco:formatDateTimeShort(lastUserActivityTime)}
+			</c:if>
+			&nbsp;
+		</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_STATUS%>"/>
+		<table:td>${eco:translate(user.userStatus.name)}</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_GENDER%>"/>
+		<table:td>
+			<icons:userGender user="${user}"/>
+		</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_EMAIL%>"/>
+		<table:td>
+			${eco:escapeHtml(user.email)}
+		</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_BIRTHDAY%>"/>
+		<table:td>${eco:formatDate(user.dateOfBirth)}</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_MEMBERSHIP_TYPE%>"/>
+		<table:td>${eco:translate(user.membershipType.name)}</table:td>
+	</table:trinfo>
+
+	<table:trinfo>
+		<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_REGISTRATION_TIME%>"/>
+		<table:td>${eco:formatDateTimeShort(user.registrationTime)}</table:td>
+	</table:trinfo>
+
+</table:table>
+
+<%-- TODO: move this link to the user's context menu --%>
+<c:if test="${isEditable}">
+	<links:userEdit user="${user}">
+		${eco:translate('User card: Edit member personal data')}
+	</links:userEdit>
+</c:if>
