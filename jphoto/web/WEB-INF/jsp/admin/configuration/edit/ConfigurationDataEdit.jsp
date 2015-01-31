@@ -48,7 +48,7 @@
 
 					<table:tr>
 						<table:td>
-							${eco:translate('Name')}
+							${eco:translate('Edit configuration: Name')}
 						</table:td>
 						<table:td colspan="3">
 							<form:input path="systemConfigurationName" size="60" />
@@ -57,7 +57,7 @@
 
 					<table:tr>
 						<table:td>
-							${eco:translate('Description')}
+							${eco:translate('Edit configuration: Description')}
 						</table:td>
 						<table:td colspan="3">
 							<form:textarea path="description" cols="50" rows="4" />
