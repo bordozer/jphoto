@@ -155,34 +155,37 @@
 				<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}"/>
 
 				<c:if test="${showCommentAuthorData && hasAvatar}">
-					<div class="text-centered" style="float: left; width: 90px;">
-						<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50"
-							 alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}"/>
+					<div class="col-lg-1 text-center">
+						<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}"/>
 					</div>
 				</c:if>
 
 				<c:if test="${!showCommentAuthorData}">
-					<div class="text-centered" style="float: left; width: 90px;">
-						<html:img src="hidden_picture.png" alt="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}" id="avatar_${comment.id}"
-								  height="100" width="100"/>
+					<div class="col-lg-1 text-center">
+						<html:img src="hidden_picture.png" alt="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}" id="avatar_${comment.id}"  height="100" width="100"/>
 					</div>
 				</c:if>
 
-				<div style="float: left; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
-					<div id="photoCommentText_${commentId}" style="float: left; width: 100%;">
+				<div class="col-lg-11">
+
+					<div class="row">
+						<div id="photoCommentText_${commentId}" class="col-lg-12">
 							${eco:formatPhotoCommentText(comment.commentText)}
+						</div>
 					</div>
 
-					<div style="float: left; width: 100%; padding-top: 15px; font-size: 10px;">
-						<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">
-							${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}:
-							<span title="${eco:translate1('Comment View: Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
-							/
-							<span title="${eco:translate1('Comment View: Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
-							<c:if test="${not status.last}">
-								,
-							</c:if>
-						</c:forEach>
+					<div class="row">
+						<div class="col-lg-12">
+							<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">
+								${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}:
+								<span title="${eco:translate1('Comment View: Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
+								/
+								<span title="${eco:translate1('Comment View: Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
+								<c:if test="${not status.last}">
+									,
+								</c:if>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>

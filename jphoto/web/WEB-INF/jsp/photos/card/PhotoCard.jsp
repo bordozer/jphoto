@@ -101,9 +101,9 @@
 			<c:if test="${not empty photo.description}">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="page-title">
+						<h4 class="page-title">
 							${eco:translate('Photo info: Photo description')}
-						</h3>
+						</h4>
 					</div>
 					<div class="panel-body">
 						${eco:formatPhotoCommentText(photo.description)}
