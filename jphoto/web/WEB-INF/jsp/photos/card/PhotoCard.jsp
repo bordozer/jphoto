@@ -59,52 +59,56 @@
 
 	<tags:contextMenuJs />
 
-	<div class="photoCardPhotoName">${photoNameEscaped}</div>
+	<div class="panel panel-default">
 
-	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? photo.bgColor : 'transparent'};">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center">${photoNameEscaped}</h3>
+		</div>
 
-		<div style="width: ${shownDimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
-			<a href="#" onclick="return false;">
-				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
-			</a>
+		<div class="panel-body text-center" style="background-color: ${not empty photo.bgColor ? photo.bgColor : 'transparent'};">
+
+			<div style="width: ${shownDimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
+				<a href="#" onclick="return false;">
+					<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
+				</a>
+			</div>
+
+		</div>
+
+		<div class="panel-footer text-center">
+
+			<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
+
+			<icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
+
+			<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}"/>
+
+			<tags:contextMenu entryId="${photoId}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
+
+			<c:if test="${isLoggedUser}">
+				<br />
+				<html:img id="cropDisabled16" src="photo/cropDisabled16.png" width="16" height="16" />
+				<html:img id="cropEnabled16" src="photo/cropEnabled16.png" width="16" height="16" />
+			</c:if>
 		</div>
 
 	</div>
 
-	<div class="floatleft centerAlign border-bottom" style="padding-top: 10px;">
-
-		<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
-
-		<icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
-
-		<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}"/>
-
-		<tags:contextMenu entryId="${photoId}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
-
-		<c:if test="${isLoggedUser}">
-			<br />
-			<html:img id="cropDisabled16" src="photo/cropDisabled16.png" width="16" height="16" />
-			<html:img id="cropEnabled16" src="photo/cropEnabled16.png" width="16" height="16" />
-		</c:if>
-	</div>
-
 	<js:confirmAction/>
 
-	<div class="commentsAndVotingDiv">
+	<div class="row"> <%-- comments, info, voting --%>
 
-		<div class="commentsDiv" style="margin-left: 20px; width: ${ isMobile ? 50 : 63 }%;">
+		<div class="col-lg-8"> <%-- description and comments column --%>
 
 			<c:if test="${not empty photo.description}">
-				<div class="floatleft photoCommentContainerInner block-background block-border base-font-color">
-					<div style="padding: 15px;">
-						<b>${eco:translate('Photo info: Photo description')}:</b>
-						<br />
-						${eco:formatPhotoCommentText(photo.description)}
-					</div>
+				<div class="row">
+					<h4>${eco:translate('Photo info: Photo description')}:</h4>
+					<br />
+					${eco:formatPhotoCommentText(photo.description)}
 				</div>
 			</c:if>
 
-			<div id="commentList" style="float: left; width: 90%;">
+			<div class="row" id="commentList">
 
 				<script type="text/javascript">
 
@@ -138,7 +142,7 @@
 				</script>
 
 				<div class="${commentsEndAnchor}"></div>
-			</div>
+			</div> <%-- / commentList --%>
 
 			<c:if test="${photoCardModel.commentingValidationResult.validationPassed}">
 				<comments:commentForm photo="${photo}" minCommentLength="${photoCardModel.minCommentLength}" maxCommentLength="${photoCardModel.maxCommentLength}" usedDelayBetweenComments="${photoCardModel.usedDelayBetweenComments}" />
@@ -147,8 +151,6 @@
 			<c:if test="${photoCardModel.commentingValidationResult.validationFailed}">
 				<tags:validationResult title_t="ValidationResult: You can not comment the photo" validationMessage="${photoCardModel.commentingValidationResult.validationMessage}" />
 			</c:if>
-
-			<div class="footerseparator"></div>
 
 			<script type="text/javascript">
 
@@ -237,12 +239,15 @@
 				}
 			</script>
 
-		</div> <%-- / commentsDiv --%>
+		</div> <%-- / description and comments column --%>
 
-		<div class="photoInfoAndVotingDiv">
-			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
+		<div class="col-lg-4">
 
-			<div class="votingDiv photo-appraisal-form-div">
+			<div class="row">
+				<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
+			</div>
+
+			<div class="row votingDiv photo-appraisal-form-div">
 
 				<div style="text-align: center;">
 					<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
@@ -256,7 +261,8 @@
 			</div>
 
 		</div>
-	</div>
+
+	</div> <%-- / comments, info, voting --%>
 
 	<c:if test="${isLoggedUser}">
 		<%--<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jcrop/js/jquery.Jcrop.js"></script>--%>
