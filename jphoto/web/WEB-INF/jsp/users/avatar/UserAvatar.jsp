@@ -1,8 +1,5 @@
 <%@ page import="ui.controllers.users.avatar.UserAvatarModel" %>
-<%@ page import="java.io.File" %>
-<%@ page import="core.general.img.Dimension" %>
 <%@ page import="core.services.utils.UserPhotoFilePathUtilsService" %>
-<%@ page import="core.services.utils.ImageFileUtilsService" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,6 +7,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="edit" tagdir="/WEB-INF/tags/edit" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="userAvatarModel" type="ui.controllers.users.avatar.UserAvatarModel" scope="request"/>
@@ -28,6 +26,17 @@
 <c:set var="doesAvatarExist" value="${not empty dimension}"/>
 
 <tags:page pageModel="${userAvatarModel.pageModel}">
+
+	<edit:container title_t="User avatar: Avatar section title" width="400">
+		<jsp:attribute name="footer">
+			footer
+		</jsp:attribute>
+		<jsp:body>body</jsp:body>
+
+
+	</edit:container>
+
+
 
 	<eco:form action="${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
 
