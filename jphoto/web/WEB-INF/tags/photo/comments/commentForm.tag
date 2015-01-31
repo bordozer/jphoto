@@ -37,132 +37,130 @@
 
 <c:set var="newCommentsNotificationEntryType" value="<%=FavoriteEntryType.NEW_COMMENTS_NOTIFICATION%>"/>
 
-<c:set var="photoId" value="${photo.id}" />
+<c:set var="photoId" value="${photo.id}"/>
 
 <comments:commentJS photoId="${photoId}"/>
 
-<c:if test="${loggedUser.id > 0}">
+<tags:inputHintForm/>
 
-	<tags:inputHintForm/>
+<c:set var="url" value="${eco:baseUrl()}/photos/${photoId}/comments/save/"/>
+<c:set var="frmPhotoComment" value="<%=FormTag.FORM_NAME%>"/>
 
-	<c:set var="url" value="${eco:baseUrl()}/photos/${photoId}/comments/save/"/>
-	<c:set var="frmPhotoComment" value="<%=FormTag.FORM_NAME%>"/>
+<eco:form formName="${frmPhotoComment}" action="">
 
-	<div class="photoCommentForm">
+	<input type="hidden" id="${beingEditedCommentIdFormControl}" name="${beingEditedCommentIdFormControl}" value="0"/>
+	<input type="hidden" id="${replyToCommentIdFormControl}" name="${replyToCommentIdFormControl}" value="0"/>
+	<input type="hidden" id="${commentFormControl}" name="${commentFormControl}" value=""/>
 
-		<eco:form formName="${frmPhotoComment}" action="">
+	<a name="${photoCommentFormAnchor}"></a>
 
-			<input type="hidden" id="${beingEditedCommentIdFormControl}" name="${beingEditedCommentIdFormControl}" value="0"/>
-			<input type="hidden" id="${replyToCommentIdFormControl}" name="${replyToCommentIdFormControl}" value="0"/>
-			<input type="hidden" id="${commentFormControl}" name="${commentFormControl}" value=""/>
+	<table width="90%">
 
-			<a name="${photoCommentFormAnchor}"></a>
+		<tr>
+			<td width="50px">&nbsp;</td>
+			<td>
+				<div id="${photoCommentFormInfoDiv}">${addButtonCaptionTranslated}</div>
+			</td>
+		</tr>
 
-			<table:table width="90%">
+		<tr>
+			<td>${eco:translate('Comment form: Comment from')}</td>
+			<td>
+				<user:userCard user="${loggedUser}"/>
+			</td>
+		</tr>
 
-				<table:tr>
-					<table:td width="50px">&nbsp;</table:td>
-					<table:td>
-						<div id="${photoCommentFormInfoDiv}" class="floatleft">${addButtonCaptionTranslated}</div>
-					</table:td>
-				</table:tr>
-
-				<table:tr>
-					<table:tdtext text_t="Comment form: Comment from"/>
-					<table:td>
-						<user:userCard user="${loggedUser}"/>
-					</table:td>
-				</table:tr>
-
-				<table:tr>
-					<table:tdtext text_t="Comment form: Comment text" isMandatory="true" labelFor="${commentTextFormControl}"/>
-					<table:tddata>
-						<tags:inputHint inputId="${commentTextFormControl}">
-						<jsp:attribute name="inputField">
-							<html:textarea inputId="${commentTextFormControl}" inputValue="" cols="40" rows="5"/>
-							<div style="float: left; width: 100%; height: 20px;">
+		<tr>
+			<td>
+					${eco:translate('Comment form: Comment text')}
+			</td>
+			<td>
+				<tags:inputHint inputId="${commentTextFormControl}">
+					<jsp:attribute name="inputField">
+						<html:textarea inputId="${commentTextFormControl}" inputValue="" cols="40" rows="5"/>
+						<div style="float: left; width: 100%; height: 20px;">
 								${eco:translate2( "Comment form: Comments length: $1 - $2 symbols", minCommentLength, maxCommentLength )}
-								<br />
+							<br/>
 								${eco:translate1( "Comment form: Your delay between comments: $1 seconds", usedDelayBetweenComments )}
-							</div>
-						</jsp:attribute>
-						</tags:inputHint>
-					</table:tddata>
-				</table:tr>
+						</div>
+					</jsp:attribute>
+				</tags:inputHint>
+			</td>
+		</tr>
 
-				<table:trok id="${submitCommentButton}" text_t="${addButtonCaption}" onclick="return submitForm();"/>
+		<tr>
+			<td colspan="2">
+				<html:submitButton id="${submitCommentButton}" caption_t="${addButtonCaption}" onclick="return submitForm();"/>
+			</td>
+		</tr>
 
-				<table:tr>
-					<table:td colspan="2">
-						${eco:translate('Comment form: Comments subscribe')}: <icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
-					</table:td>
-				</table:tr>
+		<tr>
+			<td colspan="2">
+					${eco:translate('Comment form: Comments subscribe')}: <icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
+			</td>
+		</tr>
 
-				<table:tr>
-					<table:td colspan="2"><a href="#">${eco:translate('Comment form: To the top of page')}</a></table:td>
-				</table:tr>
+		<tr>
+			<td colspan="2"><a href="#">${eco:translate('Comment form: To the top of page')}</a></td>
+		</tr>
 
-			</table:table>
+	</table>
 
-		</eco:form>
+</eco:form>
 
-	</div>
+<script type="text/javascript">
 
-	<script type="text/javascript">
+	function submitForm() {
+		var textArea = $( '#${commentTextFormControl}' );
+		var commentText = textArea.val();
 
-		function submitForm() {
-			var textArea = $( '#${commentTextFormControl}' );
-			var commentText = textArea.val();
+		var commentField = $( '#${commentFormControl}' );
+		commentField.val( commentText );
 
-			var commentField = $( '#${commentFormControl}' );
-			commentField.val( commentText );
-
-			if ( commentText.length < ${minCommentLength} ) {
-				showUIMessage_Information( "${eco:translate2('Comment form: Comment must be more then $1 and less then $2 symbols', minCommentLength, maxCommentLength)}" );
-				return false;
-			}
-
-			disableCommentText();
-
-			var beingEditedCommentId = $( '#${beingEditedCommentIdFormControl}' ).val();
-			var isCommentEditing = beingEditedCommentId == 0;
-			var replyToCommentId = $( '#${replyToCommentIdFormControl}' ).val();
-
-			function insertBeforeAnchor( anchor, response ) {
-				$( '.' + anchor ).before( response );
-			}
-
-			function updateCommentDivContent( commentId, response ) {
-				$( '#${commentDivId}' + commentId ).html( response );
-			}
-
-			$.ajax( {
-						type:'POST',
-						url:'${url}',
-						data:$( '#${frmPhotoComment}' ).serialize(),
-						success:function ( response ) {
-							// response == CommentSave.jsp
-							if ( isCommentEditing ) {
-								var endOfTheBeingEditedCommentAnchor = '${commentsEndAnchor}';
-								if ( replyToCommentId > 0) {
-									endOfTheBeingEditedCommentAnchor = '${commentEndAnchor}' + replyToCommentId;
-								}
-								insertBeforeAnchor( endOfTheBeingEditedCommentAnchor, response );
-							} else {
-								updateCommentDivContent( beingEditedCommentId, response );
-								disableCommentText(); // TODO: processes ALL icons!!! Replace with desabling only 'commentId'
-							}
-							refreshPhotoInfo();
-						},
-						error:function () {
-							showUIMessage_Error( '${eco:translate('Comment form: Error saving message')}' );
-							enableCommentText();
-						}
-					} );
-
+		if ( commentText.length < ${minCommentLength} ) {
+			showUIMessage_Information( "${eco:translate2('Comment form: Comment must be more then $1 and less then $2 symbols', minCommentLength, maxCommentLength)}" );
 			return false;
 		}
 
-	</script>
+		disableCommentText();
 
-</c:if>
+		var beingEditedCommentId = $( '#${beingEditedCommentIdFormControl}' ).val();
+		var isCommentEditing = beingEditedCommentId == 0;
+		var replyToCommentId = $( '#${replyToCommentIdFormControl}' ).val();
+
+		function insertBeforeAnchor( anchor, response ) {
+			$( '.' + anchor ).before( response );
+		}
+
+		function updateCommentDivContent( commentId, response ) {
+			$( '#${commentDivId}' + commentId ).html( response );
+		}
+
+		$.ajax( {
+					type: 'POST',
+					url: '${url}',
+					data: $( '#${frmPhotoComment}' ).serialize(),
+					success: function ( response ) {
+						// response == CommentSave.jsp
+						if ( isCommentEditing ) {
+							var endOfTheBeingEditedCommentAnchor = '${commentsEndAnchor}';
+							if ( replyToCommentId > 0 ) {
+								endOfTheBeingEditedCommentAnchor = '${commentEndAnchor}' + replyToCommentId;
+							}
+							insertBeforeAnchor( endOfTheBeingEditedCommentAnchor, response );
+						} else {
+							updateCommentDivContent( beingEditedCommentId, response );
+							disableCommentText(); // TODO: processes ALL icons!!! Replace with desabling only 'commentId'
+						}
+						refreshPhotoInfo();
+					},
+					error: function () {
+						showUIMessage_Error( '${eco:translate('Comment form: Error saving message')}' );
+						enableCommentText();
+					}
+				} );
+
+		return false;
+	}
+
+</script>

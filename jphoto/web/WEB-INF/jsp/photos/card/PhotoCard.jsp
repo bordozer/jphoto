@@ -67,23 +67,21 @@
 
 		<div class="panel-body text-center" style="background-color: ${not empty photo.bgColor ? photo.bgColor : 'transparent'};">
 
-			<div style="width: ${shownDimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
-				<a href="#" onclick="return false;">
-					<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
-				</a>
-			</div>
+			<a href="#" onclick="return false;">
+				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
+			</a>
 
 		</div>
 
 		<div class="panel-footer text-center">
 
-			<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
+				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
 
-			<icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
+				<icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
 
-			<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}"/>
+				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}"/>
 
-			<tags:contextMenu entryId="${photoId}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
+				<tags:contextMenu entryId="${photoId}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
 
 			<c:if test="${isLoggedUser}">
 				<br />
@@ -101,10 +99,15 @@
 		<div class="col-lg-8"> <%-- description and comments column --%>
 
 			<c:if test="${not empty photo.description}">
-				<div class="row">
-					<h4>${eco:translate('Photo info: Photo description')}:</h4>
-					<br />
-					${eco:formatPhotoCommentText(photo.description)}
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="page-title">
+							${eco:translate('Photo info: Photo description')}
+						</h3>
+					</div>
+					<div class="panel-body">
+						${eco:formatPhotoCommentText(photo.description)}
+					</div>
 				</div>
 			</c:if>
 
