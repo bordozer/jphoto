@@ -31,7 +31,7 @@
 	<c:set var="showNextButton" value="${not photoCommentsListModel.showPaging && isLoggedUserLokingOnOwnUnreadMessages}" />
 
 	<c:if test="${noComments}">
-		<h3>${eco:translate('There are no comments')}</h3>
+		<h3>${eco:translate('Comment list: There are no comments')}</h3>
 	</c:if>
 
 	<c:if test="${not noComments}">

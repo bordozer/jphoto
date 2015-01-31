@@ -27,7 +27,7 @@
 
 <tags:page pageModel="${userAvatarModel.pageModel}">
 
-	<eco:form action="${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
+	<eco:form action="${eco:baseUrl	()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
 
 		<edit:container title_t="User avatar: Avatar section title" width="700">
 
