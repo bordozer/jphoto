@@ -13,42 +13,41 @@
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
 
-	<c:set var="activeJobTypes" value="${savedJobListModel.activeJobTypes}" />
+	<c:set var="activeJobTypes" value="${savedJobListModel.activeJobTypes}"/>
 
-	<admin:jobListHeader jobListTab="${savedJobListModel.jobListTab}"
-						 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
-						 activeJobs="${savedJobListModel.activeJobs}" />
+	<div class="panel">
+		<div class="panel-body">
+			<div class="row row-bottom-padding-10">
+				<admin:jobListHeader jobListTab="${savedJobListModel.jobListTab}"
+									 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
+									 activeJobs="${savedJobListModel.activeJobs}"/>
+			</div>
 
-	<div style="width: 95%; float: left; height: 100%; margin: 10px;">
 
-		<js:confirmAction />
+			<div class="row"> <%-- panel row 1 --%>
 
-		<table:table border="0" width="90%">
+				<js:confirmAction/>
 
-			<table:tr>
+				<div class="col-lg-12"> <%-- panel row 1 column --%>
 
-				<c:set var="counter" value="1"/>
+					<c:set var="counter" value="1"/>
 
-				<c:forEach var="savedJobTab" items="${savedJobTabs}">
+					<div class="row">
+						<c:forEach var="savedJobTab" items="${savedJobTabs}">
 
-					<c:if test="${counter > 3}">
-						</tr><tr>
-						<c:set var="counter" value="1"/>
-					</c:if>
+							<div class="col-lg-4">
+								<admin:templateJobList activeJobTypes="${activeJobTypes}" jobListTab="${savedJobTab}"/>
+							</div>
 
-					<table:td valign="top" width="30%">
-						<admin:templateJobList activeJobTypes="${activeJobTypes}" jobListTab="${savedJobTab}" />
-					</table:td>
+							<c:set var="counter" value="${counter + 1}"/>
 
-					<table:td width="20"/>
+						</c:forEach>
+					</div>
 
-					<c:set var="counter" value="${counter + 1}"/>
-				</c:forEach>
+				</div> <%-- / panel row 1 column --%>
 
-			</table:tr>
-
-		</table:table>
-
-	</div>
+			</div> <%-- / panel row 1 --%>
+		</div> <%-- / panel body --%>
+	</div> <%-- / panel --%>
 
 </tags:page>

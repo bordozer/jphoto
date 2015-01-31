@@ -19,28 +19,13 @@
 
 <c:set var="activeJobsQty" value="${fn:length(activeJobs)}" />
 
-<style type="text/css">
-	.jobListHeaderTab {
-		float: left;
-		width: ${tabWidthPercent}%;
-		padding-top: 5px;
-		padding-bottom: 5px;
-		text-align: center;
-		height: 29px;
-		border-radius: 12px 12px 0 0;
-		font-size: 11px;
-		/*border: dotted;*/
-	}
-
-</style>
-
-<div class="tabHeader">
+<ul class="nav nav-tabs">
 
 	<c:forEach var="jobListTabValue" items="${jobListTabValues}">
 
 		<c:set var="isSelectedTab" value="${jobListTab == jobListTabValue}" />
 
-		<div class="jobListHeaderTab block-border${isSelectedTab ? " block-background" : ""}">
+		<li class="${isSelectedTab ? "active" : ""}">
 
 			<c:set var="activeTabAndThereAreRunningJobs" value="${jobListTabValue == 'JOB_EXECUTION_HISTORY' and activeJobsQty > 0}" />
 
@@ -49,34 +34,19 @@
 			</c:if>
 
 			<c:set var="jobListTabValueName" value="${eco:translate(jobListTabValue.name)}"/>
-			<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/" title="${jobListTabValueName}">${jobListTabValueName}</a>
-
-			<br />
+			<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/" title="${jobListTabValueName}">${jobListTabValueName} (${tabJobInfosMap[jobListTabValue].tabJobsQty})</a>
 
 			<c:if test="${activeTabAndThereAreRunningJobs}">
-				<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/status/${activeStatusId}/" title="${eco:translate('jobListHeader: Show active jobs')}">&nbsp;${activeJobsQty}&nbsp;</a> /
+				<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/status/${activeStatusId}/" title="${eco:translate('jobListHeader: Show active jobs')}">&nbsp;${activeJobsQty}&nbsp;</a>
 			</c:if>
-			${tabJobInfosMap[jobListTabValue].tabJobsQty}
 
-		</div>
+		</li>
 
 	</c:forEach>
 
-</div>
+</ul>
 
 <c:set var="interval" value="60000" />
 <c:if test="${activeJobsQty == 0}">
 	<c:set var="interval" value="60000" />
 </c:if>
-
-<%--<c:if test="${not suppressAutoReloading}">
-	<script type="text/javascript">
-		require( [ 'jquery' ], function( $ ) {
-			$( document ).ready( function() {
-				setTimeout( function() {
-					document.location.reload();
-				}, ${interval} );
-			});
-		});
-	</script>
-</c:if>--%>
