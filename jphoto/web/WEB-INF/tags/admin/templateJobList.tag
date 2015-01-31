@@ -12,40 +12,44 @@
 
 <c:set var="savedJobTypes" value="<%=SavedJobType.values()%>" />
 
-<table:table border="0" width="400">
+<div class="panel panel-default">
 
-	<table:separatorInfo colspan="3" title="${eco:translate(jobListTab.name)}" height="50"/>
+	<div class="panel-heading">
+		<h3 class="panel-title">${eco:translate(jobListTab.name)}</h3>
+	</div>
 
-	<c:forEach var="jobType" items="${savedJobTypes}">
+	<div class="panel-body">
 
-		<c:if test="${jobListTab == jobType.jobListTab}">
+		<c:forEach var="jobType" items="${savedJobTypes}">
 
-			<c:set var="jobTypeId" value="${jobType.id}" />
-			<c:set var="isJobTypeActive" value="${eco:contains(activeJobTypes, jobTypeId)}" />
+			<c:if test="${jobListTab == jobType.jobListTab}">
 
-			<table:tr>
+				<c:set var="jobTypeId" value="${jobType.id}" />
+				<c:set var="isJobTypeActive" value="${eco:contains(activeJobTypes, jobTypeId)}" />
 
-			<table:tdicon>
-				<c:if test="${isJobTypeActive}">
-					<html:spinningWheel16 title="${eco:translate('One or more jobs of this type is active now')}" />
-				</c:if>
-			</table:tdicon>
+				<div class="row">
 
-			<table:tdicon>
-				<html:img32 src="jobtype/${jobType.icon}" />
-			</table:tdicon>
+					<div class="col-lg-1">
+						<c:if test="${isJobTypeActive}">
+							<html:spinningWheel16 title="${eco:translate('One or more jobs of this type is active now')}" />
+						</c:if>
+					</div>
 
-			<table:td>
-				<admin:jobTemplate savedJobType="${jobType}" />
-				<%--<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/" title="${eco:translate(jobType.name)}">${eco:translate(jobType.name)}</a>--%>
-			</table:td>
+					<div class="col-lg-1">
+						<html:img32 src="jobtype/${jobType.icon}" />
+					</div>
 
-			</table:tr>
-		</c:if>
+					<div class="col-lg-10">
+						<admin:jobTemplate savedJobType="${jobType}" />
+					</div>
+				</div>
+			</c:if>
 
-	</c:forEach>
+		</c:forEach>
 
-</table:table>
+	</div>
+
+</div>
 
 
 
