@@ -38,10 +38,12 @@ a {
 td.column-title {
 	text-align: right;
 	width: 45%;
+	padding-right: 10px;
 }
 
 td.column-data {
 	text-align: left;
+	padding-left: 10px;
 }
 
 /*.table-striped > tbody > tr:nth-child(odd) > th {

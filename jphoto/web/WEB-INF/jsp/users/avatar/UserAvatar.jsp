@@ -27,68 +27,54 @@
 
 <tags:page pageModel="${userAvatarModel.pageModel}">
 
-	<edit:container title_t="User avatar: Avatar section title" width="400">
-		<jsp:attribute name="footer">
-			footer
-		</jsp:attribute>
-		<jsp:body>body</jsp:body>
-
-
-	</edit:container>
-
-
-
 	<eco:form action="${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
 
-		<div class="panel panel-default block-center" style="width: 400px;">
+		<edit:container title_t="User avatar: Avatar section title" width="600">
 
-			<div class="panel-heading">
-				<h3 class="panel-title">${eco:translate('User avatar: Avatar section title')}</h3>
-			</div>
+			<jsp:attribute name="footer">
 
-			<div class="panel-body">
+				<c:if test="${doesAvatarExist}">
 
-				<table:table width="800">
+					<html:submitButton id="delete_avatar" caption_t="User avatar: Delete avatar" onclick="deleteAvatar"/>
 
-					<c:if test="${doesAvatarExist}">
-						<table:tr>
-							<table:td colspan="2" cssClass="text-centered">
-								${eco:userAvatarImage(user.id, dimension.width, dimension.height, '', '', '')}
-							</table:td>
-						</table:tr>
-					</c:if>
+					<script type="text/javascript">
+						function deleteAvatar() {
+							if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
+								document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
+							}
+							return false;
+						}
+					</script>
 
-					<table:tredit>
-						<table:tdtext text_t="User avatar: Avatar file field"/>
+				</c:if>
 
-						<table:tddata>
-							<form:input path="userAvatarModel.avatarFile" type="file" id="${avatarFileControl}"/>
-						</table:tddata>
-					</table:tredit>
-
-					<c:if test="${doesAvatarExist}">
-						<table:tr>
-							<table:td colspan="2">
-								<a href="#" onclick="return deleteAvatar();">${eco:translate('User avatar: Delete avatar')}</a>
-								<script type="text/javascript">
-									function deleteAvatar() {
-										if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
-											document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
-										}
-										return false;
-									}
-								</script>
-							</table:td>
-						</table:tr>
-					</c:if>
-
-				</table:table>
-
-			</div>
-			<div class="panel-footer">
 				<html:submitButton id="submit_avatar" caption_t="User avatar: Save"/>
-			</div>
-		</div>
+			</jsp:attribute>
+
+			<jsp:body>
+
+				<c:if test="${doesAvatarExist}">
+					<div class="row text-center row-bottom-padding-10">
+						${eco:userAvatarImage(user.id, dimension.width, dimension.height, '', '', '')}
+					</div>
+				</c:if>
+
+				<div class="row">
+					<table width="100%">
+						<tr>
+							<td class="column-title">
+								${eco:translate('User avatar: Avatar file field')}
+							</td>
+							<td class="column-data">
+								<form:input path="userAvatarModel.avatarFile" type="file" id="${avatarFileControl}"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</jsp:body>
+
+		</edit:container>
 
 	</eco:form>
 
