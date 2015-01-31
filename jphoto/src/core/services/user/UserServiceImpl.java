@@ -136,6 +136,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean deleteAvatar( final int userId ) throws IOException {
+
+		final File userAvatarFile = userPhotoFilePathUtilsService.getUserAvatarFile( userId );
+
+		if ( userAvatarFile.exists() ) {
+			final boolean isDeleted = FileUtils.deleteQuietly( userAvatarFile );
+
+			if ( isDeleted ) {
+				cacheService.expire( CacheKey.USER_AVATAR, userId );
+				return true;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
 	public UserAvatar getUserAvatar( final int userId ) {
 		return cacheService.getEntry( CacheKey.USER_AVATAR, userId, new CacheEntryFactory<UserAvatar>() {
 			@Override

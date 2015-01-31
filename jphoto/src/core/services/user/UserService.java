@@ -32,6 +32,8 @@ public interface UserService extends BaseEntityService<User>, AllEntriesLoadable
 
 	boolean saveAvatar( final int userId, final File file ) throws IOException;
 
+	boolean deleteAvatar( final int userId ) throws IOException;
+
 	UserAvatar getUserAvatar( final int userId );
 
 	boolean setUserStatus( final int userId, final UserStatus userStatus );

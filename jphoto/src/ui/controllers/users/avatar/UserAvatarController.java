@@ -68,12 +68,7 @@ public class UserAvatarController {
 	}
 
 	@ModelAttribute( MODEL_NAME )
-	private UserAvatarModel prepareModel() {
-		return new UserAvatarModel();
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String showAvatar( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( MODEL_NAME ) UserAvatarModel model ) {
+	private UserAvatarModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
 
 		securityService.assertUserExists( _userId );
 
@@ -83,9 +78,20 @@ public class UserAvatarController {
 
 		securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), user );
 
-		model.setUser( user );
+		final UserAvatarModel model = new UserAvatarModel();
 
-		final File userAvatarFile = userPhotoFilePathUtilsService.getUserAvatarFile( userId );
+		model.setUser( user );
+		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarBreadcrumbs( model.getUser() ) );
+		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
+
+		return model;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	public String showAvatar( final @ModelAttribute( MODEL_NAME ) UserAvatarModel model ) {
+
+
+		final File userAvatarFile = userPhotoFilePathUtilsService.getUserAvatarFile( model.getUser().getId() );
 		if ( userAvatarFile.exists() ) {
 			model.setCurrentAvatarFile( userAvatarFile );
 		}
@@ -98,26 +104,15 @@ public class UserAvatarController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/" )
-	public String uploadAvatar( final @PathVariable( "userId" ) String _userId, @Valid final @ModelAttribute( MODEL_NAME ) UserAvatarModel model, final BindingResult result ) {
-
-		securityService.assertUserExists( _userId );
-
-		final int userId = NumberUtils.convertToInt( _userId );
-
-		final User user = userService.load( userId );
-		securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), user );
-
-		model.setUser( user );
+	public String uploadAvatar( @Valid final @ModelAttribute( MODEL_NAME ) UserAvatarModel model, final BindingResult result ) {
 
 		model.setBindingResult( result );
-
-		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarBreadcrumbs( model.getUser() ) );
-
-		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 
 		if ( result.hasErrors() ) {
 			return VIEW;
 		}
+
+		final int userId = model.getUser().getId();
 
 		final MultipartFile multipartFile = model.getAvatarFile();
 
@@ -127,7 +122,7 @@ public class UserAvatarController {
 			multipartFile.transferTo( tmpAvatarFile );
 
 			userService.saveAvatar( userId, tmpAvatarFile );
-		} catch ( IOException e ) {
+		} catch ( final IOException e ) {
 			final Language language = EnvironmentContext.getLanguage();
 			result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Can not copy file", language ) );
 			log.error( e );
@@ -141,14 +136,14 @@ public class UserAvatarController {
 
 		securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), model.getUser() );
 
-		final File userAvatarFile = userPhotoFilePathUtilsService.getUserAvatarFile( userId );
-
-		if ( userAvatarFile.exists() ) {
-			final boolean isDeleted = org.apache.commons.io.FileUtils.deleteQuietly( userAvatarFile );
+		try {
+			final boolean isDeleted = userService.deleteAvatar( userId );
 			if ( isDeleted ) {
 				model.setAvatarFile( null );
 				model.setCurrentAvatarFile( null );
 			}
+		} catch ( final IOException e ) {
+			log.error( String.format( "Error deleting user avatar: %d", userId ), e );
 		}
 
 		return VIEW;
