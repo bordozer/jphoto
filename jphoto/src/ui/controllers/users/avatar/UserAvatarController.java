@@ -32,6 +32,7 @@ public class UserAvatarController {
 	private static final String VIEW = "users/avatar/UserAvatar";
 
 	private static final String MODEL_NAME = "userAvatarModel";
+	private static final int MAX_DIMENSION = 600;
 
 	@Autowired
 	private UserService userService;
@@ -147,7 +148,8 @@ public class UserAvatarController {
 	private Dimension getAvatarDimension( final File avatarFile ) {
 		if ( avatarFile != null ) {
 			try {
-				return imageFileUtilsService.getImageDimension( avatarFile );
+				final Dimension imageDimension = imageFileUtilsService.getImageDimension( avatarFile );
+				return imageFileUtilsService.resizePhotoImage( imageDimension, new Dimension( MAX_DIMENSION, MAX_DIMENSION ) );
 			} catch ( IOException e ) {
 				log.error( String.format( "Error reading avatar dimension: '%s'", avatarFile ) );
 			}

@@ -29,7 +29,7 @@
 
 	<eco:form action="${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
 
-		<edit:container title_t="User avatar: Avatar section title" width="600">
+		<edit:container title_t="User avatar: Avatar section title" width="700">
 
 			<jsp:attribute name="footer">
 
