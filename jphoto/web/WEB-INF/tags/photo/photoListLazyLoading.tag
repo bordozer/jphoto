@@ -30,6 +30,12 @@
 
 	<a name="${photoList.photoListId}"></a>
 
+	<div class="row">
+		<c:if test="${showPaging and totalPhotos > 0}">
+			<tags:paging showSummary="false"/>
+		</c:if>
+	</div>
+
 	<div class="panel panel-primary">
 
 		<photo:photoListHeader photoList="${photoList}" />
@@ -38,10 +44,6 @@
 
 			<c:if test="${totalPhotos == 0}">
 				${eco:translate(photoList.noPhotoText)}
-			</c:if>
-
-			<c:if test="${showPaging and totalPhotos > 0}">
-				<tags:paging showSummary="false"/>
 			</c:if>
 
 			<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
