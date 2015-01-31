@@ -8,15 +8,16 @@
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
+<%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 
 <jsp:useBean id="userCardModel" type="ui.controllers.users.card.UserCardModel" scope="request"/>
 
 <c:set var="user" value="${userCardModel.user}"/>
-<c:set var="editingUserDataIsAccessible" value="${userCardModel.editingUserDataIsAccessible}" />
+<c:set var="editingUserDataIsAccessible" value="${userCardModel.editingUserDataIsAccessible}"/>
 
 <tags:page pageModel="${userCardModel.pageModel}">
 
-	<tags:contextMenuJs />
+	<tags:contextMenuJs/>
 
 	<div class="panel">
 
@@ -32,17 +33,30 @@
 			</div>
 
 			<div class="row row-bottom-padding-10">
-				<div class="col-lg-6">
-					<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
+
+				<div class="col-lg-2">
+
+					<div class="row row-bottom-padding-10">
+						${eco:escapeHtml(user.name)}
+						<icons:userIcons user="${user}" hideIconSendPrivateMessage="true"/>
+					</div>
+
+					<div class="row text-center">
+						<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+					</div>
+
 				</div>
-				<div class="col-lg-6">
+
+				<div class="col-lg-4">
 					<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
 				</div>
+
 			</div>
 
 			<div class="row">
-				<photo:photoListsRender photoLists="${userCardModel.photoLists}" />
+				<photo:photoListsRender photoLists="${userCardModel.photoLists}"/>
 			</div>
+
 		</div>
 
 	</div>

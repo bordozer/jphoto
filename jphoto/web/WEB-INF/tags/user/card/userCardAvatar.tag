@@ -42,38 +42,32 @@
 
 <c:set var="fullAvatarDivId" value="avatar_${user.id}"/>
 
-<%--<div class="row">--%>
+<c:if test="${userHasAvatar}">
+	<c:set var="avatarTitle" value="${eco:translate('User card avatar: Click to see full size')}"/>
+	${eco:userAvatarImage(user.id, 200, 200, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
+</c:if>
 
-	<c:if test="${userHasAvatar}">
-		<c:set var="avatarTitle" value="${eco:translate('User card avatar: Click to see full size')}"/>
-		${eco:userAvatarImage(user.id, 200, 200, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
+<c:if test="${not userHasAvatar}">
+	<c:set var="noAvatar" value="noAvataBoy.png"/>
+	<c:if test="${user.gender == 'FEMALE'}">
+		<c:set var="noAvatar" value="noAvatarGirl.png"/>
 	</c:if>
 
-	<c:if test="${not userHasAvatar}">
-		<c:set var="noAvatar" value="noAvataBoy.png"/>
-		<c:if test="${user.gender == 'FEMALE'}">
-			<c:set var="noAvatar" value="noAvatarGirl.png"/>
-		</c:if>
+	<c:set var="avatarHint" value="${eco:translate('User card avatar: The member has not downloaded avatar yet...')}"/>
+	<c:set var="avatarOnClick" value="alert('${avatarHint}');"/>
+	<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
+</c:if>
 
-		<c:set var="avatarHint"
-			   value="${eco:translate('User card avatar: The member has not downloaded avatar yet...')}"/>
-		<c:set var="avatarOnClick" value="alert('${avatarHint}');"/>
-		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}"
-				  alt="${avatarHint}"/>
-	</c:if>
-
-	<%-- TODO: move this link to the user's context menu --%>
-	<c:if test="${isEditable}">
-		<div style="text-align: center; width: 200px; padding-top: 10px;">
-			<c:set var="avatarHint" value="${eco:translate('User card: Change avatar')}"/>
-			<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
-		</div>
-	</c:if>
-<%--</div>--%>
+<%-- TODO: move this link to the user's context menu --%>
+<c:if test="${isEditable}">
+	<br />
+	<br />
+	<c:set var="avatarHint" value="${eco:translate('User card: Change avatar')}"/>
+	<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
+</c:if>
 
 <div id="${fullAvatarDivId}" style="display: none;">
-	<img src="${userAvatarFileUrl}" alt="${eco:escapeHtml(user.name)}" width="${dimension.width}"
-		 height="${dimension.height}" onclick="closeMessageBox( '${fullAvatarDivId}' )">
+	<img src="${userAvatarFileUrl}" alt="${eco:escapeHtml(user.name)}" width="${dimension.width}" height="${dimension.height}" onclick="closeMessageBox( '${fullAvatarDivId}' )">
 </div>
 
 <script type="text/javascript">

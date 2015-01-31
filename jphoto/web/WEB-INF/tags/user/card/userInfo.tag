@@ -50,7 +50,6 @@
 		<table:td>
 			${eco:escapeHtml(user.name)}
 			<icons:userIcons user="${user}" hideIconSendPrivateMessage="true"/>
-			<%--<tags:entryMenu entryMenu="${entryMenu}" />--%>
 			<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>"/>
 		</table:td>
 	</table:trinfo>
