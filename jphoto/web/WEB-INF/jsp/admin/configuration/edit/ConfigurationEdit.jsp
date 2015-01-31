@@ -90,7 +90,8 @@
 							</c:if>
 							<c:set var="oldConfigurationTab" value="${configurationKey.tab}"/>
 
-							<table:tr>
+							<table:tr cssClass="${isConfigurationMissedInDB ? 'danger' : ( not gotFromDefaultSystemConfiguration ? 'warning' : '')}">
+
 								<table:td width="20">
 									<c:if test="${not gotFromDefaultSystemConfiguration}">
 										<a href="#" onclick="resetValueToDefault( ${configurationKey.id} );">
@@ -113,14 +114,14 @@
 								</table:tdunderlined>
 
 								<table:tdunderlined>
-									<c:set var="additionalCss" value=""/>
+									<%--<c:set var="additionalCss" value=""/>
 									<c:if test="${not gotFromDefaultSystemConfiguration}">
 										<c:set var="additionalCss" value="notFromDefaultSystemConfiguration"/>
 									</c:if>
 									<c:if test="${isConfigurationMissedInDB}">
 										<c:set var="additionalCss" value="${additionalCss} configurationMissedInDB"/>
-									</c:if>
-									<span title="${configurationKey.id}: ${configurationKey}<c:if test="${isConfigurationMissedInDB}">. ${eco:translate('The key is not stored in db. The default value is used.')}</c:if>" class="${additionalCss}">
+									</c:if>--%>
+									<span title="${configurationKey.id}: ${configurationKey}<c:if test="${isConfigurationMissedInDB}">. ${eco:translate('The key is not stored in db. The default value is used.')}</c:if>">
 										${eco:translate(configurationKey.description)}
 									</span>
 								</table:tdunderlined>

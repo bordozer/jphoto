@@ -73,7 +73,7 @@
 							<c:set var="isConfigurationMissedInDB" value="${configuration.missedInDB}"/>
 
 							<c:if test="${configurationKey.tab == configurationTab}">
-								<table:tr>
+								<table:tr cssClass="${isConfigurationMissedInDB ? 'danger' : ( not gotFromDefaultSystemConfiguration ? 'warning' : '')}">
 									<table:tdunderlined>
 										<c:if test="${not gotFromDefaultSystemConfiguration}">
 											<html:img id="conf_${configurationKey.id}" src="edited16.png" width="16" height="16" alt="${eco:translate('Overrides value of default system configuration.')}" />
@@ -93,14 +93,7 @@
 										<span title="${eco:translate1('Configuration key ID: #$1', configurationKey.id)}">${configurationKey.id}</span>
 									</table:tdunderlined>
 
-									<c:set var="css" value=""/>
-									<c:if test="${not gotFromDefaultSystemConfiguration}">
-										<c:set var="css" value="changedConfigurationValue"/>
-									</c:if>
-									<c:if test="${isConfigurationMissedInDB}">
-										<c:set var="css" value="${css} configurationMissedInDB"/>
-									</c:if>
-									<table:tdunderlined cssClass="${css}">
+									<table:tdunderlined>
 										<span title="${configurationKey.id}: ${configurationKey}">${eco:translate(configurationKey.description)}
 									</table:tdunderlined>
 
