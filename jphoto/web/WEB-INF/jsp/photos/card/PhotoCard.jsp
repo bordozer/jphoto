@@ -111,7 +111,7 @@
 				</div>
 			</c:if>
 
-			<div class="row">
+			<div class="panel panel-default">
 				<div class="col-lg-12" id="commentList">
 					<%-- all comments are going to be places here by JS --%>
 					<div class="${commentsEndAnchor}"></div>

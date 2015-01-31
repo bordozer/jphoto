@@ -60,136 +60,146 @@
 
 <c:set var="commentReadTime" value="${comment.readTime.time}"/>
 
-<div id="${fullCommentDivId}" class="floatleft" style="margin-bottom: 10px; ${useAnimation ? "display: none;" : ""}">
+<div id="${fullCommentDivId}" class="row" style="${useAnimation ? "display: none;" : ""}">
 
 	<c:if test="${photo.archived}">
 
-		<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}" />
+		<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}"/>
 
-		<div class="block-border" style="margin: 10px; padding: 5px;">
+		<div class="row">
 
-			<c:if test="${hasAvatar}">
-				<div style="display: inline-block; width: 90px;">
-					<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}" />
+			<div class="col-lg-12">
+				<c:if test="${hasAvatar}">
+					<div style="display: inline-block; width: 90px;">
+						<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50"
+							 alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}"/>
+					</div>
+				</c:if>
+
+				<div style="display: inline-block; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
+						${eco:formatDateTimeShort(comment.creationTime)}
+					<br/>
+						${eco:formatPhotoCommentText(comment.commentText)}
 				</div>
-			</c:if>
 
-			<div style="display: inline-block; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
-				${eco:formatDateTimeShort(comment.creationTime)}
-				<br />
-				${eco:formatPhotoCommentText(comment.commentText)}
+				<c:forEach var="childrenPommentInfo" items="${commentInfo.childrenComments}">
+					<comments:commentView commentInfo="${childrenPommentInfo}" useAnimation="${useAnimation}"/>
+				</c:forEach>
 			</div>
-
-			<c:forEach var="childrenPommentInfo" items="${commentInfo.childrenComments}">
-				<comments:commentView commentInfo="${childrenPommentInfo}" useAnimation="${useAnimation}" />
-			</c:forEach>
 		</div>
 
 	</c:if>
 
-<c:if test="${not photo.archived}">
+	<c:if test="${not photo.archived}">
 
-	<div class="floatleft photoCommentContainerInner block-border">
+		<div class="panel panel-default">
 
-		<div class="floatleft block-background">
+				<%--<div class="col-lg-12">--%>
 
-			&nbsp;#${commentId} /&nbsp;
+			<div class="panel-heading"> <%-- header --%>
 
-			<a name="${commentStartAnchor}${commentId}"></a>
+				<h3 class="panel-title">
 
-			<c:if test="${not isCommentOfPhotoAuthor}">
-				<c:if test="${commentReadTime == 0}">
-					<c:if test="${isThisPhotoOfCurrentUser}">
-						<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${eco:translate('Comment View: New comment')}" />
-					</c:if>
+					#${commentId}
 
-					<c:if test="${not isThisPhotoOfCurrentUser}">
-						<c:set var="readHint" value="${eco:translate1('Comment View: $1 has not read this comment yet', eco:escapeHtml(photoAuthor.name))}"/>
-						<c:if test="${not showCommentAuthorData}">
-							<c:set var="readHint" value="${eco:translate('Comment View: Photo_s author has not read this comment yet')}"/>
+					<a name="${commentStartAnchor}${commentId}"></a>
+
+					<c:if test="${not isCommentOfPhotoAuthor}">
+						<c:if test="${commentReadTime == 0}">
+							<c:if test="${isThisPhotoOfCurrentUser}">
+								<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${eco:translate('Comment View: New comment')}"/>
+							</c:if>
+
+							<c:if test="${not isThisPhotoOfCurrentUser}">
+								<c:set var="readHint" value="${eco:translate1('Comment View: $1 has not read this comment yet', eco:escapeHtml(photoAuthor.name))}"/>
+								<c:if test="${not showCommentAuthorData}">
+									<c:set var="readHint" value="${eco:translate('Comment View: Photo_s author has not read this comment yet')}"/>
+								</c:if>
+								<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${readHint}"/>
+							</c:if>
 						</c:if>
-						<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${readHint}" />
+
+						<c:if test="${commentReadTime > 0}">
+							<html:img id="" src="icons16/photoCommentRead.png" width="16" height="16"
+									  alt="${eco:translate3('Comment View: $1 read this comment at $2 $3', eco:escapeHtml(photoAuthor.name), eco:formatDate(comment.readTime), eco:formatTime(comment.readTime))}"/>
+						</c:if>
 					</c:if>
-				</c:if>
 
-				<c:if test="${commentReadTime > 0}">
-					<html:img id="" src="icons16/photoCommentRead.png" width="16" height="16"
-							  alt="${eco:translate3('Comment View: $1 read this comment at $2 $3', eco:escapeHtml(photoAuthor.name), eco:formatDate(comment.readTime), eco:formatTime(comment.readTime))}" />
-				</c:if>
-			</c:if>
+					<c:if test="${showCommentAuthorData}">
+						<user:userCard user="${commentAuthor}"/>
+						<icons:favoritesUser user="${commentAuthor}" entryType="<%=FavoriteEntryType.BLACKLIST%>"/>
+					</c:if>
 
-			<c:if test="${showCommentAuthorData}">
-				<user:userCard user="${commentAuthor}"/>
-				<icons:favoritesUser user="${commentAuthor}" entryType="<%=FavoriteEntryType.BLACKLIST%>" />
-			</c:if>
-
-			<c:if test="${isCommentOfPhotoAuthor}">
-				<span title="${eco:translate('Photo info: The photo is posted anonymously')}">${anonymouslyPostedName}</span>
-				/
-				<html:img id="" src="icons16/photoCommentAuthor.png" width="16" height="16" alt="${eco:translate('Comment View: Photo_s author comment')}" />
-			</c:if>
-
-			<c:if test="${showCommentAuthorData}">
-				/ <user:userRankInGenreRenderer userRankIconContainer="${commentInfo.userRankIconContainer}"/>
-			</c:if>
-
-			/ ${eco:formatDate(comment.creationTime)} ${eco:formatTime(comment.creationTime)}
-
-			<c:if test="${not empty commentInfo and not empty commentInfo.entryMenu.entryMenuItems}">
-				/
-				<tags:contextMenu entryId="${comment.id}" entryMenuType="<%=EntryMenuType.COMMENT%>" />
-			</c:if>
-
-		</div>
-
-		<div id="${commentTextDivId}${commentId}" class="photoCommentText">
-
-			<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}" />
-
-			<c:if test="${showCommentAuthorData && hasAvatar}">
-				<div class="text-centered" style="float: left; width: 90px;">
-					<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}" />
-				</div>
-			</c:if>
-
-			<c:if test="${!showCommentAuthorData}">
-				<div class="text-centered" style="float: left; width: 90px;">
-					<html:img src="hidden_picture.png" alt="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}"  id="avatar_${comment.id}" height="100" width="100"/>
-				</div>
-			</c:if>
-
-			<div style="float: left; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
-				<div id="photoCommentText_${commentId}" style="float: left; width: 100%;">
-					${eco:formatPhotoCommentText(comment.commentText)}
-				</div>
-
-				<div style="float: left; width: 100%; padding-top: 15px; font-size: 10px;">
-					<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">
-						${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}:
-						<span title="${eco:translate1('Comment View: Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
+					<c:if test="${isCommentOfPhotoAuthor}">
+						<span title="${eco:translate('Photo info: The photo is posted anonymously')}">${anonymouslyPostedName}</span>
 						/
-						<span title="${eco:translate1('Comment View: Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
-						<c:if test="${not status.last}">
-							,
-						</c:if>
-					</c:forEach>
+						<html:img id="" src="icons16/photoCommentAuthor.png" width="16" height="16" alt="${eco:translate('Comment View: Photo_s author comment')}"/>
+					</c:if>
+
+					<c:if test="${showCommentAuthorData}">
+						/ <user:userRankInGenreRenderer userRankIconContainer="${commentInfo.userRankIconContainer}"/>
+					</c:if>
+
+					/ ${eco:formatDate(comment.creationTime)} ${eco:formatTime(comment.creationTime)}
+
+					<c:if test="${not empty commentInfo and not empty commentInfo.entryMenu.entryMenuItems}">
+						/
+						<tags:contextMenu entryId="${comment.id}" entryMenuType="<%=EntryMenuType.COMMENT%>"/>
+					</c:if>
+				</h3>
+			</div>
+				<%--</div>--%>
+
+			<div id="${commentTextDivId}${commentId}" class="panel-body">
+
+				<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}"/>
+
+				<c:if test="${showCommentAuthorData && hasAvatar}">
+					<div class="text-centered" style="float: left; width: 90px;">
+						<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50"
+							 alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}"/>
+					</div>
+				</c:if>
+
+				<c:if test="${!showCommentAuthorData}">
+					<div class="text-centered" style="float: left; width: 90px;">
+						<html:img src="hidden_picture.png" alt="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}" id="avatar_${comment.id}"
+								  height="100" width="100"/>
+					</div>
+				</c:if>
+
+				<div style="float: left; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
+					<div id="photoCommentText_${commentId}" style="float: left; width: 100%;">
+							${eco:formatPhotoCommentText(comment.commentText)}
+					</div>
+
+					<div style="float: left; width: 100%; padding-top: 15px; font-size: 10px;">
+						<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">
+							${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}:
+							<span title="${eco:translate1('Comment View: Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
+							/
+							<span title="${eco:translate1('Comment View: Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
+							<c:if test="${not status.last}">
+								,
+							</c:if>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
+
+			<c:forEach var="childrenPommentInfo" items="${commentInfo.childrenComments}">
+				<comments:commentView commentInfo="${childrenPommentInfo}" useAnimation="${useAnimation}"/>
+			</c:forEach>
+
+			<div class="${commentEndAnchor}${commentId}"></div>
 		</div>
 
-		<c:forEach var="childrenPommentInfo" items="${commentInfo.childrenComments}">
-			<comments:commentView commentInfo="${childrenPommentInfo}" useAnimation="${useAnimation}" />
-		</c:forEach>
-
-		<div class="${commentEndAnchor}${commentId}"></div>
-	</div>
-
-</c:if>
+	</c:if>
 
 </div>
 
 <script type="text/javascript">
-	require( [ 'jquery' ], function( $ ) {
+	require( [ 'jquery' ], function ( $ ) {
 		$( '#${fullCommentDivId}' ).fadeIn( 700, "linear" );
-	});
+	} );
 </script>
