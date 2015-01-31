@@ -58,7 +58,8 @@
 
 								<table:tdunderlined colspan="${colspan}">
 									<links:configurationInfo systemConfigurationId="${systemConfiguration.id}" configurationTab="${configurationTab}">
-										<h3>${eco:translate(configurationTab.name)}</h3></links:configurationInfo>
+										${eco:translate(configurationTab.name)}
+									</links:configurationInfo>
 								</table:tdunderlined>
 
 							</table:tr>

@@ -63,12 +63,12 @@
 
 					<table:tr>
 						<table:td colspan="${colspan}">
-							<h3>
+							<h4>
 								${eco:translate1('Edit configuration: $1', systemConfiguration.name)}
 								<c:if test="${systemConfiguration.defaultConfiguration}">
 									- <span style="color: red">${eco:translate('Configuration: default configuration sign')}</span>
 								</c:if>
-							</h3>
+							</h4>
 						</table:td>
 					</table:tr>
 
@@ -84,7 +84,9 @@
 							<c:if test="${oldConfigurationTab != configurationKey.tab}">
 								<table:tr>
 									<table:td colspan="${colspan}">
-										<a href="#" onclick="submitConfigurationForm( '${configurationKey.tab.key}' ); return false;"><h3>${eco:translate(configurationKey.tab.name)}</h3>
+										<a href="#" onclick="submitConfigurationForm( '${configurationKey.tab.key}' ); return false;">
+											<h4>${eco:translate(configurationKey.tab.name)}</h4>
+										</a>
 									</table:td>
 								</table:tr>
 							</c:if>

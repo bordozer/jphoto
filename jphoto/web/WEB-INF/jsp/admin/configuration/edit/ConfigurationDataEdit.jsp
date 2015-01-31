@@ -37,12 +37,12 @@
 
 					<table:tr>
 						<table:td colspan="4">
-							<h3>
+							<h4>
 								${eco:translate1('Edit configuration: $1', systemConfiguration.name)}
 								<c:if test="${systemConfiguration.defaultConfiguration}">
 									- <span style="color: red">${eco:translate('default')}</span>
 								</c:if>
-							</h3>
+							</h4>
 						</table:td>
 					</table:tr>
 
