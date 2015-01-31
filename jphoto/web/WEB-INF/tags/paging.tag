@@ -32,7 +32,7 @@
 		</c:if>
 	</div>
 
-	<c:if test="${totalPages > pagingModel.itemsOnPage}">
+	<c:if test="${pagingModel.totalItems > pagingModel.itemsOnPage}">
 		<div class="col-lg-8">
 			<ul class="pagination">
 				<c:forEach var="pageItem" items="${pageItems}">
