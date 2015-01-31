@@ -115,6 +115,7 @@
 			<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 
 				<c:set var="isSelectedTab" value="${jobTypeIdFilter == savedJobType.id}" />
+				<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
 
 				<li class="${isSelectedTab ? "active" : ""}">
 					<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
