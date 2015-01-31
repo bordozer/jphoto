@@ -100,52 +100,55 @@
 
 				<h3 class="panel-title">
 
-					#${commentId}
+					<div class="col-lg-2" style="width: 130px;">
+						<c:if test="${not empty commentInfo and not empty commentInfo.entryMenu.entryMenuItems}">
+							<tags:contextMenu entryId="${comment.id}" entryMenuType="<%=EntryMenuType.COMMENT%>"/>
+						</c:if>
 
-					<a name="${commentStartAnchor}${commentId}"></a>
+						#${commentId}
+					</div>
 
-					<c:if test="${not isCommentOfPhotoAuthor}">
-						<c:if test="${commentReadTime == 0}">
-							<c:if test="${isThisPhotoOfCurrentUser}">
-								<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${eco:translate('Comment View: New comment')}"/>
-							</c:if>
+					<div class="col-lg-2">
+						<a name="${commentStartAnchor}${commentId}"></a>
 
-							<c:if test="${not isThisPhotoOfCurrentUser}">
-								<c:set var="readHint" value="${eco:translate1('Comment View: $1 has not read this comment yet', eco:escapeHtml(photoAuthor.name))}"/>
-								<c:if test="${not showCommentAuthorData}">
-									<c:set var="readHint" value="${eco:translate('Comment View: Photo_s author has not read this comment yet')}"/>
+						<c:if test="${not isCommentOfPhotoAuthor}">
+							<c:if test="${commentReadTime == 0}">
+								<c:if test="${isThisPhotoOfCurrentUser}">
+									<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${eco:translate('Comment View: New comment')}"/>
 								</c:if>
-								<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${readHint}"/>
+
+								<c:if test="${not isThisPhotoOfCurrentUser}">
+									<c:set var="readHint" value="${eco:translate1('Comment View: $1 has not read this comment yet', eco:escapeHtml(photoAuthor.name))}"/>
+									<c:if test="${not showCommentAuthorData}">
+										<c:set var="readHint" value="${eco:translate('Comment View: Photo_s author has not read this comment yet')}"/>
+									</c:if>
+									<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${readHint}"/>
+								</c:if>
+							</c:if>
+
+							<c:if test="${commentReadTime > 0}">
+								<html:img id="" src="icons16/photoCommentRead.png" width="16" height="16"
+										  alt="${eco:translate3('Comment View: $1 read this comment at $2 $3', eco:escapeHtml(photoAuthor.name), eco:formatDate(comment.readTime), eco:formatTime(comment.readTime))}"/>
 							</c:if>
 						</c:if>
 
-						<c:if test="${commentReadTime > 0}">
-							<html:img id="" src="icons16/photoCommentRead.png" width="16" height="16"
-									  alt="${eco:translate3('Comment View: $1 read this comment at $2 $3', eco:escapeHtml(photoAuthor.name), eco:formatDate(comment.readTime), eco:formatTime(comment.readTime))}"/>
+						<c:if test="${showCommentAuthorData}">
+							<user:userCard user="${commentAuthor}"/>
+							<icons:favoritesUser user="${commentAuthor}" entryType="<%=FavoriteEntryType.BLACKLIST%>"/>
+							<user:userRankInGenreRenderer userRankIconContainer="${commentInfo.userRankIconContainer}"/>
 						</c:if>
-					</c:if>
-
-					<c:if test="${showCommentAuthorData}">
-						<user:userCard user="${commentAuthor}"/>
-						<icons:favoritesUser user="${commentAuthor}" entryType="<%=FavoriteEntryType.BLACKLIST%>"/>
-					</c:if>
+					</div>
 
 					<c:if test="${isCommentOfPhotoAuthor}">
-						<span title="${eco:translate('Photo info: The photo is posted anonymously')}">${anonymouslyPostedName}</span>
-						/
-						<html:img id="" src="icons16/photoCommentAuthor.png" width="16" height="16" alt="${eco:translate('Comment View: Photo_s author comment')}"/>
+						<div class="col-lg-2">
+							<span title="${eco:translate('Photo info: The photo is posted anonymously')}">${anonymouslyPostedName}</span>
+							<html:img id="" src="icons16/photoCommentAuthor.png" width="16" height="16" alt="${eco:translate('Comment View: Photo_s author comment')}"/>
+						</div>
 					</c:if>
 
-					<c:if test="${showCommentAuthorData}">
-						/ <user:userRankInGenreRenderer userRankIconContainer="${commentInfo.userRankIconContainer}"/>
-					</c:if>
-
-					/ ${eco:formatDate(comment.creationTime)} ${eco:formatTime(comment.creationTime)}
-
-					<c:if test="${not empty commentInfo and not empty commentInfo.entryMenu.entryMenuItems}">
-						/
-						<tags:contextMenu entryId="${comment.id}" entryMenuType="<%=EntryMenuType.COMMENT%>"/>
-					</c:if>
+					<%--<div class="col-lg-2">--%>
+						${eco:formatDate(comment.creationTime)} ${eco:formatTime(comment.creationTime)}
+					<%--</div>--%>
 				</h3>
 			</div>
 				<%--</div>--%>
