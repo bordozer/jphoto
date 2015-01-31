@@ -33,22 +33,29 @@
 
 			<jsp:attribute name="footer">
 
+				<html:button caption_t="User avatar: Save" onclick="saveAvatar();"/>
+
 				<c:if test="${doesAvatarExist}">
-
-					<html:submitButton id="delete_avatar" caption_t="User avatar: Delete avatar" onclick="deleteAvatar"/>
-
-					<script type="text/javascript">
-						function deleteAvatar() {
-							if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
-								document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
-							}
-							return false;
-						}
-					</script>
-
+					<html:button caption_t="User avatar: Delete avatar" onclick="deleteAvatar();"/>
 				</c:if>
 
-				<html:submitButton id="submit_avatar" caption_t="User avatar: Save"/>
+				<script type="text/javascript">
+					function saveAvatar() {
+						var formName = $( '#FormName' );
+						formName.attr( 'action', '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/' );
+						formName.submit();
+					}
+
+					function deleteAvatar() {
+						if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
+							var formName = $( '#FormName' );
+							formName.attr( 'action', '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/' );
+							formName.submit();
+						}
+						return false;
+					}
+				</script>
+
 			</jsp:attribute>
 
 			<jsp:body>

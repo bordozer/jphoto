@@ -107,6 +107,7 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	@Override
 	public Dimension resizePhotoFileToDimensionAndReturnResultDimension( final File photoFile ) throws IOException {
 		final Dimension originalDimension = getImageDimension( photoFile );
+
 		return resizePhotoImage( originalDimension );
 	}
 

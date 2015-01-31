@@ -136,7 +136,7 @@ public class UserAvatarController {
 		return String.format( "redirect:%s", urlUtilsService.getEditUserAvatarLink( userId ) );
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/delete/" )
+	@RequestMapping( method = RequestMethod.POST, value = "/delete/" )
 	public String deleteAvatar( final @PathVariable( "userId" ) int userId, final @ModelAttribute( MODEL_NAME ) UserAvatarModel model ) {
 
 		securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), model.getUser() );
@@ -162,6 +162,6 @@ public class UserAvatarController {
 				log.error( String.format( "Error reading avatar dimension: '%s'", avatarFile ) );
 			}
 		}
-		return new Dimension( 1, 1 );
+		return null; //new Dimension( 1, 1 );
 	}
 }
