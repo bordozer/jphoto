@@ -566,6 +566,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE ) ).andReturn( testData.confKeyPhotoListShowUserRankInGenre ).anyTimes();
 		EasyMock.expect( configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME ) ).andReturn( ANONYMOUS_USER_NAME ).anyTimes();
 		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS ) ).andReturn( 2 ).anyTimes();
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER ) ).andReturn( true ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
