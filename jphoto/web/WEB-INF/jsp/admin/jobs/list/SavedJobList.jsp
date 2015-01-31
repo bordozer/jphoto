@@ -21,11 +21,8 @@
 						 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
 						 activeJobs="${savedJobListModel.activeJobs}" />
 
-	<div style="width: 95%; float: left; height: 100%; margin: 10px;">
-
-		<js:confirmAction />
-
-		<div style="width: 95%; float: left; height: 100%; margin: 10px;">
+	<div class="panel">
+		<div class="panel-body">
 
 		<js:confirmAction />
 
@@ -37,6 +34,6 @@
 					   selectedSavedJobTypeId="${savedJobListModel.savedJobType.id}"
 				/>
 
+		</div>
 	</div>
-
 </tags:page>

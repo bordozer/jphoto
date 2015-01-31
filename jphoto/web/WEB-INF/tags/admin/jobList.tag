@@ -19,29 +19,20 @@
 <c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>" />
 <c:set var="colspan" value="6" />
 
-<style type="text/css">
-	.selectedJobType {
+<ul class="nav nav-tabs">
+	<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 
-	}
-</style>
+		<c:set var="isSelectedTab" value="${selectedSavedJobTypeId == savedJobType.id}" />
+		<li class="${isSelectedTab ? "active" : ""}">
+			<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
+				<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}" />
+			</a>
+		</li>
 
-<table:table width="90%" border="0">
+	</c:forEach>
+</ul>
 
-	<table:tr>
-		<table:tdunderlined colspan="${colspan}" cssClass="text-centered">
-			<c:forEach var="savedJobType" items="${savedJobTypeValues}">
-
-				<c:set var="cssClass" value=""/>
-				<c:if test="${selectedSavedJobTypeId == savedJobType.id}">
-					<c:set var="cssClass" value="block-border block-background block-shadow"/>
-				</c:if>
-
-				<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
-					<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}" />
-				</a> &nbsp;&nbsp;&nbsp;&nbsp;
-			</c:forEach>
-		</table:tdunderlined>
-	</table:tr>
+<table:table border="0">
 
 	<c:forEach var="savedJob" items="${savedJobs}">
 
@@ -109,8 +100,6 @@
 			<table:td cssClass="jobInactive" width="400">
 				${job.jobParametersDescription}
 			</table:td>
-
-			<table:separator colspan="${colspan}" />
 
 		</table:tr>
 
