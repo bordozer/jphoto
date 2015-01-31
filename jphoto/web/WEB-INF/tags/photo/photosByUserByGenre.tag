@@ -26,7 +26,7 @@
 		<c:set var="total" value="${total + userPhotosByGenre.photosQty}" />
 	</c:forEach>
 
-	<div style="float: left; width: 100%; text-align: center;">
+	<div class="row text-center">
 
 		<div class="user-photos"><links:userPhotos user="${user}" /> ( ${total} )</div> ${separator}
 
@@ -35,7 +35,9 @@
 			<c:set var="genre" value="${userPhotosByGenre.genre}" />
 			<c:set var="photosQty" value="${userPhotosByGenre.photosQty}" />
 
-			<div class="user-photos"><links:photosByUserByGenre user="${user}" genre="${genre}"/> ( ${photosQty} )</div>
+			<div class="user-photos">
+				<links:photosByUserByGenre user="${user}" genre="${genre}"/> ( ${photosQty} )
+			</div>
 
 			<c:if test="${not status.last}">
 				${separator}
