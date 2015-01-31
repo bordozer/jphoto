@@ -58,69 +58,76 @@
 <c:set var="selectedIconCss" value="block-border block-background block-shadow"/>
 <c:set var="colspan" value="8"/>
 
-<div class="row">
+<div class="row row-bottom-padding-10">
 
-	<ul class="nav nav-tabs">
+	<div class="col-lg-12">
 
-		<c:set var="isSelectedTab" value="${jobExecutionStatusIdFilter == 0}" />
+		<ul class="nav nav-tabs">
 
-		<li class="${isSelectedTab ? "active" : ""}">
-			<a href="${eco:baseAdminUrl()}/jobs/done/${jobTypeIdUrlFilter}">
-				<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('JobExecutionHistory: Reset filter by execution status')}"/>
-			</a>
-		</li>
-
-		<c:forEach var="jobExecutionStatus" items="${jobExecutionStatusValues}">
-
-			<c:set var="isSelectedTab" value="${jobExecutionStatusIdFilter == jobExecutionStatus.id}" />
+			<c:set var="isSelectedTab" value="${jobExecutionStatusIdFilter == 0}" />
 
 			<li class="${isSelectedTab ? "active" : ""}">
-				<a href="${eco:baseAdminUrl()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
-					<c:set var="jobExecutionStatusNameTranslated" value="${eco:translate(jobExecutionStatus.name)}"/>
-					<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate1('JobExecutionHistory: Filter by job status: $1', jobExecutionStatusNameTranslated)}"/>
+				<a href="${eco:baseAdminUrl()}/jobs/done/${jobTypeIdUrlFilter}">
+					<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('JobExecutionHistory: Reset filter by execution status')}"/>
 				</a>
 			</li>
 
-		</c:forEach>
+			<c:forEach var="jobExecutionStatus" items="${jobExecutionStatusValues}">
 
-	</ul>
+				<c:set var="isSelectedTab" value="${jobExecutionStatusIdFilter == jobExecutionStatus.id}" />
+
+				<li class="${isSelectedTab ? "active" : ""}">
+					<a href="${eco:baseAdminUrl()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
+						<c:set var="jobExecutionStatusNameTranslated" value="${eco:translate(jobExecutionStatus.name)}"/>
+						<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate1('JobExecutionHistory: Filter by job status: $1', jobExecutionStatusNameTranslated)}"/>
+					</a>
+				</li>
+
+			</c:forEach>
+
+		</ul>
+	</div>
 
 </div>
 
-<div class="row">
+<div class="row row-bottom-padding-10">
 
-	<ul class="nav nav-tabs">
+	<div class="col-lg-12">
 
-		<%--<div class="jobHistoryButton wdth">&nbsp;</div>
-		<div class="jobHistoryButton wdth">
-			<a href="${eco:baseAdminUrl()}/jobs/done/">
-				<html:img32 src="jobExecutionStatus/allEntries.png" alt="${eco:translate('JobExecutionHistory: Reset all filters')}"/>
-			</a>
-		</div>
-		<div class="jobHistoryButton wdth">&nbsp;</div>--%>
+		<ul class="nav nav-tabs">
 
-		<c:set var="isSelectedTab" value="${jobTypeIdFilter == 0}" />
+			<%--<div class="jobHistoryButton wdth">&nbsp;</div>
+			<div class="jobHistoryButton wdth">
+				<a href="${eco:baseAdminUrl()}/jobs/done/">
+					<html:img32 src="jobExecutionStatus/allEntries.png" alt="${eco:translate('JobExecutionHistory: Reset all filters')}"/>
+				</a>
+			</div>
+			<div class="jobHistoryButton wdth">&nbsp;</div>--%>
 
-		<li class="${isSelectedTab ? "active" : ""}">
-			<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}">
-				<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('JobExecutionHistory: Reset filter by job type')}"/>
-			</a>
-		</li>
-
-		<c:forEach var="savedJobType" items="${savedJobTypeValues}">
-
-			<c:set var="isSelectedTab" value="${jobTypeIdFilter == savedJobType.id}" />
+			<c:set var="isSelectedTab" value="${jobTypeIdFilter == 0}" />
 
 			<li class="${isSelectedTab ? "active" : ""}">
-				<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
-				<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('JobExecutionHistory: Filter by job type: $1', savedJobTypeNameTranslated)}">
-					<html:img32 src="jobtype/${savedJobType.icon}"/>
+				<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}">
+					<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('JobExecutionHistory: Reset filter by job type')}"/>
 				</a>
 			</li>
 
-		</c:forEach>
+			<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 
-	</ul>
+				<c:set var="isSelectedTab" value="${jobTypeIdFilter == savedJobType.id}" />
+
+				<li class="${isSelectedTab ? "active" : ""}">
+					<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
+					<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('JobExecutionHistory: Filter by job type: $1', savedJobTypeNameTranslated)}">
+						<html:img32 src="jobtype/${savedJobType.icon}"/>
+					</a>
+				</li>
+
+			</c:forEach>
+
+		</ul>
+
+	</div>
 
 </div>
 
@@ -130,15 +137,18 @@
 
 	<form:hidden path="formAction"/>
 
-	<div style="float: left; width: 100%; text-align: center; margin: 10px;">
+	<div class="row row-bottom-padding-10">
+		<div class="col-lg-12">
 			${eco:translate('JobExecutionHistory: Filter by scheduler task')}:
-		<form:select path="schedulerTaskId" onchange="filterBySchedulerTask();">
-			<form:option value="0" label=""/>
-			<form:options itemValue="id" itemLabel="name" items="${savedJobListModel.schedulerTasks}"/>
-		</form:select>
+			<form:select path="schedulerTaskId" onchange="filterBySchedulerTask();">
+				<form:option value="0" label=""/>
+				<form:options itemValue="id" itemLabel="name" items="${savedJobListModel.schedulerTasks}"/>
+			</form:select>
+		</div>
 	</div>
 
-	<div style="float: left; width: 100%;">
+	<div class="row">
+		<div class="col-lg-12">
 
 		<table:table width="90%">
 
@@ -316,6 +326,7 @@
 			</jsp:body>
 
 		</table:table>
+		</div>
 
 	</div>
 
