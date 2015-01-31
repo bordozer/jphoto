@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.css"/>
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.context-menu.css"/>
 ##	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.legacy.css"/>
-	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto-main-menu.css"/>
+##	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto-main-menu.css"/>
 
 	<script type="text/javascript" src="$baseUrl/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="$baseUrl/js/lib/front-end/require.js"></script>
@@ -27,6 +27,10 @@
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/toastmessage/resources/css/jquery.toastmessage.css"/>
 
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/bootstrap-3.3.2-dist/css/bootstrap.min.css"/>
+##	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/bootstrap-3.3.2-dist/css/bootstrap.min.flatly.css"/>
+##	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/bootstrap-3.3.2-dist/css/bootstrap.min.cyborg.css"/>
+##	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/bootstrap-3.3.2-dist/css/bootstrap.min.superhero.css"/>
+##	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/bootstrap-3.3.2-dist/css/bootstrap.min.united.css"/>
 
 	<style type="text/css">
 		.language {
@@ -36,7 +40,7 @@
 
 </head>
 
-<body class="base-font-color">
+<body>
 
 	<div class="container-fluid">
 
@@ -114,16 +118,16 @@
 
 		</div> #* / panel *#
 
-		<div class="panel panel-default">
+##		<div class="panel panel-default">
 
-			<div class="panel-body">
+##			<div class="panel-body">
 
-				#parse( "menu.vm" )
+				#parse( "menu.bootstrap.vm" )
 
 				#if ( $showPhotoCategoriesToolbar )
 					#parse( "genrelist.vm" )
 				#end
 
-			</div>
+##			</div>
 
-		</div>
+##		</div>
