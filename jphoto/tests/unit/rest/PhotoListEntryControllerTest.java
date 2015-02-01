@@ -338,7 +338,8 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	public void showPostedAnonymouslyIfAnonymousPeriodHasNotPassedYetTest() {
 
 		final TestData testData = new TestData( photo, accessor );
-		testData.photoAuthorNameMustBeHidden = true; // TRUE
+//		testData.photoAuthorNameMustBeHidden = true; // TRUE
+		testData.photoWithingAnonymousPeriod = true; // TRUE
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
@@ -352,6 +353,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		final TestData testData = new TestData( photo, accessor );
 		testData.photoWithingAnonymousPeriod = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
@@ -364,6 +366,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		final TestData testData = new TestData( photo, photoAuthor );
 		testData.photoWithingAnonymousPeriod = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
 //		controller.setDateUtilsService( getDateUtilsService() );
@@ -377,6 +380,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
 		testData.photoWithingAnonymousPeriod = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
@@ -503,6 +507,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final UserService userService = EasyMock.createMock( UserService.class );
 
 		EasyMock.expect( userService.load( testData.photo.getUserId() ) ).andReturn( photoAuthor ).anyTimes();
+		EasyMock.expect( userService.getAnonymousUserName( Language.EN ) ).andReturn( ANONYMOUS_USER_NAME ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( userService );
