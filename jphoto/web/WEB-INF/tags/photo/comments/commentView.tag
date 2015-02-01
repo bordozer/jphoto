@@ -3,8 +3,8 @@
 <%@ tag import="core.enums.FavoriteEntryType" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
-<%@ tag import="core.general.configuration.ConfigurationKey" %>
 <%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
+<%@ tag import="core.services.user.UserService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -38,10 +38,7 @@
 <c:set var="commentId" value="${comment.id}"/>
 <c:set var="fullCommentDivId" value="${commentDivId}${commentId}"/>
 
-<%
-	final ConfigurationService configurationService = ApplicationContextHelper.getConfigurationService();
-%>
-<c:set var="anonymouslyPostedName" value="<%=configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME )%>"/>
+<c:set var="anonymouslyPostedName" value="<%=ApplicationContextHelper.<UserService>getBean( UserService.BEAN_NAME ).getAnonymousUserName( EnvironmentContext.getLanguage() )%>"/>
 
 <%--TODO: highlight own comments--%>
 <%--<c:set var="ownPhotoStyle" value=""/>

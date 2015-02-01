@@ -292,7 +292,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 
 		if ( hideAuthorName ) {
-			return configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
+			return userService.getAnonymousUserName( language );
 		}
 
 		final User photoAuthor = userService.load( photo.getUserId() );

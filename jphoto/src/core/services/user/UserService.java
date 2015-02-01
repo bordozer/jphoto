@@ -19,6 +19,8 @@ public interface UserService extends BaseEntityService<User>, AllEntriesLoadable
 
 	String BEAN_NAME = "userService";
 
+	String ANONYMOUS_USER_NAME = "ANONYMOUS_USER_NAME";
+
 	SqlSelectResult<User> loadByIds( final SqlIdsSelectQuery selectIdsQuery );
 
 	// Transactional
@@ -49,4 +51,6 @@ public interface UserService extends BaseEntityService<User>, AllEntriesLoadable
 	User getNotLoggedTemporaryUser();
 
 	User getNotLoggedTemporaryUser( final Language language );
+
+	String getAnonymousUserName( final Language language );
 }

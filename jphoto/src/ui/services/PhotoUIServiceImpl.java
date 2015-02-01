@@ -193,7 +193,7 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 		final boolean isPhotoAuthorNameMustBeHidden = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 		photoInfo.setPhotoAuthorNameMustBeHidden( isPhotoAuthorNameMustBeHidden );
 		if ( isPhotoAuthorNameMustBeHidden ) {
-			photoInfo.setPhotoAuthorAnonymousName( configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME ) );
+			photoInfo.setPhotoAuthorAnonymousName( userService.getAnonymousUserName( accessor.getLanguage() ) );
 			photoInfo.setPhotoAnonymousPeriodExpirationTime( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) );
 		}
 

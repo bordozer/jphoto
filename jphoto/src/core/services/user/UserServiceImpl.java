@@ -12,6 +12,7 @@ import core.services.entry.ActivityStreamService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -54,6 +55,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	private final AtomicInteger sessionUserCounter = new AtomicInteger( 1 );
 
@@ -235,6 +239,11 @@ public class UserServiceImpl implements UserService {
 		user.setPhotosOnPage( configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTOS_ON_PAGE ) );
 
 		return user;
+	}
+
+	@Override
+	public String getAnonymousUserName( final Language language ) {
+		return translatorService.translate( ANONYMOUS_USER_NAME, language );
 	}
 
 	private int getSessionUserUniqueId() {

@@ -1,6 +1,5 @@
 package ui.activity;
 
-import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
@@ -27,7 +26,7 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 		final TranslatableMessage translatableMessage = new TranslatableMessage( services );
 
 		if ( services.getSecurityService().isPhotoAuthorNameMustBeHidden( activityOfPhoto, EnvironmentContext.getCurrentUser() ) ) {
-			return translatableMessage.string( services.getConfigurationService().getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME ) );
+			return translatableMessage.string( services.getUserService().getAnonymousUserName( EnvironmentContext.getLanguage() ) );
 		}
 
 		return translatableMessage.userCardLink( activityOfPhoto.getUserId() );
