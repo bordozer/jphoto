@@ -80,10 +80,6 @@
 				<div class="row margin-left-5"><%=photoAuthorRank%></div>
 			<%}%>
 
-			<% if( showAnonymousPeriodExpirationInfo ) {%>
-				<div class="row margin-left-5"><%=photoAnonymousPeriodExpirationInfo%></div>
-			<%}%>
-
 			<div class="row text-center" style="height: 20px; margin-left: 1px;">
 
 				<div class="col-lg-1">
@@ -96,7 +92,7 @@
 
 				<div class="col-lg-1">
 					<% if( showAdminFlag_Anonymous ) {%>
-						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="<%=iconTitleAnonymousPosting%>">
+						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="<%=photoAnonymousPeriodExpirationInfo%>">
 					<%}%>
 				</div>
 

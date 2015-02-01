@@ -115,7 +115,6 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		dto.setShowPhotoListPreviewFooter( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER ) );
 
 		dto.setIconTitlePhotoIsInAlbum( translatorService.translate( "Photo preview: The photo is in album admin icon", language ) );
-		dto.setIconTitleAnonymousPosting( translatorService.translate( "Photo preview: Anonymous posting admin icon", language ) );
 		dto.setIconTitleNudeContent( showAdminFlag_nude && ! canContainNudeContent ? translatorService.translate( "Photo preview: Category $1 can not contain NUDE but it does!!!", language, genreName ) : translatorService.translate( "Photo preview: The photo has nude content admin icon", language ) );
 
 		dto.setTextConfirmSettingNudeContent( translatorService.translate( "Photo preview: Set nude content property for photo?", language ) );
@@ -324,9 +323,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 	}
 
 	private void setPhotoAnonymousPeriodExpiration( final Photo photo, User accessor, final PhotoEntryDTO photoEntry, final Language language ) {
-		final boolean showAnonymousPeriodExpirationInfo = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
-		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
-		if ( showAnonymousPeriodExpirationInfo ) {
+		if ( securityService.isPhotoWithingAnonymousPeriod( photo ) ) {
 			photoEntry.setShowUserRank( false );
 			final String expirationInfo = translatorService.translate( "Photo preview: Anonymous posting till $1", language, dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
 			photoEntry.setPhotoAnonymousPeriodExpirationInfo( expirationInfo );

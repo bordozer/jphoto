@@ -1,7 +1,5 @@
 package rest.photo.list;
 
-import core.general.configuration.ConfigurationKey;
-
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +36,6 @@ public class PhotoEntryDTO {
 	private String previewsCount;
 	private String commentsCount;
 
-	private boolean showAnonymousPeriodExpirationInfo;
 	private String photoAnonymousPeriodExpirationInfo;
 
 	private boolean showAdminFlag_Anonymous;
@@ -63,7 +60,6 @@ public class PhotoEntryDTO {
 	private boolean showPhotoListPreviewFooter;
 
 	private String iconTitlePhotoIsInAlbum;
-	private String iconTitleAnonymousPosting;
 	private String iconTitleNudeContent;
 
 	private boolean photoCategoryCanContainNudeContent;
@@ -221,14 +217,6 @@ public class PhotoEntryDTO {
 
 	public void setPeriodMarksTitle( final String periodMarksTitle ) {
 		this.periodMarksTitle = periodMarksTitle;
-	}
-
-	public void setShowAnonymousPeriodExpirationInfo( final boolean showAnonymousPeriodExpirationInfo ) {
-		this.showAnonymousPeriodExpirationInfo = showAnonymousPeriodExpirationInfo;
-	}
-
-	public boolean isShowAnonymousPeriodExpirationInfo() {
-		return showAnonymousPeriodExpirationInfo;
 	}
 
 	public String getPhotoAnonymousPeriodExpirationInfo() {
@@ -397,14 +385,6 @@ public class PhotoEntryDTO {
 
 	public void setIconTitleNudeContent( final String iconTitleNudeContent ) {
 		this.iconTitleNudeContent = iconTitleNudeContent;
-	}
-
-	public String getIconTitleAnonymousPosting() {
-		return iconTitleAnonymousPosting;
-	}
-
-	public void setIconTitleAnonymousPosting( final String iconTitleAnonymousPosting ) {
-		this.iconTitleAnonymousPosting = iconTitleAnonymousPosting;
 	}
 
 	public void setPhotoCategoryCanContainNudeContent( final boolean photoCategoryCanContainNudeContent ) {
