@@ -89,11 +89,11 @@ define( ["backbone", "jquery", "underscore"
 
 			_.each( this.model.get( 'photoBookmarkIcons' ), function( photoBookmarkIcon ) {
 
-				var container = $( '<div style="display: inline-block; margin-right: 3px;"></div>' );
-				iconsContainer.append( container );
+//				var container = this.$( '.photo-icons' );
+//				iconsContainer.append( container );
 
 				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ] } );
-				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
+				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: iconsContainer } );
 
 				entryIconModel.fetch( { cache: false } );
 			});

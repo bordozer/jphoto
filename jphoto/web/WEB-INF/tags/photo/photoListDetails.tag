@@ -13,7 +13,7 @@
 	<tags:paging showSummary="false"/>
 </c:if>
 
-<div class="panel panel-primary">
+<div class="panel panel-default">
 
 	<photo:photoListHeader photoList="${photoList}"/>
 

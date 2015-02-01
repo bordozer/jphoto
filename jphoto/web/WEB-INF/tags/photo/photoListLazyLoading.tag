@@ -36,7 +36,7 @@
 		</c:if>
 	</div>
 
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
 
 		<photo:photoListHeader photoList="${photoList}" />
 
