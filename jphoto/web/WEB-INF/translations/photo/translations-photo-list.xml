@@ -453,6 +453,11 @@ z
 	</translation>
 
 	<translation>
+		<nerd>Photo preview: Category $1 contains nude content</nerd>
+		<ru><![CDATA[Раздел '$1' всегда содержит НЮ]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

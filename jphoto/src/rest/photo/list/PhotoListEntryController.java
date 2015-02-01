@@ -121,6 +121,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		dto.setTextConfirmRemovingNudeContent( translatorService.translate( "Photo preview: Remove nude content property for photo?", language ) );
 
 		dto.setTextCategoryCanNotContainNudeContent( translatorService.translate( "Photo preview: Category $1 can not contains nude content", language, genreName ) );
+		dto.setTextCategoryContainsNudeContent( translatorService.translate( "Photo preview: Category $1 contains nude content", language, genreName ) );
 
 		setNudeContent( photo, accessor, dto, language );
 

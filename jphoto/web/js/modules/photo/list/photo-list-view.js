@@ -65,6 +65,12 @@ define( ["backbone", "jquery", "underscore"
 
 			var refresh = _.bind( this.refreshPreview, this );
 
+			if ( photoCategoryContainsNudeContent ) {
+				console.log( this.model );
+				showUIMessage_Information( this.model.get( 'textCategoryContainsNudeContent' ) );
+				return;
+			}
+
 			if ( hasNude ) {
 				if ( confirm( this.model.get( 'textConfirmRemovingNudeContent' ) ) ) {
 					adminPhotoNudeContentRemove( photoId, refresh );
