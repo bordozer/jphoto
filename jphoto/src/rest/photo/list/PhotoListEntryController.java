@@ -144,7 +144,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 		final boolean userOwnThePhoto = securityService.userOwnThePhoto( accessor, photo );
 
-		dto.setShowAdminFlag_Anonymous( securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) );
+		dto.setShowAdminFlag_Anonymous( ( isSuperAdminUser || userOwnThePhoto ) && securityService.isPhotoWithingAnonymousPeriod( photo ) );
 
 		dto.setShowAdminFlag_Nude( showAdminFlag_nude );
 

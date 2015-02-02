@@ -379,22 +379,11 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void anonymousIconShouldBeShownTest() {
+	public void anonymousIconShouldBeHiddenForUsualUserTest() {
 
 		final TestData testData = new TestData( photo, accessor );
-		testData.photoAuthorNameMustBeHidden = true; // TRUE
-
-		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
-
-		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
-	}
-
-	@Test
-	public void anonymousIconShouldBeHiddenTest() {
-
-		final TestData testData = new TestData( photo, photoAuthor );
-		testData.photoAuthorNameMustBeHidden = false;
+		testData.photoWithingAnonymousPeriod = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 );
 
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
@@ -403,15 +392,29 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void anonymousIconShouldBeShownForAdminTest() {
+	public void anonymousIconShouldBeHiddenTest() {
 
-		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
-		testData.photoAuthorNameMustBeHidden = true; // TRUE
+		final TestData testData = new TestData( photo, photoAuthor );
+		testData.photoWithingAnonymousPeriod = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 );
 
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Anonymous() );
+		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
+	}
+
+	@Test
+	public void anonymousIconShouldBeShownForAdminTest() {
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+		testData.photoWithingAnonymousPeriod = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
 	}
 
 	@Test
