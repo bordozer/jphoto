@@ -370,7 +370,6 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	public void showPostedAnonymouslyIfAnonymousPeriodHasNotPassedYetTest() {
 
 		final TestData testData = new TestData( photo, accessor );
-//		testData.photoAuthorNameMustBeHidden = true; // TRUE
 		testData.photoWithingAnonymousPeriod = true; // TRUE
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 ); // Anonymous period is expiring in 15 minutes
 
@@ -381,29 +380,27 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void anonymousIconShouldBeHiddenForUsualUserTest() {
+	public void anonymousIconShouldBeShownTest() {
 
 		final TestData testData = new TestData( photo, accessor );
-		testData.photoWithingAnonymousPeriod = true; // TRUE
-		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
-
-		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
-
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Anonymous() );
-	}
-
-	@Test
-	public void anonymousIconShouldBeShownForPhotoAuthorTest() {
-
-		final TestData testData = new TestData( photo, photoAuthor );
 		testData.photoAuthorNameMustBeHidden = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-//		controller.setDateUtilsService( getDateUtilsService() );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Anonymous() );
+		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
+	}
+
+	@Test
+	public void anonymousIconShouldBeHiddenTest() {
+
+		final TestData testData = new TestData( photo, photoAuthor );
+		testData.photoAuthorNameMustBeHidden = false;
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertFalse( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
 	}
 
 	@Test
