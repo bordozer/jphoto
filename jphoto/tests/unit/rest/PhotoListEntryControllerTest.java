@@ -256,12 +256,11 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void photoAuthorRankShouldNotBeShownForRegularUserIfPhotoWithinAnonymousPeriodTest() {
+	public void photoAuthorRankShouldNotBeShownTest() {
 
 		final TestData testData = new TestData( photo, accessor );
 		testData.confKeyPhotoListShowUserRankInGenre = true; // TRUE
-		testData.photoWithingAnonymousPeriod = true;
-		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 );
+		testData.photoAuthorNameMustBeHidden = true;
 
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );

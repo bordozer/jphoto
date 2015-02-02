@@ -310,7 +310,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 			return;
 		}
 
-		if ( ! securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ) {
+		if ( securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ) {
 			return;
 		}
 
