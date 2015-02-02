@@ -29,10 +29,14 @@ define( ["backbone", "jquery", "underscore"
 
 			var hasNude = this.model.get( 'showAdminFlag_Nude' );
 			var photoCategoryCanContainNudeContent = this.model.get( 'photoCategoryCanContainNudeContent' );
+			var photoCategoryContainsNudeContent = this.model.get( 'photoCategoryContainsNudeContent' );
 
 			if ( ! photoCategoryCanContainNudeContent && hasNude ) {
-				console.log( 'invalid!' );
 				this.$( '.photo-list-entry-icon-nude-content' ).addClass( 'invalid-nude-content' );
+			}
+
+			if ( photoCategoryContainsNudeContent ) {
+				this.$( '.nude-content-icon' ).attr( 'src', Backbone.JPhoto.imageFolder() + '/icons24/admin-special-flag-always-nude-content.png' );
 			}
 		}
 
