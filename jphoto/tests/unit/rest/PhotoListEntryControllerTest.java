@@ -5,6 +5,7 @@ import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
 import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoCommentService;
@@ -35,6 +36,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 
 public class PhotoListEntryControllerTest extends AbstractTestCase {
 
@@ -395,8 +397,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	public void anonymousIconShouldBeShownForPhotoAuthorTest() {
 
 		final TestData testData = new TestData( photo, photoAuthor );
-		testData.photoWithingAnonymousPeriod = true; // TRUE
-		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
+		testData.photoAuthorNameMustBeHidden = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
 //		controller.setDateUtilsService( getDateUtilsService() );
@@ -409,8 +410,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	public void anonymousIconShouldBeShownForAdminTest() {
 
 		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
-		testData.photoWithingAnonymousPeriod = true; // TRUE
-		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
+		testData.photoAuthorNameMustBeHidden = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
@@ -480,6 +480,48 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
+	}
+
+	@Test
+	public void photoAlbumIconShouldBeHiddenEvenIfPhotoHasAlbumButPhotoAuthorNameShouldBeHiddenTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.photoAuthorNameMustBeHidden = true;
+
+		final UserPhotoAlbum album = new UserPhotoAlbum();
+		testData.userPhotoAlbums = newArrayList( album );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertFalse( THE_VALUES_ARE_NOT_EQUAL, dto.isMemberOfAlbum() );
+	}
+
+	@Test
+	public void photoAlbumIconShouldNotBeHiddenIfPhotoInAlbumForAdminTest() {
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+		testData.photoAuthorNameMustBeHidden = false;
+
+		final UserPhotoAlbum album = new UserPhotoAlbum();
+		testData.userPhotoAlbums = newArrayList( album );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isMemberOfAlbum() );
+	}
+
+	@Test
+	public void photoAlbumIconShouldNotBeVisibleEvenIfHasNoAlbumEvenForAdminTest() {
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+		testData.photoAuthorNameMustBeHidden = false;
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertFalse( THE_VALUES_ARE_NOT_EQUAL, dto.isMemberOfAlbum() );
 	}
 
 	@Test
@@ -685,7 +727,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	private UserPhotoAlbumService getUserPhotoAlbumService( final TestData testData ) {
 		final UserPhotoAlbumService userPhotoAlbumService = EasyMock.createMock( UserPhotoAlbumService.class );
 
-		EasyMock.expect( userPhotoAlbumService.loadPhotoAlbums( EasyMock.anyInt() ) ).andReturn( newArrayList() ).anyTimes();
+		EasyMock.expect( userPhotoAlbumService.loadPhotoAlbums( EasyMock.anyInt() ) ).andReturn( testData.userPhotoAlbums ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( userPhotoAlbumService );
@@ -709,6 +751,8 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		private boolean confKeyPhotoListShowUserRankInGenre;
 		private EnumSet<FavoriteEntryType> favorites;
+
+		private List<UserPhotoAlbum> userPhotoAlbums = newArrayList();
 
 		private TestData( final PhotoMock photo, final User accessor ) {
 			this.accessor = accessor;

@@ -144,7 +144,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 		final boolean userOwnThePhoto = securityService.userOwnThePhoto( accessor, photo );
 
-		dto.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
+		dto.setShowAdminFlag_Anonymous( securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) );
 
 		dto.setShowAdminFlag_Nude( showAdminFlag_nude );
 
@@ -165,11 +165,14 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		}
 		dto.setPhotoBookmarkIcons( photoBookmarkIcons );
 
-		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photo.getId() );
-		final boolean isPhotoInAlbum = !userPhotoAlbums.isEmpty();
-		dto.setMemberOfAlbum( isPhotoInAlbum );
-		if ( isPhotoInAlbum ) {
-			dto.setPhotoAlbumLink( urlUtilsService.getUserPhotoAlbumPhotosLink( photo.getUserId(), userPhotoAlbums.get( 0 ).getId() ) );
+		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
+		if ( ! hideAuthorName ) {
+			final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photo.getId() );
+			final boolean isPhotoInAlbum = ! userPhotoAlbums.isEmpty();
+			dto.setMemberOfAlbum( isPhotoInAlbum );
+			if ( isPhotoInAlbum ) {
+				dto.setPhotoAlbumLink( urlUtilsService.getUserPhotoAlbumPhotosLink( photo.getUserId(), userPhotoAlbums.get( 0 ).getId() ) );
+			}
 		}
 
 		log.debug( String.format( "Rendering photo list entry #%d: %s", photo.getId(), photo.getName() ) );
@@ -307,7 +310,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 			return;
 		}
 
-		if ( ! securityService.isSuperAdminUser( accessor ) && securityService.isPhotoWithingAnonymousPeriod( photo ) ) {
+		if ( ! securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ) {
 			return;
 		}
 
