@@ -17,15 +17,15 @@ import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
-import rest.photo.list.PhotoBookmarkIcon;
-import rest.photo.list.PhotoEntryDTO;
-import rest.photo.list.PhotoListEntryController;
 import mocks.GenreMock;
 import mocks.PhotoMock;
 import mocks.UserMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import rest.photo.list.PhotoBookmarkIcon;
+import rest.photo.list.PhotoEntryDTO;
+import rest.photo.list.PhotoListEntryController;
 import ui.services.security.SecurityUIService;
 
 import java.util.Date;
@@ -34,6 +34,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 
 public class PhotoListEntryControllerTest extends AbstractTestCase {
 
@@ -227,7 +228,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void photoAuthorRankShouldNotBeShownIdItIsSwitchedOffInSettingsTest() {
+	public void photoAuthorRankShouldNotBeShownIfItIsSwitchedOffInSettingsTest() {
 
 		final TestData testData = new TestData( photo, accessor );
 		testData.confKeyPhotoListShowUserRankInGenre = false; // FALSE
@@ -236,6 +237,35 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, null, dto.getPhotoAuthorRank() );
+		assertFalse( dto.isShowUserRank() );
+	}
+
+	@Test
+	public void photoAuthorRankShouldNotBeShownEvenForAdminIfItIsSwitchedOffInSettingsTest() {
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+		testData.confKeyPhotoListShowUserRankInGenre = false; // FALSE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, null, dto.getPhotoAuthorRank() );
+		assertFalse( dto.isShowUserRank() );
+	}
+
+	@Test
+	public void photoAuthorRankShouldNotBeShownForRegularUserIfPhotoWithinAnonymousPeriodTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.confKeyPhotoListShowUserRankInGenre = true; // TRUE
+		testData.photoWithingAnonymousPeriod = true;
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, null, dto.getPhotoAuthorRank() );
+		assertFalse( dto.isShowUserRank() );
 	}
 
 	@Test
@@ -498,10 +528,24 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		controller.setPhotoPreviewService( getPhotoPreviewService( testData ) );
 		controller.setPhotoCommentService( getPhotoCommentService( testData ) );
 		controller.setRestrictionService( getRestrictionService( testData ) );
-		controller.setUserPhotoAlbumService( getUserPhotoAlbumService() );
+		controller.setUserPhotoAlbumService( getUserPhotoAlbumService( testData ) );
+//		controller.setUserRankService( getUserRankService( testData ) );
 
 		return controller;
 	}
+
+	/*private UserRankService getUserRankService( final TestData testData ) {
+		final UserRankIconContainer iconContainer = new UserRankIconContainer( photoAuthor, genre, 2, );
+
+		final UserRankService userRankService = EasyMock.createMock( UserRankService.class );
+
+		EasyMock.expect( userRankService.getUserRankIconContainer( photoAuthor, genre ) ).andReturn( iconContainer ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( userRankService );
+
+		return userRankService;
+	}*/
 
 	private UserService getUserService( final TestData testData ) {
 		final UserService userService = EasyMock.createMock( UserService.class );
@@ -638,7 +682,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		return restrictionService;
 	}
 
-	private UserPhotoAlbumService getUserPhotoAlbumService() {
+	private UserPhotoAlbumService getUserPhotoAlbumService( final TestData testData ) {
 		final UserPhotoAlbumService userPhotoAlbumService = EasyMock.createMock( UserPhotoAlbumService.class );
 
 		EasyMock.expect( userPhotoAlbumService.loadPhotoAlbums( EasyMock.anyInt() ) ).andReturn( newArrayList() ).anyTimes();
