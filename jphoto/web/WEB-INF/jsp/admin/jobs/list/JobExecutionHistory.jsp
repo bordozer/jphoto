@@ -41,7 +41,7 @@
 					 activeJobs="${savedJobListModel.activeJobs}"/>
 
 <c:set var="jobExecutionHistoryDatas" value="${savedJobListModel.jobExecutionHistoryDatas}"/>
-<c:set var="activeJobPercentageMap" value="${savedJobListModel.activeJobPercentageMap}"/>
+<c:set var="activeJobHistoryMap" value="${savedJobListModel.activeJobHistoryMap}"/>
 
 <c:set var="jobExecutionStatusIdFilter" value="${savedJobListModel.jobExecutionStatusIdFilter}"/>
 <c:set var="jobExecutionStatusIdUrlFilter" value=""/>
@@ -253,7 +253,7 @@
 
 							<c:if test="${jobExecutionStatus == 'IN_PROGRESS'}">
 
-								<c:set var="percentage" value="${activeJobPercentageMap[jobEntryId]}"/>
+								<c:set var="percentage" value="${activeJobHistoryMap[jobEntryId].percentage}"/>
 
 								<c:set var="progressColor" value=""/>
 								<c:if test="${jobType == 'JOB_CHAIN'}">
