@@ -9,6 +9,7 @@
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="jobs" tagdir="/WEB-INF/tags/jobs" %>
+<%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
 
 <%@ attribute name="savedJobs" type="java.util.List" required="true" %>
 <%@ attribute name="notDeletableJobIds" type="java.util.Set" required="true" %>
@@ -17,7 +18,6 @@
 <%@ attribute name="jobListTab" type="admin.jobs.enums.JobListTab" required="true" %>
 <%@ attribute name="selectedSavedJobTypeId" type="java.lang.Integer" required="true" %>
 
-<c:set var="jobProgressInterval" value="<%=SavedJobListController.JOB_PROGRESS_INTERVAL%>"/>
 <c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>"/>
 <c:set var="colspan" value="6"/>
 
@@ -132,39 +132,12 @@
 
 								<c:if test="${isActiveSavedJob}">
 
-									<%--<c:forEach var="entry" items="${activeJobHistoryMap}">--%>
-
-										<c:set var="jobHistoryEntryDTO" value="${activeJobHistoryMap[savedJob.job.jobId]}" />
-										<c:set var="jobHistoryEntryId" value="${jobHistoryEntryDTO.jobHistoryEntryId}" />
-
-										<%--<c:if test="${jobHistoryEntryId == savedJob.job.jobId}">--%>
-											<c:set var="percentage" value="${jobHistoryEntryDTO.percentage}"/>
-											<div class="row">
-												<div class="col-lg-12">
-													<tags:progressSimple progressBarId="progressbar_${jobHistoryEntryId}" percentage="${percentage}" width="400" height="7"/>
-													<div class="row">
-														<div class="col-lg-12" id="progressStatusFullDescription_${jobHistoryEntryId}" style="font-size: 10px;"></div>
-													</div>
-
-													<script type="text/javascript">
-														require( [ 'jquery', '/admin/js/job-execution-progress.js' ], function( $, progress ) {
-
-															function callback() {}
-
-															var interval = ${jobProgressInterval};
-															setTimeout( function () {
-																progress.updateProgress( ${jobHistoryEntryId}, interval, callback );
-
-															}, interval );
-														});
-													</script>
-												</div>
-											</div>
-										</c:if>
-
-									<%--</c:forEach>--%>
-
-								<%--</c:if>--%>
+									<div class="row">
+										<div class="col-lg-12">
+											<admin:jobExecutionProgress jobHistoryEntryDTO="${activeJobHistoryMap[savedJob.job.jobId]}" />
+										</div>
+									</div>
+								</c:if>
 
 							</div>
 						</div>

@@ -20,7 +20,8 @@
 			<div class="row row-bottom-padding-10">
 				<admin:jobListHeader jobListTab="${savedJobListModel.jobListTab}"
 									 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
-									 activeJobs="${savedJobListModel.activeJobs}"/>
+									 activeJobs="${savedJobListModel.activeJobs}"
+						/>
 			</div>
 
 
@@ -34,7 +35,11 @@
 						<c:forEach var="savedJobTab" items="${savedJobTabs}">
 
 							<div class="col-lg-4">
-								<admin:templateJobList activeJobTypes="${activeJobTypes}" jobListTab="${savedJobTab}"/>
+								<admin:templateJobList
+										activeJobTypes="${activeJobTypes}"
+										jobListTab="${savedJobTab}"
+										activeJobHistoryMap="${savedJobListModel.activeJobHistoryMap}"
+										/>
 							</div>
 
 						</c:forEach>

@@ -9,6 +9,7 @@
 
 <%@ attribute name="activeJobTypes" type="java.util.Set" required="true" %>
 <%@ attribute name="jobListTab" type="admin.jobs.enums.JobListTab" required="true" %>
+<%@ attribute name="activeJobHistoryMap" type="java.util.Map" required="true" %>
 
 <c:set var="savedJobTypes" value="<%=SavedJobType.values()%>" />
 
@@ -25,22 +26,37 @@
 			<c:if test="${jobListTab == jobType.jobListTab}">
 
 				<c:set var="jobTypeId" value="${jobType.id}" />
-				<c:set var="isJobTypeActive" value="${eco:contains(activeJobTypes, jobTypeId)}" />
 
 				<div class="row" style="height: 45px;">
-
-					<div class="col-lg-1">
-						<c:if test="${isJobTypeActive}">
-							<html:spinningWheel16 title="${eco:translate('One or more jobs of this type is active now')}" />
-						</c:if>
-					</div>
 
 					<div class="col-lg-1">
 						<html:img32 src="jobtype/${jobType.icon}" />
 					</div>
 
 					<div class="col-lg-10">
-						<admin:jobTemplate savedJobType="${jobType}" />
+
+						<div class="row">
+							<div class="col-lg-12">
+								<admin:jobTemplate savedJobType="${jobType}" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<c:forEach var="entry" items="${activeJobHistoryMap}">
+									<c:set var="jobHistoryEntryDTO" value="${entry.value}" />
+
+									<c:if test="${jobHistoryEntryDTO.jobType == jobType}">
+										<div class="row">
+											<div class="col-lg-12">
+												<admin:jobExecutionProgress jobHistoryEntryDTO="${jobHistoryEntryDTO}" />
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</c:if>
