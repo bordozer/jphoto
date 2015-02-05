@@ -252,23 +252,7 @@
 							</c:if>
 
 							<c:if test="${jobExecutionStatus == 'IN_PROGRESS'}">
-
-								<c:set var="percentage" value="${activeJobHistoryMap[jobEntryId].percentage}"/>
-
-								<c:set var="progressColor" value=""/>
-								<c:if test="${jobType == 'JOB_CHAIN'}">
-									<c:set var="progressColor" value="#669966"/>
-								</c:if>
-
-								<tags:progressSimple progressBarId="progressbar_${jobEntryId}" percentage="${percentage}" width="200" height="7" color="${progressColor}"/>
-
-								<span id="progressStatusFullDescription_${jobEntryId}" style="font-size: 10px;"></span>
-
-								<script type="text/javascript">
-									setTimeout( function () {
-										updateProgress( ${jobExecutionHistoryEntry.id}, doNothing );
-									}, interval );
-								</script>
+								<admin:jobExecutionProgress jobHistoryEntryDTO="${activeJobHistoryMap[jobEntryId]}" />
 							</c:if>
 
 							<c:if test="${isJobFinishedWithAnyResult}">
