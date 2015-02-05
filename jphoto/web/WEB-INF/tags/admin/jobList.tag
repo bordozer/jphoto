@@ -12,7 +12,7 @@
 
 <%@ attribute name="savedJobs" type="java.util.List" required="true" %>
 <%@ attribute name="notDeletableJobIds" type="java.util.Set" required="true" %>
-<%@ attribute name="activeJobHistoryEntries" type="java.util.List" required="true" %>
+<%@ attribute name="activeJobHistoryMap" type="java.util.Map" required="true" %>
 <%@ attribute name="activeSavedJobIds" type="java.util.Set" required="true" %>
 <%@ attribute name="jobListTab" type="admin.jobs.enums.JobListTab" required="true" %>
 <%@ attribute name="selectedSavedJobTypeId" type="java.lang.Integer" required="true" %>
@@ -132,12 +132,12 @@
 
 								<c:if test="${isActiveSavedJob}">
 
-									<c:forEach var="jobHistoryEntryDTO" items="${activeJobHistoryEntries}">
+									<%--<c:forEach var="entry" items="${activeJobHistoryMap}">--%>
 
-										<%--<c:set var="jobHistoryEntryDTO" value="${entry.key}" />--%>
+										<c:set var="jobHistoryEntryDTO" value="${activeJobHistoryMap[savedJob.job.jobId]}" />
 										<c:set var="jobHistoryEntryId" value="${jobHistoryEntryDTO.jobHistoryEntryId}" />
 
-										<c:if test="${jobHistoryEntryId == savedJob.job.jobId}">
+										<%--<c:if test="${jobHistoryEntryId == savedJob.job.jobId}">--%>
 											<c:set var="percentage" value="${jobHistoryEntryDTO.percentage}"/>
 											<div class="row">
 												<div class="col-lg-12">
@@ -162,9 +162,9 @@
 											</div>
 										</c:if>
 
-									</c:forEach>
+									<%--</c:forEach>--%>
 
-								</c:if>
+								<%--</c:if>--%>
 
 							</div>
 						</div>

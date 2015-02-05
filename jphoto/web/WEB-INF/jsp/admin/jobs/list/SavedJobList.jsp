@@ -13,7 +13,7 @@
 	<c:set var="savedJobs" value="${savedJobListModel.savedJobs}"/>
 
 	<c:set var="notDeletableJobIds" value="${savedJobListModel.notDeletableJobIds}"/>
-	<c:set var="activeJobHistoryEntries" value="${savedJobListModel.activeJobHistoryEntries}"/>
+	<c:set var="activeJobHistoryMap" value="${savedJobListModel.activeJobHistoryMap}"/>
 	<c:set var="activeSavedJobIds" value="${savedJobListModel.activeSavedJobIds}"/>
 	<c:set var="jobListTab" value="${savedJobListModel.jobListTab}"/>
 
@@ -32,7 +32,7 @@
 
 			<admin:jobList savedJobs="${savedJobs}"
 						   notDeletableJobIds="${notDeletableJobIds}"
-						   activeJobHistoryEntries="${activeJobHistoryEntries}"
+						   activeJobHistoryMap="${activeJobHistoryMap}"
 						   activeSavedJobIds="${activeSavedJobIds}"
 						   jobListTab="${jobListTab}"
 						   selectedSavedJobTypeId="${savedJobListModel.savedJobType.id}"
