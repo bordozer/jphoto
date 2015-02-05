@@ -7,6 +7,7 @@ public class JobHistoryEntryDTO {
 	private int jobHistoryEntryId;
 	private SavedJobType jobType;
 	private int percentage;
+	private boolean savedJob;
 
 	public JobHistoryEntryDTO() {
 	}
@@ -39,5 +40,13 @@ public class JobHistoryEntryDTO {
 
 	public void setPercentage( final int percentage ) {
 		this.percentage = percentage;
+	}
+
+	public boolean isSavedJob() {
+		return savedJob;
+	}
+
+	public void setSavedJob( final boolean savedJob ) {
+		this.savedJob = savedJob;
 	}
 }

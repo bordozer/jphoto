@@ -300,7 +300,10 @@ public class SavedJobListController {
 		final List<JobExecutionHistoryEntry> historyEntriesOfActiveJobs = jobExecutionHistoryService.getActiveJobs();
 		for ( final JobExecutionHistoryEntry entry : historyEntriesOfActiveJobs ) {
 			final int percentage = entry.getCurrentJobStep() * 100 / entry.getTotalJobSteps();
-			activeJobHistoryEntries.put( entry.getId(), new JobHistoryEntryDTO( entry.getId(), entry.getSavedJobType(), percentage ) );
+			final JobHistoryEntryDTO dto = new JobHistoryEntryDTO( entry.getId(), entry.getSavedJobType(), percentage );
+			dto.setSavedJob( entry.getSavedJob() != null );
+
+			activeJobHistoryEntries.put( entry.getId(), dto );
 		}
 		model.setActiveJobHistoryMap( activeJobHistoryEntries );
 

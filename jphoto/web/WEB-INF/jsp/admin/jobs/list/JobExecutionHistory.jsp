@@ -1,6 +1,5 @@
 <%@ page import="admin.jobs.enums.JobExecutionStatus" %>
 <%@ page import="admin.jobs.enums.SavedJobType" %>
-<%@ page import="admin.controllers.jobs.list.SavedJobListController" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -20,21 +19,8 @@
 
 <c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>"/>
 <c:set var="savedJobTypeValuesLength" value="<%=SavedJobType.values().length%>"/>
-<c:set var="jobProgressInterval" value="<%=SavedJobListController.JOB_PROGRESS_INTERVAL%>"/>
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
-
-<script type="text/javascript">
-	var interval = ${jobProgressInterval};
-
-	function doNothing() {}
-
-	function updateProgress( jobExecutionHistoryEntryId ) {
-		require( [ 'jquery', '/admin/js/job-execution-progress.js' ], function( $, progress ) {
-			progress.updateProgress( jobExecutionHistoryEntryId, interval, doNothing );
-		});
-	}
-</script>
 
 <admin:jobListHeader jobListTab="${savedJobListModel.jobListTab}"
 					 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
