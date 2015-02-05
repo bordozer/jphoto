@@ -30,16 +30,12 @@
 
 				<div class="col-lg-12"> <%-- panel row 1 column --%>
 
-					<c:set var="counter" value="1"/>
-
 					<div class="row">
 						<c:forEach var="savedJobTab" items="${savedJobTabs}">
 
 							<div class="col-lg-4">
 								<admin:templateJobList activeJobTypes="${activeJobTypes}" jobListTab="${savedJobTab}"/>
 							</div>
-
-							<c:set var="counter" value="${counter + 1}"/>
 
 						</c:forEach>
 					</div>

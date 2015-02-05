@@ -10,30 +10,33 @@
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
 
-	<c:set var="savedJobs" value="${savedJobListModel.savedJobs}" />
+	<c:set var="savedJobs" value="${savedJobListModel.savedJobs}"/>
 
-	<c:set var="notDeletableJobIds" value="${savedJobListModel.notDeletableJobIds}" />
-	<c:set var="activeJobPercentageMap" value="${savedJobListModel.activeJobPercentageMap}" />
-	<c:set var="activeSavedJobIds" value="${savedJobListModel.activeSavedJobIds}" />
-	<c:set var="jobListTab" value="${savedJobListModel.jobListTab}" />
+	<c:set var="notDeletableJobIds" value="${savedJobListModel.notDeletableJobIds}"/>
+	<c:set var="activeJobPercentageMap" value="${savedJobListModel.activeJobPercentageMap}"/>
+	<c:set var="activeSavedJobIds" value="${savedJobListModel.activeSavedJobIds}"/>
+	<c:set var="jobListTab" value="${savedJobListModel.jobListTab}"/>
 
-	<admin:jobListHeader jobListTab="${savedJobListModel.jobListTab}"
-						 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
-						 activeJobs="${savedJobListModel.activeJobs}" />
+	<js:confirmAction/>
 
-	<div class="panel">
-		<div class="panel-body">
+	<div class="row">
+		<div class="col-lg-12">
+			<admin:jobListHeader jobListTab="${savedJobListModel.jobListTab}"
+								 tabJobInfosMap="${savedJobListModel.tabJobInfosMap}"
+								 activeJobs="${savedJobListModel.activeJobs}"/>
+		</div>
+	</div>
 
-		<js:confirmAction />
+	<div class="row">
+		<div class="col-lg-12">
 
-		<admin:jobList savedJobs="${savedJobs}"
-					   notDeletableJobIds="${notDeletableJobIds}"
-					   activeJobPercentageMap="${activeJobPercentageMap}"
-					   activeSavedJobIds="${activeSavedJobIds}"
-					   jobListTab="${jobListTab}"
-					   selectedSavedJobTypeId="${savedJobListModel.savedJobType.id}"
-				/>
-
+			<admin:jobList savedJobs="${savedJobs}"
+						   notDeletableJobIds="${notDeletableJobIds}"
+						   activeJobPercentageMap="${activeJobPercentageMap}"
+						   activeSavedJobIds="${activeSavedJobIds}"
+						   jobListTab="${jobListTab}"
+						   selectedSavedJobTypeId="${savedJobListModel.savedJobType.id}"
+					/>
 		</div>
 	</div>
 </tags:page>

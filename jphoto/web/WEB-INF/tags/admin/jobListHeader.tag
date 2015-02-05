@@ -25,7 +25,7 @@
 
 		<c:set var="isSelectedTab" value="${jobListTab == jobListTabValue}" />
 
-		<li class="${isSelectedTab ? "active" : ""}">
+		<li class="${isSelectedTab ? "active" : ""} text-center">
 
 			<c:set var="activeTabAndThereAreRunningJobs" value="${jobListTabValue == 'JOB_EXECUTION_HISTORY' and activeJobsQty > 0}" />
 
@@ -34,7 +34,7 @@
 			</c:if>
 
 			<c:set var="jobListTabValueName" value="${eco:translate(jobListTabValue.name)}"/>
-			<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/" title="${jobListTabValueName}">${jobListTabValueName} (${tabJobInfosMap[jobListTabValue].tabJobsQty})</a>
+			<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/" title="${jobListTabValueName}">${jobListTabValueName}<br/> (${tabJobInfosMap[jobListTabValue].tabJobsQty})</a>
 
 			<c:if test="${activeTabAndThereAreRunningJobs}">
 				<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/status/${activeStatusId}/" title="${eco:translate('jobListHeader: Show active jobs')}">&nbsp;${activeJobsQty}&nbsp;</a>

@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
@@ -16,93 +15,131 @@
 <%@ attribute name="jobListTab" type="admin.jobs.enums.JobListTab" required="true" %>
 <%@ attribute name="selectedSavedJobTypeId" type="java.lang.Integer" required="true" %>
 
-<c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>" />
-<c:set var="colspan" value="6" />
+<c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>"/>
+<c:set var="colspan" value="6"/>
 
-<ul class="nav nav-tabs">
-	<c:forEach var="savedJobType" items="${savedJobTypeValues}">
+<div class="row  row-bottom-padding-10">
+	<div class="col-lg-12">
+		<ul class="nav nav-tabs">
+			<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 
-		<c:set var="isSelectedTab" value="${selectedSavedJobTypeId == savedJobType.id}" />
-		<li class="${isSelectedTab ? "active" : ""}">
-			<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
-				<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}" />
-			</a>
-		</li>
-
-	</c:forEach>
-</ul>
-
-<table:table border="0">
-
-	<c:forEach var="savedJob" items="${savedJobs}">
-
-		<c:set var="savedJobId" value="${savedJob.id}" />
-
-		<c:set var="job" value="${savedJob.job}"/>
-		<c:set var="jobType" value="${job.jobType}"/>
-		<c:set var="jobTypeId" value="${jobType.id}" />
-
-		<c:set var="isActiveSavedJob" value="${eco:contains(activeSavedJobIds, savedJobId)}" />
-
-		<table:tr>
-
-			<table:tdicon>
-
-				<c:if test="${isActiveSavedJob}">
-					<html:spinningWheel16 title="${eco:translate('The job is executing')}" />
-				</c:if>
-			</table:tdicon>
-
-			<table:tdicon>
-				<c:set var="isUsedInScheduler" value="${eco:contains(notDeletableJobIds, savedJobId)}" />
-
-				<c:if test="${not isUsedInScheduler and not isActiveSavedJob}">
-					<a href="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/" title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
-						<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
+				<c:set var="isSelectedTab" value="${selectedSavedJobTypeId == savedJobType.id}"/>
+				<li class="${isSelectedTab ? "active" : ""}">
+					<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/"
+					   title="${eco:translate(savedJobType.name)}">
+						<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}"/>
 					</a>
+				</li>
+
+			</c:forEach>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+
+		<c:set var="counter" value="1"/>
+
+		<div class="row">
+
+			<c:forEach var="savedJob" items="${savedJobs}">
+
+				<c:set var="savedJobId" value="${savedJob.id}"/>
+
+				<c:set var="job" value="${savedJob.job}"/>
+				<c:set var="jobType" value="${job.jobType}"/>
+				<c:set var="jobTypeId" value="${jobType.id}"/>
+
+				<c:set var="isActiveSavedJob" value="${eco:contains(activeSavedJobIds, savedJobId)}"/>
+
+				<c:if test="${counter == 4}">
+					</div>
+					<div class="row">
+
+					<c:set var="counter" value="1"/>
 				</c:if>
 
-				<c:if test="${isUsedInScheduler or isActiveSavedJob}">
-					<icons:canNotDelete hint="${eco:translate1('Job \\\'$1\\\' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job', savedJob.name)}"/>
-				</c:if>
-			</table:tdicon>
+				<div class="col-lg-4">
 
-			<table:td width="36">
-				<html:img32 src="jobtype/${jobType.icon}" />
-			</table:td>
+					<div class="panel panel-default">
 
-			<table:td cssClass="${cssClass}">
-				<c:if test="${not isActiveSavedJob}">
-					<links:savedJobEdit savedJob="${savedJob}" />
-				</c:if>
+						<div class="panel-heading" style="height: 50px;">
 
-				<c:if test="${isActiveSavedJob}">
-					<jobs:savedJobProgress savedJob="${savedJob}" jobId="${savedJob.job.jobId}" /> <%-- TODO: .Job.jobId is 0--%>
-				</c:if>
+							<h3 class="panel-title">
 
-				<br />
-				${eco:translate(savedJob.jobType.name)}
+								<div class="col-lg-1" style="margin-right: 5px;">
+									<html:img32 src="jobtype/${jobType.icon}"/>
 
-				<c:if test="${isActiveSavedJob}">
-					<c:set var="percentage" value="${activeJobPercentageMap[jobTypeId]}" />
-					<br />
-					<tags:progressSimple progressBarId="saved_job_progressbar_${savedJobId}" percentage="${percentage}" width="200" height="7" />
-					<%--<tags:progress current="${percentage}" total="100" size="3" />--%>
-				</c:if>
+									<c:if test="${isActiveSavedJob}">
+										<html:spinningWheel16 title="${eco:translate('The job is executing')}"/>
+									</c:if>
+								</div>
 
-				<br />
-				<c:if test="${not savedJob.active}">
-					[ <span style="color: #AA0000">${eco:translate('Inactive')}</span> ]
-				</c:if>
-				<%--<tags:progress current="${100}" total="100" size="3" />--%>
-			</table:td>
+								<div class="col-lg-9">
 
-			<table:td cssClass="jobInactive" width="400">
-				${job.jobParametersDescription}
-			</table:td>
+									<div class="row">
+										<div class="col-lg-12">
+											<c:if test="${not isActiveSavedJob}">
+												<links:savedJobEdit savedJob="${savedJob}"/>
+											</c:if>
 
-		</table:tr>
+											<c:if test="${isActiveSavedJob}">
+												<jobs:savedJobProgress savedJob="${savedJob}" jobId="${savedJob.job.jobId}"/> <%-- TODO: .Job.jobId is 0--%>
+											</c:if>
+										</div>
+									</div>
 
-	</c:forEach>
+									<div class="row">
+										<div class="col-lg-12 fon">
+											<small>${eco:translate(savedJob.jobType.name)}</small>
+										</div>
+									</div>
 
-</table:table>
+								</div>
+
+								<div class="col-lg-1">
+									<c:set var="isUsedInScheduler" value="${eco:contains(notDeletableJobIds, savedJobId)}"/>
+
+									<c:if test="${not isUsedInScheduler and not isActiveSavedJob}">
+										<a href="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/"
+										   title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
+											<html:img16 src="delete16.png"
+														onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
+										</a>
+									</c:if>
+
+									<c:if test="${isUsedInScheduler or isActiveSavedJob}">
+										<icons:canNotDelete	hint="${eco:translate1('Job \\\'$1\\\' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job', savedJob.name)}"/>
+									</c:if>
+								</div>
+							</h3>
+						</div>
+
+						<div class="panel-body">
+
+							<div class="col-lg-12">
+
+								<c:if test="${isActiveSavedJob}">
+									<c:set var="percentage" value="${activeJobPercentageMap[jobTypeId]}"/>
+									<br/>
+									<tags:progressSimple progressBarId="saved_job_progressbar_${savedJobId}" percentage="${percentage}" width="200" height="7"/>
+								</c:if>
+
+								<c:if test="${not savedJob.active}">
+									[ <span style="color: #AA0000">${eco:translate('Inactive')}</span> ]
+								</c:if>
+
+								<small>${job.jobParametersDescription}</small>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<c:set var="counter" value="${counter + 1}"/>
+
+			</c:forEach>
+		</div>
+	</div>
+</div>
