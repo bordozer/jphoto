@@ -27,7 +27,7 @@
 				<c:set var="jobTypeId" value="${jobType.id}" />
 				<c:set var="isJobTypeActive" value="${eco:contains(activeJobTypes, jobTypeId)}" />
 
-				<div class="row">
+				<div class="row" style="height: 45px;">
 
 					<div class="col-lg-1">
 						<c:if test="${isJobTypeActive}">
