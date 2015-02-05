@@ -64,20 +64,19 @@
 
 				<div class="col-lg-4">
 
-					<div class="panel panel-default">
+					<div class="panel panel-${isActiveSavedJob ? 'warning' : 'info'}">
 
 						<div class="panel-heading" style="height: 50px;">
 
-							<h3 class="panel-title">
+							<div class="col-lg-1" style="margin-right: 5px;">
+								<html:img32 src="jobtype/${jobType.icon}"/>
+							</div>
 
-								<div class="col-lg-1" style="margin-right: 5px;">
-									<html:img32 src="jobtype/${jobType.icon}"/>
-								</div>
+							<div class="col-lg-9">
 
-								<div class="col-lg-9">
-
-									<div class="row">
-										<div class="col-lg-12">
+								<div class="row">
+									<div class="col-lg-12">
+											<h3 class="panel-title">
 											<c:if test="${not isActiveSavedJob}">
 												<links:savedJobEdit savedJob="${savedJob}"/>
 											</c:if>
@@ -85,32 +84,32 @@
 											<c:if test="${isActiveSavedJob}">
 												<jobs:savedJobProgress savedJob="${savedJob}" jobId="${savedJob.job.jobId}"/> <%-- TODO: .Job.jobId is 0--%>
 											</c:if>
-										</div>
+										</h3>
 									</div>
-
-									<div class="row">
-										<div class="col-lg-12 fon">
-											<small>${eco:translate(savedJob.jobType.name)}</small>
-										</div>
-									</div>
-
 								</div>
 
-								<div class="col-lg-1">
-									<c:set var="isUsedInScheduler" value="${eco:contains(notDeletableJobIds, savedJobId)}"/>
-
-									<c:if test="${not isUsedInScheduler and not isActiveSavedJob}">
-										<a href="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/"
-										   title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
-											<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
-										</a>
-									</c:if>
-
-									<c:if test="${isUsedInScheduler or isActiveSavedJob}">
-										<icons:canNotDelete	hint="${eco:translate1('Job \\\'$1\\\' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job', savedJob.name)}"/>
-									</c:if>
+								<div class="row">
+									<div class="col-lg-12 panel-title">
+										<small>${eco:translate(savedJob.jobType.name)}</small>
+									</div>
 								</div>
-							</h3>
+
+							</div>
+
+							<div class="col-lg-1">
+								<c:set var="isUsedInScheduler" value="${eco:contains(notDeletableJobIds, savedJobId)}"/>
+
+								<c:if test="${not isUsedInScheduler and not isActiveSavedJob}">
+									<a href="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/"
+									   title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
+										<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
+									</a>
+								</c:if>
+
+								<c:if test="${isUsedInScheduler or isActiveSavedJob}">
+									<icons:canNotDelete	hint="${eco:translate1('Job \\\'$1\\\' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job', savedJob.name)}"/>
+								</c:if>
+							</div>
 						</div>
 
 						<div class="panel-body">
