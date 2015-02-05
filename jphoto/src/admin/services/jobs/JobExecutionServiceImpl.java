@@ -5,7 +5,6 @@ import admin.jobs.entries.JobChainJob;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.enums.JobRunMode;
 import admin.jobs.general.GenerationMonitor;
-import admin.jobs.general.JobProgressDTO;
 import admin.jobs.general.JobStatusChangeStrategy;
 import admin.jobs.general.SavedJob;
 import core.log.LogHelper;
@@ -13,7 +12,6 @@ import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.context.EnvironmentContext;
 
 import java.util.List;
 import java.util.Map;
@@ -139,27 +137,6 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 	@Override
 	public GenerationMonitor getMonitor( final AbstractJob job ) {
 		return job.getGenerationMonitor();
-	}
-
-	@Override
-	public JobProgressDTO getJobProgressAjax( final int jobId ) {
-
-		final JobProgressDTO result = new JobProgressDTO( translatorService, EnvironmentContext.getLanguage() );
-
-		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
-		if ( historyEntry == null ) {
-			result.setJobStatusId( JobExecutionStatus.ERROR.getId() );
-			log.error( String.format( "Job with JobId='%d' not found", jobId ) );
-			return result;
-		}
-
-		result.setCurrent( historyEntry.getCurrentJobStep() );
-		result.setTotal( historyEntry.getTotalJobSteps() );
-		result.setJobStatusId( historyEntry.getJobExecutionStatus().getId() );
-		result.setJobActive( historyEntry.getJobExecutionStatus().isActive() );
-		result.setJobExecutionDuration( dateUtilsService.formatTime( historyEntry.getExecutionDuration() ) );
-
-		return result;
 	}
 
 	@Override

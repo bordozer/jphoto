@@ -1,4 +1,6 @@
 <%@ tag import="admin.jobs.enums.SavedJobType" %>
+<%@ tag import="admin.controllers.jobs.list.SavedJobListController" %>
+<%@ tag import="admin.services.jobs.JobExecutionService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -15,6 +17,7 @@
 <%@ attribute name="jobListTab" type="admin.jobs.enums.JobListTab" required="true" %>
 <%@ attribute name="selectedSavedJobTypeId" type="java.lang.Integer" required="true" %>
 
+<c:set var="jobProgressInterval" value="<%=SavedJobListController.JOB_PROGRESS_INTERVAL%>"/>
 <c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>"/>
 <c:set var="colspan" value="6"/>
 
@@ -26,7 +29,7 @@
 				<c:set var="isSelectedTab" value="${selectedSavedJobTypeId == savedJobType.id}"/>
 				<li class="${isSelectedTab ? "active" : ""}">
 					<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/">
-						<html:img32 src="jobtype/${savedJobType.icon}" alt="${eco:translate(savedJobType.name)}"/>
+						<html:img32 src="jobtype/${savedJobType.icon}" alt="${eco:translate( 'Job list: filter by task type')} '${eco:translate(savedJobType.name)}'"/>
 					</a>
 				</li>
 
@@ -69,10 +72,6 @@
 
 								<div class="col-lg-1" style="margin-right: 5px;">
 									<html:img32 src="jobtype/${jobType.icon}"/>
-
-									<c:if test="${isActiveSavedJob}">
-										<html:spinningWheel16 title="${eco:translate('The job is executing')}"/>
-									</c:if>
 								</div>
 
 								<div class="col-lg-9">
@@ -103,8 +102,7 @@
 									<c:if test="${not isUsedInScheduler and not isActiveSavedJob}">
 										<a href="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/"
 										   title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
-											<html:img16 src="delete16.png"
-														onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
+											<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
 										</a>
 									</c:if>
 
@@ -119,17 +117,56 @@
 
 							<div class="col-lg-12">
 
+								<div class="row">
+
+									<div class="col-lg-12">
+										<small>${job.jobParametersDescription}</small>
+									</div>
+
+									<c:if test="${not savedJob.active}">
+										<div class="col-lg-12">
+											<span style="color: #AA0000">${eco:translate('Inactive')}</span>
+										</div>
+									</c:if>
+
+								</div>
+
 								<c:if test="${isActiveSavedJob}">
-									<c:set var="percentage" value="${activeJobPercentageMap[jobTypeId]}"/>
-									<br/>
-									<tags:progressSimple progressBarId="saved_job_progressbar_${savedJobId}" percentage="${percentage}" width="200" height="7"/>
+
+									<c:forEach var="entry" items="${activeJobPercentageMap}">
+
+										<c:set var="activeJobId" value="${entry.key}" />
+										<c:set var="activeJobPercentage" value="${entry.value}" />
+
+										<c:if test="${activeJobId == savedJob.job.jobId}">
+											<c:set var="percentage" value="${activeJobPercentageMap[activeJobId]}"/>
+											<div class="row">
+												<div class="col-lg-12">
+													<tags:progressSimple progressBarId="progressbar_${savedJob.job.jobId}" percentage="${percentage}" width="400" height="7"/>
+													<div class="row">
+														<div class="col-lg-12" id="progressStatusFullDescription_${savedJob.job.jobId}" style="font-size: 10px;"></div>
+													</div>
+
+													<script type="text/javascript">
+														require( [ 'jquery', '/admin/js/job-execution-progress.js' ], function( $, progress ) {
+
+															function callback() {}
+
+															var interval = ${jobProgressInterval};
+															setTimeout( function () {
+																progress.updateProgress( ${savedJob.job.jobId}, interval, callback );
+
+															}, interval );
+														});
+													</script>
+												</div>
+											</div>
+										</c:if>
+
+									</c:forEach>
+
 								</c:if>
 
-								<c:if test="${not savedJob.active}">
-									[ <span style="color: #AA0000">${eco:translate('Inactive')}</span> ]
-								</c:if>
-
-								<small>${job.jobParametersDescription}</small>
 							</div>
 						</div>
 					</div>

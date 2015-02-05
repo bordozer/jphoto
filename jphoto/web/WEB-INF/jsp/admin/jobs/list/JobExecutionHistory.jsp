@@ -31,7 +31,7 @@
 
 	function updateProgress( jobExecutionHistoryEntryId ) {
 		require( [ 'jquery', '/admin/js/job-execution-progress.js' ], function( $, progress ) {
-			progress.updateProgress( jobExecutionHistoryEntryId, interval, jsonRPC, doNothing );
+			progress.updateProgress( jobExecutionHistoryEntryId, interval, doNothing );
 		});
 	}
 </script>

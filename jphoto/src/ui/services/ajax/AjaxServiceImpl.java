@@ -5,6 +5,10 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePho
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
+import admin.jobs.enums.JobExecutionStatus;
+import admin.jobs.general.JobProgressDTO;
+import admin.services.jobs.JobExecutionHistoryEntry;
+import admin.services.jobs.JobExecutionHistoryService;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.enums.RestrictionType;
@@ -98,6 +102,9 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private RestrictionService restrictionService;
+
+	@Autowired
+	private JobExecutionHistoryService jobExecutionHistoryService;
 
 	private final LogHelper log = new LogHelper( AjaxServiceImpl.class );
 
@@ -495,6 +502,29 @@ public class AjaxServiceImpl implements AjaxService {
 		}
 
 		return new JSONObject( result );
+	}
+
+
+
+	@Override
+	public JobProgressDTO getJobProgressAjax( final int jobId ) {
+
+		final JobProgressDTO result = new JobProgressDTO( translatorService, EnvironmentContext.getLanguage() );
+
+		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
+		if ( historyEntry == null ) {
+			result.setJobStatusId( JobExecutionStatus.ERROR.getId() );
+			log.error( String.format( "Job with JobId='%d' not found", jobId ) );
+			return result;
+		}
+
+		result.setCurrent( historyEntry.getCurrentJobStep() );
+		result.setTotal( historyEntry.getTotalJobSteps() );
+		result.setJobStatusId( historyEntry.getJobExecutionStatus().getId() );
+		result.setJobActive( historyEntry.getJobExecutionStatus().isActive() );
+		result.setJobExecutionDuration( dateUtilsService.formatTime( historyEntry.getExecutionDuration() ) );
+
+		return result;
 	}
 
 	private Restrictable getRestrictableEntry( final int entryId, final RestrictionType restrictionType ) {

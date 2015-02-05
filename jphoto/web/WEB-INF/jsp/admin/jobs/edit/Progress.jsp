@@ -1,6 +1,3 @@
-<%@ page import="org.jabsorb.JSONRPCBridge" %>
-<%@ page import="ui.context.ApplicationContextHelper" %>
-<%@ page import="admin.services.jobs.JobExecutionService" %>
 <%@ page import="admin.controllers.jobs.list.SavedJobListController" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,10 +11,6 @@
 <%@ taglib prefix="jobs" tagdir="/WEB-INF/tags/jobs" %>
 
 <jsp:useBean id="command" type="admin.controllers.jobs.edit.AbstractAdminJobModel" scope="request"/>
-
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "jobExecutionService", ApplicationContextHelper.<JobExecutionService>getBean( JobExecutionService.BEAN_NAME ) );
-%>
 
 <c:set var="jobExecutionHistoryEntry" value="${command.jobExecutionHistoryEntry}" />
 
@@ -97,7 +90,7 @@
 			var updateJobExecutionIFrameUpdateInterval = 6000;
 
 			setTimeout( function () {
-				progress.updateProgress( ${jobExecutionHistoryEntry.id}, interval, jsonRPC, updatePageTitle );
+				progress.updateProgress( ${jobExecutionHistoryEntry.id}, interval, updatePageTitle );
 
 			}, interval );
 
@@ -127,7 +120,5 @@
 		}
 
 	</script>
-
-	<div class="footerseparator"></div>
 
 </tags:page>

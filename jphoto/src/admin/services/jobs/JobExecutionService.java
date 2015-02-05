@@ -29,8 +29,6 @@ public interface JobExecutionService {
 
 	GenerationMonitor getMonitor( final AbstractJob job );
 
-	JobProgressDTO getJobProgressAjax( final int jobId );
-
 	List<AbstractJob> getActiveJobs();
 
 	AbstractJob getActiveJob( final int jobId );

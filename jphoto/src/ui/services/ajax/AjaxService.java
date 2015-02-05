@@ -1,6 +1,7 @@
 package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
+import admin.jobs.general.JobProgressDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 import rest.users.picker.UserDTO;
@@ -47,4 +48,6 @@ public interface AjaxService {
 	String translate( final String nerd );
 
 	JSONObject translateAll( final JSONObject nerds ) throws JSONException;
+
+	JobProgressDTO getJobProgressAjax( final int jobId );
 }
