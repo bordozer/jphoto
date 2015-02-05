@@ -294,16 +294,22 @@ public class SavedJobListController {
 	}
 
 	private void setActiveJobMaps( final SavedJobListModel model ) {
-		final Map<Integer, Integer> activeJobProgressMap = newLinkedHashMap();
+
+		final List<JobHistoryEntryDTO> activeJobHistoryEntries = newArrayList();
+
+		final List<JobExecutionHistoryEntry> historyEntriesOfActiveJobs = jobExecutionHistoryService.getActiveJobs();
+		for ( final JobExecutionHistoryEntry entry : historyEntriesOfActiveJobs ) {
+			activeJobHistoryEntries.add( new JobHistoryEntryDTO( entry.getId(), entry.getSavedJob().getJobType(), 35 ) );
+		}
+		model.setActiveJobHistoryEntries( activeJobHistoryEntries );
+
 		final Set<Integer> activeJobTypes = newHashSet();
 
 		final List<AbstractJob> activeJobs = jobExecutionService.getActiveJobs();
 		for ( final AbstractJob activeJob : activeJobs ) {
-			activeJobProgressMap.put( activeJob.getJobId(), activeJob.getGenerationMonitor().getPercentage() );
 			activeJobTypes.add( activeJob.getJobType().getId() );
 		}
 
-		model.setActiveJobPercentageMap( activeJobProgressMap );
 		model.setActiveJobTypes( activeJobTypes );
 	}
 

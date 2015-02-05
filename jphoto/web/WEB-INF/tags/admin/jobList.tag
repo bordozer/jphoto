@@ -12,7 +12,7 @@
 
 <%@ attribute name="savedJobs" type="java.util.List" required="true" %>
 <%@ attribute name="notDeletableJobIds" type="java.util.Set" required="true" %>
-<%@ attribute name="activeJobPercentageMap" type="java.util.Map" required="true" %>
+<%@ attribute name="activeJobHistoryEntries" type="java.util.List" required="true" %>
 <%@ attribute name="activeSavedJobIds" type="java.util.Set" required="true" %>
 <%@ attribute name="jobListTab" type="admin.jobs.enums.JobListTab" required="true" %>
 <%@ attribute name="selectedSavedJobTypeId" type="java.lang.Integer" required="true" %>
@@ -132,18 +132,18 @@
 
 								<c:if test="${isActiveSavedJob}">
 
-									<c:forEach var="entry" items="${activeJobPercentageMap}">
+									<c:forEach var="jobHistoryEntryDTO" items="${activeJobHistoryEntries}">
 
-										<c:set var="activeJobId" value="${entry.key}" />
-										<c:set var="activeJobPercentage" value="${entry.value}" />
+										<%--<c:set var="jobHistoryEntryDTO" value="${entry.key}" />--%>
+										<c:set var="jobHistoryEntryId" value="${jobHistoryEntryDTO.jobHistoryEntryId}" />
 
-										<c:if test="${activeJobId == savedJob.job.jobId}">
-											<c:set var="percentage" value="${activeJobPercentageMap[activeJobId]}"/>
+										<c:if test="${jobHistoryEntryId == savedJob.job.jobId}">
+											<c:set var="percentage" value="${jobHistoryEntryDTO.percentage}"/>
 											<div class="row">
 												<div class="col-lg-12">
-													<tags:progressSimple progressBarId="progressbar_${savedJob.job.jobId}" percentage="${percentage}" width="400" height="7"/>
+													<tags:progressSimple progressBarId="progressbar_${jobHistoryEntryId}" percentage="${percentage}" width="400" height="7"/>
 													<div class="row">
-														<div class="col-lg-12" id="progressStatusFullDescription_${savedJob.job.jobId}" style="font-size: 10px;"></div>
+														<div class="col-lg-12" id="progressStatusFullDescription_${jobHistoryEntryId}" style="font-size: 10px;"></div>
 													</div>
 
 													<script type="text/javascript">
@@ -153,7 +153,7 @@
 
 															var interval = ${jobProgressInterval};
 															setTimeout( function () {
-																progress.updateProgress( ${savedJob.job.jobId}, interval, callback );
+																progress.updateProgress( ${jobHistoryEntryId}, interval, callback );
 
 															}, interval );
 														});

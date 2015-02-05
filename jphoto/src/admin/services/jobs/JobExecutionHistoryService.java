@@ -26,4 +26,6 @@ public interface JobExecutionHistoryService extends BaseEntityService<JobExecuti
 	void delete( final List<Integer> ids );
 
 	int getJobExecutionLogLength();
+
+	List<JobExecutionHistoryEntry> getActiveJobs();
 }

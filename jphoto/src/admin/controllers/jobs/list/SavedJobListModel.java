@@ -17,7 +17,7 @@ public class SavedJobListModel extends AbstractGeneralModel {
 	private List<SavedJob> savedJobs;
 	private Set<Integer> notDeletableJobIds;
 
-	private Map<Integer, Integer> activeJobPercentageMap;
+	private List<JobHistoryEntryDTO> activeJobHistoryEntries;
 	private Set<Integer> activeJobTypes;
 	private Set<Integer> activeSavedJobIds;
 
@@ -54,12 +54,12 @@ public class SavedJobListModel extends AbstractGeneralModel {
 		this.notDeletableJobIds = notDeletableJobIds;
 	}
 
-	public Map<Integer, Integer> getActiveJobPercentageMap() {
-		return activeJobPercentageMap;
+	public List<JobHistoryEntryDTO> getActiveJobHistoryEntries() {
+		return activeJobHistoryEntries;
 	}
 
-	public void setActiveJobPercentageMap( final Map<Integer, Integer> activeJobPercentageMap ) {
-		this.activeJobPercentageMap = activeJobPercentageMap;
+	public void setActiveJobHistoryEntries( final List<JobHistoryEntryDTO> activeJobHistoryEntries ) {
+		this.activeJobHistoryEntries = activeJobHistoryEntries;
 	}
 
 	public Set<Integer> getActiveJobTypes() {

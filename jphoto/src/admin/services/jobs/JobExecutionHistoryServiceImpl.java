@@ -90,6 +90,11 @@ public class JobExecutionHistoryServiceImpl implements JobExecutionHistoryServic
 		return jobExecutionHistoryDao.getJobExecutionLogLength();
 	}
 
+	@Override
+	public List<JobExecutionHistoryEntry> getActiveJobs() {
+		return jobExecutionHistoryDao.getActiveJobs();
+	}
+
 	private Map<SavedJobParameterKey, CommonProperty> getJobParametersMap( final int jobExecutionHistoryId ) {
 		final Map<SavedJobParameterKey, CommonProperty> jobParameters = jobExecutionHistoryDao.getJobParameters( jobExecutionHistoryId );
 

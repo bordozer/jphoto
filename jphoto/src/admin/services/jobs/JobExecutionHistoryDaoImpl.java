@@ -3,6 +3,8 @@ package admin.services.jobs;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.services.dao.BaseEntityDao;
@@ -10,6 +12,7 @@ import core.services.dao.BaseEntityDaoImpl;
 import core.services.dao.SavedJobDao;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.utils.DateUtilsService;
+import javafx.print.PrinterJob;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,10 +21,12 @@ import utils.ListUtils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Maps.newLinkedHashMap;
 
@@ -269,6 +274,29 @@ public class JobExecutionHistoryDaoImpl extends BaseEntityDaoImpl<JobExecutionHi
 		final String sql = String.format( "SELECT COUNT(%s) FROM %s;", ENTITY_ID, TABLE_JOB_EXECUTION_HISTORY );
 
 		return getIntValueOrZero( sql, new MapSqlParameterSource() );
+	}
+
+	@Override
+	public List<JobExecutionHistoryEntry> getActiveJobs() {
+
+		final ArrayList activeStatuses = newArrayList( JobExecutionStatus.ACTIVE_STATUSES );
+		final String join = StringUtils.join( Lists.transform( activeStatuses, new Function<JobExecutionStatus, Integer>() {
+			@Override
+			public Integer apply( final JobExecutionStatus status ) {
+				return status.getId();
+			}
+		} ), ", " );
+
+		final String sql = String.format( "SELECT * FROM %s WHERE %s IN ( %s ) ORDER BY %s DESC;"
+				, TABLE_JOB_EXECUTION_HISTORY
+				, TABLE_JOB_DONE_COL_JOB_STATUS_ID
+				, join
+				, ENTITY_ID
+		);
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
+		return jdbcTemplate.query( sql, paramSource, new JobExecutionHistoryMapper() );
 	}
 
 	private void setJobStatus( final int jobId, final JobExecutionStatus status ) {
