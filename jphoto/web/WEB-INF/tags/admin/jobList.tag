@@ -25,9 +25,8 @@
 
 				<c:set var="isSelectedTab" value="${selectedSavedJobTypeId == savedJobType.id}"/>
 				<li class="${isSelectedTab ? "active" : ""}">
-					<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/"
-					   title="${eco:translate(savedJobType.name)}">
-						<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}"/>
+					<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/">
+						<html:img32 src="jobtype/${savedJobType.icon}" alt="${eco:translate(savedJobType.name)}"/>
 					</a>
 				</li>
 
