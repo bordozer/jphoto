@@ -22,10 +22,7 @@
 
 	<script type="text/javascript">
 
-		var jsonRPC;
-		require( ['jsonrpc'], function() {
-			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-		} );
+		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 
 		function showUIMessage_Notification( messageText ) {
 			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {

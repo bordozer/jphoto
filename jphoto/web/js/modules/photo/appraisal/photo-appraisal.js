@@ -1,4 +1,4 @@
-define( ["modules/photo/appraisal/photo-appraisal-model"
+define( [ "modules/photo/appraisal/photo-appraisal-model"
 		, "modules/photo/appraisal/photo-appraisal-view"
 		, "jquery"], function ( Model, View, $ ) {
 

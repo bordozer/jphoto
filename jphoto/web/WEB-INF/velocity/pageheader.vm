@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.css"/>
 	<link rel="stylesheet" type="text/css" href="$baseUrl/css/jphoto.context-menu.css"/>
 
+	<script type="text/javascript" src="$baseUrl/js/lib/jsonrpc.js"></script>
+
 	<script type="text/javascript" src="$baseUrl/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="$baseUrl/js/lib/front-end/require.js"></script>
 

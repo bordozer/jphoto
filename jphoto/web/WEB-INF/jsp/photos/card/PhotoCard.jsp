@@ -261,7 +261,7 @@
 			</div>
 
 			<script type="text/javascript">
-				require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
+				require( [ 'jquery', 'modules/photo/appraisal/photo-appraisal'], function ( $, photoAppraisal ) {
 					photoAppraisal( ${photoId}, ${loggedUser.id}, $( '.photo-appraisal-form-container' ) );
 				} );
 			</script>

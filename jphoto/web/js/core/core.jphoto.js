@@ -1,4 +1,8 @@
-define( [ 'backbone', 'underscore' ], function ( Backbone, _ ) {
+define( function ( require, exports, module ) {
+
+	var Backbone = require('backbone');
+	var _ = require('underscore');
+	var ajaxRpc = require('jsonrpc');
 
 	var JPhoto = function ( options ) {
 		this.options = _.extend( this.defaults, options );
@@ -27,7 +31,5 @@ define( [ 'backbone', 'underscore' ], function ( Backbone, _ ) {
 		}
 	} );
 
-	return function ( options ) {
-		Backbone.JPhoto = new JPhoto( options );
-	}
+	Backbone.JPhoto = new JPhoto( module.config() );
 } );

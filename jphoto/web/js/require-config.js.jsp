@@ -16,6 +16,13 @@ var require = {
 
 	baseUrl: '${baseUrl}/js',
 
+	config: {
+		'core_jphoto': {
+			baseUrl: '${baseUrl}'
+			, imageFolder: '${eco:imageFolderURL()}'
+		}
+	},
+
 	paths: {
 		jquery: "lib/jquery/jquery-1.10.2"
 		, jquery_ui: "lib/jquery/jquery-ui-1.10.4"
@@ -45,11 +52,11 @@ var require = {
 		, ui_messages: "ui_messages"
 		, mass_checker: "components/mass-checker"
 		, photosight: "/admin/js/photosight.js"
-		, 'core.jphoto': 'core/core.jphoto'
+		, core_jphoto: 'core/core.jphoto'
 	},
 
 	shim: {
-		'backbone': {
+		backbone: {
 			deps: [ 'underscore', 'jquery' ],
 			exports: 'Backbone'
 		},
@@ -104,11 +111,11 @@ var require = {
 		}
 	},
 
-	deps: [ "jquery", "backbone", "underscore", "text", "core.jphoto", 'jsonrpc', 'bootstrap' ],
+	deps: [ "jquery", "backbone", "underscore", "text", "core_jphoto", 'jsonrpc', 'bootstrap' ],
 
 	callback: function ( $, Backbone, _, text, core, jsonrpc ) {
 
-		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+		<%--var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 
 		var options = {
 			baseUrl: '${baseUrl}'
@@ -116,8 +123,7 @@ var require = {
 			, imageFolder: '${eco:imageFolderURL()}'
 		};
 
-		core( options );
+		core( options );--%>
 	}
-
 };
 
