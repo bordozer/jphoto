@@ -48,7 +48,7 @@
 				<h3 class="panel-title text-center">${eco:translate('Photo info: Photo details')}</h3>
 			</div>
 
-			<div class="panel-body">
+			<div class="panel-body small">
 				<table:table>
 
 					<table:tr>
