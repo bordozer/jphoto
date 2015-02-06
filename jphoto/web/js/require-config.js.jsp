@@ -6,10 +6,6 @@
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
-
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 var require = {
@@ -114,16 +110,6 @@ var require = {
 	deps: [ "jquery", "backbone", "underscore", "text", "core_jphoto", 'jsonrpc', 'bootstrap' ],
 
 	callback: function ( $, Backbone, _, text, core, jsonrpc ) {
-
-		<%--var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-
-		var options = {
-			baseUrl: '${baseUrl}'
-			, ajaxService: jsonRPC.ajaxService
-			, imageFolder: '${eco:imageFolderURL()}'
-		};
-
-		core( options );--%>
 	}
 };
 
