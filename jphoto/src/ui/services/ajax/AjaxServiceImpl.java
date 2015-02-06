@@ -37,6 +37,7 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.lang.StringUtils;
+import org.dom4j.DocumentException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -525,6 +526,11 @@ public class AjaxServiceImpl implements AjaxService {
 		result.setJobExecutionDuration( dateUtilsService.formatTime( historyEntry.getExecutionDuration() ) );
 
 		return result;
+	}
+
+	@Override
+	public void reloadTranslationsAjax() throws DocumentException {
+		translatorService.reloadTranslations();
 	}
 
 	private Restrictable getRestrictableEntry( final int entryId, final RestrictionType restrictionType ) {

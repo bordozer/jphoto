@@ -16,7 +16,7 @@ define( [ 'jquery' ], function ( $ ) {
 				return;
 			}
 
-			jsonRPC.translatorService.reloadTranslationsAjax();
+			jsonRPC.ajaxService.reloadTranslationsAjax();
 
 			showUIMessage_Notification( "${eco:translate('Translations have been reloaded')}" );
 		}

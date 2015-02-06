@@ -24,8 +24,6 @@ public interface TranslatorService {
 
 	void reloadTranslations() throws DocumentException;
 
-	void reloadTranslationsAjax() throws DocumentException;
-
 	TranslationDTO getTranslationAjax( final String nerd );
 
 	boolean save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation );

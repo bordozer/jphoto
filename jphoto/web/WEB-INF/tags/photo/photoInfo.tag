@@ -197,8 +197,8 @@
 						<table:td>
 							<c:forEach var="marksByCategoryInfo" items="${photoInfo.marksByCategoryInfos}" >
 								${eco:translateVotingCategory(marksByCategoryInfo.photoVotingCategory.id)}:
-								<span title="${eco:translate('Photo info: Summary photo\'s mark in this category')}">${marksByCategoryInfo.sumMark} ${eco:translate('PLURAL marks')}</span>
-								( <span title="${eco:translate('Photo info: Number of users who voted for the photo in this category')}">${marksByCategoryInfo.quantity} ${eco:translate('PLURAL voices')}</span> )
+								<span title="${eco:translate('Photo info: Summary photo\'s mark in this category')}">${eco:translate('PLURAL marks')} - ${marksByCategoryInfo.sumMark}</span>
+								, <span title="${eco:translate('Photo info: Number of users who voted for the photo in this category')}">${eco:translate('PLURAL voices')} - ${marksByCategoryInfo.quantity}</span>
 								<br />
 							</c:forEach>
 						</table:td>
