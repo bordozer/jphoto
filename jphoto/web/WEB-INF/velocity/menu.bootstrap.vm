@@ -7,7 +7,7 @@
 						<a href="$menuItem.key.link" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">$menuItem.key.caption<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							#foreach( $subMenuItem in $menuItem.value )
-								<li>
+								<li style="height: 30px;">
 									<a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">
 
 										#if ( $StringUtils.isNotEmpty( $subMenuItem.icon ) )
