@@ -1,8 +1,8 @@
 define( function ( require, exports, module ) {
 
-	var Backbone = require('backbone');
-	var _ = require('underscore');
-	var ajaxRpc = require('jsonrpc');
+	var Backbone = require( 'backbone' );
+	var _ = require( 'underscore' );
+	var json = jsonRPC;
 
 	var JPhoto = function ( options ) {
 		this.options = _.extend( this.defaults, options );
@@ -15,19 +15,19 @@ define( function ( require, exports, module ) {
 		},
 
 		url: function ( path ) {
-			return this.options.baseUrl + '/' +  path;
+			return this.options.baseUrl + '/' + path;
 		},
 
-		ajaxService: function() {
-			return this.options.ajaxService;
+		ajaxService: function () {
+			return json.ajaxService;
 		},
 
-		imageFolder: function() {
+		imageFolder: function () {
 			return this.options.imageFolder;
 		},
 
-		translate: function( nerd ) {
-			return this.options.ajaxService.translate( nerd );
+		translate: function ( nerd ) {
+			return this.ajaxService().translate( nerd );
 		}
 	} );
 

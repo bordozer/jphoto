@@ -1,6 +1,3 @@
-<%@ page import="ui.services.ajax.AjaxService"%>
-<%@ page import="ui.context.ApplicationContextHelper"%>
-<%@ page import="org.jabsorb.JSONRPCBridge"%>
 <%@ page contentType="text/javascript" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
@@ -28,7 +25,7 @@ var require = {
 
 		, bootstrap: "lib/bootstrap-3.3.2-dist/js/bootstrap.min"
 
-		, jsonrpc: "lib/jsonrpc"
+		<%--, jsonrpc: "lib/jsonrpc"--%>
 
 		, jquery_form: "lib/jquery/jquery.form" <%-- TODO: IS it used somewhere? --%>
 		, jquery_progressbar: "lib/progressbar/jquery.progressbar"
@@ -107,9 +104,9 @@ var require = {
 		}
 	},
 
-	deps: [ "jquery", "backbone", "underscore", "text", "core_jphoto", 'jsonrpc', 'bootstrap' ],
+	deps: [ "jquery", "backbone", "underscore", "text", "core_jphoto", 'bootstrap' ],
 
-	callback: function ( $, Backbone, _, text, core, jsonrpc ) {
+	callback: function ( $, Backbone, _, text, core ) {
 	}
 };
 

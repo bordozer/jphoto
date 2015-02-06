@@ -1,3 +1,6 @@
+<%@ page import="ui.services.ajax.AjaxService" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
+<%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -6,6 +9,10 @@
 <c:set var="entryId" value="${restrictionModel.entryId}" />
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
+<%
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
+%>
+
 <c:set var="restrictionEntryTypeId" value="${restrictionModel.restrictionEntryType.id}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -13,6 +20,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
 
 	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
@@ -26,6 +35,10 @@
 </head>
 
 <body>
+
+	<script type="text/javascript">
+		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+	</script>
 
 	<div class="restriction-area-header">
 
