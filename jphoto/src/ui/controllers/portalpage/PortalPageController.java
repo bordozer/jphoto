@@ -13,6 +13,7 @@ import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
+import core.services.utils.SystemVarsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import org.apache.commons.collections15.CollectionUtils;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
+import ui.elements.PageTitleData;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.security.SecurityUIService;
 
 import java.util.Collections;
@@ -71,6 +74,9 @@ public class PortalPageController {
 	@Autowired
 	private RestrictionService restrictionService;
 
+	@Autowired
+	private SystemVarsService systemVarsService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel prepareModel() {
 		final PortalPageModel model = new PortalPageModel();
@@ -117,6 +123,9 @@ public class PortalPageController {
 		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotosIds.size() - 1 ) );
 
 		model.setLastActivities( activityStreamService.getLastActivities( configurationService.getInt( ConfigurationKey.SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH ) ) );
+
+		final String title = translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, EnvironmentContext.getLanguage() );
+		model.getPageModel().setPageTitleData( new PageTitleData( systemVarsService.getProjectName(), title, title ) );
 
 		return VIEW;
 	}

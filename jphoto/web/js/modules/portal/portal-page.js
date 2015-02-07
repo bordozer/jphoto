@@ -5,10 +5,11 @@ define( [ 'jquery'
 
 	function init( container ) {
 
-		var model = new Model.PhotoListEntryModel();
+		var model = new Model.PortalPageModel();
 		model.fetch( { cache: false } );
 
-		var view = new View.PhotoListEntryModelView( { model: model, el: container } );
+		var view = new View.PortalPageView( { model: model, el: container } );
+		view.render();
 	}
 
 	return init;

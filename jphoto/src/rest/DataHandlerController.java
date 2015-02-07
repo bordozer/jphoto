@@ -16,6 +16,8 @@ import ui.context.EnvironmentContext;
 
 import java.io.IOException;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RequestMapping( "" )
 @Controller
 public class DataHandlerController {
@@ -32,7 +34,7 @@ public class DataHandlerController {
 	@Autowired
 	private SecurityService securityService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "photos/{photoId}/nude-content/{isNudeContent}/", produces = "application/json" )
+	@RequestMapping( method = RequestMethod.GET, value = "photos/{photoId}/nude-content/{isNudeContent}/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public boolean setPhotoNudeContext( final @PathVariable( "photoId" ) int photoId, final @PathVariable( "isNudeContent" ) boolean isNudeContent ) {
 
