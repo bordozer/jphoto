@@ -619,7 +619,11 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem allPhotosMenu() {
 		final String caption = translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, getLanguage() );
 		final String link = urlUtilsService.getAllPhotosLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem item = new MenuItem( caption, link );
+		item.setIcon( "menus/main/gallery.png" );
+
+		return item;
 	}
 
 	private MenuItem todayPhotos() {
