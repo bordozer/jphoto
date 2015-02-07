@@ -1,12 +1,13 @@
 package ui.controllers.portalpage;
 
+import core.general.base.AbstractGeneralPageModel;
 import core.general.data.UserRating;
 import core.services.translator.TranslatorService;
 import ui.activity.AbstractActivityStreamEntry;
 
 import java.util.List;
 
-public class PortalPageModel {
+public class PortalPageModel extends AbstractGeneralPageModel {
 
 	public static final int TOP_BEST_USERS_QTY = 10;
 

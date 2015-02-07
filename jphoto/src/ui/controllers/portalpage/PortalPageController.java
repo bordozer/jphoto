@@ -15,7 +15,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
-import core.services.utils.sql.PhotoQueryService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +53,6 @@ public class PortalPageController {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private PhotoQueryService photoQueryService;
 
 	@Autowired
 	private RandomUtilsService randomUtilsService;
