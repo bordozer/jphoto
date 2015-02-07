@@ -51,4 +51,9 @@ public class MenuItem {
 		menuItem.setJsFunction( jsFunction );
 		return menuItem;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s", caption );
+	}
 }

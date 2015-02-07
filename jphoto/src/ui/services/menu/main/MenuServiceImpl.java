@@ -89,7 +89,10 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( thisMonthPhotos() );
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.PHOTOS_URL ) );
 
-		menus.put( new MenuItem( menuItem.getCaption(), menuItem.getLink() ), menuItems );
+		final MenuItem photoGalleryItem = new MenuItem( menuItem.getCaption(), menuItem.getLink() );
+		photoGalleryItem.setIcon( "gallery.png" );
+
+		menus.put( photoGalleryItem, menuItems );
 	}
 
 	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus, final Language language ) {
@@ -102,7 +105,10 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( new MenuItem( caption, link ) );
 		}
 
-		menus.put( new MenuItem( translatorService.translate( "Main menu: Photos by categories", getLanguage() ), urlUtilsService.getGenreListLink() ), menuItems );
+		final MenuItem item = new MenuItem( translatorService.translate( "Main menu: Photos by categories", getLanguage() ), urlUtilsService.getGenreListLink() );
+		item.setIcon( "categories.png" );
+
+		menus.put( item, menuItems );
 	}
 
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {
@@ -120,6 +126,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.addAll( bestPhotosByMembershipMenus( UrlUtilsServiceImpl.PHOTOS_URL ) );
 
 		final MenuItem menuItem = new MenuItem( translatorService.translate( "Main menu: The best photos", getLanguage() ), bestPhotos.getLink() );
+		menuItem.setIcon( "rating.png" );
 
 		menus.put( menuItem, menuItems );
 	}
@@ -133,7 +140,10 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.USERS_URL ) );
 		menuItems.add( getActivityStreamMenu() );
 
-		menus.put( new MenuItem( translatorService.translate( MAIN_MENU_MEMBERS, getLanguage() ), menuItem.getLink() ), menuItems );
+		final MenuItem item = new MenuItem( translatorService.translate( MAIN_MENU_MEMBERS, getLanguage() ), menuItem.getLink() );
+		item.setIcon( "members.png" );
+
+		menus.put( item, menuItems );
 	}
 
 	private MenuItem getActivityStreamMenu() {
@@ -160,9 +170,11 @@ public class MenuServiceImpl implements MenuService {
 
 			final String link = userCardMenu.getLink();
 			menuItem = new MenuItem( translatorService.translate( "Main menu: My club", getLanguage() ), link );
+			menuItem.setIcon( "profile.png" );
 		} else {
 			menuItem = registerMenu();
 			menuItems.add( new MenuItem( translatorService.translate( MAIN_MENU_REGISTER, getLanguage() ), menuItem.getLink() ) );
+			menuItem.setIcon( "register.png" );
 		}
 
 		menus.put( menuItem, menuItems );
@@ -181,6 +193,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( userBlackListMenu( user ) );
 
 			final MenuItem menuItem = new MenuItem( translatorService.translate( "Main menu: My bookmarks", getLanguage() ), favoritesMenu.getLink() );
+			menuItem.setIcon( "bookmarks.png" );
 			menus.put( menuItem, menuItems );
 		}
 	}
@@ -195,7 +208,10 @@ public class MenuServiceImpl implements MenuService {
 
 			menuItems.addAll( getPrivateMessagesMenus( user ) );
 
-			menus.put( MenuItem.noLinkMenu( translatorService.translate( "Main menu: Messages", getLanguage() ) ), menuItems );
+			final MenuItem item = MenuItem.noLinkMenu( translatorService.translate( "Main menu: Messages", getLanguage() ) );
+			item.setIcon( "messages.png" );
+
+			menus.put( item, menuItems );
 
 			menuItems.add( userNotificationsControlMenu( user ) );
 		}
@@ -259,7 +275,10 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( getSubscriptionOnNewCommentsMenu( user ) );
 			menuItems.add( getSubscriptionOnNewPhotosMenu( user ) );
 
-			menus.put( MenuItem.noLinkMenu( translatorService.translate( "Main menu: My subscription", getLanguage() ) ), menuItems );
+			final MenuItem item = MenuItem.noLinkMenu( translatorService.translate( "Main menu: My subscription", getLanguage() ) );
+			item.setIcon( "subscribe.png" );
+
+			menus.put( item, menuItems );
 		}
 	}
 
@@ -278,7 +297,10 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( controlPanelMenu() );
 		menuItems.add( upgradeMenu() );
 
-		menus.put( MenuItem.noLinkMenu( translatorService.translate( MAIN_MENU_ADMIN_ROOT, getLanguage() ) ), menuItems );
+		final MenuItem item = MenuItem.noLinkMenu( translatorService.translate( MAIN_MENU_ADMIN_ROOT, getLanguage() ) );
+		item.setIcon( "admin.png" );
+
+		menus.put( item, menuItems );
 	}
 
 	private List<MenuItem> byMembershipMenus( final String url ) {
