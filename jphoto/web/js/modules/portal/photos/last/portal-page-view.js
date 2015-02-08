@@ -5,8 +5,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 	'use strict';
 
 	var translator = Backbone.JPhoto.translateAll( {
-		theLatestPhotos: 'Portal page: The latest uploaded photos'
-		, photoOfTheDay: 'Portal page: The photos of the day'
+		photoOfTheDay: 'Portal page: The photos of the day'
 		, photoGenres: 'Portal page: Photo genres'
 		, theBestWeeksAuthors: 'Portal page: The best weeks authors'
 		, theBestMonthAuthors: 'Portal page: The best month authors'

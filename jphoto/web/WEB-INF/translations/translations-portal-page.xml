@@ -3,6 +3,11 @@
 <translations>
 
 	<translation>
+		<nerd>Portal page: The latest uploaded photos</nerd>
+		<ru><![CDATA[Последние загруженные работы]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Portal page: The photos of the day</nerd>
 		<ru><![CDATA[Лучшие работы дня]]></ru>
 	</translation>
