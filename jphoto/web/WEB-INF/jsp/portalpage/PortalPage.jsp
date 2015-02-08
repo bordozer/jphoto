@@ -7,7 +7,24 @@
 
 <tags:page pageModel="${portalPageModel.pageModel}">
 
-	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/slick-master/slick.css" />
+	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/slick-master/css/slick.css" />
+	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/slick-master/css/slick-theme.css" />
+
+	<style type="text/css">
+		.latest-photo-preview {
+			display: inline-block;
+			width: auto;
+			margin-left: 5px;
+		}
+
+		.slick-prev{
+			background-image: url( "/images/add16.png" );
+		}
+
+		.slick-next{
+			background-image: url("paper.gif");
+		}
+	</style>
 
 	<div class="row">
 		<div class="col-lg-12 portal-page-container">

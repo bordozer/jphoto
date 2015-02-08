@@ -1,6 +1,6 @@
 define( [ 'backbone', 'jquery', 'underscore'
 			, 'text!modules/portal/photos/latest/templates/latest-photos-template.html'
-			, '/js/lib/slick-master/slick.min.js'
+			, '/js/lib/slick-master/src/slick.min.js'
 		], function ( Backbone, $, _, template, slick ) {
 
 	'use strict';
@@ -34,14 +34,15 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		applySmoothScrolling: function() {
 //			this.$( ".latest-photos-container" ).
+
 			this.$( '.latest-photos-container' ).slick( {
 				infinite: true
 				, slidesToShow: 10
 				, slidesToScroll: 3
 				, variableWidth: false
-				, prevArrow: '<button type="button" data-role="none" class="slick-prev">Go Previous</button>'
-				, nextArrow: '<button type="button" data-role="none" class="slick-next">Go Next</button>'
-//				, dots: true
+				, dots: false
+				, autoplay: false
+				, autoplaySpeed: 5000
 			});
 		}
 } );
