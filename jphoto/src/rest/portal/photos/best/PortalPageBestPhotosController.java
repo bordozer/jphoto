@@ -1,12 +1,14 @@
 package rest.portal.photos.best;
 
 import core.general.configuration.ConfigurationKey;
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.RestrictionService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
@@ -22,6 +24,7 @@ import rest.portal.photos.LatestPhotosDTO;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -53,14 +56,18 @@ public class PortalPageBestPhotosController {
 	@Autowired
 	private PhotoVotingService photoVotingService;
 
+	@Autowired
+	private ImageFileUtilsService imageFileUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/photos/best/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public LatestPhotosDTO theBestPhotos() {
+	public LatestPhotosDTO theBestPhotos() throws IOException {
 
 		final List<LatestPhotoDTO> dtos = newArrayList();
 
 		final List<Integer> photos = getBestPhotos();
 
+		int index = 0;
 		for ( final int photoId : photos ) {
 
 			final Photo photo = photoService.load( photoId );
@@ -68,10 +75,17 @@ public class PortalPageBestPhotosController {
 			final LatestPhotoDTO photoDTO = new LatestPhotoDTO();
 			photoDTO.setPhotoId( photo.getId() );
 			photoDTO.setPhotoName( photo.getName() ); // TODO: escape!
-			photoDTO.setPhotoImageUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+			photoDTO.setPhotoImageUrl( userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
 			photoDTO.setPhotoCardUrl( urlUtilsService.getPhotoCardLink( photoId ) );
 
+			final Dimension dimension = imageFileUtilsService.resizeImageToDimensionAndReturnResultDimension( photo.getPhotoImageFile(), new Dimension( 300, 300 ) );
+			photoDTO.setDimension( dimension );
+
+			photoDTO.setIndex( index );
+
 			dtos.add( photoDTO );
+
+			index++;
 		}
 
 		return new LatestPhotosDTO( 1, dtos );

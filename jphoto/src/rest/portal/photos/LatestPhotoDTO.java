@@ -1,11 +1,16 @@
 package rest.portal.photos;
 
+import core.general.img.Dimension;
+
 public class LatestPhotoDTO {
 
 	private int photoId;
 	private String photoName;
 	private String photoImageUrl;
 	private String photoCardUrl;
+
+	private Dimension dimension;
+	private int index;
 
 	public int getPhotoId() {
 		return photoId;
@@ -37,6 +42,22 @@ public class LatestPhotoDTO {
 
 	public void setPhotoCardUrl( final String photoCardUrl ) {
 		this.photoCardUrl = photoCardUrl;
+	}
+
+	public Dimension getDimension() {
+		return dimension;
+	}
+
+	public void setDimension( final Dimension dimension ) {
+		this.dimension = dimension;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex( final int index ) {
+		this.index = index;
 	}
 
 	@Override

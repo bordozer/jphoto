@@ -35,6 +35,8 @@ define( [ 'backbone', 'jquery', 'underscore'
 	 applySlider: function () {
 		this.$( ".best-photos-container" ).bxSlider( {
 			pagerCustom: '#bx-pager'
+//			, adaptiveHeight: true
+//			, captions: true
 		} );
 	}
 } );

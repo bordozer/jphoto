@@ -6,10 +6,10 @@
 
 	<div class="panel-body">
 
-		<div class="col-lg-12 text-center best-photos-container">
+		<div class="col-lg-12 best-photos-container">
 			<% _.each( photoDTOs, function( photoDTO ) { %>
 				<a href="<%= photoDTO.photoCardUrl %>">
-					<img src="<%=photoDTO.photoImageUrl%>" alt="<%=photoDTO.photoName%>" title="<%=photoDTO.photoName%>" height="200px;">
+					<img src="<%=photoDTO.photoImageUrl%>" alt="<%=photoDTO.photoName%>" title="<%=photoDTO.photoName%>" width="<%=photoDTO.dimension.width%>" height="<%=photoDTO.dimension.height%>">
 				</a>
 			<%})%>
 		</div>
@@ -19,10 +19,9 @@
 	<div class="panel-footer">
 		<div id="bx-pager">
 			<% _.each( photoDTOs, function( photoDTO ) { %>
-				<a data-slide-index="0" href=""><img src="<%=photoDTO.photoImageUrl%>"  height="50px;" /></a>
+				<a data-slide-index="<%=photoDTO.index%>" href=""><img src="<%=photoDTO.photoImageUrl%>"  height="50px;" /></a>
 			<%})%>
 		</div>
-
 	</div>
 
 </div>
