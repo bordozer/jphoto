@@ -16,4 +16,13 @@
 
 	</div>
 
+	<div class="panel-footer">
+		<div id="bx-pager">
+			<% _.each( photoDTOs, function( photoDTO ) { %>
+				<a data-slide-index="0" href=""><img src="<%=photoDTO.photoImageUrl%>"  height="50px;" /></a>
+			<%})%>
+		</div>
+
+	</div>
+
 </div>
