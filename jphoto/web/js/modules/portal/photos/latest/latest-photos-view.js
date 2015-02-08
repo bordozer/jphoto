@@ -1,6 +1,7 @@
 define( [ 'backbone', 'jquery', 'underscore'
 			, 'text!modules/portal/photos/latest/templates/latest-photos-template.html'
-		], function ( Backbone, $, _, template ) {
+			, '/js/lib/scrollbox/jquery.scrollbox.min.js'
+		], function ( Backbone, $, _, template, scrollbox ) {
 
 	'use strict';
 
@@ -32,7 +33,10 @@ define( [ 'backbone', 'jquery', 'underscore'
 		},
 
 		applySmoothScrolling: function() {
-//			this.$( ".latest-photos-container" ).;
+			this.$( ".latest-photos-container" ).scrollbox( {
+																direction: 'h',
+																distance: 140
+															} );
 		}
 } );
 

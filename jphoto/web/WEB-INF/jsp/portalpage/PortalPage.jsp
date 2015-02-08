@@ -7,6 +7,8 @@
 
 <tags:page pageModel="${portalPageModel.pageModel}">
 
+	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/scrollbox/demo.css" />
+
 	<div class="row">
 		<div class="col-lg-12 portal-page-container">
 
