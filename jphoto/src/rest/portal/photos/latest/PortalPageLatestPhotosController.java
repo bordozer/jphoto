@@ -1,4 +1,4 @@
-package rest.portalpage;
+package rest.portal.photos.latest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,11 +9,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "portal-page" )
-public class PortalPageController {
+public class PortalPageLatestPhotosController {
 
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/photos/latest/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public PortalPageDTO portalPage( final PortalPageDTO dto ) {
+	public LatestPhotosDTO theLatestPhotos( final LatestPhotosDTO dto ) {
 		return dto;
 	}
 }

@@ -1,6 +1,7 @@
 define( [ 'backbone', 'jquery', 'underscore'
 			, 'text!modules/portal/page/templates/portal-page-template.html'
-		], function ( Backbone, $, _, template ) {
+			, 'modules/portal/photos/latest/latest-photos'
+		], function ( Backbone, $, _, template, latestPhotos ) {
 
 	'use strict';
 
@@ -28,6 +29,8 @@ define( [ 'backbone', 'jquery', 'underscore'
 				 model: modelJSON
 				, translator: translator
 			 } ) );
+
+			latestPhotos( this.$( '.latest-photos-container' ) );
 		}
 } );
 

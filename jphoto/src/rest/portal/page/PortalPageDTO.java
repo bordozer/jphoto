@@ -1,4 +1,4 @@
-package rest.portalpage;
+package rest.portal.page;
 
 public class PortalPageDTO {
 
