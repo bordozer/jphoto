@@ -29,7 +29,9 @@ define( [ 'backbone', 'jquery', 'underscore'
 				 model: modelJSON
 				, translator: translator
 			 } ) );
+		},
 
+		renderLatestPhotos: function() {
 			latestPhotos( this.$( '.latest-photos-container' ) );
 		}
 } );
