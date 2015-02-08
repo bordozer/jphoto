@@ -1,7 +1,8 @@
 define( [ 'backbone', 'jquery', 'underscore'
 			, 'text!modules/portal/page/templates/portal-page-template.html'
-			, 'modules/portal/photos/latest/latest-photos'
-		], function ( Backbone, $, _, template, latestPhotos ) {
+			, 'modules/portal/photos/latest/latest-photos-model'
+			, 'modules/portal/photos/latest/latest-photos-view'
+		], function ( Backbone, $, _, template, LatestPhotosModel, LatestPhotosView ) {
 
 	'use strict';
 
@@ -35,7 +36,13 @@ define( [ 'backbone', 'jquery', 'underscore'
 		},
 
 		renderLatestPhotos: function() {
-			latestPhotos( this.$( '.latest-photos-container' ) );
+			//			latestPhotos( this.$( '.latest-photos-container' ) );
+			var container = this.$( '.latest-photos-container' );
+
+			var model = new LatestPhotosModel.PortalPageLatestPhotosModel();
+			var view = new LatestPhotosView.PortalPageLatestPhotosView( { model: model, el: container } );
+
+			container.html( view.$el );
 		}
 } );
 

@@ -1,9 +1,9 @@
 <div class="row text-center latest-photos-container">
 
 	<% _.each( photoDTOs, function( photoDTO ) { %>
-		<div class="col-lg-1">
-			<%=photoDTO.photoId%>
-		</div>
+		<!--<div class="col-lg-1" style="width: auto;">-->
+			<a href="<%= photoDTO.photoCardUrl %>"><img src="<%=photoDTO.photoImageUrl%>" alt="<%=photoDTO.photoName%>" title="<%=photoDTO.photoName%>" height="100px;"></a>
+		<!--</div>-->
 	<%})%>
 
 </div>

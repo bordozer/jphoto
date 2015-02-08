@@ -5,6 +5,7 @@ import core.general.photo.Photo;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class PortalPageLatestPhotosController {
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
+	@Autowired
+	private UrlUtilsService urlUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/photos/latest/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public LatestPhotosDTO theLatestPhotos() {
@@ -51,6 +55,7 @@ public class PortalPageLatestPhotosController {
 			photoDTO.setPhotoId( photo.getId() );
 			photoDTO.setPhotoName( photo.getName() ); // TODO: escape!
 			photoDTO.setPhotoImageUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+			photoDTO.setPhotoCardUrl( urlUtilsService.getPhotoCardLink( photoId ) );
 
 			dtos.add( photoDTO );
 		}

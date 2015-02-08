@@ -5,6 +5,7 @@ public class LatestPhotoDTO {
 	private int photoId;
 	private String photoName;
 	private String photoImageUrl;
+	private String photoCardUrl;
 
 	public int getPhotoId() {
 		return photoId;
@@ -28,6 +29,14 @@ public class LatestPhotoDTO {
 
 	public void setPhotoImageUrl( final String photoImageUrl ) {
 		this.photoImageUrl = photoImageUrl;
+	}
+
+	public String getPhotoCardUrl() {
+		return photoCardUrl;
+	}
+
+	public void setPhotoCardUrl( final String photoCardUrl ) {
+		this.photoCardUrl = photoCardUrl;
 	}
 
 	@Override
