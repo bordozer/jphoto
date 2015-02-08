@@ -1,4 +1,4 @@
-package rest.portal.photos.latest;
+package rest.portal.photos.best;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "portal-page" )
-public class PortalPageLatestPhotosController {
+public class PortalPageBestPhotosController {
 
 	@Autowired
 	private PhotoService photoService;
@@ -41,13 +41,13 @@ public class PortalPageLatestPhotosController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/photos/latest/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/photos/best/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public LatestPhotosDTO theLatestPhotos() {
+	public LatestPhotosDTO theBestPhotos() {
 
 		final List<LatestPhotoDTO> dtos = newArrayList();
 
-		final List<Integer> photos = getLatestUploadedPhotos();
+		final List<Integer> photos = getBestPhotos();
 
 		for ( final int photoId : photos ) {
 
@@ -65,7 +65,7 @@ public class PortalPageLatestPhotosController {
 		return new LatestPhotosDTO( 1, dtos );
 	}
 
-	private List<Integer> getLatestUploadedPhotos() {
+	private List<Integer> getBestPhotos() {
 		final SqlIdsSelectQuery query = new PhotoListQueryBuilder( dateUtilsService )
 			.forPage( 1, configurationService.getInt( ConfigurationKey.SYSTEM_UI_PORTAL_PAGE_LATEST_PHOTOS_COUNT ) )
 			.sortByUploadTimeDesc()

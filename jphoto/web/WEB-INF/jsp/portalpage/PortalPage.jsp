@@ -10,6 +10,8 @@
 	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/slick-master/css/slick.css" />
 	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/slick-master/css/slick-theme.css" />
 
+	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/bxslider/jquery.bxslider.css" />
+
 	<div class="row">
 		<div class="col-lg-12 portal-page-container">
 

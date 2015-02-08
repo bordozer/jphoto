@@ -1,4 +1,4 @@
-package rest.portal.photos.latest;
+package rest.portal.photos;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

@@ -2,11 +2,6 @@ define( ["backbone"], function ( Backbone ) {
 
 	var PortalPageLatestPhotosModel = Backbone.Model.extend( {
 
-		/*defaults: {
-			id: 1
-			, latestPhotosDTOs: {}
-		},*/
-
 		initialize:function ( options ) {
 			this.url = Backbone.JPhoto.url( "rest/portal-page/photos/latest/" );
 		},
