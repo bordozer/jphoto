@@ -12,18 +12,9 @@
 
 	<div class="row row-bottom-padding-10">
 
-		<c:set var="counter" value="0" />
-
 		<c:forEach var="genreListEntry" items="${genreListEntries}">
 
-			<c:if test="${counter > 2}">
-				</div>
-				<div class="row row-bottom-padding-10">
-
-				<c:set var="counter" value="0" />
-			</c:if>
-
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 
 				<div class="panel panel-info">
 
@@ -46,8 +37,6 @@
 				</div>
 
 			</div>
-
-			<c:set var="counter" value="${counter + 1}" />
 
 		</c:forEach>
 
