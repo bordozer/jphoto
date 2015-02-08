@@ -1,6 +1,6 @@
-define( [ 'backbone', 'jquery', 'underscore', '/js/lib/smoothdiv/jquery.mousewheel.min.js', 'lib/smoothdiv/jquery.smoothDivScroll-1.2'
+define( [ 'backbone', 'jquery', 'underscore'
 			, 'text!modules/portal/photos/latest/templates/latest-photos-template.html'
-		], function ( Backbone, $, _, mousewheel, smoothDivScroll, template ) {
+		], function ( Backbone, $, _, template ) {
 
 	'use strict';
 
@@ -34,12 +34,7 @@ define( [ 'backbone', 'jquery', 'underscore', '/js/lib/smoothdiv/jquery.mousewhe
 		},
 
 		applySmoothScrolling: function() {
-			this.$( ".latest-photos-container" ).smoothDivScroll( {
-				mousewheelScrolling: false,
-				manualContinuousScrolling: true,
-				visibleHotSpotBackgrounds: "always",
-				autoScrollingMode: "onstart"
-			} );
+//			this.$( ".latest-photos-container" )
 		}
 } );
 
