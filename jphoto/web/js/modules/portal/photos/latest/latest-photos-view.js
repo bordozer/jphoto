@@ -28,7 +28,9 @@ define( [ 'backbone', 'jquery', 'underscore', '/js/lib/smoothdiv/jquery.mousewhe
 			 } ) );
 
 
-			setTimeout( this.applySmoothScrolling, 1000 );
+			this.applySmoothScrolling();
+
+			return this.$el;
 		},
 
 		applySmoothScrolling: function() {
