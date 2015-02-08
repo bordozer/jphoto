@@ -10,24 +10,44 @@
 
 <tags:page pageModel="${genreListModel.pageModel}">
 
-	<div style="width: 90%; margin-left: auto; margin-right: auto; padding-top: 50px;">
+	<div class="row row-bottom-padding-10">
+
+		<c:set var="counter" value="0" />
 
 		<c:forEach var="genreListEntry" items="${genreListEntries}">
 
-			<div class="block-background block-shadow" style="display: inline-block; width: 30%; text-align: center; vertical-align: top; height: 400px;  border: 1px dotted #cccccc; margin: 10px;">
-
-				<div style="float: left; width: 100%; height: 370px;">
-					<h2 class=""><links:genrePhotos genre="${genreListEntry.genre}"/></h2>
-					<a href="${genreListEntry.photosByGenreURL}">
-						<img src="${genreListEntry.photoPreviewWrapper.photoPreviewImgUrl}" alt="" title="${genreListEntry.genreIconTitle}">
-					</a>
+			<c:if test="${counter > 2}">
 				</div>
+				<div class="row row-bottom-padding-10">
 
-				<div style="float: left; width: 100%; text-align: left; padding-left: 30px;">
-					${eco:translate("Genre list: photos in genre count")}: ${genreListEntry.photosCount}
+				<c:set var="counter" value="0" />
+			</c:if>
+
+			<div class="col-lg-4">
+
+				<div class="panel panel-info">
+
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<links:genrePhotos genre="${genreListEntry.genre}"/>
+						</h3>
+					</div>
+
+					<div class="panel-body text-center" style="height: 350px;">
+						<a href="${genreListEntry.photosByGenreURL}">
+							<img src="${genreListEntry.photoPreviewWrapper.photoPreviewImgUrl}" alt="" title="${genreListEntry.genreIconTitle}">
+						</a>
+					</div>
+
+					<div class="panel-footer">
+						${eco:translate("Genre list: photos in genre count")}: ${genreListEntry.photosCount}
+					</div>
+
 				</div>
 
 			</div>
+
+			<c:set var="counter" value="${counter + 1}" />
 
 		</c:forEach>
 
