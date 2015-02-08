@@ -1,7 +1,7 @@
 define( [ 'backbone', 'jquery', 'underscore'
 			, 'text!modules/portal/photos/latest/templates/latest-photos-template.html'
-			, '/js/lib/scrollbox/jquery.scrollbox.min.js'
-		], function ( Backbone, $, _, template, scrollbox ) {
+			, '/js/lib/slick-master/slick.min.js'
+		], function ( Backbone, $, _, template, slick ) {
 
 	'use strict';
 
@@ -12,6 +12,11 @@ define( [ 'backbone', 'jquery', 'underscore'
 	var PortalPageLatestPhotosView = Backbone.View.extend( {
 
 		template:_.template( template ),
+
+		/*events: {
+			'click .slide-left': '_onSlideLeft'
+			, 'click .slide-right': '_onSlideRight'
+		},*/
 
 		initialize: function() {
 			this.model.on( 'sync', this.render, this );
@@ -33,11 +38,23 @@ define( [ 'backbone', 'jquery', 'underscore'
 		},
 
 		applySmoothScrolling: function() {
-			this.$( ".latest-photos-container" ).scrollbox( {
-																direction: 'h',
-																distance: 140
-															} );
-		}
+//			this.$( ".latest-photos-container" ).
+			$( '.latest-photos-container' ).slick( {
+				infinite: false
+				, slidesToShow: 3
+				, slidesToScroll: 3
+				, variableWidth: false
+//				, dots: true
+			});
+		}/*,
+
+		_onSlideLeft: function() {
+			this.$( '.latest-photos-container' ).trigger( 'backward' );
+		},
+
+		_onSlideRight: function() {
+			this.$( '.latest-photos-container' ).trigger( 'forward' );
+		}*/
 } );
 
 	return { PortalPageLatestPhotosView: PortalPageLatestPhotosView };
