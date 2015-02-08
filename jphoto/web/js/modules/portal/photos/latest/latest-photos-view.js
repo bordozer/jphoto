@@ -41,7 +41,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 				, slidesToScroll: 3
 				, variableWidth: false
 				, dots: false
-				, autoplay: false
+				, autoplay: true
 				, autoplaySpeed: 5000
 			});
 		}

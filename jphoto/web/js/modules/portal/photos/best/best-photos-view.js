@@ -43,7 +43,9 @@ define( [ 'backbone', 'jquery', 'underscore'
 //  		, speed: 2000
 //			, minSlides: 4
 //			, maxSlides: 4
-//			, slideWidth: 300
+			, slideWidth: 500
+			, pause: 5000
+			, speed: 500
 //			, slideMargin: 10
 //  		, autoControls: true
 //			, adaptiveHeight: true
