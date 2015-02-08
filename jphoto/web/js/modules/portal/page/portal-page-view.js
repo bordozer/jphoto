@@ -19,7 +19,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 		template:_.template( template ),
 
 		initialize: function() {
-
+			this.model.on( 'sync', this.render, this );
 		},
 
 		render: function () {

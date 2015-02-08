@@ -9,7 +9,6 @@ define( [ 'jquery'
 		model.fetch( { cache: false } );
 
 		var view = new View.PortalPageView( { model: model, el: container } );
-		view.render();
 	}
 
 	return init;
