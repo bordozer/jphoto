@@ -28,6 +28,10 @@ define( function ( require, exports, module ) {
 
 		translate: function ( nerd ) {
 			return this.ajaxService().translate( nerd );
+		},
+
+		translateAll: function ( nerds ) {
+			return this.ajaxService().translateAll( nerds );
 		}
 	} );
 

@@ -3,48 +3,38 @@
 <translations>
 
 	<translation>
-		<nerd>Portal page: Activity stream</nerd>
-		<ru><![CDATA[Последние события в клубе]]></ru>
+		<nerd>Portal page: The photos of the day</nerd>
+		<ru><![CDATA[Лучшие работы дня]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Portal page: Full activity stream</nerd>
-		<ru><![CDATA[Вся лента событий]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Portal page: Top authors of the week</nerd>
-		<ru><![CDATA[Авторы недели]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Portal page: Top authors of the month</nerd>
-		<ru><![CDATA[Авторы месяца]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Portal page: Last uploaded photos</nerd>
-		<ru><![CDATA[Последние работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Portal page: The best photos</nerd>
-		<ru><![CDATA[Лучшие работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Portal page: The best photos are not defined</nerd>
-		<ru><![CDATA[Лучшие работы не определены]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Portal page: Photo categories</nerd>
+		<nerd>Portal page: Photo genres</nerd>
 		<ru><![CDATA[Разделы фотографии]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Portal page: The photos that have got $1 marks for last $2 days</nerd>
-		<ru><![CDATA[Работы, набравшие минимум $1 баллов за последние $2 дня(ей)]]></ru>
+		<nerd>Portal page: The best weeks authors</nerd>
+		<ru><![CDATA[Лучшие авторы недели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page: The best month authors</nerd>
+		<ru><![CDATA[Лучшие авторы месяца]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page: Activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>
