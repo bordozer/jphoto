@@ -13,11 +13,6 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		template:_.template( template ),
 
-		/*events: {
-			'click .slide-left': '_onSlideLeft'
-			, 'click .slide-right': '_onSlideRight'
-		},*/
-
 		initialize: function() {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -39,22 +34,16 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		applySmoothScrolling: function() {
 //			this.$( ".latest-photos-container" ).
-			$( '.latest-photos-container' ).slick( {
-				infinite: false
-				, slidesToShow: 3
+			this.$( '.latest-photos-container' ).slick( {
+				infinite: true
+				, slidesToShow: 10
 				, slidesToScroll: 3
 				, variableWidth: false
+				, prevArrow: '<button type="button" data-role="none" class="slick-prev">Go Previous</button>'
+				, nextArrow: '<button type="button" data-role="none" class="slick-next">Go Next</button>'
 //				, dots: true
 			});
-		}/*,
-
-		_onSlideLeft: function() {
-			this.$( '.latest-photos-container' ).trigger( 'backward' );
-		},
-
-		_onSlideRight: function() {
-			this.$( '.latest-photos-container' ).trigger( 'forward' );
-		}*/
+		}
 } );
 
 	return { PortalPageLatestPhotosView: PortalPageLatestPhotosView };
