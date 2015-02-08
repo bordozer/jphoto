@@ -96,7 +96,12 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus, final Language language ) {
+
 		final List<MenuItem> menuItems = newArrayList();
+
+		final MenuItem allGenresItem = new MenuItem( translatorService.translate( "Main menu: All categories", getLanguage() ), urlUtilsService.getGenreListLink() );
+		allGenresItem.setIcon( "menus/main/categories.png" );
+		menuItems.add( allGenresItem );
 
 		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( language );
 		for ( final Genre genre : genres ) {
