@@ -29,6 +29,8 @@ define( [ 'backbone', 'jquery', 'underscore'
 				 model: modelJSON
 				, translator: translator
 			 } ) );
+
+			this.renderLatestPhotos();
 		},
 
 		renderLatestPhotos: function() {
