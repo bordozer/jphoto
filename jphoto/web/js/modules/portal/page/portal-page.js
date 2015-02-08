@@ -4,10 +4,7 @@ define( [ 'jquery'
 		], function ( $, Model, View ) {
 
 	function init( container ) {
-
 		var model = new Model.PortalPageModel();
-		model.fetch( { cache: false } );
-
 		var view = new View.PortalPageView( { model: model, el: container } );
 	}
 

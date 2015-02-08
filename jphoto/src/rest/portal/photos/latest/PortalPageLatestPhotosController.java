@@ -37,7 +37,7 @@ public class PortalPageLatestPhotosController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/photos/latest/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public LatestPhotosDTO theLatestPhotos( final LatestPhotosDTO dto ) {
+	public LatestPhotosDTO theLatestPhotos() {
 
 		final List<LatestPhotoDTO> dtos = newArrayList();
 
@@ -55,9 +55,7 @@ public class PortalPageLatestPhotosController {
 			dtos.add( photoDTO );
 		}
 
-		dto.setLatestPhotosDTOs( dtos );
-
-		return dto;
+		return new LatestPhotosDTO( 1, dtos );
 	}
 
 	private List<Integer> getLatestUploadedPhotos() {

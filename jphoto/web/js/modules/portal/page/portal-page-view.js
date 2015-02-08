@@ -20,6 +20,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		initialize: function() {
 			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
