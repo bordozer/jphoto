@@ -35,14 +35,28 @@ define( [ 'backbone', 'jquery', 'underscore'
 	 applySlider: function () {
 		 // http://bxslider.com/options
 
-		this.$( ".best-photos-container" ).bxSlider( {
+		var slider = this.$( ".best-photos-container" ).bxSlider( {
 			pagerCustom: '#bx-pager'
 			, auto: true
 			, mode: 'fade' /* 'horizontal', 'vertical', 'fade' */
+//			, ticker: true
+//  		, speed: 2000
+//			, minSlides: 4
+//			, maxSlides: 4
+//			, slideWidth: 300
+//			, slideMargin: 10
 //  		, autoControls: true
 //			, adaptiveHeight: true
 //			, captions: true
+//			, onSlideBefore: _onSlideBefore
 		} );
+
+		/*function _onSlideBefore( $slideElement, oldIndex, newIndex ) {
+			var width = $slideElement.data( 'width' );
+			slider.reloadSlider( {
+				slideWidth: width
+			});
+		 }*/
 	}
 } );
 
