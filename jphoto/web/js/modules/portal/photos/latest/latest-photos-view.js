@@ -4,9 +4,9 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 	'use strict';
 
-	/*var translator = Backbone.JPhoto.translateAll( {
-		photoOfTheDay: ''
-	} );*/
+	var translator = Backbone.JPhoto.translateAll( {
+		theLatestPhotos: 'Portal page: The latest uploaded photos'
+	} );
 
 	var PortalPageLatestPhotosView = Backbone.View.extend( {
 
@@ -19,14 +19,12 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-//			console.log( modelJSON );
 
 			this.$el.html( this.template( {
 				 model: modelJSON
 				 , photoDTOs: modelJSON.latestPhotosDTOs
-//				, translator: translator
+				, translator: translator
 			 } ) );
-
 
 			this.applySmoothScrolling();
 
@@ -34,7 +32,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 		},
 
 		applySmoothScrolling: function() {
-//			this.$( ".latest-photos-container" )
+//			this.$( ".latest-photos-container" ).;
 		}
 } );
 

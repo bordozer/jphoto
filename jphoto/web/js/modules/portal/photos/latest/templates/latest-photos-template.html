@@ -1,9 +1,23 @@
-<div class="row text-center latest-photos-container">
+<div class="panel panel-default">
 
-	<% _.each( photoDTOs, function( photoDTO ) { %>
-		<div class="col-lg-1" style="width: auto;">
-			<a href="<%= photoDTO.photoCardUrl %>"><img src="<%=photoDTO.photoImageUrl%>" alt="<%=photoDTO.photoName%>" title="<%=photoDTO.photoName%>" height="100px;"></a>
-		</div>
-	<%})%>
+	<div class="panel-heading">
+		<h3 class="panel-title"><%=translator.theLatestPhotos%></h3>
+	</div>
+
+	<div class="panel-body latest-photos-container">
+
+		<% _.each( photoDTOs, function( photoDTO ) { %>
+			<div class="col-lg-1">
+				<a href="<%= photoDTO.photoCardUrl %>">
+					<img src="<%=photoDTO.photoImageUrl%>" alt="<%=photoDTO.photoName%>" title="<%=photoDTO.photoName%>" height="100px;">
+				</a>
+			</div>
+		<%})%>
+
+	</div>
+
+	<!--<div class="panel-footer">
+		footer
+	</div>-->
 
 </div>
