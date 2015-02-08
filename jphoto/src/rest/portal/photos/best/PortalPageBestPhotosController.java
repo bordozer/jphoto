@@ -25,6 +25,7 @@ import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 @RequestMapping( "portal-page" )
 public class PortalPageBestPhotosController {
+
+	private static final Dimension PORTAL_PAGE_BEST_PHOTO_DIMENSION = new Dimension( 500, 300 );
 
 	@Autowired
 	private PhotoService photoService;
@@ -78,7 +81,7 @@ public class PortalPageBestPhotosController {
 			photoDTO.setPhotoImageUrl( userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
 			photoDTO.setPhotoCardUrl( urlUtilsService.getPhotoCardLink( photoId ) );
 
-			final Dimension dimension = imageFileUtilsService.resizeImageToDimensionAndReturnResultDimension( photo.getPhotoImageFile(), new Dimension( 300, 300 ) );
+			final Dimension dimension = imageFileUtilsService.resizeImageToDimensionAndReturnResultDimension( photo.getPhotoImageFile(), PORTAL_PAGE_BEST_PHOTO_DIMENSION );
 			photoDTO.setDimension( dimension );
 
 			photoDTO.setIndex( index );
@@ -109,6 +112,8 @@ public class PortalPageBestPhotosController {
 				return !restrictionService.isPhotoOfTheDayRestrictedOn( photoId, currentTime );
 			}
 		} );
+
+		Collections.shuffle( ids );
 
 		return ids;
 	}

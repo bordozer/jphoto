@@ -33,8 +33,13 @@ define( [ 'backbone', 'jquery', 'underscore'
 		},
 
 	 applySlider: function () {
+		 // http://bxslider.com/options
+
 		this.$( ".best-photos-container" ).bxSlider( {
 			pagerCustom: '#bx-pager'
+			, auto: true
+			, mode: 'fade' /* 'horizontal', 'vertical', 'fade' */
+//  		, autoControls: true
 //			, adaptiveHeight: true
 //			, captions: true
 		} );
