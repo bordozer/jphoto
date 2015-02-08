@@ -1,5 +1,5 @@
 define( [ 'backbone', 'jquery', 'underscore'
-			, 'text!modules/portal/templates/portal-page-template.html'
+			, 'text!modules/portal/page/templates/portal-page-template.html'
 		], function ( Backbone, $, _, template ) {
 
 	'use strict';

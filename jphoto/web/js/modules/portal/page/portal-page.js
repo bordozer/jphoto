@@ -1,6 +1,6 @@
 define( [ 'jquery'
-			, 'modules/portal/portal-page-model'
-			, 'modules/portal/portal-page-view'
+			, 'modules/portal/page/portal-page-model'
+			, 'modules/portal/page/portal-page-view'
 		], function ( $, Model, View ) {
 
 	function init( container ) {

@@ -15,7 +15,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'modules/portal/portal-page' ], function ( $, portalPage ) {
+		require( [ 'jquery', 'modules/portal/page/portal-page' ], function ( $, portalPage ) {
 			portalPage( $( '.portal-page-container') );
 		} );
 
