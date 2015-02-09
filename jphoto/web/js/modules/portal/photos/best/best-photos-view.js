@@ -37,7 +37,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		var slider = this.$( ".best-photos-container" ).bxSlider( {
 			pagerCustom: '#bx-pager'
-			, auto: true
+			, auto: this.model.get( 'latestPhotosDTOs' ).length > 1
 			, mode: 'fade' /* 'horizontal', 'vertical', 'fade' */
 //			, ticker: true
 //  		, speed: 2000

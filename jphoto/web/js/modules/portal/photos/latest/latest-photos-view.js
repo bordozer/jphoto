@@ -13,6 +13,8 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		template:_.template( template ),
 
+		slidesToShow: 8,
+
 		initialize: function() {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -33,17 +35,21 @@ define( [ 'backbone', 'jquery', 'underscore'
 		},
 
 		applySmoothScrolling: function() {
-//			this.$( ".latest-photos-container" ).
 
 			this.$( '.latest-photos-container' ).slick( {
 				infinite: true
-				, slidesToShow: 10
+				, slidesToShow: this._slidesToShow()
 				, slidesToScroll: 3
 				, variableWidth: false
 				, dots: false
 				, autoplay: true
 				, autoplaySpeed: 5000
 			});
+		},
+
+		_slidesToShow: function() {
+			var photos = this.model.get( 'latestPhotosDTOs' ).length;
+			return photos > this.slidesToShow ? this.slidesToShow : photos;
 		}
 } );
 
