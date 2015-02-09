@@ -49,18 +49,16 @@
 
 	<div class="container-fluid">
 
-		<div class="panel panel-default">
+		<div class="row">
 
-			<div class="panel-body">
+			<div class="col-lg-2 text-center">
 
-				<div class="col-lg-2 text-center">
-
-					<div class="row" style="height: 30px;">
-						<h3><a href="$portalpageurl">$progectname</a></h3>
+					<div class="row" style="height: 35px;">
+						<span style="font-size: 24px;"><a href="$portalpageurl">$progectname</a></span>
 					</div>
 
 					<div class="row" style="height: 30px;">
-						<h5><a href="$portalpageurl">$slogan</a></h5>
+						<a href="$portalpageurl">$slogan</a>
 					</div>
 
 					<div class="row" style="height: 30px;">
@@ -86,8 +84,9 @@
 							}
 						</script>
 					</div>
+			</div>
 
-				</div>
+			<div class="col-lg-10">
 
 				<div class="col-lg-8">
 
@@ -115,7 +114,8 @@
 						#end
 					</div>
 				</div>
-				<div class="col-lg-2">
+
+				<div class="col-lg-3" style="float: right !important; margin-top: 10px;">
 					#parse( "loginForm.vm" )
 				</div>
 
