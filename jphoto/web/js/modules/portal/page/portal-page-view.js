@@ -6,19 +6,19 @@ define( [ 'backbone', 'jquery', 'underscore'
 			, 'modules/portal/photos/best/best-photos-view'
 			, 'modules/portal/authors/best-authors-model'
 			, 'modules/portal/authors/best-authors-view'
+			, 'modules/portal/genres/pp-genres-model'
+			, 'modules/portal/genres/pp-genres-view'
 		], function ( Backbone, $, _, template
 		, LatestPhotosModel, LatestPhotosView
 		, BestPhotosModel, BestPhotosView
 		, BestAuthorsModel, BestAuthorsView
+		, GenresModel, GenresView
 		) {
 
 	'use strict';
 
 	var translator = Backbone.JPhoto.translateAll( {
-		photoGenres: 'Portal page: Photo genres'
-		, theBestWeeksAuthors: 'Portal page: The best weeks authors'
-		, theBestMonthAuthors: 'Portal page: The best month authors'
-		, activityStream: 'Portal page: Activity stream'
+		activityStream: 'Portal page: Activity stream'
 	} );
 
 	var PortalPageView = Backbone.View.extend( {
@@ -42,6 +42,8 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 			this.renderBestPhotos();
 
+			this.renderCategories();
+
 			this.renderBestWeekAuthors();
 
 			this.renderBestMonthAuthors();
@@ -61,6 +63,15 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 			var model = new BestPhotosModel.PortalPageBestPhotosModel();
 			var view = new BestPhotosView.PortalPageBestPhotosView( { model: model, el: container } );
+
+			container.html( view.$el );
+		},
+
+		renderCategories: function() {
+			var container = this.$( '.genres-container' );
+
+			var model = new GenresModel.PortalPageGenresModel();
+			var view = new GenresView.PortalPageGenresView( { model: model, el: container } );
 
 			container.html( view.$el );
 		},

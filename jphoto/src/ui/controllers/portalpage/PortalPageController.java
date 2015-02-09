@@ -1,39 +1,14 @@
 package ui.controllers.portalpage;
 
-import core.general.configuration.ConfigurationKey;
-import core.general.genre.Genre;
-import core.general.photo.Photo;
-import core.general.user.User;
-import core.services.entry.ActivityStreamService;
-import core.services.entry.GenreService;
-import core.services.photo.PhotoService;
-import core.services.photo.PhotoVotingService;
-import core.services.security.RestrictionService;
-import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
-import core.services.utils.DateUtilsService;
-import core.services.utils.RandomUtilsService;
 import core.services.utils.SystemVarsService;
-import core.services.utils.UserPhotoFilePathUtilsService;
-import core.services.utils.sql.PhotoListQueryBuilder;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sql.SqlSelectIdsResult;
-import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
-import ui.services.security.SecurityUIService;
-
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @Controller
 @RequestMapping( "/" )
@@ -43,30 +18,7 @@ public class PortalPageController {
 	public static final String MODEL_NAME = "portalPageModel";
 
 	@Autowired
-	private PhotoService photoService;
-
-	@Autowired
-	private GenreService genreService;
-
-	@Autowired
-	private ConfigurationService configurationService;
-
-	@Autowired
-	private PhotoVotingService photoVotingService;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
-
-	@Autowired
 	private TranslatorService translatorService;
-	@Autowired
-	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
-
-	@Autowired
-	private SecurityUIService securityUIService;
-
-	@Autowired
-	private RestrictionService restrictionService;
 
 	@Autowired
 	private SystemVarsService systemVarsService;
@@ -82,8 +34,6 @@ public class PortalPageController {
 
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
-
-
 
 		/*model.setLastUploadedPhotos( getPortalPagePhotos( getLastUploadedPhotos() ) );
 
@@ -127,7 +77,7 @@ public class PortalPageController {
 		return VIEW;
 	}
 
-	private List<PortalPagePhoto> getPortalPagePhotos( final List<Integer> photosIds ) {
+	/*private List<PortalPagePhoto> getPortalPagePhotos( final List<Integer> photosIds ) {
 		final User accessor = EnvironmentContext.getCurrentUser();
 		Collections.shuffle( photosIds );
 		final List<PortalPagePhoto> lastUploadedPhotos = newArrayList();
@@ -174,5 +124,5 @@ public class PortalPageController {
 		} );
 
 		return ids;
-	}
+	}*/
 }

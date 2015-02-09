@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		<h3 class="panel-title"><%=translator.genresTitle%></h3>
+	</div>
+
+	<div class="panel-body">
+
+		<div class="col-lg-12 genres-container">
+			<table class="table">
+				<% _.each( genreDTOs, function( genreDTO ) { %>
+					<tr>
+						<td align="left"><small><%=genreDTO.genrePhotosLink%></small></td>
+						<td width="30px" align="right"><small><%=genreDTO.totalPhotos%></small></td>
+						<td width="50px" align="right"><small>+<%=genreDTO.todayPhotos%></small></td>
+					</tr>
+				<%})%>
+			</table>
+		</div>
+
+	</div>
+
+</div>

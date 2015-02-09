@@ -1,10 +1,14 @@
 define( [ 'backbone', 'jquery', 'underscore'
-			, 'text!modules/portal/authors/templates/best-authors-template.html'
+			, 'text!modules/portal/genres/templates/pp-genres-template.html'
 		], function ( Backbone, $, _, template ) {
 
 	'use strict';
 
-	var PortalPageBestAuthorsView = Backbone.View.extend( {
+	var translator = Backbone.JPhoto.translateAll( {
+		genresTitle: 'Portal page: categories'
+	} );
+
+	var PortalPageGenresView = Backbone.View.extend( {
 
 		template:_.template( template ),
 
@@ -18,13 +22,13 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 			this.$el.html( this.template( {
 				 model: modelJSON
-				 , authorDTOs: modelJSON.authorDTOs
-				 , title: modelJSON.title
+				 , genreDTOs: modelJSON.genreDTOs
+				 , translator: translator
 			 } ) );
 
 			return this.$el;
 		}
 } );
 
-	return { PortalPageBestAuthorsView: PortalPageBestAuthorsView };
+	return { PortalPageGenresView: PortalPageGenresView };
 } );
