@@ -79,6 +79,7 @@ public class PortalPageController {
 
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel prepareModel() {
+
 		final PortalPageModel model = new PortalPageModel();
 		model.setTranslatorService( translatorService );
 
@@ -88,7 +89,13 @@ public class PortalPageController {
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
 
-		model.setLastUploadedPhotos( getPortalPagePhotos( getLastUploadedPhotos() ) );
+		model.setWeekBegin( dateUtilsService.formatDate( dateUtilsService.getFirstSecondOfLastMonday() ) );
+		model.setWeekEnd( dateUtilsService.formatDate( dateUtilsService.getLastSecondOfNextSunday() ) );
+
+		model.setMonthBegin( dateUtilsService.formatDate( dateUtilsService.getFirstSecondOfMonth() ) );
+		model.setMonthEnd( dateUtilsService.formatDate( dateUtilsService.getLastSecondOfMonth() ) );
+
+		/*model.setLastUploadedPhotos( getPortalPagePhotos( getLastUploadedPhotos() ) );
 
 		final List<Integer> theBestPhotosIds = getTheBestPhotosIds();
 		model.setBestPhotos( getPortalPagePhotos( theBestPhotosIds ) );
@@ -122,7 +129,7 @@ public class PortalPageController {
 		model.setPortalPageGenres( portalPageGenres );
 		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotosIds.size() - 1 ) );
 
-		model.setLastActivities( activityStreamService.getLastActivities( configurationService.getInt( ConfigurationKey.SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH ) ) );
+		model.setLastActivities( activityStreamService.getLastActivities( configurationService.getInt( ConfigurationKey.SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH ) ) );*/
 
 		final String title = translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, EnvironmentContext.getLanguage() );
 		model.getPageModel().setPageTitleData( new PageTitleData( systemVarsService.getProjectName(), title, title ) );

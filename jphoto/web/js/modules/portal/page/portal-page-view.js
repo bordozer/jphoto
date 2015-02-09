@@ -4,9 +4,12 @@ define( [ 'backbone', 'jquery', 'underscore'
 			, 'modules/portal/photos/latest/latest-photos-view'
 			, 'modules/portal/photos/best/best-photos-model'
 			, 'modules/portal/photos/best/best-photos-view'
+			, 'modules/portal/authors/best-authors-model'
+			, 'modules/portal/authors/best-authors-view'
 		], function ( Backbone, $, _, template
 		, LatestPhotosModel, LatestPhotosView
 		, BestPhotosModel, BestPhotosView
+		, BestAuthorsModel, BestAuthorsView
 		) {
 
 	'use strict';
@@ -22,7 +25,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 		template:_.template( template ),
 
-		initialize: function() {
+		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -38,6 +41,10 @@ define( [ 'backbone', 'jquery', 'underscore'
 			this.renderLatestPhotos();
 
 			this.renderBestPhotos();
+
+			this.renderBestWeekAuthors();
+
+			this.renderBestMonthAuthors();
 		},
 
 		renderLatestPhotos: function() {
@@ -54,6 +61,26 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 			var model = new BestPhotosModel.PortalPageBestPhotosModel();
 			var view = new BestPhotosView.PortalPageBestPhotosView( { model: model, el: container } );
+
+			container.html( view.$el );
+		},
+
+		renderBestWeekAuthors: function() {
+			var container = this.$( '.best-week-authors-container' );
+
+			var dateOptions = this.model.dateOptions;
+			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: dateOptions.weekBegin, dateTo: dateOptions.weekEnd } );
+			var view = new BestAuthorsView.PortalPageBestAuthorsView( { model: model, el: container } );
+
+			container.html( view.$el );
+		},
+
+		renderBestMonthAuthors: function() {
+			var container = this.$( '.best-month-authors-container' );
+
+			var dateOptions = this.model.dateOptions;
+			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: dateOptions.monthBegin, dateTo: dateOptions.monthEnd } );
+			var view = new BestAuthorsView.PortalPageBestAuthorsView( { model: model, el: container } );
 
 			container.html( view.$el );
 		}
