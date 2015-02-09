@@ -3,7 +3,6 @@ package rest.portal.authors;
 public class AuthorDTO {
 
 	private int userId;
-	private String userName;
 	private String userCardLink;
 
 	private int rating;
@@ -14,14 +13,6 @@ public class AuthorDTO {
 
 	public void setUserId( final int userId ) {
 		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName( final String userName ) {
-		this.userName = userName;
 	}
 
 	public String getUserCardLink() {

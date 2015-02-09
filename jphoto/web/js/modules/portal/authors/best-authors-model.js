@@ -3,6 +3,7 @@ define( ["backbone"], function ( Backbone ) {
 	var PortalPageBestAuthorsModel = Backbone.Model.extend( {
 
 		initialize:function ( options ) {
+
 			this.dateFrom = options.dateFrom;
 			this.dateTo = options.dateTo;
 

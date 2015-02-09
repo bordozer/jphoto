@@ -19,6 +19,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 			this.$el.html( this.template( {
 				 model: modelJSON
+				 , authorDTOs: modelJSON.authorDTOs
 				 , title: modelJSON.title
 			 } ) );
 

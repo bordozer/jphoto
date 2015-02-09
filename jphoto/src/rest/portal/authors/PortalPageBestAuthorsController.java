@@ -4,7 +4,6 @@ import core.general.data.UserRating;
 import core.general.user.User;
 import core.services.photo.PhotoVotingService;
 import core.services.translator.TranslatorService;
-import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ public class PortalPageBestAuthorsController {
 	private static final int TOP_BEST_USERS_QTY = 10;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
@@ -44,7 +40,7 @@ public class PortalPageBestAuthorsController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/best/{dateFrom}/{dateTo}/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public BestAuthorsModel theBestAuthors( final @PathVariable ( "dateFrom" ) String _dateFrom, final @PathVariable ( "dateFrom" ) String _dateTo ) {
+	public BestAuthorsModel theBestAuthors( final @PathVariable ( "dateFrom" ) String _dateFrom, final @PathVariable ( "dateTo" ) String _dateTo ) {
 
 		final Date dateFrom = dateUtilsService.parseDate( _dateFrom );
 		final Date dateTo = dateUtilsService.parseDate( _dateTo );
@@ -62,7 +58,6 @@ public class PortalPageBestAuthorsController {
 			final User user = userRating.getUser();
 
 			dto.setUserId( user.getId() );
-			dto.setUserName( user.getName() );
 			dto.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
 
 			dto.setRating( userRating.getRating() );
