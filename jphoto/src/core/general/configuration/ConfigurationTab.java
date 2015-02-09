@@ -5,6 +5,7 @@ public enum ConfigurationTab {
 	ALL( "all", "ConfigurationTab: All tabs" )
 	, CHANGES_ONLY( "changes", "ConfigurationTab: Changes only" )
 	, SYSTEM( "system", "ConfigurationTab: System" )
+	, PORTAL_PAGE( "archiving", "ConfigurationTab: Portal page" )
 	, CANDIDATES( "candidates", "ConfigurationTab: Candidates" )
 	, MEMBERS( "users", "ConfigurationTab: Members" )
 	, AVATAR( "avatar", "ConfigurationTab: Avatar" )

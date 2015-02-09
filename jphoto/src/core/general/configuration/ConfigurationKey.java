@@ -10,13 +10,16 @@ public enum ConfigurationKey {
 	, SYSTEM_USER_NAME_MAX_LENGTH( 103, "30", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Max length of member name" )
 	, SYSTEM_PHOTO_NAME_MAX_LENGTH( 104, "100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Max length of photo name (DB limit is 255)" )
 	, SYSTEM_SHOW_UI_MENU_GO_TO_PHOTOS_FOR_OWN_ENTRIES( 105, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Show menu items 'Go to photos...' for own entries" )
-	, SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH( 107, "15", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.SYSTEM, "Portal page activity stream length" )
 	, SYSTEM_ACTIVITY_LOG_PHOTO_PREVIEWS( 108, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log photo preview activity" )
 	, SYSTEM_ACTIVITY_LOG_FAVORITE_ACTIONS( 109, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log favorite actions activity" )
 	, SYSTEM_UI_SHOW_PHOTOS_BY_CATEGORIES_MENU_ITEM( 111, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Show photos by categories site menu item" )
 	, SYSTEM_UI_SHOW_PHOTO_CATEGORIES_TOOLBAR( 112, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Show photo categories toolbar" )
-	, SYSTEM_UI_PORTAL_PAGE_LATEST_PHOTOS_COUNT( 113, "12", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.SYSTEM, "Portal page latest photos count" )
 //	, SYSTEM_TEMP( 10900, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.SYSTEM, "Test missing configuration" )
+
+	, SYSTEM_UI_PORTAL_PAGE_LATEST_PHOTOS_COUNT( 113, "12", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PORTAL_PAGE, "Portal page latest photos count" )
+	, PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS( 1000, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PORTAL_PAGE, "The best portal page photos based on a voting period in last N days" )
+	, PORTAL_PAGE_BEST_AUTHORS_RATING_LENGTH( 114, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.PORTAL_PAGE, "Portal page best authors rating length" )
+	, SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH( 107, "15", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.PORTAL_PAGE, "Portal page activity stream length" )
 
 	, MEMBERS_FILE_MAX_SIZE_KB( 200, "500", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.MEMBERS, "Max size of uploading file" )
 	, MEMBERS_DAILY_FILE_SIZE_LIMIT( 201, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.MEMBERS, "Max summary photos size that allowed to upload daily" )
@@ -79,7 +82,6 @@ public enum ConfigurationKey {
 	, PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT( 804, "3", true, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.PHOTO_VOTING, "Photo appraisal: categories count" )
 	, PHOTO_VOTING_ALLOW_MULTIPLE_APPRAISAL_CATEGORIES( 805, "0", true, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_VOTING, "Allow appraisal a photo in multiple categories ( define a category more then one time )" )
 
-	, PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS( 1000, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_RATING, "The best portal page photos based on a voting period in last N days" )
 	, PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY( 1001, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_RATING, "A photo must get this marks in voting period to pretend to be the best photo of the day" )
 	, PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS( 1002, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_RATING, "The best photos in photo lists based on a voting period in last N days" )
 	, PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO( 1003, "40", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_RATING, "A photo must get this marks in voting period to appear in a top best of photo list" )

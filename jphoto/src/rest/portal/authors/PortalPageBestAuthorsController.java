@@ -1,8 +1,10 @@
 package rest.portal.authors;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.data.UserRating;
 import core.general.user.User;
 import core.services.photo.PhotoVotingService;
+import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -24,8 +26,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping( "portal-page/authors" )
 public class PortalPageBestAuthorsController {
 
-	private static final int TOP_BEST_USERS_QTY = 10;
-
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
@@ -38,6 +38,9 @@ public class PortalPageBestAuthorsController {
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
+	@Autowired
+	private ConfigurationService configurationService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/best/{dateFrom}/{dateTo}/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public BestAuthorsModel theBestAuthors( final @PathVariable ( "dateFrom" ) String _dateFrom, final @PathVariable ( "dateTo" ) String _dateTo ) {
@@ -49,7 +52,7 @@ public class PortalPageBestAuthorsController {
 
 		model.setTitle( translatorService.translate( "Portal page: Beat authors $1 - $2", EnvironmentContext.getLanguage(), _dateFrom, _dateTo ) );
 
-		final List<UserRating> users = photoVotingService.getUserRatingForPeriod( dateFrom, dateTo, TOP_BEST_USERS_QTY );
+		final List<UserRating> users = photoVotingService.getUserRatingForPeriod( dateFrom, dateTo, configurationService.getInt( ConfigurationKey.PORTAL_PAGE_BEST_AUTHORS_RATING_LENGTH ) );
 
 		final List<AuthorDTO> authors = newArrayList();
 		for ( final UserRating userRating : users ) {

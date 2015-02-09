@@ -10,8 +10,14 @@
 			<table class="table">
 				<% _.each( activityStreamEntryDTOs, function( activityDTO ) { %>
 					<tr>
-						<td width="30px"><small><%=activityDTO.activityIcon%></small></td>
-						<td width="30px"><small><%=activityDTO.activityTime%></small></td>
+						<td width="30px">
+							<div class="row">
+								<%=activityDTO.activityIcon%>
+							</div>
+							<div class="row">
+								<small><span style="text-align: left;"><%=activityDTO.activityTime%> <%=activityDTO.activityUserLink%></span></small>
+							</div>
+						</td>
 					</tr>
 				<%})%>
 			</table>
