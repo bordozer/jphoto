@@ -54,8 +54,9 @@ public class PortalPageGenresController {
 
 			dtos.add( genreDTO );
 		}
-
 		model.setGenreDTOs( dtos );
+
+		model.setTotalPhotos( photoService.getPhotosCount() );
 
 		return model;
 	}

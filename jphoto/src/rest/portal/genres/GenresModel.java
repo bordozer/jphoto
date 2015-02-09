@@ -6,6 +6,7 @@ public class GenresModel {
 
 	private int id = 1;
 	private List<GenreDTO> genreDTOs;
+	private int totalPhotos;
 
 	public int getId() {
 		return id;
@@ -21,5 +22,13 @@ public class GenresModel {
 
 	public void setGenreDTOs( final List<GenreDTO> genreDTOs ) {
 		this.genreDTOs = genreDTOs;
+	}
+
+	public int getTotalPhotos() {
+		return totalPhotos;
+	}
+
+	public void setTotalPhotos( final int totalPhotos ) {
+		this.totalPhotos = totalPhotos;
 	}
 }

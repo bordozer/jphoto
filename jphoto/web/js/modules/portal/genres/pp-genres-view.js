@@ -6,6 +6,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 	var translator = Backbone.JPhoto.translateAll( {
 		genresTitle: 'Portal page: categories'
+		, totalPhotos: 'Portal page: totalPhotos'
 	} );
 
 	var PortalPageGenresView = Backbone.View.extend( {
@@ -23,6 +24,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 			this.$el.html( this.template( {
 				 model: modelJSON
 				 , genreDTOs: modelJSON.genreDTOs
+				 , totalPhotos: modelJSON.totalPhotos
 				 , translator: translator
 			 } ) );
 
