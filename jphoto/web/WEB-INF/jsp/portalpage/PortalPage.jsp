@@ -21,15 +21,7 @@
 	<script type="text/javascript">
 
 		require( [ 'jquery', 'modules/portal/page/portal-page' ], function ( $, portalPage ) {
-
-			var dateOptions = {
-				weekBegin: '${portalPageModel.weekBegin}'
-				, weekEnd: '${portalPageModel.weekEnd}'
-				, monthBegin: '${portalPageModel.monthBegin}'
-				, monthEnd: '${portalPageModel.monthEnd}'
-			};
-
-			portalPage( dateOptions, $( '.portal-page-container') );
+			portalPage( $( '.portal-page-container') );
 		} );
 
 	</script>

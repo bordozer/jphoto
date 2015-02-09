@@ -68,8 +68,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 		renderBestWeekAuthors: function() {
 			var container = this.$( '.best-week-authors-container' );
 
-			var dateOptions = this.model.dateOptions;
-			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: dateOptions.weekBegin, dateTo: dateOptions.weekEnd } );
+			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: this.model.get( 'weekBegin' ), dateTo: this.model.get( 'weekEnd' ) } );
 			var view = new BestAuthorsView.PortalPageBestAuthorsView( { model: model, el: container } );
 
 			container.html( view.$el );
@@ -78,8 +77,7 @@ define( [ 'backbone', 'jquery', 'underscore'
 		renderBestMonthAuthors: function() {
 			var container = this.$( '.best-month-authors-container' );
 
-			var dateOptions = this.model.dateOptions;
-			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: dateOptions.monthBegin, dateTo: dateOptions.monthEnd } );
+			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: this.model.get( 'monthBegin' ), dateTo: this.model.get( 'monthEnd' ) } );
 			var view = new BestAuthorsView.PortalPageBestAuthorsView( { model: model, el: container } );
 
 			container.html( view.$el );

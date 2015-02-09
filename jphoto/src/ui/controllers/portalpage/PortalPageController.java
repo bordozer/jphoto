@@ -58,12 +58,6 @@ public class PortalPageController {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private RandomUtilsService randomUtilsService;
-
-	@Autowired
-	private ActivityStreamService activityStreamService;
-
-	@Autowired
 	private TranslatorService translatorService;
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
@@ -89,11 +83,7 @@ public class PortalPageController {
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
 
-		model.setWeekBegin( dateUtilsService.formatDate( dateUtilsService.getFirstSecondOfLastMonday() ) );
-		model.setWeekEnd( dateUtilsService.formatDate( dateUtilsService.getLastSecondOfNextSunday() ) );
 
-		model.setMonthBegin( dateUtilsService.formatDate( dateUtilsService.getFirstSecondOfMonth() ) );
-		model.setMonthEnd( dateUtilsService.formatDate( dateUtilsService.getLastSecondOfMonth() ) );
 
 		/*model.setLastUploadedPhotos( getPortalPagePhotos( getLastUploadedPhotos() ) );
 

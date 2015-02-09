@@ -28,12 +28,6 @@ public class PortalPageModel extends AbstractGeneralPageModel {
 
 	private TranslatorService translatorService;
 
-	private String weekBegin;
-	private String weekEnd;
-
-	private String monthBegin;
-	private String monthEnd;
-
 	public List<PortalPagePhoto> getLastUploadedPhotos() {
 		return lastUploadedPhotos;
 	}
@@ -112,37 +106,5 @@ public class PortalPageModel extends AbstractGeneralPageModel {
 
 	public void setTranslatorService( final TranslatorService translatorService ) {
 		this.translatorService = translatorService;
-	}
-
-	public String getWeekBegin() {
-		return weekBegin;
-	}
-
-	public void setWeekBegin( final String weekBegin ) {
-		this.weekBegin = weekBegin;
-	}
-
-	public String getWeekEnd() {
-		return weekEnd;
-	}
-
-	public void setWeekEnd( final String weekEnd ) {
-		this.weekEnd = weekEnd;
-	}
-
-	public String getMonthBegin() {
-		return monthBegin;
-	}
-
-	public void setMonthBegin( final String monthBegin ) {
-		this.monthBegin = monthBegin;
-	}
-
-	public String getMonthEnd() {
-		return monthEnd;
-	}
-
-	public void setMonthEnd( final String monthEnd ) {
-		this.monthEnd = monthEnd;
 	}
 }
