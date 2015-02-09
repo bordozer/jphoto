@@ -3,10 +3,10 @@ package rest.portal.activity;
 public class ActivityStreamEntryDTO {
 
 	private int id;
-	private String activityText;
+	private String activityIcon;
 	private String activityTime;
 	private String activityUserLink;
-	private String activityIcon;
+	private String activityText;
 
 	public int getId() {
 		return id;
