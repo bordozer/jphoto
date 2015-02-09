@@ -49,10 +49,7 @@ public class PortalPageGenresController {
 			final GenreDTO genreDTO = new GenreDTO();
 			genreDTO.setGenreId( genre.getId() );
 			genreDTO.setGenrePhotosLink( entityLinkUtilsService.getPhotosByGenreLink( genre, EnvironmentContext.getLanguage() ) );
-
-
 			genreDTO.setTodayPhotos( photoService.getPhotosCountByGenreForPeriod( genre, todayFirstSecond, todayLastSecond ) );
-
 			genreDTO.setTotalPhotos( photoService.getPhotosCountByGenre( genre.getId() ) );
 
 			dtos.add( genreDTO );
