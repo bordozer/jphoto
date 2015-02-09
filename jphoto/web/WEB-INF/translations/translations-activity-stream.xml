@@ -80,7 +80,7 @@
 
 	<translation>
 		<nerd>activity stream entry: voted for rank of $1 in category $2 ( $3 )</nerd>
-		<ru><![CDATA[проголосовал(а) за ранг $1 в разделе '$2' ( $3 )]]></ru>
+		<ru><![CDATA[проголосовал(а) за за изменение ранга $1 в разделе '$2' ( $3 )]]></ru>
 	</translation>
 
 	<translation>
