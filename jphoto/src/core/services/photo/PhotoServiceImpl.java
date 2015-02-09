@@ -34,6 +34,9 @@ import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 
@@ -45,6 +48,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 
 public class PhotoServiceImpl implements PhotoService {
+
+	private static final String CACHE_KEY_PHOTO_SERVICE_TOTAL_PHOTOS = "photoService.total.photos";
 
 	@Autowired
 	private PhotoDao photoDao;
@@ -115,6 +120,9 @@ public class PhotoServiceImpl implements PhotoService {
 	private final LogHelper log = new LogHelper( PhotoServiceImpl.class );
 
 	@Override
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_KEY_PHOTO_SERVICE_TOTAL_PHOTOS, allEntries = true ),
+	} )
 	public boolean save( final Photo entry ) {
 
 		final boolean isNew = entry.isNew();
@@ -142,7 +150,11 @@ public class PhotoServiceImpl implements PhotoService {
 
 		return isSaved;
 	}
+
 	@Override
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_KEY_PHOTO_SERVICE_TOTAL_PHOTOS, allEntries = true ),
+	} )
 	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
 		final User photoAuthor = userService.load( photo.getUserId() );
@@ -165,6 +177,9 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_KEY_PHOTO_SERVICE_TOTAL_PHOTOS, allEntries = true ),
+	} )
 	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final String photoImageUrl, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
 		final User photoAuthor = userService.load( photo.getUserId() );
@@ -205,6 +220,9 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_KEY_PHOTO_SERVICE_TOTAL_PHOTOS, allEntries = true ),
+	} )
 	public boolean delete( final int entryId ) {
 
 		final Photo photo = load( entryId ); // Must be loaded before photo photoDao.delete()
@@ -256,6 +274,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
+	@Cacheable( value = CACHE_KEY_PHOTO_SERVICE_TOTAL_PHOTOS )
 	public int getPhotosCount() {
 		return photoDao.getPhotoQty();
 	}
