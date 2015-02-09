@@ -1,6 +1,6 @@
 package rest.editableList.albums;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import rest.editableList.AbstractEditableListEntryDTO;
 
 @JsonIgnoreProperties( ignoreUnknown = true )

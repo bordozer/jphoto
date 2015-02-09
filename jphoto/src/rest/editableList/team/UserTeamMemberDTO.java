@@ -1,6 +1,6 @@
 package rest.editableList.team;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import rest.editableList.AbstractEditableListEntryDTO;
 
 @JsonIgnoreProperties( ignoreUnknown = true )

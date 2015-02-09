@@ -1,6 +1,6 @@
 package rest.photo.upload.category;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import rest.photo.upload.category.allowance.PhotoUploadDescription;
 
 import java.util.List;
