@@ -8,11 +8,14 @@ define( [ 'backbone', 'jquery', 'underscore'
 			, 'modules/portal/authors/best-authors-view'
 			, 'modules/portal/genres/pp-genres-model'
 			, 'modules/portal/genres/pp-genres-view'
+			, 'modules/portal/activity/pp-activity-model'
+			, 'modules/portal/activity/pp-activity-view'
 		], function ( Backbone, $, _, template
 		, LatestPhotosModel, LatestPhotosView
 		, BestPhotosModel, BestPhotosView
 		, BestAuthorsModel, BestAuthorsView
 		, GenresModel, GenresView
+		, ActivityStreamModel, ActivityStreamView
 		) {
 
 	'use strict';
@@ -47,6 +50,8 @@ define( [ 'backbone', 'jquery', 'underscore'
 			this.renderBestWeekAuthors();
 
 			this.renderBestMonthAuthors();
+
+			this.renderActivityStream();
 		},
 
 		renderLatestPhotos: function() {
@@ -90,6 +95,15 @@ define( [ 'backbone', 'jquery', 'underscore'
 
 			var model = new BestAuthorsModel.PortalPageBestAuthorsModel( { dateFrom: this.model.get( 'monthBegin' ), dateTo: this.model.get( 'monthEnd' ) } );
 			var view = new BestAuthorsView.PortalPageBestAuthorsView( { model: model, el: container } );
+
+			container.html( view.$el );
+		},
+
+		renderActivityStream: function() {
+			var container = this.$( '.activity-stream-container' );
+
+			var model = new ActivityStreamModel.PortalPageActivityStreamModel();
+			var view = new ActivityStreamView.PortalPageActivityStreamView( { model: model, el: container } );
 
 			container.html( view.$el );
 		}

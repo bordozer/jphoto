@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		<h3 class="panel-title"><%=translator.title%></h3>
+	</div>
+
+	<div class="panel-body">
+
+		<div class="col-lg-12 genres-container">
+			<table class="table">
+				<% _.each( activityStreamEntryDTOs, function( activityDTO ) { %>
+					<tr>
+						<td width="30px"><small><%=activityDTO.activityIcon%></small></td>
+						<td width="30px"><small><%=activityDTO.activityTime%></small></td>
+					</tr>
+				<%})%>
+			</table>
+		</div>
+
+	</div>
+
+</div>

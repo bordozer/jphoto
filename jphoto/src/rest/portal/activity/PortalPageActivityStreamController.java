@@ -44,7 +44,7 @@ public class PortalPageActivityStreamController {
 		for ( final AbstractActivityStreamEntry activity : activities ) {
 			final ActivityStreamEntryDTO dto = new ActivityStreamEntryDTO();
 			dto.setActivityText( activity.getActivityText( language ) );
-			dto.setActivityTime( dateUtilsService.formatDateTimeShort( activity.getActivityTime() ) );
+			dto.setActivityTime( dateUtilsService.isItToday( activity.getActivityTime() ) ? dateUtilsService.formatTimeShort( activity.getActivityTime() ) : dateUtilsService.formatDateTimeShort( activity.getActivityTime() ) );
 			dto.setActivityUserLink( activity.getDisplayActivityUserLink().build( language ) );
 			dto.setActivityIcon( activity.getDisplayActivityIcon() );
 
