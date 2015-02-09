@@ -13,10 +13,6 @@
 <%@ attribute name="user" type="core.general.user.User" required="false" %>
 <%@ attribute name="callbackJSFunction" type="java.lang.String" required="false" %>
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
-
 <style type="text/css">
 	.ui-autocomplete {
 		max-height: 300px;

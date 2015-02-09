@@ -22,6 +22,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
+	<script type="text/javascript">
+		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+	</script>
 
 	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
@@ -35,10 +38,6 @@
 </head>
 
 <body>
-
-	<script type="text/javascript">
-		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-	</script>
 
 	<div class="restriction-area-header">
 

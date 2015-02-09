@@ -1,5 +1,3 @@
-<%@ tag import="org.jabsorb.JSONRPCBridge" %>
-<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
 <%@ tag import="ui.services.menu.entry.items.comment.ComplaintReasonType" %>
@@ -13,9 +11,6 @@
 <c:set var="customDescriptionTextId" value="customDescriptionTextId" />
 <c:set var="sendComplaintDivId" value="sendCoplaintDivId" />
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 <c:set var="complaintEntities" value="<%=EntryMenuType.values()%>"/>
@@ -31,7 +26,6 @@
 
 	function initContextMenuForEntry( entryId, menuTypeId, container ) {
 		require( ['components/menu/context-menu'], function ( contextMenu ) {
-//			console.log( 'Initializing a context menu for ', container );
 			contextMenu( entryId, menuTypeId, container );
 		} );
 	}

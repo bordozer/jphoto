@@ -1,5 +1,4 @@
 <%@ tag import="ui.context.ApplicationContextHelper" %>
-<%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
@@ -11,9 +10,6 @@
 
 <%@ attribute name="pageModel" required="true" type="ui.elements.PageModel" %>
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 <c:set var="isSuperAdmin" value="<%=ApplicationContextHelper.getSecurityService().isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() )%>"/>
 <c:set var="menuType_PhotoId" value="<%=EntryMenuType.PHOTO.getId()%>" />
@@ -21,8 +17,6 @@
 <eco:page pageModel="${pageModel}">
 
 	<script type="text/javascript">
-
-		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 
 		function showUIMessage_Notification( messageText ) {
 			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {

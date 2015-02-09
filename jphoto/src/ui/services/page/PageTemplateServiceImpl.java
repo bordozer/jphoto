@@ -22,13 +22,15 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.ToolManager;
+import org.jabsorb.JSONRPCBridge;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mobile.device.DeviceType;
+import ui.context.ApplicationContextHelper;
 import ui.context.EnvironmentContext;
 import ui.controllers.users.login.UserLoginModel;
 import ui.elements.MenuItem;
 import ui.elements.PageModel;
 import ui.elements.PageTitleData;
+import ui.services.ajax.AjaxService;
 import ui.services.menu.main.MenuService;
 import ui.services.page.icons.TitleIconLoader;
 import utils.StringUtilities;
@@ -79,10 +81,16 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	@Autowired
 	private ConfigurationService configurationService;
 
+	@Autowired
+	private AjaxService ajaxService;
+
 	private final LogHelper log = new LogHelper( PageTemplateServiceImpl.class );
 
 	@Override
 	public String renderPageHeader( final PageModel pageModel ) {
+
+		JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ajaxService );
+
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		final Language language = currentUser.getLanguage();
 
