@@ -4,6 +4,7 @@
 <%@ page import="ui.context.EnvironmentContext" %>
 <%@ page import="ui.services.breadcrumbs.items.BreadcrumbsBuilder" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
+<%@ page import="rest.portal.authors.PortalPageBestAuthorsController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
@@ -218,8 +219,6 @@
 				</table:table>
 
 			</table:td>
-
-			<c:set var="topBestUsersQty" value="<%=PortalPageModel.TOP_BEST_USERS_QTY%>"/>
 
 			<table:td width="${ratingWirth}" valign="top">
 				<user:userRating userRatings="${portalPageModel.bestWeekUserRating}" listTitle="${eco:translate('Portal page: Top authors of the week')}" />

@@ -9,8 +9,6 @@ import java.util.List;
 
 public class PortalPageModel extends AbstractGeneralPageModel {
 
-	public static final int TOP_BEST_USERS_QTY = 10;
-
 	private List<PortalPagePhoto> lastUploadedPhotos;
 	private List<PortalPagePhoto> bestPhotos;
 
