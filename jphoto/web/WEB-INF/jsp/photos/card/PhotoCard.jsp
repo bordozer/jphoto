@@ -55,7 +55,11 @@
 <c:set var="isMobile" value="<%=EnvironmentContext.getDeviceType() == DeviceType.MOBILE%>"/>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
+<c:set var="photoImageID" value="photo_${photo.id}" />
+
 <tags:page pageModel="${photoCardModel.pageModel}">
+
+	<%--<link rel="stylesheet" type="text/css" href="${baseUrl}/js/lib/slimbox2/slimbox2.css"/>--%>
 
 	<tags:contextMenuJs />
 
@@ -68,8 +72,20 @@
 		<div class="panel-body text-center" style="background-color: ${not empty photo.bgColor ? photo.bgColor : 'transparent'};">
 
 			<a href="#" onclick="return false;">
-				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
+				<img id="${photoImageID}"
+					 src="${imageUrl}"
+					 alt="${photoNameEscaped}"
+					 title="${photoNameEscaped}"
+					 width="${shownDimension.width}"
+					 height="${shownDimension.height}"
+				/>
 			</a>
+
+			<script type="text/javascript">
+				/*require( [ 'jquery', '/js/lib/slimbox2/slimbox2.js'], function ( $, lightbox ) {
+
+				} );*/
+			</script>
 
 		</div>
 

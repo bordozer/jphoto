@@ -31,8 +31,6 @@ Base functionality
 			- Custom
 			- Delete unused context menus and tests
 
-7. Portal page
-
 
 ADMIN functions
 
@@ -63,3 +61,4 @@ Technical debt
 
 Known bugs
 - Photo import: selected photo categories are not saved theirs states
+- User comments count - add archived too
