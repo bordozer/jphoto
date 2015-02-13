@@ -95,15 +95,14 @@ define( ["backbone", "jquery", "underscore"
 		, renderBookmarkIcons: function( iconsContainer ) {
 
 			var model = this.model;
-			var el = this.$el;
 
 			_.each( this.model.get( 'photoBookmarkIcons' ), function( photoBookmarkIcon ) {
 
-//				var container = this.$( '.photo-icons' );
-//				iconsContainer.append( container );
+				var container = $( '<div class="photo-list-entry-icon-container"></div>' );
+				iconsContainer.append( container );
 
 				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ] } );
-				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: iconsContainer } );
+				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
 
 				entryIconModel.fetch( { cache: false } );
 			});

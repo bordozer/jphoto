@@ -48,15 +48,14 @@
 		<div class="panel-footer" style="display: <%=showPhotoListPreviewFooter ? 'block' : 'none'%>;">
 
 			<div class="row">
-				<div class="col-lg-6 margin-left-5"><%=photoAuthorLink%></div>
+				<div class="col-lg-10 margin-left-5"><%=photoAuthorLink%></div>
 				<% if( showPhotoContextMenu ) {%>
-					<div class="col-lg-1 text-center context-menu-photo context-menu-photo-<%=photoId%>">
+					<div class="col-lg-1 context-menu-photo context-menu-photo-<%=photoId%>">
 						<a href="#" onclick="return false;">
 							<img class="photo-context-menu-icon" src="/images/ui-menu-blue.png" onclick="" />
 						</a>
 					</div>
 				<%}%>
-				<div class="col-lg-5 text-right photo-icons"></div>
 			</div>
 
 			<div class="row text-center" style="height: 20px;">
@@ -82,30 +81,32 @@
 				<%}%>
 			</div>
 
-			<div class="row text-center" style="height: 20px; margin-left: 1px;">
+			<div class="row text-center" style="height: 20px; padding-left: 15px;">
 
-				<div class="col-lg-1">
+				<div class="photo-list-entry-icon-container">
 					<% if( memberOfAlbum ) {%>
 						<a href="<%=photoAlbumLink%>">
-							<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon" title="<%=iconTitlePhotoIsInAlbum%>">
+							<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon " title="<%=iconTitlePhotoIsInAlbum%>">
 						</a>
 					<%}%>
 				</div>
 
-				<div class="col-lg-1">
+				<div class="photo-icons"></div>
+
+				<div class="photo-list-entry-icon-container">
 					<% if( showAdminFlag_Anonymous ) {%>
 						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="<%=photoAnonymousPeriodExpirationInfo%>">
 					<%}%>
 				</div>
 
 				<% if( userSuperAdmin ) {%>
-					<div class="col-lg-1 photo-list-entry-icon-nude-content">
+					<div class="photo-list-entry-icon-nude-content photo-list-entry-icon-container">
 						<img src="/images/icons24/admin-special-flag-nude-content.png" class="nude-content-icon photo-list-entry-icon <%= showAdminFlag_Nude ? '' : ( photoCategoryCanContainNudeContent ? 'img-grayscale' : 'invisible' ) %>" title="<%=iconTitleNudeContent%>">
 					</div>
 				<%}%>
 
 				<% _.each( specialRestrictionIcons, function( iconDTO ) {%>
-					<div class="col-lg-1">
+					<div class="photo-list-entry-icon-container">
 						<img src="/images/<%=iconDTO.icon%>" alt="<%=iconDTO.restrictionTypeName%>" class="photo-list-entry-icon" title="<%=iconDTO.restrictionTypeName%>">
 					</div>
 				<%} );%>
