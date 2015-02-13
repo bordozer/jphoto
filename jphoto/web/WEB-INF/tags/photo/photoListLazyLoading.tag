@@ -146,10 +146,15 @@
 		function renderPhotos( photosToRender ) {
 
 			require( [ 'jquery', 'modules/photo/list/entry/photo-list-entry'], function ( $, photoListEntry ) {
+
+				var displayOptions = {
+					isGroupOperationEnabled: ${isGroupOperationEnabled}
+				};
+
 				for ( var i = 0; i < photosToRender.length; i++ ) {
 					var photoId = photosToRender[i];
 					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
-					photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, $( '.' + photoUniqueClass ) );
+					photoListEntry( photoId, ${photoList.photoListId}, displayOptions, $( '.' + photoUniqueClass ) );
 				}
 			} );
 		}
