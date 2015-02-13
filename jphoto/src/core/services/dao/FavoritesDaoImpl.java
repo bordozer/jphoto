@@ -123,6 +123,11 @@ public class FavoritesDaoImpl extends BaseEntityDaoImpl<FavoriteEntry> implement
 	}
 
 	@Override
+	public int getVisibilityInPhotoListEntriesQty( final int userId ) {
+		return getFavoriteEntriesQty( userId, FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST );
+	}
+
+	@Override
 	public int getNotificationsAboutNewPhotosQty( final int userId ) {
 		return getFavoriteEntriesQty( userId, FavoriteEntryType.NEW_PHOTO_NOTIFICATION );
 	}

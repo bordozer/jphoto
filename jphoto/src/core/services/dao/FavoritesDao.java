@@ -26,6 +26,8 @@ public interface FavoritesDao extends BaseEntityDao<FavoriteEntry> {
 
 	int getBackListEntriesQty( final int userId );
 
+	int getVisibilityInPhotoListEntriesQty( final int userId );
+
 	int getNotificationsAboutNewPhotosQty( final int userId );
 
 	int getNotificationsAboutNewCommentsQty( final int userId );

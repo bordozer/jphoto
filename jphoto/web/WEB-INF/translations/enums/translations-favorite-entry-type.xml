@@ -125,4 +125,29 @@
 		<ru><![CDATA[Удалить работу из списка работ, новые комментарии к которым отслеживаются]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>FavoriteEntryType: Hide photos in photo list</nerd>
+		<ru><![CDATA[Список непоказываемых авторов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The authors photos are shown in gallery</nerd>
+		<ru><![CDATA[Работы этого автора скрываются от вас в галерее]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The authors photos are hidden in gallery</nerd>
+		<ru><![CDATA[Работы этого автора не показываются вам в галерее]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
 </translations>

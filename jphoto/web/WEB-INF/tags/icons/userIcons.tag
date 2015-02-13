@@ -13,6 +13,7 @@
 <%@ attribute name="hideIconNewPhotoNotification" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="hideIconToBlackList" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="hideIconSendPrivateMessage" required="false" type="java.lang.Boolean" %>
+<%@ attribute name="hideIconPhotoVisibilityInPhotoList" required="false" type="java.lang.Boolean" %>
 
 <c:if test="${not hideIconToFavoriteUser}">
 	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.FAVORITE_MEMBERS%>" />
@@ -30,6 +31,10 @@
 	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.BLACKLIST%>" />
 </c:if>
 
+<c:if test="${not hideIconPhotoVisibilityInPhotoList}">
+	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST%>" />
+</c:if>
+
 <%
 	final User currentUser = EnvironmentContext.getCurrentUser();
 	final boolean isLoggedUser = UserUtils.isCurrentUserLoggedUser();
@@ -40,4 +45,5 @@
 <c:if test="${not hideIconSendPrivateMessage and showIcon}">
 	<icons:sendPrivateMessage toUser="${user}" />
 </c:if>
+
 

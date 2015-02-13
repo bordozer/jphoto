@@ -38,6 +38,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Links: authors invisible list of $1</nerd>
+		<ru><![CDATA[$1: список участников, чьи работы скрыты в галереи]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Links: bookmarked photos of $1</nerd>
 		<ru><![CDATA[$1: работы в закладках]]></ru>
 	</translation>

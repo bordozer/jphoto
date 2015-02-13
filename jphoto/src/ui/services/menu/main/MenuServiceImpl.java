@@ -196,6 +196,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( userFavoriteMembersMenu( user ) );
 			menuItems.add( userFriendsMenu( user ) );
 			menuItems.add( userBlackListMenu( user ) );
+			menuItems.add( userVisibilityListMenu( user ) );
 
 			final MenuItem menuItem = new MenuItem( translatorService.translate( "Main menu: My bookmarks", getLanguage() ), favoritesMenu.getLink() );
 			menuItem.setIcon( "bookmarks.png" );
@@ -599,6 +600,16 @@ public class MenuServiceImpl implements MenuService {
 
 		final MenuItem menuItem = new MenuItem( caption, link );
 		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.BLACKLIST.getRemoveIcon() ) );
+
+		return menuItem;
+	}
+
+	private MenuItem userVisibilityListMenu( final User user ) {
+		final String caption = translatorService.translate( FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST.getName(), getLanguage() );
+		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST.getRemoveIcon() ) );
 
 		return menuItem;
 	}

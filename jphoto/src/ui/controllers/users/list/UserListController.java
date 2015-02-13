@@ -195,6 +195,15 @@ public class UserListController {
 		return VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "{userId}/visibility/" )
+	public String visibilityList( @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
+		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+
+		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST );
+
+		return VIEW;
+	}
+
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/notification/photos/" )
 	public String showUsersThatNotificateAboutNewPhotos( final @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
 		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {

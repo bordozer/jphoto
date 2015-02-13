@@ -119,6 +119,8 @@ public class FavoritesJob extends AbstractJob {
 					return new NewCommentNotificationEntryGenerator( user );
 				case NEW_PHOTO_NOTIFICATION:
 					return new NewPhotoNotificationEntryGenerator( user );
+				case HIDE_PHOTOS_IN_PHOTO_LIST:
+					return new PhotoListPhotoVisibilityEntryGenerator( user );
 			}
 			throw new IllegalArgumentException( String.format( "Illegal favorite entry: %s", favoriteEntryType ) );
 		}
@@ -257,6 +259,18 @@ public class FavoritesJob extends AbstractJob {
 		@Override
 		public boolean generateFavoriteEntry() {
 			return addFavoritePhoto( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
+		}
+	}
+
+	private class PhotoListPhotoVisibilityEntryGenerator extends AbstractFavoriteEntryGenerator {
+
+		protected PhotoListPhotoVisibilityEntryGenerator( final User user ) {
+			super( user );
+		}
+
+		@Override
+		public boolean generateFavoriteEntry() {
+			return addFavoritePhoto( FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST );
 		}
 	}
 }

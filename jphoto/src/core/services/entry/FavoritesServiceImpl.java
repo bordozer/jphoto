@@ -33,6 +33,11 @@ public class FavoritesServiceImpl implements FavoritesService {
 	}
 
 	@Override
+	public boolean hidePhotosInPhotoList( final int userId, final int beingCheckedUserId ) {
+		return isEntryInFavorites( userId, beingCheckedUserId, FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST.getId() );
+	}
+
+	@Override
 	public FavoriteEntry getFavoriteEntry( final int userId, final int favoriteEntryId, final FavoriteEntryType entryType ) {
 		return favoritesDao.getFavoriteEntry( userId, favoriteEntryId, entryType );
 	}
