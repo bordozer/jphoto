@@ -100,6 +100,8 @@ public interface UrlUtilsService {
 
 	String getUserFavoriteBlackListLink( final int userId );
 
+	String getUserFavoriteMembersInvisibilityListLink( final int userId );
+
 	String getUserBookmarkedPhotosLink( final int userId );
 
 	String getPhotosWithSubscribeOnNewCommentsLink( final int userId );

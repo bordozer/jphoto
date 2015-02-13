@@ -261,6 +261,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getUserFavoriteMembersInvisibilityListLink( final int userId ) {
+		return String.format( "%s/%s/%s/invisibility/", getBaseURL(), USERS_URL, userId );
+	}
+
+	@Override
 	public String getUserBookmarkedPhotosLink( final int userId ) {
 		return String.format( "%s/%s/%s/bookmark/", getBaseURL(), USERS_URL, userId );
 	}

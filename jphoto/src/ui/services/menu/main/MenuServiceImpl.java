@@ -196,7 +196,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( userFavoriteMembersMenu( user ) );
 			menuItems.add( userFriendsMenu( user ) );
 			menuItems.add( userBlackListMenu( user ) );
-			menuItems.add( userVisibilityListMenu( user ) );
+			menuItems.add( userInvisibilityListMenu( user ) );
 
 			final MenuItem menuItem = new MenuItem( translatorService.translate( "Main menu: My bookmarks", getLanguage() ), favoritesMenu.getLink() );
 			menuItem.setIcon( "bookmarks.png" );
@@ -604,9 +604,9 @@ public class MenuServiceImpl implements MenuService {
 		return menuItem;
 	}
 
-	private MenuItem userVisibilityListMenu( final User user ) {
+	private MenuItem userInvisibilityListMenu( final User user ) {
 		final String caption = translatorService.translate( FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getName(), getLanguage() );
-		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
+		final String link = urlUtilsService.getUserFavoriteMembersInvisibilityListLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
 		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getRemoveIcon() ) );

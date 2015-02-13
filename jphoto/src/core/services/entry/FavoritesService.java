@@ -16,7 +16,7 @@ public interface FavoritesService extends BaseEntityService<FavoriteEntry> {
 
 	boolean isUserInBlackListOfUser( final int blackListOwnerId, final int beingCheckedUserId );
 
-	boolean hidePhotosInPhotoList( final int userId, final int beingCheckedUserId );
+	boolean isUserInMembersInvosobolityListOfUser( final int userId, final int beingCheckedUserId );
 
 	FavoriteEntry getFavoriteEntry( final int userId, final int favoriteEntryId, final FavoriteEntryType entryType );
 

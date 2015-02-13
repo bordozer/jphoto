@@ -33,7 +33,7 @@ public class FavoritesServiceImpl implements FavoritesService {
 	}
 
 	@Override
-	public boolean hidePhotosInPhotoList( final int userId, final int beingCheckedUserId ) {
+	public boolean isUserInMembersInvosobolityListOfUser( final int userId, final int beingCheckedUserId ) {
 		return isEntryInFavorites( userId, beingCheckedUserId, FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getId() );
 	}
 

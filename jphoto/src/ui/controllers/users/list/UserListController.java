@@ -195,8 +195,8 @@ public class UserListController {
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "{userId}/visibility/" )
-	public String visibilityList( @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
+	@RequestMapping( method = RequestMethod.GET, value = "{userId}/invisibility/" )
+	public String membersInvisibilityList( @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
 		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 
 		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.MEMBERS_INVISIBILITY_LIST );
