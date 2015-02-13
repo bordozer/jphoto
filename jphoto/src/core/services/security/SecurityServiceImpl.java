@@ -595,7 +595,7 @@ public class SecurityServiceImpl implements SecurityService {
 			return false;
 		}
 
-		if ( UserUtils.isUsersEqual( accessor, photoAuthor ) ) {
+		if ( userOwnThePhoto( accessor, photo ) ) {
 			return false;
 		}
 
