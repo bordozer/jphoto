@@ -187,9 +187,10 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	public void photoNameShouldBeReplacedIfPreviewHasToBeHiddenTest() {
 
 		final TestData testData = new TestData( photo, accessor );
+		testData.photoAuthorNameMustBeHidden = true;
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden == TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: Photo's name is hidden", dto.getPhotoName() );
 	}
@@ -274,10 +275,11 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	public void totalMarksShouldBeShownAsTextIfPreviewHasToBeHiddenTest() {
 
 		final TestData testData = new TestData( photo, accessor );
-		testData.confKeyPhotoListShowStatistic = true; // TRUE
+		testData.confKeyPhotoListShowStatistic = true;
+		testData.photoAuthorNameMustBeHidden = true;
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: The photo's total marks'>43</span>", dto.getTotalMarks() );
 	}
@@ -335,9 +337,10 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		final TestData testData = new TestData( photo, accessor );
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
+		testData.photoAuthorNameMustBeHidden = true;
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Previews count: 143'>143</span>", dto.getPreviewsCount() );
 	}
