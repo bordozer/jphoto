@@ -145,7 +145,7 @@
 
 		function renderPhotos( photosToRender ) {
 
-			require( [ 'jquery', 'modules/photo/list/photo-list-entry'], function ( $, photoListEntry ) {
+			require( [ 'jquery', 'modules/photo/list/entry/photo-list-entry'], function ( $, photoListEntry ) {
 				for ( var i = 0; i < photosToRender.length; i++ ) {
 					var photoId = photosToRender[i];
 					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;

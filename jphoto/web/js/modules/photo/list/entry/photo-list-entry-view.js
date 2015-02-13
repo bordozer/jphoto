@@ -1,5 +1,5 @@
 define( ["backbone", "jquery", "underscore"
-		, "text!modules/photo/list/templates/photo-list-entry-template.html"
+		, "text!modules/photo/list/entry/templates/photo-list-entry-template.html"
 		, "components/menu/context-menu-model"
 		, "components/menu/context-menu-view"
 		, "modules/icon/entry-icon-model"
