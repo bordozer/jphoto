@@ -142,7 +142,8 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Genre> genres = genreService.loadAll();
 
 		for ( final Genre genre : genres ) {
-			if ( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) > 0 || userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0 ) {
+			//userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0
+			if ( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) > 0 ) {
 				final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( user, genre, accessor );
 				photosByGenresMap.put( genre, userCardGenreInfo );
 			}
