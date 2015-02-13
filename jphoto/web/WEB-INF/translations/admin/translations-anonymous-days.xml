@@ -8,13 +8,13 @@
 	</translation>
 
 	<translation>
-		<nerd>The names will be shown after $1 day(s) after photo uploading</nerd>
-		<ru><![CDATA[Имя автора будет показано через $1 день с момента загрузки работы]]></ru>
+		<nerd>The posted in selected days photos authors names will be hidden</nerd>
+		<ru><![CDATA[Авторы загруженных в дни анонимной загрузки работ будут скрыты на период анонимности]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>The posted in selected days photos authors names will be hidden</nerd>
-		<ru><![CDATA[Авторы загруженных в дни анонимной загрузки работ будут скрыты на период анонимности]]></ru>
+		<nerd>The names will be shown after $1 day(s) after photo uploading</nerd>
+		<ru><![CDATA[Период анонимности составляет $1 день с момента загрузки работы]]></ru>
 	</translation>
 
 	<translation>
