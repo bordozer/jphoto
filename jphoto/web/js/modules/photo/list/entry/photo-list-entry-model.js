@@ -6,10 +6,12 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize:function ( options ) {
 			this.url = Backbone.JPhoto.url( "/rest/photos/" + options.photoId + "/" );
+
+			this.displayOptions = options.displayOptions;
 		}
 
 		, refresh: function() {
-			this.fetch( { reset: true } );
+			this.fetch( { data: this.displayOptions, reset: true } );
 		}
 
 	});

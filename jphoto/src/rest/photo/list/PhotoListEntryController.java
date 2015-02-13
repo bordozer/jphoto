@@ -39,7 +39,6 @@ import ui.services.security.SecurityUIService;
 import ui.userRankIcons.AbstractUserRankIcon;
 import ui.userRankIcons.UserRankIconContainer;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -80,12 +79,13 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public PhotoEntryDTO photoListEntry( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
+	public PhotoEntryDTO photoListEntry( final @PathVariable( "photoId" ) int photoId, final PhotoListEntryDisplayOptions displayOptions ) {
 
 		final Photo photo = photoService.load( photoId );
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final boolean doesPreviewHasToBeHidden = request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() ) && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
+		final boolean displayOptionHidePreviewsForAnonymous = displayOptions.isGroupOperationEnabled(); //request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() );
+		final boolean doesPreviewHasToBeHidden = displayOptionHidePreviewsForAnonymous && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
 
 		return photoListEntry( photo, currentUser, doesPreviewHasToBeHidden, getLanguage() );
 	}

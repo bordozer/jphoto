@@ -6,7 +6,7 @@ define( ["modules/photo/list/entry/photo-list-entry-model"
 
 		var photoListEntryModel = new Model.PhotoListEntryModel( { photoId: photoId });
 		photoListEntryModel.set( { photoListId: photoListId, displayOptions: displayOptions } );
-		photoListEntryModel.fetch( { cache: false } );
+		photoListEntryModel.fetch( { data: displayOptions, cache: false } );
 
 		var photoListEntryView = new View.PhotoListEntryModelView( { model: photoListEntryModel, el: container } );
 	}
