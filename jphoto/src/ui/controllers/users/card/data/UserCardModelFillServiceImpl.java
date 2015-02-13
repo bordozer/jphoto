@@ -16,6 +16,7 @@ import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryService;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
+import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -105,6 +106,9 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
+	@Autowired
+	private SecurityService securityService;
+
 	@Override
 	public void setUserAvatar( final UserCardModel model ) {
 		model.setUserAvatar( userService.getUserAvatar( getUserId( model ) ) );
@@ -142,8 +146,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Genre> genres = genreService.loadAll();
 
 		for ( final Genre genre : genres ) {
-			//userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0
-			if ( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) > 0 ) {
+			if ( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) > 0 || ( securityService.isSuperAdminUser( accessor ) && userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0 ) ) {
 				final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( user, genre, accessor );
 				photosByGenresMap.put( genre, userCardGenreInfo );
 			}
