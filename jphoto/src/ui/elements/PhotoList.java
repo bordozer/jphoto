@@ -31,6 +31,8 @@ public class PhotoList {
 	private PhotoListViewModeType selectedPhotoListViewModeType = PhotoListViewModeType.VIEW_MODE_PREVIEW;
 	private List<PhotoListViewMode> accessiblePhotoListViewModes;
 
+	private boolean hidePreviewsForAnonymouslyPostedPhotos = true;
+
 	public PhotoList( final List<Integer> photoIds, final String photoListTitle ) {
 		this( photoIds, photoListTitle, true );
 	}
@@ -139,5 +141,13 @@ public class PhotoList {
 
 	public void setAccessiblePhotoListViewModes( final List<PhotoListViewMode> accessiblePhotoListViewModes ) {
 		this.accessiblePhotoListViewModes = accessiblePhotoListViewModes;
+	}
+
+	public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+		return hidePreviewsForAnonymouslyPostedPhotos;
+	}
+
+	public void setHidePreviewsForAnonymouslyPostedPhotos( final boolean hidePreviewsForAnonymouslyPostedPhotos ) {
+		this.hidePreviewsForAnonymouslyPostedPhotos = hidePreviewsForAnonymouslyPostedPhotos;
 	}
 }

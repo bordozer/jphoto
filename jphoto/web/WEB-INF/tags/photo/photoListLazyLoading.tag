@@ -148,7 +148,8 @@
 			require( [ 'jquery', 'modules/photo/list/entry/photo-list-entry'], function ( $, photoListEntry ) {
 
 				var displayOptions = {
-					isGroupOperationEnabled: ${isGroupOperationEnabled}
+					groupOperationEnabled: ${isGroupOperationEnabled}
+					, hidePreviewsForAnonymouslyPostedPhotos: ${photoList.hidePreviewsForAnonymouslyPostedPhotos}
 				};
 
 				for ( var i = 0; i < photosToRender.length; i++ ) {

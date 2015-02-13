@@ -84,8 +84,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		final Photo photo = photoService.load( photoId );
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final boolean displayOptionHidePreviewsForAnonymous = displayOptions.isGroupOperationEnabled(); //request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() );
-		final boolean doesPreviewHasToBeHidden = displayOptionHidePreviewsForAnonymous && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
+		final boolean doesPreviewHasToBeHidden = displayOptions.isHidePreviewsForAnonymouslyPostedPhotos() && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
 
 		return photoListEntry( photo, currentUser, doesPreviewHasToBeHidden, getLanguage() );
 	}

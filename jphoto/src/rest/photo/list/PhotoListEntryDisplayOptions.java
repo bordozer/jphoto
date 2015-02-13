@@ -5,13 +5,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class PhotoListEntryDisplayOptions {
 
-	private boolean isGroupOperationEnabled;
+	private boolean groupOperationEnabled;
+	private boolean hidePreviewsForAnonymouslyPostedPhotos;
 
 	public boolean isGroupOperationEnabled() {
-		return isGroupOperationEnabled;
+		return groupOperationEnabled;
 	}
 
-	public void setGroupOperationEnabled( final boolean isGroupOperationEnabled ) {
-		this.isGroupOperationEnabled = isGroupOperationEnabled;
+	public void setGroupOperationEnabled( final boolean groupOperationEnabled ) {
+		this.groupOperationEnabled = groupOperationEnabled;
+	}
+
+	public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+		return hidePreviewsForAnonymouslyPostedPhotos;
+	}
+
+	public void setHidePreviewsForAnonymouslyPostedPhotos( final boolean hidePreviewsForAnonymouslyPostedPhotos ) {
+		this.hidePreviewsForAnonymouslyPostedPhotos = hidePreviewsForAnonymouslyPostedPhotos;
 	}
 }

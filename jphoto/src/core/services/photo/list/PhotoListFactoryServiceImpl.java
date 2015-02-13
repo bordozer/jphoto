@@ -1010,6 +1010,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.string( user.getNameEscaped() )
 					;
 			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return false;
+			}
 		};
 	}
 
