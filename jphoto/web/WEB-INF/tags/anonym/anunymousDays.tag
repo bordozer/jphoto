@@ -93,9 +93,9 @@
 <br />
 
 <div style="font-size: 12px;">
-	${eco:translate("The selected days are days of anonymous photo posting.")}
+	${eco:translate("The selected days are days of anonymous photo posting")}
 	<br />
-	${eco:translate("The posted in selectd days photos\' authors\' names will be hidden.")}
+	${eco:translate("The posted in selected days photos authors names will be hidden")}
 	<br />
 	${eco:translate1("The names will be shown after $1 day(s) after photo uploading", anonymousPeriod)}
 </div>
