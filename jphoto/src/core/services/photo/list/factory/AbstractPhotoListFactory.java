@@ -87,7 +87,7 @@ public abstract class AbstractPhotoListFactory {
 	}
 
 	public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
-		return true;
+		return false;
 	}
 
 	protected int getTopListPhotosCount() {

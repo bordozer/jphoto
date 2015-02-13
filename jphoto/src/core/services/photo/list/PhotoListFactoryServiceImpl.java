@@ -505,6 +505,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.translatableString( SORTING_BY_TOTAL_MARKS )
 					;
 			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return true;
+			}
 		};
 	}
 
@@ -537,6 +542,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 				return getPhotoGroupOperationMenuContainerForUserCard( user );
+			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return true;
 			}
 		};
 	}
@@ -611,6 +621,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.translatableString( SORTING_BY_TOTAL_MARKS )
 					;
 			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return true;
+			}
 		};
 	}
 
@@ -644,6 +659,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 				return getPhotoGroupOperationMenuContainerForUserCard( user );
+			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return true;
 			}
 		};
 	}
@@ -938,6 +958,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.string( user.getNameEscaped() )
 					;
 			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return true;
+			}
 		};
 	}
 
@@ -974,6 +999,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.string( user.getNameEscaped() )
 					;
 			}
+
+			@Override
+			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
+				return true;
+			}
 		};
 	}
 
@@ -1009,11 +1039,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				return new TranslatableMessage( "Photo list bottom tex: User card $1: last appraised photos", services )
 					.string( user.getNameEscaped() )
 					;
-			}
-
-			@Override
-			public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
-				return false;
 			}
 		};
 	}
