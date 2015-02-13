@@ -14,6 +14,11 @@ public class TopBestFilteringStrategy extends AbstractPhotoFilteringStrategy {
 
 	@Override
 	public boolean isPhotoHidden( final int photoId, final Date time ) {
+
+		if ( isPhotoAuthorInInvisibilityList( photoId ) ) {
+			return true;
+		}
+
 		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, time );
 	}
 }

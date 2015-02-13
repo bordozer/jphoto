@@ -1,5 +1,6 @@
 package core.services.photo.list.factory;
 
+import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.system.Services;
 
@@ -19,5 +20,10 @@ public abstract class AbstractPhotoFilteringStrategy {
 
 	protected boolean isSuperAdmin( final User user ) {
 		return services.getSecurityService().isSuperAdminUser( user );
+	}
+
+	protected boolean isPhotoAuthorInInvisibilityList( final int photoId ) {
+		final Photo photo = services.getPhotoService().load( photoId );
+		return services.getFavoritesService().isUserInMembersInvisibilityListOfUser( accessor.getId(), photo.getUserId() );
 	}
 }

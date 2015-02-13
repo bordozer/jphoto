@@ -19,6 +19,10 @@ public class BestFilteringStrategy extends AbstractPhotoFilteringStrategy {
 			return false;
 		}
 
+		if ( isPhotoAuthorInInvisibilityList( photoId ) ) {
+			return true;
+		}
+
 		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, time );
 	}
 }
