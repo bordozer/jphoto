@@ -81,9 +81,9 @@
 				<%}%>
 			</div>
 
-			<div class="row text-center" style="height: 20px; padding-left: 15px;">
+			<div class="row text-center" style="height: 20px; padding-left: 5px;">
 
-				<div class="photo-list-entry-icon-container">
+				<div class="photo-list-entry-icon-container" style="margin-right: 10px;">
 					<% if( memberOfAlbum ) {%>
 						<a href="<%=photoAlbumLink%>">
 							<img src="/images/photo-list-entry-album.png" class="photo-list-entry-icon " title="<%=iconTitlePhotoIsInAlbum%>">
@@ -93,17 +93,17 @@
 
 				<div class="photo-icons"></div>
 
-				<div class="photo-list-entry-icon-container">
+				<div class="photo-list-entry-icon-container" style="margin-left: 10px;">
 					<% if( showAdminFlag_Anonymous ) {%>
 						<img src="/images/icons24/admin-special-flag-anonymous-posting.png" class="photo-list-entry-icon" title="<%=photoAnonymousPeriodExpirationInfo%>">
 					<%}%>
 				</div>
 
-				<% if( userSuperAdmin ) {%>
-					<div class="photo-list-entry-icon-nude-content photo-list-entry-icon-container">
+				<div class="photo-list-entry-icon-nude-content photo-list-entry-icon-container" style="margin-right: 10px;">
+					<% if( userSuperAdmin ) {%>
 						<img src="/images/icons24/admin-special-flag-nude-content.png" class="nude-content-icon photo-list-entry-icon <%= showAdminFlag_Nude ? '' : ( photoCategoryCanContainNudeContent ? 'img-grayscale' : 'invisible' ) %>" title="<%=iconTitleNudeContent%>">
-					</div>
-				<%}%>
+					<%}%>
+				</div>
 
 				<% _.each( specialRestrictionIcons, function( iconDTO ) {%>
 					<div class="photo-list-entry-icon-container">
