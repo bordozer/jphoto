@@ -58,6 +58,7 @@ public class ConfigurationValidator implements Validator {
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_HEIGHT );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_WIDTH );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
+		positiveConfigurationKeys.add( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
 
 		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
 
@@ -88,7 +89,6 @@ public class ConfigurationValidator implements Validator {
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_PHOTOS_PER_WEEK_LIMIT );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
-		positiveOrZeroConfigurationKeys.add( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_MIN_LENGTH );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_DELAY_AFTER_COMMENT_SEC );
 //		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_USER_MUST_HAVE_N_APPROVED_PHOTOS_BEFORE_CAN_LEAVE_COMMENT );
