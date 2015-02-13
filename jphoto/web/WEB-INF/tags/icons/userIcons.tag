@@ -32,7 +32,7 @@
 </c:if>
 
 <c:if test="${not hideIconPhotoVisibilityInPhotoList}">
-	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.HIDE_PHOTOS_IN_PHOTO_LIST%>" />
+	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.MEMBER_INVISIBILITY_LIST%>" />
 </c:if>
 
 <%
