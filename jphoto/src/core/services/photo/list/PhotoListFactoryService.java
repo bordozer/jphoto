@@ -1,7 +1,6 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
-import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
