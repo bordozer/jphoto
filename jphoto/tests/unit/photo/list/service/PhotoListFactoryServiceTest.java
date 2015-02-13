@@ -84,7 +84,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: All photos.<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+		
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -97,8 +97,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a>", factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -113,7 +111,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: All photos of <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a><br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+		
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -133,8 +131,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: Photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a><br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
 
@@ -153,7 +149,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom tex: User card User card owner: the latest photos", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/", factory.getLinkToFullList() );
 
-		assertTrue( factory.isHidePreviewsForAnonymouslyPostedPhotos() ); // !!!
+		
 
 		assertGroupOperationMenusEmpty( factory );
 	}
@@ -168,7 +164,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: bookmarked photos FavoriteEntryType: Favorite photos<br />Photo list bottom text: Sorted by adding to bookmark time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+		
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -189,7 +185,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> photos ( member type is UserTeamMemberType: Model )<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+		
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -221,7 +217,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> photos ( member type is UserTeamMemberType: Model )", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/members/112/team/987/", factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+
 
 		assertGroupOperationMenusEmpty( factory );
 	}
@@ -238,7 +234,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "Photo list bottom text: Top best photos that got at least %s marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( String.format( "http://127.0.0.1:8085/worker/photos/from/%s/to/%s/best/", dateData.from2, dateData.to2 ), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+
 
 		assertGroupOperationMenusEmpty( factory );
 	}
@@ -255,7 +251,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "Photo list bottom text: The most popular photos for period %s - %s.<br />Photo list bottom text: Sorted by previews count DESC", dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
+
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -272,8 +268,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "Photo list bottom text: Top best photos by genre Translated entry that got at least %d marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/genres/222/best/", factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusEmpty( factory );
 	}
 
@@ -286,8 +280,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list title: Photo gallery absolutely best", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Photo gallery absolutely best which got at least 40 marks.<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -304,8 +296,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "Photo list bottom text: The best photos from category Translated entry which got at least %d marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
 
@@ -319,8 +309,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: Top best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/best/", factory.getLinkToFullList() );
 
-		assertTrue( factory.isHidePreviewsForAnonymouslyPostedPhotos() ); // !!!
-
 		assertGroupOperationMenusEmpty( factory );
 	}
 
@@ -333,8 +321,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list title: User card User card owner: the best photos", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom tex: User card User card owner: the best photos", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/best/", factory.getLinkToFullList() );
-
-		assertTrue( factory.isHidePreviewsForAnonymouslyPostedPhotos() ); // !!!
 
 		assertGroupOperationMenusEmpty( factory );
 	}
@@ -354,8 +340,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: The best photos of user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> best which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertTrue( factory.isHidePreviewsForAnonymouslyPostedPhotos() ); // !!!
-
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
 
@@ -374,8 +358,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: Top best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/genre/222/best/", factory.getLinkToFullList() );
 
-		assertTrue( factory.isHidePreviewsForAnonymouslyPostedPhotos() ); // !!!
-
 		assertGroupOperationMenusEmpty( factory );
 	}
 
@@ -388,8 +370,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> best", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: The best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertTrue( factory.isHidePreviewsForAnonymouslyPostedPhotos() ); // !!!
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -409,8 +389,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom tex: User card User card owner: last appraised photos", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/category/", factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusEmpty( factory );
 	}
 
@@ -423,8 +401,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised<br />Photo list bottom text: Sorted by voting time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -440,8 +416,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list bottom text: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised as Translated entry<br />Photo list bottom text: Sorted by voting time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
 
@@ -454,8 +428,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Photo list title: Photos uploaded between 2014-08-10 and 2014-08-14", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Photos uploaded between 2014-08-10 and 2014-08-14<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -472,8 +444,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "Photo list bottom text: The best photos which got at least %d marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
 
@@ -487,8 +457,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Main menu: photos: UserMembershipType: model", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Photos of users with membership type UserMembershipType: model plural<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}
@@ -504,8 +472,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "Photo list bottom text: The top best photos of users with membership type UserMembershipType: makeup master plural which got at least %d masks in period %s - %s.<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/type/3/best/", factory.getLinkToFullList() );
 
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		assertGroupOperationMenusEmpty( factory );
 	}
 
@@ -519,8 +485,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "Main menu: The best photos: UserMembershipType: makeup master", factory.getTitle().build( Language.EN ) );
 		assertEquals( String.format( "Photo list bottom text: The best photos of users with membership type UserMembershipType: makeup master plural which got at least %d marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-
-		assertFalse( factory.isHidePreviewsForAnonymouslyPostedPhotos() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
 	}

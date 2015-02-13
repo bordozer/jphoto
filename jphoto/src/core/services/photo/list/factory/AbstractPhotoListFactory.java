@@ -57,8 +57,6 @@ public abstract class AbstractPhotoListFactory {
 
 		photoList.setAccessiblePhotoListViewModes( getAccessiblePhotoListViewModes() );
 
-		photoList.setHidePreviewsForAnonymouslyPostedPhotos( isHidePreviewsForAnonymouslyPostedPhotos() );
-
 		return photoList;
 	}
 
@@ -84,10 +82,6 @@ public abstract class AbstractPhotoListFactory {
 
 	public List<PhotoListViewMode> getAccessiblePhotoListViewModes() {
 		return newArrayList();
-	}
-
-	public boolean isHidePreviewsForAnonymouslyPostedPhotos() {
-		return false;
 	}
 
 	protected int getTopListPhotosCount() {

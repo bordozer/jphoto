@@ -72,14 +72,7 @@ public abstract class AbstractPhotoListEntryController {
 		return EnvironmentContext.getLanguage();
 	}
 
-	protected String getPhotoPreview( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language, final String photoPreviewUrl ) {
-
-		if ( doesPreviewHasToBeHidden ) {
-			return String.format( "<img src='%s/hidden_picture.png' class='photo-preview-image' title='%s'/>"
-					, urlUtilsService.getSiteImagesPath()
-					, translatorService.translate( "Photo preview: The photo is within anonymous period", language )
-			);
-		}
+	protected String getPhotoPreview( final Photo photo, final User accessor, final Language language, final String photoPreviewUrl ) {
 
 		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, accessor ) ) {
 			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"

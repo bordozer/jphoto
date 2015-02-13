@@ -161,9 +161,7 @@
 				</c:if>
 
 				<c:if test="${!showCommentAuthorData}">
-					<div class="col-lg-1 text-center">
-						<html:img src="hidden_picture.png" alt="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}" id="avatar_${comment.id}"  height="100" width="100"/>
-					</div>
+					<div class="col-lg-1 text-center" title="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}"></div>
 				</c:if>
 
 				<div class="col-lg-11">

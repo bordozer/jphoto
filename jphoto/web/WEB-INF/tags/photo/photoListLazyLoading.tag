@@ -149,7 +149,6 @@
 
 				var displayOptions = {
 					groupOperationEnabled: ${isGroupOperationEnabled}
-					, hidePreviewsForAnonymouslyPostedPhotos: ${photoList.hidePreviewsForAnonymouslyPostedPhotos}
 				};
 
 				for ( var i = 0; i < photosToRender.length; i++ ) {

@@ -74,7 +74,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, dto.getUserId(), testData.accessor.getId() );
 	}
@@ -85,7 +85,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, dto.getPhotoId(), testData.photo.getId() );
 	}
@@ -96,7 +96,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, dto.getGroupOperationCheckbox(), "<input type='checkbox' id='selectedPhotoIds' name='selectedPhotoIds' class='selectedPhotoIds' value='777' />" );
 	}
@@ -109,7 +109,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, String.format( "<a href='http://127.0.0.1:8085/worker/photos/date/%1$s/uploaded/' title='Photo preview: show all photos uploaded at %1$s'>00:15</a>", dateUtilsService.formatDate( firstSecondOfToday ) ), dto.getPhotoUploadDate() );
 	}
@@ -121,7 +121,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/date/20014-05-22/uploaded/' title='Photo preview: show all photos uploaded at 20014-05-22'>20014-05-22 14:44</a>", dto.getPhotoUploadDate() );
 	}
@@ -132,7 +132,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/555/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a>", dto.getPhotoCategory() );
 	}
@@ -143,20 +143,9 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777'><img src='http://127.0.0.1:8085/worker/download/photos/777/preview/' class='photo-preview-image block-border'/></a>", dto.getPhotoImage() );
-	}
-
-	@Test
-	public void photoPreviewShouldBeHiddenForUsualUserIfParameterIsTRUETest() {
-
-		final TestData testData = new TestData( photo, accessor );
-
-		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE );  // photoPreviewShouldBeHidden = TRUE
-
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<img src='http://127.0.0.1:8085/worker/images/hidden_picture.png' class='photo-preview-image' title='Photo preview: The photo is within anonymous period'/>", dto.getPhotoImage() );
 	}
 
 	@Test
@@ -165,7 +154,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // photoPreviewShouldBeHidden = FALSE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // photoPreviewShouldBeHidden = FALSE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777'><img src='http://127.0.0.1:8085/worker/download/photos/777/preview/' class='photo-preview-image block-border'/></a>", dto.getPhotoImage() );
 	}
@@ -177,7 +166,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoHasToBeHiddenBecauseOfNudeContent = true; // Nude content
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777 ( Photo preview: Nude content )'><img src='http://127.0.0.1:8085/worker/images/nude_content.jpg' class='photo-preview-image block-border'/></a>", dto.getPhotoImage() );
 	}
@@ -188,7 +177,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // doesPreviewHasToBeHidden == FALSE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden == FALSE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a class=\"photo-link\" href=\"http://127.0.0.1:8085/worker/photos/777/card/\" title=\"EntityLinkUtilsService: Photo #777: photo card link title\">Photo #777</a>", dto.getPhotoLink() );
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo #777", dto.getPhotoName() );
@@ -200,7 +189,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden == TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden == TRUE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: Photo's name is hidden", dto.getPhotoName() );
 	}
@@ -211,7 +200,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // doesPreviewHasToBeHidden == FALSE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden == FALSE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/321/card/\" title=\"EntityLinkUtilsService: Photo Author: user card link title\">Photo Author</a>", dto.getPhotoAuthorLink() );
 	}
@@ -224,7 +213,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.getCurrentTime(), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, ANONYMOUS_USER_NAME, dto.getPhotoAuthorLink() );
 	}
@@ -236,7 +225,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowUserRankInGenre = false; // FALSE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, null, dto.getPhotoAuthorRank() );
 		assertFalse( dto.isShowUserRank() );
@@ -249,7 +238,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowUserRankInGenre = false; // FALSE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, null, dto.getPhotoAuthorRank() );
 		assertFalse( dto.isShowUserRank() );
@@ -263,7 +252,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAuthorNameMustBeHidden = true;
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, null, dto.getPhotoAuthorRank() );
 		assertFalse( dto.isShowUserRank() );
@@ -276,7 +265,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // doesPreviewHasToBeHidden = FALSE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden = FALSE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/marks/' title='Photo preview: The photo's total marks'>43</a>", dto.getTotalMarks() );
 	}
@@ -288,7 +277,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: The photo's total marks'>43</span>", dto.getTotalMarks() );
 	}
@@ -300,7 +289,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, Language.NERD );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, Language.NERD );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: The photo's marks for period from $1 to $2", dto.getPeriodMarksTitle() );
 	}
@@ -312,7 +301,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<img src='http://127.0.0.1:8085/worker/images/photo_preview_views_icon.png' height='8' title='Photo preview: Previews count: 143'>", dto.getPreviewsIcon() );
 	}
@@ -324,7 +313,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<img src='http://127.0.0.1:8085/worker/images/photo_preview_comments_icon.png' height='8' title='Photo preview: Comments count: 67'>", dto.getCommentsIcon() );
 	}
@@ -336,7 +325,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // doesPreviewHasToBeHidden = FALSE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden = FALSE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/previews/' title='Photo preview: Show preview history'>143</a>", dto.getPreviewsCount() );
 	}
@@ -348,7 +337,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Previews count: 143'>143</span>", dto.getPreviewsCount() );
 	}
@@ -360,7 +349,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Comments count: 67'>67</span>", dto.getCommentsCount() );
 	}
@@ -373,7 +362,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: Anonymous posting till 20014-03-08 12:28", dto.getPhotoAnonymousPeriodExpirationInfo() );
 	}
@@ -386,7 +375,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertFalse( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
 	}
@@ -399,7 +388,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
 	}
@@ -412,7 +401,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isShowAdminFlag_Anonymous() );
 	}
@@ -424,7 +413,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoWithingAnonymousPeriod = false; // FALSE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Anonymous() );
 	}
@@ -437,7 +426,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Nude() );
 	}
@@ -450,7 +439,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
 	}
@@ -463,7 +452,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, photoAuthor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
 	}
@@ -476,7 +465,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
 	}
@@ -491,7 +480,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.userPhotoAlbums = newArrayList( album );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertFalse( THE_VALUES_ARE_NOT_EQUAL, dto.isMemberOfAlbum() );
 	}
@@ -506,7 +495,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.userPhotoAlbums = newArrayList( album );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertTrue( THE_VALUES_ARE_NOT_EQUAL, dto.isMemberOfAlbum() );
 	}
@@ -518,7 +507,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAuthorNameMustBeHidden = false;
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		assertFalse( THE_VALUES_ARE_NOT_EQUAL, dto.isMemberOfAlbum() );
 	}
@@ -529,7 +518,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final TestData testData = new TestData( photo, accessor );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		final List<PhotoBookmarkIcon> array = newArrayList();
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, array, dto.getPhotoBookmarkIcons() );
@@ -542,7 +531,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.favorites = EnumSet.<FavoriteEntryType>of( FavoriteEntryType.FAVORITE_PHOTOS );
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, LANGUAGE );
 
 		final List<PhotoBookmarkIcon> array = newArrayList( new PhotoBookmarkIcon( FavoriteEntryType.FAVORITE_PHOTOS.getId() ) );
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, array.get( 0 ).getFavoriteEntryTypeId(), dto.getPhotoBookmarkIcons().get( 0 ).getFavoriteEntryTypeId() );

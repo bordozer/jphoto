@@ -84,12 +84,12 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		final Photo photo = photoService.load( photoId );
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final boolean doesPreviewHasToBeHidden = displayOptions.isHidePreviewsForAnonymouslyPostedPhotos() && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
-
-		return photoListEntry( photo, currentUser, doesPreviewHasToBeHidden, getLanguage() );
+		return photoListEntry( photo, currentUser, getLanguage() );
 	}
 
-	public PhotoEntryDTO photoListEntry( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language ) {
+	public PhotoEntryDTO photoListEntry( final Photo photo, final User accessor, final Language language ) {
+
+		final boolean doesPreviewHasToBeHidden = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 
 		final boolean isSuperAdminUser = securityService.isSuperAdminUser( accessor );
 		final boolean showAdminFlag_nude = isSuperAdminUser && photo.isContainsNudeContent();
@@ -109,7 +109,7 @@ public class PhotoListEntryController extends AbstractPhotoListEntryController {
 		dto.setPhotoCategoryCanContainNudeContent( canContainNudeContent );
 		dto.setPhotoCategoryContainsNudeContent( genre.isContainsNudeContent() );
 
-		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
+		dto.setPhotoImage( getPhotoPreview( photo, accessor, language, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) ) );
 		dto.setPhotoCardLink( urlUtilsService.getPhotoCardLink( photo.getId() ) );
 		dto.setShowPhotoListPreviewFooter( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PREVIEW_FOOTER ) );
 
