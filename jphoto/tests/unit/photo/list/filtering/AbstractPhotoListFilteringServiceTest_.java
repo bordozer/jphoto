@@ -1,6 +1,7 @@
 package photo.list.filtering;
 
 import common.AbstractTestCase;
+import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
@@ -28,8 +29,20 @@ public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 		services.setSecurityService( getSecurityService( testData ) );
 		services.setRestrictionService( getRestrictionService( testData ) );
 		services.setPhotoService( getPhotoService( testData ) );
+		services.setFavoritesService( getFavoritesService( testData ) );
 
 		return services;
+	}
+
+	private FavoritesService getFavoritesService( final TestData testData ) {
+		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
+
+		EasyMock.expect( favoritesService.isUserInMembersInvisibilityListOfUser( testData.accessor.getId(), testData.photoAuthor.getId() ) ).andReturn( testData.isPhotoAuthorInInvisibilityList ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( favoritesService );
+
+		return favoritesService;
 	}
 
 	private SecurityService getSecurityService( final TestData testData ) {

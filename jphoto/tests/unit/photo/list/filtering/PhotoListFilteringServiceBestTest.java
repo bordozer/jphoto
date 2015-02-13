@@ -47,4 +47,25 @@ public class PhotoListFilteringServiceBestTest extends AbstractPhotoListFilterin
 
 		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
+
+	@Test
+	public void photoShouldNotBeVisibleIfPhotoAuthorIsInInvisibilityListTest() {
+
+		testData.isPhotoAuthorInInvisibilityList = true;
+
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( testData.accessor, getTestServices( testData ) );
+
+		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+	}
+
+	@Test
+	public void photoShouldBeVisibleForAdminsEvenIfPhotoAuthorIsInInvisibilityListTest() {
+
+		testData.accessor = SUPER_ADMIN_1;
+		testData.isPhotoAuthorInInvisibilityList = true;
+
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( testData.accessor, getTestServices( testData ) );
+
+		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+	}
 }
