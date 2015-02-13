@@ -589,7 +589,6 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor, final Date onTime ) {
-		final User photoAuthor = userService.load( photo.getUserId() );
 
 		if ( isSuperAdminUser( accessor.getId() ) ) {
 			return false;
