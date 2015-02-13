@@ -1,5 +1,5 @@
-define( ["modules/photo/list/photo-list-model"
-		, "modules/photo/list/photo-list-view"
+define( ["modules/photo/list/photo-list-entry-model"
+		, "modules/photo/list/photo-list-entry-view"
 		, "jquery"], function ( Model, View, $ ) {
 
 	function init( photoId, photoListId, isGroupOperationEnabled, container ) {
