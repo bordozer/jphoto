@@ -13,7 +13,7 @@ public enum FavoriteEntryType implements IdentifiableNameable {
 	, BOOKMARKED_PHOTOS( 5, "FavoriteEntryType: Bookmarks"							, "FavoriteEntryType: add photo to bookmarks"									, "FavoriteEntryType: The photo is in your bookmarks. Click to remove."					, "bookmarkAdd16x16.png"				, "bookmarkRemove16x16.png" )
 	, NEW_PHOTO_NOTIFICATION( 6, "FavoriteEntryType: New photos notification"		, "FavoriteEntryType: add notification about new photos"						, "FavoriteEntryType: You get notification about new photos. Click to unsubscribe"		, "newPhotoNotificationAdd16x16.png"	, "newPhotoNotificationRemove16x16.png" )
 	, NEW_COMMENTS_NOTIFICATION( 7, "FavoriteEntryType: New comments notification"	, "FavoriteEntryType: You did not subscribe notification about new comments"	, "FavoriteEntryType: You get notification about new comments. Click to unsubscribe"	, "newCommentsNotificationAdd16x16.png"	, "newCommentsNotificationRemove16x16.png" )
-	, MEMBER_INVISIBILITY_LIST( 8, "FavoriteEntryType: Hide photos in photo list"	, "FavoriteEntryType: The authors photos are shown in gallery"					, "FavoriteEntryType: The authors photos are hidden in gallery"							, "show_author_photos_in-photo-list.png", "hide_author_photos_in-photo-list.png" )
+	, MEMBERS_INVISIBILITY_LIST( 8, "FavoriteEntryType: Hide photos in photo list"	, "FavoriteEntryType: The authors photos are shown in gallery"					, "FavoriteEntryType: The authors photos are hidden in gallery"							, "members-invisibility-list-add.png"	, "members-invisibility-list-remove.png" )
 	;
 
 	public static final String FAVORITES_IMAGE_FOLDER = "favorites";

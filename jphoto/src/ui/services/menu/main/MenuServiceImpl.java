@@ -605,11 +605,11 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem userVisibilityListMenu( final User user ) {
-		final String caption = translatorService.translate( FavoriteEntryType.MEMBER_INVISIBILITY_LIST.getName(), getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.MEMBER_INVISIBILITY_LIST.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getRemoveIcon() ) );
 
 		return menuItem;
 	}

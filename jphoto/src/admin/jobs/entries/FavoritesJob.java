@@ -119,7 +119,7 @@ public class FavoritesJob extends AbstractJob {
 					return new NewCommentNotificationEntryGenerator( user );
 				case NEW_PHOTO_NOTIFICATION:
 					return new NewPhotoNotificationEntryGenerator( user );
-				case MEMBER_INVISIBILITY_LIST:
+				case MEMBERS_INVISIBILITY_LIST:
 					return new PhotoListPhotoVisibilityEntryGenerator( user );
 			}
 			throw new IllegalArgumentException( String.format( "Illegal favorite entry: %s", favoriteEntryType ) );
@@ -270,7 +270,7 @@ public class FavoritesJob extends AbstractJob {
 
 		@Override
 		public boolean generateFavoriteEntry() {
-			return addFavoritePhoto( FavoriteEntryType.MEMBER_INVISIBILITY_LIST );
+			return addFavoritePhoto( FavoriteEntryType.MEMBERS_INVISIBILITY_LIST );
 		}
 	}
 }

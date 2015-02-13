@@ -199,7 +199,7 @@ public class UserListController {
 	public String visibilityList( @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
 		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 
-		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.MEMBER_INVISIBILITY_LIST );
+		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.MEMBERS_INVISIBILITY_LIST );
 
 		return VIEW;
 	}

@@ -13,7 +13,7 @@ public class FavoritableFactory {
 			case FRIENDS:
 			case BLACKLIST:
 			case NEW_PHOTO_NOTIFICATION:
-			case MEMBER_INVISIBILITY_LIST:
+			case MEMBERS_INVISIBILITY_LIST:
 				return userService.load( favoriteEntryId );
 			case FAVORITE_PHOTOS:
 			case BOOKMARKED_PHOTOS:
