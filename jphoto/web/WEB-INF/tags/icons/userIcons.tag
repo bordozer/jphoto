@@ -4,6 +4,7 @@
 <%@ tag import="utils.UserUtils" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.general.user.User" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
@@ -31,14 +32,18 @@
 	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.BLACKLIST%>" />
 </c:if>
 
-<c:if test="${not hideIconPhotoVisibilityInPhotoList}">
-	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.MEMBERS_INVISIBILITY_LIST%>" />
-</c:if>
-
+<c:set var="showIcon" value="%>"/>
 <%
 	final User currentUser = EnvironmentContext.getCurrentUser();
 	final boolean isLoggedUser = UserUtils.isCurrentUserLoggedUser();
+	final boolean isAdmin = ApplicationContextHelper.getSecurityService().isSuperAdminUser( currentUser );
 %>
+
+<c:set var="isAdmin" value="<%=isAdmin%>" />
+
+<c:if test="${not isAdmin and not hideIconPhotoVisibilityInPhotoList}">
+	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.MEMBERS_INVISIBILITY_LIST%>" />
+</c:if>
 
 <c:set var="showIcon" value="<%=isLoggedUser && ! UserUtils.isUsersEqual( user, currentUser )%>"/>
 
