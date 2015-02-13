@@ -25,6 +25,8 @@ public class TestData {
 	boolean isPhotoWithingAnonymousPeriod;
 	boolean isPhotoAuthorInInvisibilityList;
 
+	boolean isPhotoAuthorHidden;
+
 	public TestData( final DateUtilsService dateUtilsService ) {
 		currentTime = dateUtilsService.parseDateTime( "2014-08-20 18:22:01" );
 

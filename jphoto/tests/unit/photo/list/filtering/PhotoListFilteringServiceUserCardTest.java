@@ -15,31 +15,9 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 	}
 
 	@Test
-	public void photoShouldBeVisibleForAdminEvenIfPhotoIsWithinAnonymousPeriodTest() {
-
-		testData.isPhotoWithingAnonymousPeriod = true;
-		testData.accessor = SUPER_ADMIN_1;
-
-		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( testData.accessor, getTestServices( testData ) );
-
-		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
-	}
-
-	@Test
-	public void photoShouldBeVisibleForUserCardOwnerEvenIfPhotoIsWithinAnonymousPeriodTest() {
-
-		testData.isPhotoWithingAnonymousPeriod = true;
-		testData.accessor = testData.photoAuthor;
-
-		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( testData.accessor, getTestServices( testData ) );
-
-		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
-	}
-
-	@Test
 	public void photoShouldNotBeVisibleForUsualUserIfPhotoIsWithinAnonymousPeriodTest() {
 
-		testData.isPhotoWithingAnonymousPeriod = true;
+		testData.isPhotoAuthorHidden = true;
 
 		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( testData.accessor, getTestServices( testData ) );
 
