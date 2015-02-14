@@ -54,9 +54,9 @@
 			} );
 		}
 
-		function renderEntryIcon( userId, bookmarkEntryId, bookmarkEntryTypeId, container ) {
+		function renderEntryIcon( userId, bookmarkEntryId, bookmarkEntryTypeId, iconSize, container ) {
 			require( [ 'jquery', 'modules/icon/entry-icon'], function ( $, bookmarking ) {
-				bookmarking( userId, bookmarkEntryId, bookmarkEntryTypeId, container );
+				bookmarking( userId, bookmarkEntryId, bookmarkEntryTypeId, iconSize, container );
 			} );
 		}
 	</script>

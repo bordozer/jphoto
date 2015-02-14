@@ -131,7 +131,7 @@
 
 						<c:if test="${showCommentAuthorData}">
 							<user:userCard user="${commentAuthor}"/>
-							<icons:favoritesUser user="${commentAuthor}" entryType="<%=FavoriteEntryType.BLACKLIST%>"/>
+							<icons:favoritesUser user="${commentAuthor}" entryType="<%=FavoriteEntryType.BLACKLIST%>" iconSize="16"/>
 							<user:userRankInGenreRenderer userRankIconContainer="${commentInfo.userRankIconContainer}"/>
 						</c:if>
 					</div>

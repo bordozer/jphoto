@@ -4,8 +4,10 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 
 	var EntryIconView = Backbone.View.extend( {
 
-		initialize: function() {
+		initialize: function( options ) {
 			this.listenTo( this.model, "sync", this.render );
+
+			this.iconSize = options.iconSize;
 		},
 
 		render:function () {

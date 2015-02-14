@@ -7,6 +7,7 @@
 
 <%@ attribute name="favoriteEntry" required="true" type="core.interfaces.Favoritable" %>
 <%@ attribute name="entryType" required="true" type="core.enums.FavoriteEntryType" %>
+<%@ attribute name="iconSize" required="false" type="java.lang.Integer" %>
 
 <c:set var="userId" value="<%=EnvironmentContext.getCurrentUserId()%>" />
 
@@ -15,6 +16,6 @@
 
 <script type="text/javascript">
 	require( [ 'jquery' ], function ( $ ) {
-		renderEntryIcon( ${userId}, ${favoriteEntry.id}, ${entryType.id}, $( '.${cssClass}' ) );
+		renderEntryIcon( ${userId}, ${favoriteEntry.id}, ${entryType.id}, ${iconSize}, $( '.${cssClass}' ) );
 	});
 </script>

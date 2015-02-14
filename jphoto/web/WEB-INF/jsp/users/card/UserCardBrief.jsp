@@ -43,7 +43,7 @@
 
 					<div class="row text-center">
 						<h2>${eco:escapeHtml(user.name)}</h2>
-						<icons:userIcons user="${user}" hideIconSendPrivateMessage="true"/>
+						<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" iconSize="32"/>
 						<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>"/>
 					</div>
 

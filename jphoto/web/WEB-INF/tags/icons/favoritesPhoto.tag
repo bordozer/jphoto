@@ -7,10 +7,11 @@
 
 <%@ attribute name="photo" required="true" type="core.general.photo.Photo" %>
 <%@ attribute name="entryType" required="true" type="core.enums.FavoriteEntryType" %>
+<%@ attribute name="iconSize" required="true" type="java.lang.Integer" %>
 
 <c:set var="showAddToFavoritesIcon" value="<%=UserUtils.isCurrentUserLoggedUser() && ! UserUtils.isUserOwnThePhoto( EnvironmentContext.getCurrentUser(), photo )%>"/>
 
 <c:if test="${showAddToFavoritesIcon}">
-	<icons:faforiteIcon favoriteEntry="${photo}" entryType="${entryType}" />
+	<icons:faforiteIcon favoriteEntry="${photo}" entryType="${entryType}" iconSize="${iconSize}"/>
 </c:if>
 
