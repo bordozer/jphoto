@@ -10,55 +10,55 @@ public enum FavoriteEntryType implements IdentifiableNameable {
 		, "FavoriteEntryType: Favorite members"
 		, "FavoriteEntryType: Favorite members - add"
 		, "FavoriteEntryType: Favorite members - remove"
-		, "userAdd16x16.png"
-		, "userRemove16x16.png"
+		, "favorite-members-add.png"
+		, "favorite-members-remove.png"
 	)
 	, FAVORITE_PHOTOS( 2
 		, "FavoriteEntryType: Favorite photos"
 		, "FavoriteEntryType: Favorite photos - add"
 		, "FavoriteEntryType: Favorite photos - remove"
-		, "photoAdd16x16.png"
-		, "photoRemove16x16.png"
+		, "favorite-photos-add.png"
+		, "favorite-photos-remove.png"
 	)
 	, FRIENDS( 3
 		, "FavoriteEntryType: Friends"
 		, "FavoriteEntryType: Friends - add"
 		, "FavoriteEntryType: Friends - remove"
-		, "friendAdd16x16.png"
-		, "friendRemove16x16.png"
+		, "friends-add.png"
+		, "friends-remove.png"
 	)
 	, BLACKLIST( 4
 		, "FavoriteEntryType: Black list"
 		, "FavoriteEntryType: Black list - add"
 		, "FavoriteEntryType: Black list - remove"
-		, "blackListAdd16x16.png"
-		, "blackListRemove16x16.png"
+		, "black-list-add.png"
+		, "black-list-remove.png"
 	)
 	, BOOKMARKED_PHOTOS( 5
 		, "FavoriteEntryType: Bookmarked photo"
 		, "FavoriteEntryType: Bookmarked photo - add"
 		, "FavoriteEntryType: Bookmarked photo - remove"
-		, "bookmarkAdd16x16.png"
-		, "bookmarkRemove16x16.png"
+		, "bookmarked-photo-add.png"
+		, "bookmarked-photo-remove.png"
 	)
 	, NEW_PHOTO_NOTIFICATION( 6
-		, "FavoriteEntryType: New photos notification"
-		, "FavoriteEntryType: New photos notification - add"
-		, "FavoriteEntryType: New photos notification - remove"
-		, "newPhotoNotificationAdd16x16.png"
-		, "newPhotoNotificationRemove16x16.png"
+		, "FavoriteEntryType: New photos tracking"
+		, "FavoriteEntryType: New photos tracking - add"
+		, "FavoriteEntryType: New photos tracking - remove"
+		, "new-photos-tracking-add.png"
+		, "new-photos-tracking-remove.png"
 	)
 	, NEW_COMMENTS_NOTIFICATION( 7
-		, "FavoriteEntryType: New comments to photo notification"
-		, "FavoriteEntryType: New comments to photo notification - add"
-		, "FavoriteEntryType: New comments to photo notification - remove"
-		, "newCommentsNotificationAdd16x16.png"
-		, "newCommentsNotificationRemove16x16.png"
+		, "FavoriteEntryType: Photo comments tracking"
+		, "FavoriteEntryType: Photo comments tracking - add"
+		, "FavoriteEntryType: Photo comments tracking - remove"
+		, "photo-comments-tracking-add.png"
+		, "photo-comments-tracking-remove.png"
 	)
 	, MEMBERS_INVISIBILITY_LIST( 8
-		, "FavoriteEntryType: Authors invisibility list"
-		, "FavoriteEntryType: Authors invisibility list - add"
-		, "FavoriteEntryType: Authors invisibility list - remove"
+		, "FavoriteEntryType: Members invisibility list"
+		, "FavoriteEntryType: Members invisibility list - add"
+		, "FavoriteEntryType: Members invisibility list - remove"
 		, "members-invisibility-list-add.png"
 		, "members-invisibility-list-remove.png"
 	)

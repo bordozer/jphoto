@@ -93,17 +93,17 @@
 
 
 	<translation>
-		<nerd>FavoriteEntryType: New photos notification</nerd>
+		<nerd>FavoriteEntryType: New photos tracking</nerd>
 		<ru><![CDATA[Пользователи, новые работы которых отслеживаются]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>FavoriteEntryType: New photos notification - add</nerd>
+		<nerd>FavoriteEntryType: New photos tracking - add</nerd>
 		<ru><![CDATA[Добавить пользователя в список пользователей, работы которых отслеживаются]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>FavoriteEntryType: New photos notification - remove</nerd>
+		<nerd>FavoriteEntryType: New photos tracking - remove</nerd>
 		<ru><![CDATA[Удалить пользователя из списка пользователей, работы которых отслеживаются]]></ru>
 	</translation>
 
@@ -111,17 +111,17 @@
 
 
 	<translation>
-		<nerd>FavoriteEntryType: New comments to photo notification</nerd>
+		<nerd>FavoriteEntryType: Photo comments tracking</nerd>
 		<ru><![CDATA[Работы, новые комментари к которым отслеживаются]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>FavoriteEntryType: New comments to photo notification - add</nerd>
+		<nerd>FavoriteEntryType: Photo comments tracking - add</nerd>
 		<ru><![CDATA[Следить за новыми комментариями к работе]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>FavoriteEntryType: New comments to photo notification - remove</nerd>
+		<nerd>FavoriteEntryType: Photo comments tracking - remove</nerd>
 		<ru><![CDATA[Прекратить отслеживание новых комментариев к работе]]></ru>
 	</translation>
 
@@ -129,17 +129,17 @@
 
 
 	<translation>
-		<nerd>FavoriteEntryType: Authors invisibility list</nerd>
+		<nerd>FavoriteEntryType: Members invisibility list</nerd>
 		<ru><![CDATA[Авторы работы которых не показываются]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>FavoriteEntryType: Authors invisibility list - add</nerd>
+		<nerd>FavoriteEntryType: Members invisibility list - add</nerd>
 		<ru><![CDATA[Непоказывать в галерее работы этого автора]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>FavoriteEntryType: Authors invisibility list - remove</nerd>
+		<nerd>FavoriteEntryType: Members invisibility list - remove</nerd>
 		<ru><![CDATA[Показывать в галерее работы этого автора]]></ru>
 	</translation>
 
