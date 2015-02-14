@@ -36,15 +36,23 @@
 			<div class="row row-bottom-padding-10">
 
 				<div class="col-lg-2">
+					<div class="panel panel-default">
 
-					<div class="row text-center row-bottom-padding-10">
-						<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
-					</div>
+						<div class="panel-heading">
+							<h3 class="panel-title text-center">
+								${eco:escapeHtml(user.name)}
+							</h3>
+						</div>
 
-					<div class="row text-center">
-						<h2>${eco:escapeHtml(user.name)}</h2>
-						<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" iconSize="32"/>
-						<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>"/>
+						<div class="panel-body text-center">
+							<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+						</div>
+
+						<div class="panel-footer text-center">
+							<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" iconSize="32"/>
+							<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>"/>
+						</div>
+
 					</div>
 
 				</div>
