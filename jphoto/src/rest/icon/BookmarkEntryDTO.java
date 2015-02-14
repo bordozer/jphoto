@@ -10,6 +10,7 @@ public class BookmarkEntryDTO {
 	private int bookmarkEntryTypeId;
 
 	private String title;
+	private String confirmation;
 	private String icon;
 
 	private boolean isAdding;
@@ -18,11 +19,12 @@ public class BookmarkEntryDTO {
 	public BookmarkEntryDTO() {
 	}
 
-	public BookmarkEntryDTO( final int userId, final int bookmarkEntryId, final int bookmarkEntryTypeId, final String title, final String icon ) {
+	public BookmarkEntryDTO( final int userId, final int bookmarkEntryId, final int bookmarkEntryTypeId, final String title, final String confirmation, final String icon ) {
 		this.userId = userId;
 		this.bookmarkEntryId = bookmarkEntryId;
 		this.bookmarkEntryTypeId = bookmarkEntryTypeId;
 		this.title = title;
+		this.confirmation = confirmation;
 		this.icon = icon;
 	}
 
@@ -56,6 +58,14 @@ public class BookmarkEntryDTO {
 
 	public void setTitle( final String title ) {
 		this.title = title;
+	}
+
+	public String getConfirmation() {
+		return confirmation;
+	}
+
+	public void setConfirmation( final String confirmation ) {
+		this.confirmation = confirmation;
 	}
 
 	public String getIcon() {

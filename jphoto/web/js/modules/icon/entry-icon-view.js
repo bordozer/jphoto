@@ -58,7 +58,7 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 			evt.preventDefault();
 			evt.stopPropagation();
 
-			if ( confirm( this.model.get( 'title' ) + '?' ) ) {
+			if ( confirm( this.model.get( 'confirmation' ) + '?' ) ) {
 				this.bookmarkEntryIconClick();
 			}
 		}

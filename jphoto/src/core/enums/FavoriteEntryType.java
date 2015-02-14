@@ -8,56 +8,57 @@ public enum FavoriteEntryType implements IdentifiableNameable {
 
 	FAVORITE_MEMBERS( 1
 		, "FavoriteEntryType: Favorite members"
-		, "FavoriteEntryType: add to favorite members"
-		, "FavoriteEntryType: The member is in your favorites. Click to remove."
-		, "userAdd16x16.png"					, "userRemove16x16.png"
+		, "FavoriteEntryType: Favorite members - add"
+		, "FavoriteEntryType: Favorite members - remove"
+		, "userAdd16x16.png"
+		, "userRemove16x16.png"
 	)
 	, FAVORITE_PHOTOS( 2
 		, "FavoriteEntryType: Favorite photos"
-		, "FavoriteEntryType: add to favorite photos"
-		, "FavoriteEntryType: The photo is in your favorites. Click to remove."
+		, "FavoriteEntryType: Favorite photos - add"
+		, "FavoriteEntryType: Favorite photos - remove"
 		, "photoAdd16x16.png"
 		, "photoRemove16x16.png"
 	)
 	, FRIENDS( 3
 		, "FavoriteEntryType: Friends"
-		, "FavoriteEntryType: add to friends"
-		, "FavoriteEntryType: The member is your friend. Click to remove."
+		, "FavoriteEntryType: Friends - add"
+		, "FavoriteEntryType: Friends - remove"
 		, "friendAdd16x16.png"
 		, "friendRemove16x16.png"
 	)
 	, BLACKLIST( 4
 		, "FavoriteEntryType: Black list"
-		, "FavoriteEntryType: add to black list"
-		, "FavoriteEntryType: The member is in your black list. Click to remove."
+		, "FavoriteEntryType: Black list - add"
+		, "FavoriteEntryType: Black list - remove"
 		, "blackListAdd16x16.png"
 		, "blackListRemove16x16.png"
 	)
 	, BOOKMARKED_PHOTOS( 5
-		, "FavoriteEntryType: Bookmarks"
-		, "FavoriteEntryType: add photo to bookmarks"
-		, "FavoriteEntryType: The photo is in your bookmarks. Click to remove."
+		, "FavoriteEntryType: Bookmarked photo"
+		, "FavoriteEntryType: Bookmarked photo - add"
+		, "FavoriteEntryType: Bookmarked photo - remove"
 		, "bookmarkAdd16x16.png"
 		, "bookmarkRemove16x16.png"
 	)
 	, NEW_PHOTO_NOTIFICATION( 6
 		, "FavoriteEntryType: New photos notification"
-		, "FavoriteEntryType: add notification about new photos"
-		, "FavoriteEntryType: You get notification about new photos. Click to unsubscribe"
+		, "FavoriteEntryType: New photos notification - add"
+		, "FavoriteEntryType: New photos notification - remove"
 		, "newPhotoNotificationAdd16x16.png"
 		, "newPhotoNotificationRemove16x16.png"
 	)
 	, NEW_COMMENTS_NOTIFICATION( 7
-		, "FavoriteEntryType: New comments notification"
-		, "FavoriteEntryType: You did not subscribe notification about new comments"
-		, "FavoriteEntryType: You get notification about new comments. Click to unsubscribe"
+		, "FavoriteEntryType: New comments to photo notification"
+		, "FavoriteEntryType: New comments to photo notification - add"
+		, "FavoriteEntryType: New comments to photo notification - remove"
 		, "newCommentsNotificationAdd16x16.png"
 		, "newCommentsNotificationRemove16x16.png"
 	)
 	, MEMBERS_INVISIBILITY_LIST( 8
-		, "FavoriteEntryType: Hide photos in photo list"
-		, "FavoriteEntryType: The authors photos are shown in gallery"
-		, "FavoriteEntryType: The authors photos are hidden in gallery"
+		, "FavoriteEntryType: Authors invisibility list"
+		, "FavoriteEntryType: Authors invisibility list - add"
+		, "FavoriteEntryType: Authors invisibility list - remove"
 		, "members-invisibility-list-add.png"
 		, "members-invisibility-list-remove.png"
 	)

@@ -86,17 +86,18 @@ public class EntryIconController {
 		final FavoriteEntryType bookmarkEntryType = FavoriteEntryType.getById( bookmarkEntryTypeId );
 		final boolean isInBookmark = favoritesService.isEntryInFavorites( userId, bookmarkEntryId, bookmarkEntryTypeId );
 
-		String title;
+		String confirmation;
 		String icon;
 		if ( isInBookmark ) {
-			title = translatorService.translate( bookmarkEntryType.getRemoveText(), getLanguage() );
+			confirmation = translatorService.translate( bookmarkEntryType.getRemoveText(), getLanguage() );
 			icon = bookmarkEntryType.getRemoveIcon();
 		} else {
-			title = translatorService.translate( bookmarkEntryType.getAddText(), getLanguage() );
+			confirmation = translatorService.translate( bookmarkEntryType.getAddText(), getLanguage() );
 			icon = bookmarkEntryType.getAddIcon();
 		}
+		final String title = translatorService.translate( bookmarkEntryType.getName(), getLanguage() );
 
-		final BookmarkEntryDTO entryDTO = new BookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId, title, icon );
+		final BookmarkEntryDTO entryDTO = new BookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId, title, confirmation, icon );
 		entryDTO.setAdding( ! isInBookmark );
 
 		return entryDTO;
