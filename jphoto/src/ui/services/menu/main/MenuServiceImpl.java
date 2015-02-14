@@ -549,7 +549,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserFavoritePhotosLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.FAVORITE_PHOTOS.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/16/%s", FavoriteEntryType.FAVORITE_PHOTOS.getRemoveIcon() ) );
 
 		return menuItem;
 	}
@@ -559,7 +559,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserFavoriteMembersLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.FAVORITE_MEMBERS.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/16/%s", FavoriteEntryType.FAVORITE_MEMBERS.getRemoveIcon() ) );
 
 		return menuItem;
 	}
@@ -579,7 +579,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserBookmarkedPhotosLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.BOOKMARKED_PHOTOS.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/16/%s", FavoriteEntryType.BOOKMARKED_PHOTOS.getRemoveIcon() ) );
 
 		return menuItem;
 	}
@@ -589,7 +589,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserFavoriteFriendsLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.FRIENDS.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/16/%s", FavoriteEntryType.FRIENDS.getRemoveIcon() ) );
 
 		return menuItem;
 	}
@@ -599,7 +599,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.BLACKLIST.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/16/%s", FavoriteEntryType.BLACKLIST.getRemoveIcon() ) );
 
 		return menuItem;
 	}
@@ -609,7 +609,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserFavoriteMembersInvisibilityListLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( String.format( "favorites/%s", FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getRemoveIcon() ) );
+		menuItem.setIcon( String.format( "favorites/16/%s", FavoriteEntryType.MEMBERS_INVISIBILITY_LIST.getRemoveIcon() ) );
 
 		return menuItem;
 	}

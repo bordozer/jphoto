@@ -69,7 +69,8 @@ public enum FavoriteEntryType implements IdentifiableNameable {
 	}
 
 	private String getIcon( final String icon) {
-		return String.format( "%s/%s", FAVORITES_IMAGE_FOLDER, icon );
+//		return String.format( "%s/%s", FAVORITES_IMAGE_FOLDER, icon );
+		return icon;
 	}
 
 	public static FavoriteEntryType getById( final int id ) {

@@ -102,7 +102,7 @@ define( ["backbone", "jquery", "underscore"
 				iconsContainer.append( container );
 
 				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ] } );
-				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
+				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container, iconSize: 16 } );
 
 				entryIconModel.fetch( { cache: false } );
 			});

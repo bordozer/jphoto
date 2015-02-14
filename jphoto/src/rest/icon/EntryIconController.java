@@ -90,10 +90,10 @@ public class EntryIconController {
 		String icon;
 		if ( isInBookmark ) {
 			title = translatorService.translate( bookmarkEntryType.getRemoveText(), getLanguage() );
-			icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), bookmarkEntryType.getRemoveIcon() );
+			icon = bookmarkEntryType.getRemoveIcon();
 		} else {
 			title = translatorService.translate( bookmarkEntryType.getAddText(), getLanguage() );
-			icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), bookmarkEntryType.getAddIcon() );
+			icon = bookmarkEntryType.getAddIcon();
 		}
 
 		final BookmarkEntryDTO entryDTO = new BookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId, title, icon );
