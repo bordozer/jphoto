@@ -14,7 +14,6 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 			var modelJSON = this.model.toJSON();
 //			console.log( modelJSON );
 
-//			this.$el.html( "<img src='" + this.model.get( 'icon' ) + "' width='16' height='16' title='" + this.model.get( 'title' ) + "' class='bookmark-entry-icon' />" );
 			this.$el.html( _.template( "<img src='<%=imageURL%>/favorites/<%=iconSize%>/<%=icon%>' width='<%=iconSize%>' height='<%=iconSize%>' title='<%=title%>' class='bookmark-entry-icon' />", {
 				imageURL: Backbone.JPhoto.imageFolder()
 				, icon: this.model.get( 'icon' )
