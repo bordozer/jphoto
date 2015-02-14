@@ -59,7 +59,9 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 			evt.preventDefault();
 			evt.stopPropagation();
 
-			this.bookmarkEntryIconClick();
+			if ( confirm( this.model.get( 'title' ) + '?' ) ) {
+				this.bookmarkEntryIconClick();
+			}
 		}
 	} );
 
