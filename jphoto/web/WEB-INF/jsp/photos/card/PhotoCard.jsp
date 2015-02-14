@@ -91,11 +91,11 @@
 
 		<div class="panel-footer text-center">
 
-				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}" iconSize="16"/>
+				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}" iconSize="32"/>
 
-				<icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}" iconSize="16"/>
+				<icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}" iconSize="32"/>
 
-				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}" iconSize="16"/>
+				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}" iconSize="32"/>
 
 				<tags:contextMenu entryId="${photoId}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
 

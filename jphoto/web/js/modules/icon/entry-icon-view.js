@@ -13,7 +13,7 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 		render:function () {
 			var modelJSON = this.model.toJSON();
 //			console.log( modelJSON );
-
+			console.log( this.model.get( 'icon' ), this.iconSize );
 			this.$el.html( _.template( "<img src='<%=imageURL%>/favorites/<%=iconSize%>/<%=icon%>' width='<%=iconSize%>' height='<%=iconSize%>' title='<%=title%>' class='bookmark-entry-icon' />", {
 				imageURL: Backbone.JPhoto.imageFolder()
 				, icon: this.model.get( 'icon' )
