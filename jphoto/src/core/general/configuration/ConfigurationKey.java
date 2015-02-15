@@ -14,6 +14,7 @@ public enum ConfigurationKey {
 	, SYSTEM_ACTIVITY_LOG_FAVORITE_ACTIONS( 109, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log favorite actions activity" )
 	, SYSTEM_UI_SHOW_PHOTOS_BY_CATEGORIES_MENU_ITEM( 111, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Show photos by categories site menu item" )
 	, SYSTEM_UI_SHOW_PHOTO_CATEGORIES_TOOLBAR( 112, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Show photo categories toolbar" )
+	, USER_LIST_USERS_ON_PAGE( 115, "30", false, ConfigurationDataType.INTEGER, ConfigurationUnit.USER, ConfigurationTab.SYSTEM, "User list: users on page" )
 //	, SYSTEM_TEMP( 10900, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.SYSTEM, "Test missing configuration" )
 
 	, SYSTEM_UI_PORTAL_PAGE_LATEST_PHOTOS_COUNT( 113, "12", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PORTAL_PAGE, "Portal page latest photos count" )

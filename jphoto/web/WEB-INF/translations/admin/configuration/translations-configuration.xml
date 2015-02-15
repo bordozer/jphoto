@@ -505,6 +505,11 @@
 	</translation>
 
 	<translation>
+		<nerd>User list: users on page</nerd>
+		<ru><![CDATA[К-во пользователей на странице в списке пользователей]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Portal page latest photos count</nerd>
 		<ru><![CDATA[К-во последних загруженных работ, показанных на главной странице]]></ru>
 	</translation>

@@ -49,7 +49,6 @@ import static com.google.common.collect.Maps.newHashMap;
 public class UserListController {
 
 	private static final String VIEW = "users/list/UserList";
-	private static final int USERS_ON_PAGE = 10;
 
 	private static final String USER_FILTER_MODEL = "userFilterModel";
 	private static final String USER_FILTER_DATA_SESSION_KEY = "UserFilterDataKey";
@@ -97,7 +96,7 @@ public class UserListController {
 
 	@ModelAttribute( USER_FILTER_MODEL )
 	public UserFilterModel prepareUserFilterModel() {
-		UserFilterModel filterModel = new UserFilterModel();
+		final UserFilterModel filterModel = new UserFilterModel();
 		filterModel.setVisible( true );
 
 		return filterModel;
@@ -107,7 +106,7 @@ public class UserListController {
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
 		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
-		pagingModel.setItemsOnPage( USERS_ON_PAGE );
+		pagingModel.setItemsOnPage( configurationService.getInt( ConfigurationKey.USER_LIST_USERS_ON_PAGE ) );
 
 		return pagingModel;
 	}

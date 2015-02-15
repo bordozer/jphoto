@@ -18,6 +18,7 @@ public enum ConfigurationUnit {
 	, PIXEL( 12, "ConfigurationUnit: Pixel" )
 	, RANK( 13, "ConfigurationUnit: Rank" )
 	, DPI( 14, "ConfigurationUnit: DPI" )
+	, USER( 15, "ConfigurationUnit: User" )
 	;
 
 	private final int id;

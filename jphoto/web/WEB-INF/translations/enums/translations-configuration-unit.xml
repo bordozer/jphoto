@@ -77,4 +77,9 @@
 		<ru><![CDATA[dpi]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>ConfigurationUnit: User</nerd>
+		<ru><![CDATA[Пользователь]]></ru>
+	</translation>
+
 </translations>
