@@ -10,7 +10,7 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 			this.iconSize = options.iconSize;
 		},
 
-		render:function () {
+		render: function () {
 			this.$el.html( _.template( "<img src='<%=imageURL%>/favorites/<%=iconSize%>/<%=icon%>' width='<%=iconSize%>' height='<%=iconSize%>' title='<%=title%>' class='bookmark-entry-icon' />", {
 				imageURL: Backbone.JPhoto.imageFolder()
 				, icon: this.model.get( 'icon' )
@@ -21,19 +21,19 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 
 		, events: {
 			"click .bookmark-entry-icon": "onBookmarkEntryIconClick"
-		}
+		},
 
-		, save: function() {
+		save: function() {
 			this.model.save()
 				.done( _.bind( this.onSave, this ) )
 				.fail( _.bind( this.onSaveError, this ) );
-		}
+		},
 
-		, onSave: function( response ){
+		onSave: function( response ){
 			showUIMessage_Notification( this.model.get( 'saveCallbackMessage' ) );
-		}
+		},
 
-		, onSaveError: function( response ){
+		onSaveError: function( response ){
 			if ( response.status === 422 ) {
 				var errorText = '';
 				var errors = response[ 'responseJSON' ];
@@ -45,13 +45,13 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 
 				this.model.refresh();
 			}
-		}
+		},
 
-		, bookmarkEntryIconClick: function() {
+		bookmarkEntryIconClick: function() {
 			this.save();
-		}
+		},
 
-		, onBookmarkEntryIconClick: function( evt ) {
+		onBookmarkEntryIconClick: function( evt ) {
 			evt.preventDefault();
 			evt.stopPropagation();
 
