@@ -6,6 +6,7 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 
 		initialize: function( options ) {
 			this.listenTo( this.model, "sync", this.render );
+			this.on( 'event:refresh', this.model.refresh, this );
 
 			this.iconSize = options.iconSize;
 		},

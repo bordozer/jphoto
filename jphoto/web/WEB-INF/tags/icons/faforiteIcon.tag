@@ -12,8 +12,9 @@
 
 <c:set var="userId" value="<%=EnvironmentContext.getCurrentUserId()%>" />
 
+<c:set var="cssClassEntry" value="bookmark-icon-div-${userId}-${favoriteEntry.id}-${entryType.id}" />
 <c:set var="cssClassEntryContainerId" value="bookmark-icon-div-${userId}-${favoriteEntry.id}-${entryType.id}-${iconIndex}" />
-<div class="${cssClassEntryContainerId}" style="display: inline-block;"></div>
+<div class="${cssClassEntry} ${cssClassEntryContainerId}" style="display: inline-block;"></div>
 
 <script type="text/javascript">
 	require( [ 'jquery' ], function ( $ ) {
