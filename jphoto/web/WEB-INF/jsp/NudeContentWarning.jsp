@@ -36,35 +36,49 @@
 		<input type="hidden" id="redirectToIfAcceptUrl" name="redirectToIfAcceptUrl" value="${redirectToIfAcceptUrl}">
 		<input type="hidden" id="redirectToIfDeclineUrl" name="redirectToIfDeclineUrl" value="${redirectToIfDeclineUrl}">
 
-		<br />
-		<br />
+		<div class="row">
 
-		<table:table width="500">
+			<div class="col-lg-12 text-center">
 
-			<table:separatorInfo colspan="2" title="${eco:translate( 'Nude content warning' ) }" />
+				<div class="panel panel-default" style="width: 1000px; margin-left: auto; margin-right: auto;">
 
-			<table:tr>
-				<table:td cssClass="text-centered"><img src="${eco:imageFolderURL()}/nude_content.jpg" title="${messageTranslated}" /></table:td>
-				<table:td cssClass="text-centered"><img src="${eco:imageFolderURL()}/no_nude_content.jpg" title="${messageTranslated}" /></table:td>
-			</table:tr>
+					<div class="panel-heading">
+						<h3 class="page-title">
+							${eco:translate( 'Nude content warning' ) }
+						</h3>
+					</div>
 
-			<table:tr>
-				<table:td cssClass="text-centered"><html:submitButton id="IConfirmShowingNudeContent" caption_t="I am over 18. Show nude content" /></table:td>
-				<table:td cssClass="text-centered"><html:submitButton id="IDeclineShowingNudeContent" caption_t="Do NOT show nude content" /></table:td>
-			</table:tr>
+					<div class="panel-body">
+						<div class="col-lg-6 text-center">
+							<img src="${eco:imageFolderURL()}/nude_content.jpg" title="${messageTranslated}" />
+							<br />
+							<br />
+							<html:submitButton id="IConfirmShowingNudeContent" caption_t="I am over 18. Show nude content" />
+						</div>
 
-		</table:table>
+						<div class="col-lg-6 text-center">
+							<img src="${eco:imageFolderURL()}/no_nude_content.jpg" title="${messageTranslated}" />
+							<br />
+							<br />
+							<html:submitButton id="IDeclineShowingNudeContent" caption_t="Do NOT show nude content" />
+						</div>
+					</div>
+
+					<div class="panel-footer text-left">
+						<c:if test="${isLoggedUserMode}">
+							${eco:translate('* If you want to switch nude content on by default, you can do this in the settings of your account')}
+						</c:if>
+
+						<c:if test="${not isLoggedUserMode}">
+							${eco:translate('* This choice of NUDE visibility will be applied for all photos for your current session')}
+						</c:if>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
 
 	</form>
-
-	<c:if test="${isLoggedUserMode}">
-		<br />
-		${eco:translate('* If you want to switch nude content on by default, you can do this in the settings of your account')}
-	</c:if>
-
-	<c:if test="${not isLoggedUserMode}">
-		<br />
-		${eco:translate('* This choice of NUDE visibility will be applied for all photos for your current session')}
-	</c:if>
 
 </tags:page>
