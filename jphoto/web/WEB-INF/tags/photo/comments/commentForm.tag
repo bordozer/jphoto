@@ -96,7 +96,7 @@
 
 		<tr>
 			<td colspan="2">
-					${eco:translate('Comment form: Comments subscribe')}: <icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}" iconSize="32"/>
+					${eco:translate('Comment form: Comments subscribe')}: <icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}" iconSize="32" iconIndex="2"/>
 			</td>
 		</tr>
 
