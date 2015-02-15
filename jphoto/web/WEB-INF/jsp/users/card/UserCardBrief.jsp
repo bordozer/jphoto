@@ -35,7 +35,7 @@
 
 			<div class="row row-bottom-padding-10">
 
-				<div class="col-lg-2">
+				<div class="col-lg-4">
 					<div class="panel panel-default">
 
 						<div class="panel-heading">

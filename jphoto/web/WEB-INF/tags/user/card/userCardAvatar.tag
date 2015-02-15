@@ -26,7 +26,7 @@
 	if ( userHasAvatar ) {
 		userAvatarFileUrl = userAvatar.getUserAvatarFileUrl();
 		dimension = imageFileUtilsService.getImageDimension( userAvatarFile );
-		resultDimension = imageFileUtilsService.resizePhotoImage( dimension, new Dimension( 200, 200 ) );
+		resultDimension = imageFileUtilsService.resizePhotoImage( dimension, new Dimension( 300, 300 ) );
 	}
 
 	final UrlUtilsService urlUtilsService = ApplicationContextHelper.getUrlUtilsService();
@@ -44,7 +44,7 @@
 
 <c:if test="${userHasAvatar}">
 	<c:set var="avatarTitle" value="${eco:translate('User card avatar: Click to see full size')}"/>
-	${eco:userAvatarImage(user.id, 200, 200, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
+	${eco:userAvatarImage(user.id, 300, 300, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
 </c:if>
 
 <c:if test="${not userHasAvatar}">
