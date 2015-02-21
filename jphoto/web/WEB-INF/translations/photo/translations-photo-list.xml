@@ -28,6 +28,16 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo list: there are $1 hidden photo(s)</nerd>
+		<ru><![CDATA[$1 скрытые работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoList: Show hidden photos</nerd>
+		<ru><![CDATA[Показать]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo list: Please, select at least one photo first</nerd>
 		<ru><![CDATA[Пожалуйста, выберите хотя бы одну работу]]></ru>
 	</translation>

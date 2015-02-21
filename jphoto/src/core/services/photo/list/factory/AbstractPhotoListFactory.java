@@ -57,6 +57,8 @@ public abstract class AbstractPhotoListFactory {
 
 		photoList.setAccessiblePhotoListViewModes( getAccessiblePhotoListViewModes() );
 
+		photoList.setHiddenPhotoIds( metrics.getHiddenPhotoIds() );
+
 		return photoList;
 	}
 
@@ -97,6 +99,7 @@ public abstract class AbstractPhotoListFactory {
 	}
 
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery, Date time ) {
+		final List<Integer> hiddenPhotoIds = newArrayList();
 
 		final SqlSelectIdsResult selectResult = getPhotosId( selectIdsQuery );
 
@@ -104,10 +107,12 @@ public abstract class AbstractPhotoListFactory {
 		final int selectedPhotosCount = selectedPhotosIds.size();
 		final int totalPhotosCount = selectResult.getRecordQty();
 
-		final List<Integer> notRestrictedPhotosIds = filterOutHiddenPhotos( selectedPhotosIds, time );
+		final PhotoHolder holder = filterOutHiddenPhotos( selectedPhotosIds, time );
+		final List<Integer> notRestrictedPhotosIds = holder.visiblePhotoIds;
+//		hiddenPhotoIds.addAll( holder.hiddenPhotoIds );
 
 		if ( selectedPhotosCount == totalPhotosCount ) {
-			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size() );
+			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size(), hiddenPhotoIds );
 		}
 
 		int counter = selectedPhotosCount;
@@ -123,12 +128,15 @@ public abstract class AbstractPhotoListFactory {
 				break;
 			}
 
-			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds, time ) );
+			final PhotoHolder photoHolder = filterOutHiddenPhotos( additionalPhotosIds, time );
+			notRestrictedPhotosIds.addAll( photoHolder.visiblePhotoIds );
 
 			counter += diff;
+
+			hiddenPhotoIds.addAll( photoHolder.hiddenPhotoIds );
 		}
 
-		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
+		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount, hiddenPhotoIds );
 	}
 
 	public PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainerForUserCard( final User user ) {
@@ -140,20 +148,39 @@ public abstract class AbstractPhotoListFactory {
 		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
 	}
 
-	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow, Date time ) {
-		final List<Integer> notRestrictedIds = newArrayList( idsToShow );
+	private PhotoHolder filterOutHiddenPhotos( final List<Integer> idsToShow, final Date time ) {
+		final List<Integer> visiblePhotoIds = newArrayList( idsToShow );
+		final List<Integer> hiddenPhotoIds = newArrayList();
 
-		CollectionUtils.filter( notRestrictedIds, new Predicate<Integer>() {
+		CollectionUtils.filter( visiblePhotoIds, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return ! photoFilteringStrategy.isPhotoHidden( photoId, time );
+
+				final boolean isVisible = !photoFilteringStrategy.isPhotoHidden( photoId, time );
+
+				if ( ! isVisible ) {
+					hiddenPhotoIds.add( photoId );
+				}
+
+				return isVisible;
 			}
 		} );
 
-		return notRestrictedIds;
+		return new PhotoHolder( visiblePhotoIds, hiddenPhotoIds );
 	}
 
 	public AbstractPhotoFilteringStrategy getPhotoFilteringStrategy() {
 		return photoFilteringStrategy;
+	}
+
+	private class PhotoHolder {
+
+		private List<Integer> visiblePhotoIds;
+		private List<Integer> hiddenPhotoIds;
+
+		private PhotoHolder( final List<Integer> visiblePhotoIds, final List<Integer> hiddenPhotoIds ) {
+			this.visiblePhotoIds = visiblePhotoIds;
+			this.hiddenPhotoIds = hiddenPhotoIds;
+		}
 	}
 }

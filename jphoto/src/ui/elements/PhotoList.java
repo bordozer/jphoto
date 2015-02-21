@@ -7,6 +7,8 @@ import ui.viewModes.PhotoListViewModeType;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 public class PhotoList {
 
 	private int photoListId;
@@ -30,6 +32,7 @@ public class PhotoList {
 
 	private PhotoListViewModeType selectedPhotoListViewModeType = PhotoListViewModeType.VIEW_MODE_PREVIEW;
 	private List<PhotoListViewMode> accessiblePhotoListViewModes;
+	private List<Integer> hiddenPhotoIds = newArrayList();
 
 	public PhotoList( final List<Integer> photoIds, final String photoListTitle ) {
 		this( photoIds, photoListTitle, true );
@@ -139,5 +142,17 @@ public class PhotoList {
 
 	public void setAccessiblePhotoListViewModes( final List<PhotoListViewMode> accessiblePhotoListViewModes ) {
 		this.accessiblePhotoListViewModes = accessiblePhotoListViewModes;
+	}
+
+	public void setHiddenPhotoIds( final List<Integer> hiddenPhotoIds ) {
+		this.hiddenPhotoIds = hiddenPhotoIds;
+	}
+
+	public List<Integer> getHiddenPhotoIds() {
+		return hiddenPhotoIds;
+	}
+
+	public String getHiddenPhotoIdsToJSArray() {
+		return String.format( "[ %s ]", StringUtils.join( hiddenPhotoIds, ", " ) );
 	}
 }

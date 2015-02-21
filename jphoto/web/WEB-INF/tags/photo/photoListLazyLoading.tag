@@ -7,6 +7,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
 
@@ -28,6 +29,16 @@
 
 <eco:form action="${formAction}" formName="${groupOperationForm}">
 
+	<style type="text/css">
+		.photo-spinning-wheel {
+			width: 16px;
+			height: 16px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 150px;
+		}
+	</style>
+
 	<a name="${photoList.photoListId}"></a>
 
 	<div class="row">
@@ -40,7 +51,7 @@
 
 		<photo:photoListHeader photoList="${photoList}" />
 
-		<div class="panel-body">
+		<div class="panel-body photo-list-photos">
 
 			<c:if test="${totalPhotos == 0}">
 				${eco:translate(photoList.noPhotoText)}
@@ -51,7 +62,7 @@
 				<c:set var="photoId" value="${photoId}" />
 
 				<div class="photo-container-${photoList.photoListId}-${photoId}">
-					<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
+					<div class="photo-spinning-wheel">
 						<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
 					</div>
 				</div>
@@ -74,9 +85,16 @@
 					</div>
 
 					<div class="col-lg-2 text-right">
-							<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
+						<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
 					</div>
 				</div>
+			</c:if>
+			
+			<c:if test="${not empty photoList.hiddenPhotoIds}">
+				<span class="show-hidden-photo-link-container">
+					${eco:translate1( 'Photo list: there are $1 hidden photo(s)', fn:length(photoList.hiddenPhotoIds))}
+					<a href="#" onclick="renderHiddenPhotos(); return false;">${eco:translate('PhotoList: Show hidden photos')}</a>
+				</span>
 			</c:if>
 
 			<c:if test="${isGroupOperationEnabled}">
@@ -145,17 +163,41 @@
 
 		function renderPhotos( photosToRender ) {
 
-			require( [ 'jquery', 'modules/photo/list/entry/photo-list-entry'], function ( $, photoListEntry ) {
-
-				var displayOptions = {
-					groupOperationEnabled: ${isGroupOperationEnabled}
-				};
-
+			require( [ 'jquery' ], function ( $ ) {
 				for ( var i = 0; i < photosToRender.length; i++ ) {
 					var photoId = photosToRender[i];
-					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
-					photoListEntry( photoId, ${photoList.photoListId}, displayOptions, $( '.' + photoUniqueClass ) );
+					var photoContainer = $( '.photo-container-' + ${photoList.photoListId} +'-' + photoId );
+					renderPhoto( photoId, photoContainer );
 				}
+			} );
+		}
+
+		function renderPhoto( photoId, container ) {
+
+			var displayOptions = {
+				groupOperationEnabled: ${isGroupOperationEnabled}
+			};
+
+			require( [ 'jquery', 'modules/photo/list/entry/photo-list-entry'], function ( $, render ) {
+				render( photoId, ${photoList.photoListId}, displayOptions, container );
+			} );
+		}
+
+		function renderHiddenPhotos() {
+			var photoIds = ${photoList.hiddenPhotoIdsToJSArray};
+
+			require( [ 'jquery' ], function ( $ ) {
+				var photosContainer = $( '.photo-list-photos' );
+
+				for ( var i = 0; i < photoIds.length; i++ ) {
+					var photoId = photoIds[i];
+					var photoContainer = $( "<div class='photo-container-" + ${photoList.photoListId} +'-' + photoId + "'></div>" );
+					photosContainer.append( photoContainer )
+
+					renderPhoto( photoId, photoContainer );
+				}
+
+				$( '.show-hidden-photo-link-container' ).hide();
 			} );
 		}
 
