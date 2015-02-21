@@ -1,14 +1,15 @@
 package core.services.photo.list.factory;
 
 import java.util.List;
+import java.util.Set;
 
 public class PhotoListMetrics {
 
 	private final List<Integer> photoIds;
 	private final int photosCount;
-	private final List<Integer> hiddenPhotoIds;
+	private final Set<Integer> hiddenPhotoIds;
 
-	public PhotoListMetrics( final List<Integer> photoIds, final int photosCount, final List<Integer> hiddenPhotoIds ) {
+	public PhotoListMetrics( final List<Integer> photoIds, final int photosCount, final Set<Integer> hiddenPhotoIds ) {
 		this.photoIds = photoIds;
 		this.photosCount = photosCount;
 		this.hiddenPhotoIds = hiddenPhotoIds;
@@ -26,7 +27,7 @@ public class PhotoListMetrics {
 		return photoIds != null && photoIds.size() > 0;
 	}
 
-	public List<Integer> getHiddenPhotoIds() {
+	public Set<Integer> getHiddenPhotoIds() {
 		return hiddenPhotoIds;
 	}
 }

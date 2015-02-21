@@ -17,8 +17,10 @@ import utils.UserUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 public abstract class AbstractPhotoListFactory {
 
@@ -99,7 +101,7 @@ public abstract class AbstractPhotoListFactory {
 	}
 
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery, Date time ) {
-		final List<Integer> hiddenPhotoIds = newArrayList();
+		final Set<Integer> hiddenPhotoIds = newHashSet();
 
 		final SqlSelectIdsResult selectResult = getPhotosId( selectIdsQuery );
 
@@ -109,7 +111,7 @@ public abstract class AbstractPhotoListFactory {
 
 		final PhotoHolder holder = filterOutHiddenPhotos( selectedPhotosIds, time );
 		final List<Integer> notRestrictedPhotosIds = holder.visiblePhotoIds;
-//		hiddenPhotoIds.addAll( holder.hiddenPhotoIds );
+		hiddenPhotoIds.addAll( holder.hiddenPhotoIds );
 
 		if ( selectedPhotosCount == totalPhotosCount ) {
 			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size(), hiddenPhotoIds );
@@ -150,7 +152,7 @@ public abstract class AbstractPhotoListFactory {
 
 	private PhotoHolder filterOutHiddenPhotos( final List<Integer> idsToShow, final Date time ) {
 		final List<Integer> visiblePhotoIds = newArrayList( idsToShow );
-		final List<Integer> hiddenPhotoIds = newArrayList();
+		final Set<Integer> hiddenPhotoIds = newHashSet();
 
 		CollectionUtils.filter( visiblePhotoIds, new Predicate<Integer>() {
 			@Override
@@ -176,9 +178,9 @@ public abstract class AbstractPhotoListFactory {
 	private class PhotoHolder {
 
 		private List<Integer> visiblePhotoIds;
-		private List<Integer> hiddenPhotoIds;
+		private Set<Integer> hiddenPhotoIds;
 
-		private PhotoHolder( final List<Integer> visiblePhotoIds, final List<Integer> hiddenPhotoIds ) {
+		private PhotoHolder( final List<Integer> visiblePhotoIds, final Set<Integer> hiddenPhotoIds ) {
 			this.visiblePhotoIds = visiblePhotoIds;
 			this.hiddenPhotoIds = hiddenPhotoIds;
 		}
