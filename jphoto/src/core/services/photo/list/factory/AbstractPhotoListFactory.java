@@ -3,6 +3,8 @@ package core.services.photo.list.factory;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
+import core.services.entry.FavoritesService;
+import core.services.photo.PhotoService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
@@ -138,7 +140,21 @@ public abstract class AbstractPhotoListFactory {
 			hiddenPhotoIds.addAll( photoHolder.hiddenPhotoIds );
 		}
 
+		remainOnlyPhotosFromUserInvisibilityList( hiddenPhotoIds );
+
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount, hiddenPhotoIds );
+	}
+
+	private void remainOnlyPhotosFromUserInvisibilityList( final Set<Integer> hiddenPhotoIds ) {
+		final FavoritesService favoritesService = services.getFavoritesService();
+		final PhotoService photoService = services.getPhotoService();
+
+		CollectionUtils.filter( hiddenPhotoIds, new Predicate<Integer>() {
+			@Override
+			public boolean evaluate( final Integer photoId ) {
+				return favoritesService.isUserInMembersInvisibilityListOfUser( accessor.getId(), photoService.load( photoId ).getUserId() );
+			}
+		} );
 	}
 
 	public PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainerForUserCard( final User user ) {
