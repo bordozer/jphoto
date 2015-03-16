@@ -54,7 +54,7 @@
 	</div>
 
 	<div class="panel-footer">
-
+		${eco:translate(jobModel.job.jobType.name)}
 	</div>
 </div>
 
