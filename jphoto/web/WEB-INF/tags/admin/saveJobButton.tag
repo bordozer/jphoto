@@ -16,7 +16,16 @@
 <input id="${saveJobModeFormControl}" name="${saveJobModeFormControl}" type="hidden" value="1"/>
 <input id="${saveAsCopyFormControl}" name="${saveAsCopyFormControl}" type="hidden" value="false"/>
 
-<div class="panel panel-info" style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 20px;">
+<style type="text/css">
+	.job-box {
+		width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+	}
+</style>
+
+<div class="panel panel-info job-box">
 
 	<div class="panel panel-heading">
 		<div class="row">
