@@ -3,7 +3,7 @@
 <translations>
 
 	<translation>
-		<nerd>Break current photosight user's photos import if already imported photo found</nerd>
+		<nerd>Break current photosight user_s photos import if already imported photo found</nerd>
 		<ru><![CDATA[Прервать импорт если встретится уже импортированная работа]]></ru>
 	</translation>
 

@@ -196,82 +196,91 @@
 				</div>
 			</div>
 
-		<hr/>
+			<hr/>
 
-		<div class="row">
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo import job parameter: Import comments')}
+				</div>
+				<div class="col-lg-7">
+					<form:checkbox path="${importCommentsControl}" itemValue="true"/>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Break current photosight user_s photos import if already imported photo found')}
+				</div>
+				<div class="col-lg-7">
+					<form:checkbox path="${breakImportIfAlreadyImportedPhotoFoundControl}" itemValue="true"/>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo import job parameter: Pages to process')}
+				</div>
+				<div class="col-lg-7">
+					<form:input path="${pageQtyControl}" size="4"/>
+				</div>
+			</div>
+
+			<hr/>
+
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo import job parameter: Image import strategy')}
+				</div>
+				<div class="col-lg-7">
+					<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyFile.id}"/>
+					<label for="photoImageImportStrategyTypeId1">${eco:translate(photoImageImportStrategyFile.description)}</label>
+					<br/>
+					<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyWeb.id}"/>
+					<label for="photoImageImportStrategyTypeId2">${eco:translate(photoImageImportStrategyWeb.description)}</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo import job parameter: Delay between requests')}
+				</div>
+				<div class="col-lg-7">
+					<form:input path="${delayBetweenRequestControl}" size="4"/>
+				</div>
+			</div>
+
+			<hr/>
+
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo import job parameter: Gender')}
+				</div>
+				<div class="col-lg-7">
+					<form:radiobuttons path="${userGenderIdControl}"
+												   items="${photosImportModel.userGenderTranslatableList.entries}"
+												   itemValue="id"
+												   itemLabel="name" delimiter="<br />"
+												   htmlEscape="false"
+							/>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo import job parameter: Membership')}
+				</div>
+				<div class="col-lg-7">
+					<form:radiobuttons path="${userMembershipIdControl}"
+												   items="${photosImportModel.userMembershipTypeTranslatableList.entries}"
+												   itemValue="id"
+												   itemLabel="name" delimiter="<br />"
+												   htmlEscape="false"
+							/>
+				</div>
+			</div>
 
 		</div>
-
-
-				<table:table width="100%">
-
-					<table:tr>
-						<table:tdtext text_t="Photo import job parameter: Import comments"/>
-						<table:td>
-							<form:checkbox path="${importCommentsControl}" itemValue="true"/>
-						</table:td>
-					</table:tr>
-
-					<table:tr>
-						<table:tdtext text_t="Break current photosight user's photos import if already imported photo found"/>
-						<table:td>
-							<form:checkbox path="${breakImportIfAlreadyImportedPhotoFoundControl}" itemValue="true"/>
-						</table:td>
-					</table:tr>
-
-					<table:tr>
-						<table:tdtext text_t="Photo import job parameter: Pages to process"/>
-						<table:td>
-							<form:input path="${pageQtyControl}" size="4"/>
-						</table:td>
-					</table:tr>
-
-					<table:separator colspan="2"/>
-
-					<table:tr>
-						<table:tdtext text_t="Photo import job parameter: Gender" isMandatory="true"/>
-						<table:td>
-							<form:radiobuttons path="${userGenderIdControl}" items="${photosImportModel.userGenderTranslatableList.entries}" itemValue="id"
-											   itemLabel="name" delimiter="<br />"
-											   htmlEscape="false"/>
-						</table:td>
-					</table:tr>
-
-					<table:tr>
-						<table:tdtext text_t="Photo import job parameter: Membership" isMandatory="true"/>
-						<table:td>
-							<form:radiobuttons path="${userMembershipIdControl}" items="${photosImportModel.userMembershipTypeTranslatableList.entries}" itemValue="id"
-											   itemLabel="name" delimiter="<br />"
-											   htmlEscape="false"/>
-						</table:td>
-					</table:tr>
-
-					<table:separator colspan="2"/>
-
-					<table:tr>
-						<table:tdtext text_t="Photo import job parameter: Delay between requests"/>
-						<table:td>
-							<form:input path="${delayBetweenRequestControl}" size="4"/>
-						</table:td>
-					</table:tr>
-
-					<table:separator colspan="2"/>
-
-					<table:tr>
-						<table:tdtext text_t="Photo import job parameter: Image import strategy"/>
-						<table:td>
-							<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyFile.id}"/>
-							<label for="photoImageImportStrategyTypeId1">${eco:translate(photoImageImportStrategyFile.description)}</label>
-							<br/>
-							<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyWeb.id}"/>
-							<label for="photoImageImportStrategyTypeId2">${eco:translate(photoImageImportStrategyWeb.description)}</label>
-						</table:td>
-					</table:tr>
-
-				</table:table>
-
-				<%-- / REMOTE PHOTO SITE IMPORT --%>
-
+		<%-- / REMOTE PHOTO SITE IMPORT --%>
 
 		<div class="panel-footer">
 
