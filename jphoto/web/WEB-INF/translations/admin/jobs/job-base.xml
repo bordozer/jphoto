@@ -118,17 +118,17 @@
 	</translation>
 
 	<translation>
-		<nerd>Save job '$1' as copy</nerd>
+		<nerd>Save job $1 as copy</nerd>
 		<ru><![CDATA[Сохранить задачу '$1' как копию]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Save '$1' job</nerd>
+		<nerd>Save job $1</nerd>
 		<ru><![CDATA[Сохранить задачу '$1']]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Run '$1' job</nerd>
+		<nerd>Run job $1</nerd>
 		<ru><![CDATA[Выполнить задачу '$1']]></ru>
 	</translation>
 

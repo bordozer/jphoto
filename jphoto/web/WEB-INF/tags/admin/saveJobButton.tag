@@ -6,61 +6,57 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-	<%@ attribute name="jobModel" type="admin.controllers.jobs.edit.AbstractAdminJobModel" required="true" %>
+<%@ attribute name="jobModel" type="admin.controllers.jobs.edit.AbstractAdminJobModel" required="true" %>
 
-<c:set var="saveJobModeFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_MODE_FORM_CONTROL%>" />
-<c:set var="saveAsCopyFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_AS_COPY_FORM_CONTROL%>" />
-<c:set var="saveJobNameFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_NAME_FORM_CONTROL%>" />
-<c:set var="saveJobActiveFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_ACTIVE_FORM_CONTROL%>" />
+<c:set var="saveJobModeFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_MODE_FORM_CONTROL%>"/>
+<c:set var="saveAsCopyFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_AS_COPY_FORM_CONTROL%>"/>
+<c:set var="saveJobNameFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_NAME_FORM_CONTROL%>"/>
+<c:set var="saveJobActiveFormControl" value="<%=AbstractAdminJobModel.SAVE_JOB_ACTIVE_FORM_CONTROL%>"/>
 
-<input id="${saveJobModeFormControl}" name="${saveJobModeFormControl}" type="hidden" value="1" />
-<input id="${saveAsCopyFormControl}" name="${saveAsCopyFormControl}" type="hidden" value="false" />
+<input id="${saveJobModeFormControl}" name="${saveJobModeFormControl}" type="hidden" value="1"/>
+<input id="${saveAsCopyFormControl}" name="${saveAsCopyFormControl}" type="hidden" value="false"/>
 
-<table:table border="0" width="100%">
+<div class="panel panel-info" style="width: 600px; margin-left: auto; margin-right: auto;">
 
-	<table:tr>
-		<table:td colspan="2">
-			<html:img id="save" src="/icons32/save32.png" width="32" height="32" onclick="saveJob();" alt="${eco:translate1('Save \\\'$1\\\' job', jobModel.jobName)}"/>
-			<html:img id="saveAsCopy" src="/icons32/saveAsCopy32.png" width="32" height="32" onclick="saveJobAsCopy();" alt="${eco:translate1('Save job \\\'$1\\\' as copy', jobModel.jobName)}"/>
-			<html:img id="run" src="/icons32/start32.png" width="32" height="32" onclick="checkAndStart();" alt="${eco:translate1('Run \\\'$1\\\' job', jobModel.jobName)}"/>
-		</table:td>
-	</table:tr>
+	<div class="panel panel-heading">
+		<div class="row">
+			<div class="col-lg-3">
+				<html:img id="save" src="/icons32/save32.png" width="32" height="32" onclick="saveJob();" alt="${eco:translate1('Save job $1', jobModel.jobName)}"/>
+				<html:img id="saveAsCopy" src="/icons32/saveAsCopy32.png" width="32" height="32" onclick="saveJobAsCopy();" alt="${eco:translate1('Save job $1 as copy', jobModel.jobName)}"/>
+				<html:img id="run" src="/icons32/start32.png" width="32" height="32" onclick="checkAndStart();" alt="${eco:translate1('Run job $1', jobModel.jobName)}"/>
+			</div>
+			<h3 class='panel-title'>
+				${eco:translate(jobModel.job.jobName)}
+			</h3>
+		</div>
+	</div>
 
-	<table:separatorInfo colspan="2" title="${eco:translate(jobModel.job.jobName)}" />
+	<div class="panel-body">
 
-	<table:tr>
-		<table:td width="120">
-			${eco:translate('Job: Job name')}
-		</table:td>
+		<div class="row">
+			<div class="col-lg-6">
+				${eco:translate('Job: Job name')}
+			</div>
+			<div class="col-lg-6">
+				<html:input fieldId="${saveJobNameFormControl}" fieldValue="${jobModel.jobName}" size="30"/>
+			</div>
+		</div>
 
-		<table:td>
-			<html:input fieldId="${saveJobNameFormControl}" fieldValue="${jobModel.jobName}" size="60" />
-		</table:td>
-	</table:tr>
+		<div class="row">
+			<div class="col-lg-6">
+				${eco:translate('Job: This is an active job')}
+			</div>
+			<div class="col-lg-6">
+				<form:checkbox path="${saveJobActiveFormControl}"/>
+			</div>
+		</div>
 
-	<table:tr>
-		<table:td>
-			${eco:translate('Job: This is an active job')}
-		</table:td>
+	</div>
 
-		<table:td>
-			<form:checkbox path="${saveJobActiveFormControl}" />
-			<%--<input type="hidden" id="${saveJobActiveFormControl}" name="${saveJobActiveFormControl}" value="${jobModel.active}">
-			<html:checkbox inputId="_${saveJobActiveFormControl}" inputValue="true" isChecked="${jobModel.active}" onClick="setActive()" />
-			<script type="text/javascript">
-				function setActive() {
-					var isChecked = $( '#_${saveJobActiveFormControl}' ).attr( 'checked' );
-					if ( isChecked != undefined ) {
-						$( '#${saveJobActiveFormControl}' ).val( true );
-					} else {
-						$( '#${saveJobActiveFormControl}' ).val( false );
-					}
-				}
-			</script>--%>
-		</table:td>
-	</table:tr>
+	<div class="panel-footer">
 
-</table:table>
+	</div>
+</div>
 
 <script type="text/javascript">
 	function saveJob() {
@@ -70,7 +66,7 @@
 	}
 
 	function saveJobAsCopy() {
-		if( confirmDeletion( '${eco:translate1('Job: Save "$1" as copy?', jobModel.job.jobName)}' ) ) {
+		if ( confirmDeletion( '${eco:translate1('Job: Save "$1" as copy?', jobModel.job.jobName)}' ) ) {
 			$( '#${saveAsCopyFormControl}' ).val( true );
 			saveJob();
 		}
@@ -80,7 +76,7 @@
 		$( '#${saveJobModeFormControl}' ).val( false );
 		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/${jobModel.job.jobType.prefix}/' );
 
-		if( confirmDeletion( '${eco:translate1('Job: Run "$1?"', jobModel.job.jobName)}' ) ) {
+		if ( confirmDeletion( '${eco:translate1('Job: Run "$1?"', jobModel.job.jobName)}' ) ) {
 			$( '#FormName' ).submit();
 		}
 	}

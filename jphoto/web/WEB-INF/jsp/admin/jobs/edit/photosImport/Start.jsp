@@ -62,8 +62,7 @@
 					<table:tr>
 						<table:tdtext text_t="Photo import job JSP: Import sources" isMandatory="true"/>
 						<table:tddata>
-							<form:radiobuttons path="${importSourceIdControl}" items="${photosImportModel.photosImportSourceTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"
-											   onchange="setFormsVisibility();"/>
+							<form:radiobuttons path="${importSourceIdControl}" items="${photosImportModel.photosImportSourceTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />" onchange="setFormsVisibility();"/>
 						</table:tddata>
 					</table:tr>
 
