@@ -21,20 +21,32 @@
 					 suppressAutoReloading="true"
 		/>
 
-<div style="float: left; width: 100%;">
+<div class="row">
 
-	<form:form id="FormName" name="FormName" action="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/">
+	<div class="col-lg-12">
 
-		<input type="hidden" id="referrer" name="referrer" value="${jobModel.referrer}">
+		<form:form id="FormName" name="FormName" action="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/">
 
-		<jsp:invoke fragment="jobForm"/>
+			<input type="hidden" id="referrer" name="referrer" value="${jobModel.referrer}">
 
-	</form:form>
+			<jsp:invoke fragment="jobForm"/>
 
-	&nbsp;&nbsp;${eco:translate('Job JSP: total users')}: <b>${jobModel.usersTotal}</b>
-	<br/>
-	&nbsp;&nbsp;${eco:translate('Job JSP: total Photos')}: <b>${jobModel.photosTotal}</b>
+		</form:form>
 
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		${eco:translate('Job JSP: total users')}: <b>${jobModel.usersTotal}</b>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		${eco:translate('Job JSP: total Photos')}: <b>${jobModel.photosTotal}</b>
+	</div>
 </div>
 
 <tags:springErrorHighliting bindingResult="${jobModel.bindingResult}"/>
