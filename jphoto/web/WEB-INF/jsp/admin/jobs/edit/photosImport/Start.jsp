@@ -68,7 +68,14 @@
 				</div>
 
 				<div class="col-lg-7">
-					<form:radiobuttons path="${importSourceIdControl}" items="${photosImportModel.photosImportSourceTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />" onchange="setFormsVisibility();"/>
+					<form:radiobuttons path="${importSourceIdControl}"
+									   items="${photosImportModel.photosImportSourceTranslatableList.entries}"
+									   itemValue="id"
+									   itemLabel="name"
+									   htmlEscape="false"
+									   delimiter="<br />"
+									   onchange="setFormsVisibility();"
+							/>
 				</div>
 
 			</div>
