@@ -49,15 +49,9 @@
 
 			<jsp:attribute name="jobForm">
 
+			<admin:saveJobButton jobModel="${photosImportModel}"/>
+
 				<table:table width="1000">
-
-					<table:tr>
-						<table:td colspan="2">
-							<admin:saveJobButton jobModel="${photosImportModel}"/>
-						</table:td>
-					</table:tr>
-
-					<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 					<table:tr>
 						<table:tdtext text_t="Photo import job JSP: Import sources" isMandatory="true"/>
