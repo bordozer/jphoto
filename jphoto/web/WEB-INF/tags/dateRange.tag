@@ -12,6 +12,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<%@ attribute name="title_t" required="true" type="java.lang.String" %>
 <%@ attribute name="dateRangeTypeId" required="true" type="java.lang.Integer" %>
 <%@ attribute name="dateFrom" required="true" type="java.lang.String" %>
 <%@ attribute name="dateTo" required="true" type="java.lang.String" %>
@@ -34,7 +35,7 @@
 
 	<div class="panel panel-heading">
 		<h3 class='panel-title text-center'>
-			${eco:translate('Job JSP: Date range component title')}
+			${eco:translate(title_t)}
 		</h3>
 	</div>
 

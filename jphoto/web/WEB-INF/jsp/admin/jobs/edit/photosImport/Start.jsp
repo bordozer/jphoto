@@ -104,11 +104,12 @@
 
 						<table:tr>
 							<table:td colspan="2">
-								<tags:dateRange dateRangeTypeId="${photosImportModel.dateRangeTypeId}"
-												dateFrom="${photosImportModel.dateFrom}"
-												dateTo="${photosImportModel.dateTo}"
-												timePeriod="${photosImportModel.timePeriod}"
-										/>
+								<tags:dateRange title_t="Job / Date range"
+										dateRangeTypeId="${photosImportModel.dateRangeTypeId}"
+										dateFrom="${photosImportModel.dateFrom}"
+										dateTo="${photosImportModel.dateTo}"
+										timePeriod="${photosImportModel.timePeriod}"
+									/>
 							</table:td>
 						</table:tr>
 

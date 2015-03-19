@@ -17,28 +17,12 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table width="700">
-
-				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${photoRatingJobModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-				<table:tr>
-					<table:td colspan="2">
-						<tags:dateRange dateRangeTypeId="${photoRatingJobModel.dateRangeTypeId}"
-										dateFrom="${photoRatingJobModel.dateFrom}"
-										dateTo="${photoRatingJobModel.dateTo}"
-										timePeriod="${photoRatingJobModel.timePeriod}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separator colspan="2"/>
-
-			</table:table>
+			<tags:dateRange title_t="Job / Photo rating recalculation: Recalculate rating for period"
+					dateRangeTypeId="${photoRatingJobModel.dateRangeTypeId}"
+					dateFrom="${photoRatingJobModel.dateFrom}"
+					dateTo="${photoRatingJobModel.dateTo}"
+					timePeriod="${photoRatingJobModel.timePeriod}"
+					/>
 
 		</jsp:attribute>
 

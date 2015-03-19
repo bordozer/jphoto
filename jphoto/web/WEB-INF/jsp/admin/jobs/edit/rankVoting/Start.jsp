@@ -25,14 +25,6 @@
 			<table:table width="700" border="0">
 
 				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${rankVotingJobModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-				<table:tr>
 					<table:tdtext text_t="RankVotingJob: Actions count" isMandatory="true"/>
 					<table:tddata>
 						<form:input path="${actionsQtyControl}" size="4"/>

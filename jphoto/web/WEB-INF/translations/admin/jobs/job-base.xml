@@ -118,8 +118,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Job JSP: Date range component title</nerd>
-		<ru><![CDATA[Временной отрезок]]></ru>
+		<nerd>Job / Photo rating recalculation: Recalculate rating for period</nerd>
+		<ru><![CDATA[Пересчитать рейтинг работ за период]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job / Date range</nerd>
+		<ru><![CDATA[Период времени]]></ru>
 	</translation>
 
 	<translation>

@@ -19,14 +19,6 @@
 		<table:table width="700" border="0">
 
 			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${archivingJobJobModel}"/>
-				</table:td>
-			</table:tr>
-
-			<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-			<table:tr>
 				<table:td>
 					${eco:translate1('Delete information about photos previews older then $1 days', archivingJobJobModel.archivePreviewsOlderThen )}:
 				</table:td>
