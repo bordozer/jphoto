@@ -22,18 +22,14 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table width="700" border="0">
-
-				<table:tr>
-					<table:tdtext text_t="RankVotingJob: Actions count" isMandatory="true"/>
-					<table:tddata>
-						<form:input path="${actionsQtyControl}" size="4"/>
-					</table:tddata>
-				</table:tr>
-
-				<table:separator colspan="2"/>
-
-			</table:table>
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('RankVotingJob: Actions count')}:
+				</div>
+				<div class="col-lg-7">
+					<form:input path="${actionsQtyControl}" size="4"/>
+				</div>
+			</div>
 
 		</jsp:attribute>
 
