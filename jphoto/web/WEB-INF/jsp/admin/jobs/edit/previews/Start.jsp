@@ -21,19 +21,19 @@
 		<jsp:attribute name="jobForm">
 
 			<div class="row">
-				<div class="col-lg-5 text-right">
+				<div class="col-lg-7 text-right">
 					${eco:translate('Preview generation job: Preview size')}:
 				</div>
-				<div class="col-lg-7">
+				<div class="col-lg-5">
 					<form:input path="${previewSizeControl}" cssErrorClass="invalid" size="4" />
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-5 text-right">
+				<div class="col-lg-7 text-right">
 					${eco:translate('Preview generation job: Skip generation if preview already exists')}
 				</div>
-				<div class="col-lg-7">
+				<div class="col-lg-5">
 					<form:checkbox path="skipPhotosWithExistingPreview"/>
 				</div>
 			</div>

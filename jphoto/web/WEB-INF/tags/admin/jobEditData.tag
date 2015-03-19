@@ -29,7 +29,7 @@
 
 			<input type="hidden" id="referrer" name="referrer" value="${jobModel.referrer}">
 
-			<admin:saveJobButton jobModel="${jobModelPhotoAction}"/>
+			<admin:saveJobButton jobModel="${jobModel}"/>
 
 			<div class="panel panel-info job-box">
 
