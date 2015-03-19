@@ -118,6 +118,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Job JSP: Date range component title</nerd>
+		<ru><![CDATA[Временной отрезок]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Save job $1 as copy</nerd>
 		<ru><![CDATA[Сохранить задачу '$1' как копию]]></ru>
 	</translation>

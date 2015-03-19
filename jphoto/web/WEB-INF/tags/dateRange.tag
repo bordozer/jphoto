@@ -30,77 +30,107 @@
 <c:set var="timePeriodDateRangeDiv" value="timePeriodDateRangeDiv" />
 <c:set var="dateRangeDiffDiv" value="dateRangeDiffDiv" />
 
-<div class="centerAlign">
-	<form:radiobuttons path="${dateRangeTypeIdControl}" items="${dateRangeTypes.entries}" itemValue="id" itemLabel="name" onchange="setVisibility();" delimiter="&nbsp;&nbsp;&nbsp;" htmlEscape="false"/>
-</div>
+<div class="panel panel-default">
 
-<c:set var="tblWidth" value="500"/>
+	<div class="panel panel-heading">
+		<h3 class='panel-title text-center'>
+			${eco:translate('Job JSP: Date range component title')}
+		</h3>
+	</div>
 
-<div id="dateRangeDiv" <c:if test="${dateRangeTypeId != dateRangeId}">style="display: none;" </c:if> >
-	<table:table border="0" width="${tblWidth}">
+	<div class="panel-body">
 
-		<%--TODO: translate--%>
-		<table:tr>
-			<table:tdtext text_t="Date range: Date from" isMandatory="true"/>
-			<table:tddata>
-				<tags:datePicker fieldName="${dateFromControl}" fieldValue="${dateFrom}" onchange="processDateRangeChange();" />
-			</table:tddata>
-		</table:tr>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<form:radiobuttons path="${dateRangeTypeIdControl}" items="${dateRangeTypes.entries}" itemValue="id" itemLabel="name" onchange="setVisibility();" delimiter="&nbsp;&nbsp;&nbsp;" htmlEscape="false"/>
+			</div>
+		</div>
 
-		<table:tr>
-			<table:tdtext text_t="Date range: Date to" isMandatory="true"/>
-			<table:tddata>
-				<tags:datePicker fieldName="${dateToControl}" fieldValue="${dateTo}" onchange="processDateRangeChange();"/>
-			</table:tddata>
-		</table:tr>
-	</table:table>
+		<hr />
 
-	<table:table border="0" width="${tblWidth}">
-		<table:tr>
-			<table:tdtext text_t="Date range: Time period"/>
-			<table:tddata>
-				<div id="${dateRangeDiffDiv}">${timePeriod} ${eco:translate('Date range: date range tag => parameters => days')}</div>
-			</table:tddata>
-		</table:tr>
-	</table:table>
-</div>
+		<div id='dateRangeDiv' class="row" <c:if test="${dateRangeTypeId != dateRangeId}">style="display: none;" </c:if> >
+			<div class="col-lg-12">
 
-<div id="timePeriodDiv" <c:if test="${dateRangeTypeId != timePeriodId}">style="display: none;" </c:if> >
+				<div class="row">
+					<div class="col-lg-5 text-right">
+						${eco:translate('Date range: Date from')}
+					</div>
+					<div class="col-lg-7">
+						<tags:datePicker fieldName="${dateFromControl}" fieldValue="${dateFrom}" onchange="processDateRangeChange();" />
+					</div>
+				</div>
 
-	<input type="hidden" id="${dateRangeTypeIdControl}" value="0">
+				<div class="row">
+					<div class="col-lg-5 text-right">
+						${eco:translate('Date range: Date to')}
+					</div>
+					<div class="col-lg-7">
+						<tags:datePicker fieldName="${dateToControl}" fieldValue="${dateTo}" onchange="processDateRangeChange();"/>
+					</div>
+				</div>
 
-	<table:table border="0" width="${tblWidth}">
-		<table:tr>
-			<table:tdtext text_t="Date range: Time period"/>
-			<table:tddata>
-				<html:input fieldId="${timePeriodControl}" fieldValue="${timePeriod}" size="3" onchange="processTimePeriodChange();"/> ${eco:translate('Date range: date range tag => parameters => days')}
-			</table:tddata>
-		</table:tr>
-	</table:table>
+				<div class="row">
+					<div class="col-lg-5 text-right">
+						${eco:translate('Date range: Time period')}
+					</div>
+					<div class="col-lg-7">
+						<div id="${dateRangeDiffDiv}">${timePeriod} ${eco:translate('Date range: date range tag => parameters => days')}</div>
+					</div>
+				</div>
 
-	<table:table border="0" width="${tblWidth}">
-		<table:tr>
-			<table:tdtext text_t="Date range: Date range"/>
-			<table:tddata>
-				<div id="${timePeriodDateRangeDiv}">${dateFrom} - ${dateTo}</div>
-			</table:tddata>
-		</table:tr>
-	</table:table>
-</div>
+			</div>
+		</div>
 
-<div id="currentTimeDiv" <c:if test="${dateRangeTypeId != currentTimeId}">style="display: none;" </c:if> >
-	<table:table border="0" width="${tblWidth}">
-		<table:tr>
-			<table:td cssClass="text-centered">
-				${eco:translate('Date range: Actual time will be used')}
-			</table:td>
-		</table:tr>
-		<table:tr>
-			<table:td>
-				&nbsp;
-			</table:td>
-		</table:tr>
-	</table:table>
+
+
+		<div id='timePeriodDiv' class="row" <c:if test="${dateRangeTypeId != timePeriodId}">style="display: none;" </c:if> >
+
+			<input type="hidden" id="${dateRangeTypeIdControl}" value="0">
+
+			<div class="col-lg-12">
+
+				<div class="row">
+					<div class="col-lg-5 text-right">
+						${eco:translate('Date range: Time period')}
+					</div>
+					<div class="col-lg-7">
+						<html:input fieldId="${timePeriodControl}" fieldValue="${timePeriod}" size="3" onchange="processTimePeriodChange();"/> ${eco:translate('Date range: date range tag => parameters => days')}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-5 text-right">
+						${eco:translate('Date range: Date range')}
+					</div>
+					<div class="col-lg-7">
+						<div id="${timePeriodDateRangeDiv}">${dateFrom} - ${dateTo}</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div id='currentTimeDiv' class="row" <c:if test="${dateRangeTypeId != currentTimeId}">style="display: none;" </c:if> >
+
+			<div class="col-lg-12">
+
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						${eco:translate('Date range: Actual time will be used')}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="panel-footer">
+
+	</div>
+
 </div>
 
 <c:set var="jsDateFormat" value="<%=ApplicationContextHelper.getSystemVarsService().getJavaScriptDateFormat()%>"/>

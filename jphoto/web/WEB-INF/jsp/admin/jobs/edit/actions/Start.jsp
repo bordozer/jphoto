@@ -54,14 +54,14 @@
 						<div class="col-lg-7">
 							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
 							<br/>
-							${eco:translate('Photo actions job parameters: Leave empty to select all photos')}
+							<small>* ${eco:translate('Photo actions job parameters: Leave empty to select all photos')}</small>
 						</div>
 					</div>
 
 					<hr />
 
 					<div class="row">
-						<div class="col-lg-12">
+						<div style="width: 500px; margin-left: auto; margin-right: auto;">
 							<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
 										dateFrom="${jobModelPhotoAction.dateFrom}"
 										dateTo="${jobModelPhotoAction.dateTo}"
