@@ -1,5 +1,3 @@
-<%@ page import="admin.controllers.jobs.edit.action.PhotoActionGenerationModel" %>
-<%@ page import="admin.controllers.jobs.edit.AbstractAdminJobModel" %>
 <%@ page import="admin.controllers.jobs.edit.rankVoting.RankVotingJobModel" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

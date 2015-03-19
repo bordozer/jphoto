@@ -28,13 +28,6 @@
 		<jsp:attribute name="jobForm">
 
 			<table:table width="700">
-				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${favoritesJobModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
 					<table:tdtext text_t="FavoritesJob: Total job steps" isMandatory="true"/>

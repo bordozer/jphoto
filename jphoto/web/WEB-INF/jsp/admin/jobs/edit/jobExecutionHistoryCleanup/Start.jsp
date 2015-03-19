@@ -32,14 +32,6 @@
 			<table:table border="0" width="1000">
 
 				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${jobExecutionHistoryCleanupJobModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-				<table:tr>
 					<table:tdtext text_t="JobExecutionHistoryCleanupJob: Delete entries that finished early then" isMandatory="true"/>
 
 					<table:tddata>

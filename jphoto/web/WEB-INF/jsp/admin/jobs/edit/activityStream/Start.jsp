@@ -30,14 +30,6 @@
 			<table:table border="0" width="700">
 
 				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${activityStreamCleanupJobModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-				<table:tr>
 					<table:tdtext text_t="ActivityStreamCleanupJob: Delete activities older then" isMandatory="true"/>
 
 					<table:tddata>
