@@ -21,35 +21,25 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table width="700">
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('User generation job: Users count to generate')}:
+				</div>
+				<div class="col-lg-7">
+					<form:input path="${userQtyLimitControl}" size="4"/>
+				</div>
+			</div>
 
-				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${userGenerationModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-				<table:tr>
-					<table:tdtext text_t="User generation job: Users count to generate" isMandatory="true"/>
-					<table:tddata>
-						<form:input path="${userQtyLimitControl}" size="4"/>
-					</table:tddata>
-				</table:tr>
-
-				<table:tr>
-					<table:tdtext text_t="User generation job: Avatar dir"/>
-					<table:tddata>
-						<form:input path="${avatarDirControl}" size="40"/>
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('User generation job: Avatar dir')}
+				</div>
+				<div class="col-lg-7">
+					<form:input path="${avatarDirControl}" size="40"/>
 						<br/>
-						${eco:translate('The folder must contain male and female folders with avatars (case does matter)')}
-					</table:tddata>
-				</table:tr>
-
-				<table:separator colspan="2"/>
-
-			</table:table>
+						<small>${eco:translate('The folder must contain male and female folders with avatars (case does matter)')}</small>
+				</div>
+			</div>
 
 		</jsp:attribute>
 
