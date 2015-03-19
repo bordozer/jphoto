@@ -27,7 +27,7 @@
 
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				${eco:translate('Photo search: Photo search')}
+				${eco:translate('Photo search: Photo filter')}
 			</h3>
 		</div>
 
@@ -47,8 +47,7 @@
 					<table:tddata>
 						<form:select path="filterGenreId">
 							<form:option value="-1" label="- - - - - -"/>
-							<form:options items="${photoFilterModel.genreWrappers}" itemValue="genre.id"
-										  itemLabel="genreNameTranslated"/>
+							<form:options items="${photoFilterModel.genreWrappers}" itemValue="genre.id" itemLabel="genreNameTranslated"/>
 						</form:select>
 					</table:tddata>
 				</table:tr>
@@ -60,8 +59,6 @@
 					</table:tddata>
 				</table:tr>
 
-				<table:separator colspan="2"/>
-
 				<table:tr>
 					<table:tdtext text_t="Photo search: Author name contains"/>
 					<table:tddata>
@@ -72,12 +69,9 @@
 				<table:tr>
 					<table:tdtext text_t="Photo search: Author membership type"/>
 					<table:tddata>
-						<form:checkboxes path="photoAuthorMembershipTypeIds" items="${membershipTypeListValues}"
-										 itemValue="id" itemLabel="name" delimiter="<br />"/>
+						<form:checkboxes path="photoAuthorMembershipTypeIds" items="${membershipTypeListValues}" itemValue="id" itemLabel="name" delimiter="<br />"/>
 					</table:tddata>
 				</table:tr>
-
-				<table:separator colspan="2"/>
 
 				<table:tr>
 					<table:tdtext text_t="Photo search: Photo filter: Sort by"/>
@@ -90,14 +84,14 @@
 
 			</table:table>
 
-
 		</div>
 
 		<div class="panel-footer">
 			<html:submitButton id="submit_photos_search" caption_t="Photo search: Do search photos button" />
 		</div>
 
-		<tags:springErrorHighliting bindingResult="${photoFilterModel.bindingResult}"/>
-
 	</div>
+
+	<tags:springErrorHighliting bindingResult="${photoFilterModel.bindingResult}"/>
+
 </form:form>
