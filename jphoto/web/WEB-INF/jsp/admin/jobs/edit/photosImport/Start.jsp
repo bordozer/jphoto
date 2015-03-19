@@ -55,7 +55,7 @@
 
 				<div class="panel panel-heading">
 					<h3 class='panel-title'>
-							${eco:translate('Job JSP: Job parameters')}
+						${eco:translate('Job JSP: Job parameters')}
 					</h3>
 				</div>
 

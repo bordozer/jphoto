@@ -26,46 +26,56 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table width="700" border="0">
+			<admin:saveJobButton jobModel="${jobModelPhotoAction}"/>
 
-				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${jobModelPhotoAction}"/>
-					</table:td>
-				</table:tr>
+			<div class="panel panel-info job-box">
 
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
+				<div class="panel panel-heading">
+					<h3 class='panel-title'>
+						${eco:translate('Job JSP: Job parameters')}
+					</h3>
+				</div>
 
-				<table:tr>
-					<table:tdtext text_t="Photo actions job parameters: Photos action to generate" isMandatory="true"/>
-					<table:tddata>
-						<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
-					</table:tddata>
-				</table:tr>
+				<div class="panel-body">
 
-				<table:tr>
-					<table:tdtext text_t="Photo actions job parameters: Photos"/>
-					<table:tddata>
-						<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
-						<br/>
-						${eco:translate('Photo actions job parameters: Leave empty to select all photos')}
-					</table:tddata>
-				</table:tr>
+					<div class="row">
+						<div class="col-lg-5 text-right">
+							${eco:translate('Photo actions job parameters: Photos action to generate')}
+						</div>
+						<div class="col-lg-7">
+							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
+						</div>
+					</div>
 
-				<table:separator colspan="2"/>
+					<div class="row">
+						<div class="col-lg-5 text-right">
+							${eco:translate('Photo actions job parameters: Photos')}
+						</div>
+						<div class="col-lg-7">
+							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
+							<br/>
+							${eco:translate('Photo actions job parameters: Leave empty to select all photos')}
+						</div>
+					</div>
 
-				<table:tr>
-					<table:td colspan="2">
-						<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
+					<hr />
+
+					<div class="row">
+						<div class="col-lg-12">
+							<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
 										dateFrom="${jobModelPhotoAction.dateFrom}"
 										dateTo="${jobModelPhotoAction.dateTo}"
 										timePeriod="${jobModelPhotoAction.timePeriod}"/>
-					</table:td>
-				</table:tr>
+						</div>
+					</div>
 
-				<table:separator colspan="2"/>
+				</div>
 
-			</table:table>
+				<div class="panel-footer">
+
+				</div>
+
+			</div>
 
 		</jsp:attribute>
 

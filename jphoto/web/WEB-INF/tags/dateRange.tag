@@ -43,22 +43,14 @@
 		<table:tr>
 			<table:tdtext text_t="Date range: Date from" isMandatory="true"/>
 			<table:tddata>
-				<%--<tags:inputHint inputId="${dateFromControl}" hintTitle_t="Date from" hint="Date from">--%>
-					<%--<jsp:attribute name="inputField">--%>
-						<tags:datePicker fieldName="${dateFromControl}" fieldValue="${dateFrom}" onchange="processDateRangeChange();" />
-					<%--</jsp:attribute>--%>
-				<%--</tags:inputHint>--%>
+				<tags:datePicker fieldName="${dateFromControl}" fieldValue="${dateFrom}" onchange="processDateRangeChange();" />
 			</table:tddata>
 		</table:tr>
 
 		<table:tr>
 			<table:tdtext text_t="Date range: Date to" isMandatory="true"/>
 			<table:tddata>
-				<%--<tags:inputHint inputId="${dateToControl}" hintTitle_t="Date to" hint="Date from">--%>
-					<%--<jsp:attribute name="inputField">--%>
-						<tags:datePicker fieldName="${dateToControl}" fieldValue="${dateTo}" onchange="processDateRangeChange();"/>
-					<%--</jsp:attribute>--%>
-				<%--</tags:inputHint>--%>
+				<tags:datePicker fieldName="${dateToControl}" fieldValue="${dateTo}" onchange="processDateRangeChange();"/>
 			</table:tddata>
 		</table:tr>
 	</table:table>
@@ -105,7 +97,7 @@
 		</table:tr>
 		<table:tr>
 			<table:td>
-				&nbsp;<%--${eco:translate('It will be the same for ALL actions in job')}--%>
+				&nbsp;
 			</table:td>
 		</table:tr>
 	</table:table>
@@ -135,7 +127,6 @@
 			$( '#dateRangeDiv' ).hide();
 			$( '#timePeriodDiv' ).hide();
 			$( '#currentTimeDiv' ).show();
-//			processTimePeriodChange();
 		}
 	}
 
