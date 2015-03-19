@@ -20,40 +20,23 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table border="0" width="700">
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Preview generation job: Preview size')}:
+				</div>
+				<div class="col-lg-7">
+					<form:input path="${previewSizeControl}" cssErrorClass="invalid" size="4" />
+				</div>
+			</div>
 
-				<table:tr>
-					<table:td colspan="2">
-						<admin:saveJobButton jobModel="${previewGenerationModel}"/>
-					</table:td>
-				</table:tr>
-
-				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-				<table:tr>
-					<table:td>
-						${eco:translate('Preview generation job: Preview size')}:
-					</table:td>
-
-					<table:td>
-						<form:input path="${previewSizeControl}" cssErrorClass="invalid" size="4"/>
-					</table:td>
-
-				</table:tr>
-
-				<table:tr>
-					<table:td>
-						${eco:translate('Preview generation job: Skip generation if preview already exists')}
-					</table:td>
-					<table:td>
-						<form:checkbox path="skipPhotosWithExistingPreview"/>
-					</table:td>
-
-				</table:tr>
-
-				<table:separator colspan="2"/>
-
-			</table:table>
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Preview generation job: Skip generation if preview already exists')}
+				</div>
+				<div class="col-lg-7">
+					<form:checkbox path="skipPhotosWithExistingPreview"/>
+				</div>
+			</div>
 
 		</jsp:attribute>
 
