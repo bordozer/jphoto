@@ -49,6 +49,6 @@ td.column-data {
 	display: none;
 }
 
-.photo-filter-panel-collapsed .photo-filter-collapse-button {
+.photo-filter-panel-collapsed .photo-filter-expand-button {
 	display: block;
 }

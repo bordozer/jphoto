@@ -28,7 +28,7 @@
 		<div class="panel-heading">
 
 			<div class="btn-group pull-right">
-				<button class="btn btn-default photo-filter-collapse-button" onclick="toggleFilterVisibility(); return false;">-</button>
+				<button class="btn btn-default photo-filter-collapse-button" onclick="toggleFilterVisibility(); return false;">_</button>
 				<button class="btn btn-default photo-filter-expand-button" onclick="toggleFilterVisibility(); return false;">+</button>
 			</div>
 
