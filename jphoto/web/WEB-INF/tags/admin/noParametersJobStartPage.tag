@@ -12,23 +12,11 @@
 
 	<jsp:attribute name="jobForm">
 
-		<table:table width="700" border="0">
-
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${jobModel}"/>
-				</table:td>
-			</table:tr>
-
-			<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
-
-			<table:tr>
-				<table:td colspan="2">${eco:translate('The job has no parameters')}</table:td>
-			</table:tr>
-
-			<table:separator colspan="2"/>
-
-		</table:table>
+		<div class="row">
+			<div class="col-lg-12">
+				${eco:translate('The job has no parameters')}
+			</div>
+		</div>
 
 	</jsp:attribute>
 
