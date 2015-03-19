@@ -26,55 +26,35 @@
 
 		<jsp:attribute name="jobForm">
 
-			<admin:saveJobButton jobModel="${jobModelPhotoAction}"/>
-
-			<div class="panel panel-info job-box">
-
-				<div class="panel panel-heading">
-					<h3 class='panel-title'>
-						${eco:translate('Job JSP: Job parameters')}
-					</h3>
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo actions job parameters: Photos action to generate')}
 				</div>
-
-				<div class="panel-body">
-
-					<div class="row">
-						<div class="col-lg-5 text-right">
-							${eco:translate('Photo actions job parameters: Photos action to generate')}
-						</div>
-						<div class="col-lg-7">
-							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-lg-5 text-right">
-							${eco:translate('Photo actions job parameters: Photos')}
-						</div>
-						<div class="col-lg-7">
-							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
-							<br/>
-							<small>* ${eco:translate('Photo actions job parameters: Leave empty to select all photos')}</small>
-						</div>
-					</div>
-
-					<hr />
-
-					<div class="row">
-						<div style="width: 500px; margin-left: auto; margin-right: auto;">
-							<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
-										dateFrom="${jobModelPhotoAction.dateFrom}"
-										dateTo="${jobModelPhotoAction.dateTo}"
-										timePeriod="${jobModelPhotoAction.timePeriod}"/>
-						</div>
-					</div>
-
+				<div class="col-lg-7">
+					<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
 				</div>
+			</div>
 
-				<div class="panel-footer">
-
+			<div class="row">
+				<div class="col-lg-5 text-right">
+					${eco:translate('Photo actions job parameters: Photos')}
 				</div>
+				<div class="col-lg-7">
+					<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
+					<br/>
+					<small>* ${eco:translate('Photo actions job parameters: Leave empty to select all photos')}</small>
+				</div>
+			</div>
 
+			<hr />
+
+			<div class="row">
+				<div style="width: 500px; margin-left: auto; margin-right: auto;">
+					<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
+								dateFrom="${jobModelPhotoAction.dateFrom}"
+								dateTo="${jobModelPhotoAction.dateTo}"
+								timePeriod="${jobModelPhotoAction.timePeriod}"/>
+				</div>
 			</div>
 
 		</jsp:attribute>

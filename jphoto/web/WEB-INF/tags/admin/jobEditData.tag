@@ -29,24 +29,44 @@
 
 			<input type="hidden" id="referrer" name="referrer" value="${jobModel.referrer}">
 
-			<jsp:invoke fragment="jobForm"/>
+			<admin:saveJobButton jobModel="${jobModelPhotoAction}"/>
+
+			<div class="panel panel-info job-box">
+
+				<div class="panel panel-heading">
+					<h3 class='panel-title'>
+						${eco:translate('Job JSP: Job parameters')}
+					</h3>
+				</div>
+
+				<div class="panel-body">
+
+					<jsp:invoke fragment="jobForm"/>
+
+				</div>
+
+				<div class="panel-footer">
+
+					<div class="row">
+						<div class="col-lg-12">
+							${eco:translate('Job JSP: total users')}: <b>${jobModel.usersTotal}</b>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-12">
+							${eco:translate('Job JSP: total Photos')}: <b>${jobModel.photosTotal}</b>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
 
 		</form:form>
 
 	</div>
 
-</div>
-
-<div class="row">
-	<div class="col-lg-12">
-		${eco:translate('Job JSP: total users')}: <b>${jobModel.usersTotal}</b>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-lg-12">
-		${eco:translate('Job JSP: total Photos')}: <b>${jobModel.photosTotal}</b>
-	</div>
 </div>
 
 <tags:springErrorHighliting bindingResult="${jobModel.bindingResult}"/>
