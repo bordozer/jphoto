@@ -23,9 +23,15 @@
 
 <form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrl()}/photos/filter/">
 
-	<div class="panel panel-default" style="width: 700px;">
+	<div class="panel panel-info photo-filter-panel photo-filter-panel-collapsed" style="width: 700px;">
 
 		<div class="panel-heading">
+
+			<div class="btn-group pull-right">
+				<button class="btn btn-default photo-filter-collapse-button" onclick="toggleFilterVisibility(); return false;">-</button>
+				<button class="btn btn-default photo-filter-expand-button" onclick="toggleFilterVisibility(); return false;">+</button>
+			</div>
+
 			<h3 class="panel-title">
 				${eco:translate('Photo search: Photo filter')}
 			</h3>
@@ -91,6 +97,15 @@
 		</div>
 
 	</div>
+
+	<script type="text/javascript">
+
+		function toggleFilterVisibility() {
+			require( [ 'jquery' ], function ( $ ) {
+				$( '.photo-filter-panel' ).toggleClass( 'photo-filter-panel-collapsed' );
+			});
+		}
+	</script>
 
 	<tags:springErrorHighliting bindingResult="${photoFilterModel.bindingResult}"/>
 

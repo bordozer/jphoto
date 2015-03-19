@@ -17,10 +17,6 @@ body {
 	background: #fcfcfc;
 }
 
-/*.base-font-color {
-	color: #888888;
-}*/
-
 a {
 	text-decoration: none;
 	color: #003366;
@@ -46,18 +42,13 @@ td.column-data {
 	padding-left: 10px;
 }
 
-/*.table-striped > tbody > tr:nth-child(odd) > th {
-	background-color: #f00;
-}*/
+.photo-filter-panel-collapsed .panel-body,
+.photo-filter-panel-collapsed .panel-footer,
+.photo-filter-panel-collapsed .photo-filter-collapse-button,
+.photo-filter-panel .photo-filter-expand-button {
+	display: none;
+}
 
-/*.block-background {
-	background: #e7e4d3;
-}*/
-
-/*.block-border {
-	border: solid 1px #848078;
-}*/
-
-/*.block-shadow {
-	box-shadow: 3px 3px 10px #848078;
-}*/
+.photo-filter-panel-collapsed .photo-filter-collapse-button {
+	display: block;
+}
