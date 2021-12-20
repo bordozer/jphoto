@@ -8,9 +8,12 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
 
+server:
+  port: 8555
+
 app:
   projectName: JPhoto
-  projectUrl: http://localhost:8555
+  projectUrl: http://localhost:${server.port}
   language:
     active: RU,UA,NERD
     default: RU
@@ -35,10 +38,6 @@ org:
       threadCount: 10
     jobStore:
       class: org.quartz.simpl.RAMJobStore
-
-
-server:
-  port: 8555
 
 security:
   basic:
