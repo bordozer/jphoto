@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Restriction filter form: Filter button title</nerd>
+        <ru><![CDATA[Применить фильтр]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Restriction filter form: Empty Search Result Text</nerd>
+        <ru><![CDATA[Ничего не найдено]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Restriction filter form: Filter by user restrictions title</nerd>
+        <ru><![CDATA[Ограничения пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Restriction filter form: Filter by photo restrictions title</nerd>
+        <ru><![CDATA[Ограничения работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Restriction filter form: Filter by status title</nerd>
+        <ru><![CDATA[Статус]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

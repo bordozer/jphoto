@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>UserStatus: candidate</nerd>
+        <ru><![CDATA[кандидат]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserStatus: member</nerd>
+        <ru><![CDATA[член клуба]]></ru>
+    </translation>
+
+</translations>

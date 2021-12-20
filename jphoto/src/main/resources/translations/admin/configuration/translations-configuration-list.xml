@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>System configuration list: Create new system configuration</nerd>
+        <ru><![CDATA[Созданой новую системную конфигурация]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: System configurations</nerd>
+        <ru><![CDATA[Системные конфигурации]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: System configuration list: Edit $1</nerd>
+        <ru><![CDATA[Редактировать $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: Delete $1</nerd>
+        <ru><![CDATA[Удалить $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: Delete system configuration $1?</nerd>
+        <ru><![CDATA[Удалить $1?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: The default system configuration can not be deleted.</nerd>
+        <ru><![CDATA[Базовая системная конфигурация не может быть удалена]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: The active system configuration can not be deleted. Activate another configuration and then delete this one.</nerd>
+        <ru><![CDATA[Активная системная конфигурация не может быть удалена. Активируйте другую конфигурацию и затем удалите эту.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: The default system configuration</nerd>
+        <ru><![CDATA[Базовая системная конфигурация]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: The active system configuration</nerd>
+        <ru><![CDATA[Активная системная конфигурация]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: Activate $1</nerd>
+        <ru><![CDATA[Активировать $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System configuration list: This configuration is active.</nerd>
+        <ru><![CDATA[Данная конфигурация является активной (используется в качестве конфигурации системы)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Configuration key ID: #$1</nerd>
+        <ru><![CDATA[Конфигурационный ключ #$1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Edit configuration: $1</nerd>
+        <ru><![CDATA[Редактировать конфигурацию: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Editable only for default system configuration</nerd>
+        <ru><![CDATA[Настройка общая для всех конфигураций (устанавливается в базовой конфигурации)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Reset value to the value of the default configuration?</nerd>
+        <ru><![CDATA[Установить значение из базовой конфигурации]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Configuration edit: Save configuration</nerd>
+        <ru><![CDATA[Сохранить конфигурацию]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Configuration: default configuration sign</nerd>
+        <ru><![CDATA[базовая]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Configuration: active configuration sign</nerd>
+        <ru><![CDATA[активная]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Configuration: Default system configuration value:</nerd>
+        <ru><![CDATA[Значение базовой конфигурации: ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Overrides value of default system configuration. Click to reset to default value.</nerd>
+        <ru><![CDATA[Перекрывает значение базовой системной конфигурации. Кликните, чтобы сбросить установленное значение.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Overrides value of default system configuration.</nerd>
+        <ru><![CDATA[Перекрывает значение базовой системной конфигурации.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The key is not stored in db. The default value is used.</nerd>
+        <ru><![CDATA[Значение по данному ключу отсутствует в БД. Скорее всего, это новый ключ. Используется захардкоженое значение.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Edit configuration: Name</nerd>
+        <ru><![CDATA[Название]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Edit configuration: Description</nerd>
+        <ru><![CDATA[Описание]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

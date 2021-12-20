@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Genre list: Genre system name</nerd>
+        <ru><![CDATA[Название]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Can contain nude</nerd>
+        <ru><![CDATA[Может содержать НЮ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Contains nude</nerd>
+        <ru><![CDATA[Содержит НЮ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Photos Qty</nerd>
+        <ru><![CDATA[Всего работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Min marks</nerd>
+        <ru><![CDATA[Мин. оценка для попадания в ТОП]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Voting categories</nerd>
+        <ru><![CDATA[Разрешенные критерии оценки]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Edit</nerd>
+        <ru><![CDATA[Редактирование]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Delete genre $1</nerd>
+        <ru><![CDATA[Удалить раздел $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: The genre has uploaded photos! Can not be deleted.</nerd>
+        <ru><![CDATA[В данном разделе уже загружены работы. Удаление раздела невозможно.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: System default marks to be in the best photos</nerd>
+        <ru><![CDATA[По-умолчанию]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre edit: Description</nerd>
+        <ru><![CDATA[Описание]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Create new genre button title</nerd>
+        <ru><![CDATA[Создать новый раздел фотографии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre edit: Create new genre button title</nerd>
+        <ru><![CDATA[Создать]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre edit: Save button title</nerd>
+        <ru><![CDATA[Сохранить]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre edit: new genre</nerd>
+        <ru><![CDATA[Новый раздел]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Delete genre button title</nerd>
+        <ru><![CDATA[Удалить раздел]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Deletion is not accessible</nerd>
+        <ru><![CDATA[Удаление невозможно]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: Genres translations</nerd>
+        <ru><![CDATA[Переводы разделов фотографии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System default minimal marks needed to be in the best photos in a photo category</nerd>
+        <ru><![CDATA[К-во баллов по-умолчанию в системе, которое необходимо набрать, чтобы работа попала в лучшие работы раздела]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

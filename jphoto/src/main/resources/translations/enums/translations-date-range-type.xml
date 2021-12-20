@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>DateRangeType: date range</nerd>
+        <ru><![CDATA[диапазон дат]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>DateRangeType: time period</nerd>
+        <ru><![CDATA[период времени]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>DateRangeType: actual time</nerd>
+        <ru><![CDATA[текущее время]]></ru>
+    </translation>
+
+</translations>

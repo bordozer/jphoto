@@ -1,9 +1,0 @@
-
-# This scheduler's name
-org.quartz.scheduler.instanceName = MyScheduler
-
-# There are 3 threads in the thread pool, which means that a maximum of 3 jobs can be run simultaneously
-org.quartz.threadPool.threadCount = 10
-
-# All of Quartz's data, such as details of jobs and triggers, is held in memory (rather than in a database)
-org.quartz.jobStore.class = org.quartz.simpl.RAMJobStore

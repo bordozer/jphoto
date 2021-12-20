@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>EntryMenuType: Photo</nerd>
+        <ru><![CDATA[Работа]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>EntryMenuType: Comment</nerd>
+        <ru><![CDATA[Комментарий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>EntryMenuType: Member</nerd>
+        <ru><![CDATA[Пользователь]]></ru>
+    </translation>
+
+</translations>

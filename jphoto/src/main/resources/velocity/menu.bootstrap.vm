@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            #foreach( $menuItem in $menuElements.entrySet() )
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+
+                        <a href="$menuItem.key.link" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            #if ( $StringUtils.isNotEmpty( $menuItem.key.icon ) )
+                                <img src="$imagePath/menus/main/$menuItem.key.icon" height="32" width="32"/>
+                            #end
+
+                            $menuItem.key.caption<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            #foreach( $subMenuItem in $menuItem.value )
+                                <li style="height: 30px;">
+                                    <a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">
+
+                                        #if ( $StringUtils.isNotEmpty( $subMenuItem.icon ) )
+                                            <img src="$imagePath/$subMenuItem.icon" height="16" width="16"/>
+                                        #end
+
+                                        #if ( $StringUtils.isEmpty( $subMenuItem.icon ) )
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        #end
+
+                                        $subMenuItem.caption
+                                    </a>
+                                </li>
+                            #end
+                        </ul>
+                    </li>
+                </ul>
+            #end
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Photo search: Photo filter</nerd>
+        <ru><![CDATA[Фильтрация работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Photo search result</nerd>
+        <ru><![CDATA[Результаты поиска]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Photo name contains</nerd>
+        <ru><![CDATA[Имя работы содержит]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Photo category</nerd>
+        <ru><![CDATA[Раздел]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Show photos with nude content</nerd>
+        <ru><![CDATA[Показывать работы, содержащие НЮ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Author name contains</nerd>
+        <ru><![CDATA[Имя автора содержит]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Author membership type</nerd>
+        <ru><![CDATA[Тип членства автора]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Photo filter: Sort by</nerd>
+        <ru><![CDATA[Сортировка]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo search: Do search photos button</nerd>
+        <ru><![CDATA[Искать]]></ru>
+    </translation>
+
+</translations>

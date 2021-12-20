@@ -22,7 +22,7 @@ Base functionality
 	- Redesign it totally
 
 6. Complain functionality
-	- One universal feedback to admin
+	- One universal feedback to main.java.com.bordozer.jphoto.admin
 		- Photo:
 			- Publishing photo without right owning
 		- Comment:

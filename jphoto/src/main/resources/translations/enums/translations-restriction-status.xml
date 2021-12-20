@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>RestrictionStatus: Progress</nerd>
+        <ru><![CDATA[действует]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>RestrictionStatus: Postponed</nerd>
+        <ru><![CDATA[отложено]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>RestrictionStatus: Cancelled</nerd>
+        <ru><![CDATA[отменено]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>RestrictionStatus: Passed</nerd>
+        <ru><![CDATA[истекло]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

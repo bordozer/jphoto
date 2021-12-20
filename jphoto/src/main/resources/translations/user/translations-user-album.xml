@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>PhotoAlbum: Create new photo album</nerd>
+        <ru><![CDATA[Создать новый альбом]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAlbum: Album name</nerd>
+        <ru><![CDATA[Название альбома]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAlbum: Description</nerd>
+        <ru><![CDATA[Описание]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAlbum: Photos</nerd>
+        <ru><![CDATA[К-во работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAlbum: Delete photo album?</nerd>
+        <ru><![CDATA[Удалить фото альбом?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAlbum: Save button text</nerd>
+        <ru><![CDATA[Сохранить]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAlbum: Album parameters</nerd>
+        <ru><![CDATA[Параметры альбома]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User photo albums</nerd>
+        <ru><![CDATA[Альбомы пользователя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

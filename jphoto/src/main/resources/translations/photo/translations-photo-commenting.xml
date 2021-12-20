@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Comment view: $1 - avatar</nerd>
+        <ru><![CDATA[$1 - аватар]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Add a new comment</nerd>
+        <ru><![CDATA[Добавить комментарий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Comment from</nerd>
+        <ru><![CDATA[От]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Comment text</nerd>
+        <ru><![CDATA[Текст]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Comments length: $1 - $2 symbols</nerd>
+        <ru><![CDATA[Длина комментария: $1 - $2 символов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Your delay between comments: $1 seconds</nerd>
+        <ru><![CDATA[Задержка между комментариями: $1 секунд(а)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Comments subscribe</nerd>
+        <ru><![CDATA[Подписаться на комментарии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: To the top of page</nerd>
+        <ru><![CDATA[Наверх]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Comment must be more then $1 and less then $2 symbols</nerd>
+        <ru><![CDATA[Длина комментария должна быть не менее $1 и не более $2 смволов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo Comment: You can leave a comment after</nerd>
+        <ru><![CDATA[Вы сможете оставить новый комментарий через]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo Comment: Save changes</nerd>
+        <ru><![CDATA[Сохранить изменения]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo Comment: Editing comment</nerd>
+        <ru><![CDATA[Редактирование комментария]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo Comment: Reply to the comment</nerd>
+        <ru><![CDATA[Ответить на комментарий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo Comment: You can not delete a comment which you are editing now</nerd>
+        <ru><![CDATA[Вы не можете удалить комментарий, который в данный момент редактируете]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo Comment: Delete comment?</nerd>
+        <ru><![CDATA[Удалить комментарий?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo card: Error getting photo comment</nerd>
+        <ru><![CDATA[Ошибка загрузки комментария]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo commenting: Time to the next comment</nerd>
+        <ru><![CDATA[Время до следующего комментария]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment form: Error saving message</nerd>
+        <ru><![CDATA[Ошибка сохранения комментария]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Mark ALL unread comments as read?</nerd>
+        <ru><![CDATA[Пометить ВСЕ непрочитанные комментарии как прочитанные?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Mark all unread comments as read</nerd>
+        <ru><![CDATA[Пометить все как прочитанные]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: New comment</nerd>
+        <ru><![CDATA[Новый комментарий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: $1 has not read this comment yet</nerd>
+        <ru><![CDATA[$1 еще не прочитал(а) этот комментарий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: Photo_s author has not read this comment yet</nerd>
+        <ru><![CDATA[Автор работы еще не прочитал(а) этот комментарий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: $1 read this comment at $2 $3</nerd>
+        <ru><![CDATA[$1 прочитал(а) этот комментарий $2 $3]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: Photo_s author comment</nerd>
+        <ru><![CDATA[Комментарий автора работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment view: $1 - avatar</nerd>
+        <ru><![CDATA[$1 - аватар]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: Author name is hidden due to anonymous period of photo</nerd>
+        <ru><![CDATA[Авторство работы скрыто поскольку работа опубликована анонимно]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: Set by $1 mark</nerd>
+        <ru><![CDATA[Выставленная $1 ценка]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Comment View: Max accessible at voting time for $1 mark</nerd>
+        <ru><![CDATA[Максимальная оценка, которую $1 мог(ла) выставить]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Reset comment form</nerd>
+        <ru><![CDATA[Очистить форму комментария]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Next $1 of $2 >></nerd>
+        <ru><![CDATA[Следующие $1 из $2 >>]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Shown $1 of $2 unread comments</nerd>
+        <ru><![CDATA[Показаны $1 из $2 непрочитанных комментариев]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

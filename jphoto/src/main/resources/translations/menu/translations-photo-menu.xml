@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>PhotoMenuItem: Photo info</nerd>
+        <ru><![CDATA[Информация о работе]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Restrict photo author: $1</nerd>
+        <ru><![CDATA[$1: Лишение прав автора работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Set nude content</nerd>
+        <ru><![CDATA[Установить НЮ контент]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Remove nude content</nerd>
+        <ru><![CDATA[Убрать НЮ контент]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Edit photo</nerd>
+        <ru><![CDATA[Редактировать работу]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Delete photo</nerd>
+        <ru><![CDATA[Удалить работу]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Photo $1 has been deleted</nerd>
+        <ru><![CDATA[Работа $1 удалена]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Complaint copyright</nerd>
+        <ru><![CDATA[Пожаловаться на нарушение авторских прав]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1: all photos ( $2 )</nerd>
+        <ru><![CDATA[$1: все работы ( $2 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1: photos with $2 $3 ( $4 )</nerd>
+        <ru><![CDATA[$1: работы с $2 $3 ( $4 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1: photos in category '$2' ( $3 )</nerd>
+        <ru><![CDATA[$1: работы из раздела $2 ( $3 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1: photos from album '$2' ( $3 )</nerd>
+        <ru><![CDATA[$1: работы из альбома $2 ( $3 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Send private message to $1</nerd>
+        <ru><![CDATA[Отправить личное сообщение $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Generate photo preview</nerd>
+        <ru><![CDATA[(Ре)генерировать превью]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: The preview has been generated</nerd>
+        <ru><![CDATA[Превью сгенерировано]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1: Nude context has been set</nerd>
+        <ru><![CDATA[$1: НЮ контент установлен]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1: Nude context has been removed</nerd>
+        <ru><![CDATA[$1: НЮ контент убран]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>( MenuTitle: the comment is deleted )</nerd>
+        <ru><![CDATA[( удален )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Entry Context menu hint</nerd>
+        <ru><![CDATA[Контекстное меню]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Context menu: Delete photo?</nerd>
+        <ru><![CDATA[Удалить работу?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ADMIN submenu: Move to genre</nerd>
+        <ru><![CDATA[ПЕРЕМЕСТИТЬ РАБОТУ В КАТЕГОРИЮ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: photo $1: has been moved to genre '$2'</nerd>
+        <ru><![CDATA[$1: Перемещена в категорию '$2']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: $1 - current photo category</nerd>
+        <ru><![CDATA[$1 - текущая]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Nude content has been set after the photo moving to the new category</nerd>
+        <ru><![CDATA[Ню контент был установлен]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: Nude content has been removed after the photo moving to the new category</nerd>
+        <ru><![CDATA[Ню контент был убран]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: ( + NUDE content will be set after photo moving to the new genre)</nerd>
+        <ru><![CDATA[ ( + добавить поментку 'НЮ контент' )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoMenuItem: ( - NUDE content will be removed after photo moving to the new genre)</nerd>
+        <ru><![CDATA[( + убрать пометку 'НЮ контент' )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PhotoAdminSubMenuItemPhotoRestriction: Photo restriction</nerd>
+        <ru><![CDATA[Лишение прав работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Context menu item: Delete photo?</nerd>
+        <ru><![CDATA[Удалить работу?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Context menu item: Server error on photo deletion</nerd>
+        <ru><![CDATA[Возникла ошибка во время удаления работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

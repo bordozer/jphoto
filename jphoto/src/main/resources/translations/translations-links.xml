@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Links: Edit configuration tab: $1</nerd>
+        <ru><![CDATA[Редактировать табу: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Show photos by genre: $1</nerd>
+        <ru><![CDATA[$1: все работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: $1 - photo preview, set marks link title</nerd>
+        <ru><![CDATA[$1: история голосования за работу]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: $1 - photo preview, previews link title</nerd>
+        <ru><![CDATA[$1: история просмотров работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Show photos on date $1</nerd>
+        <ru><![CDATA[Работы, загруженные $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Edit member data: $1</nerd>
+        <ru><![CDATA[$1: редактировать данные]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: black list of $1</nerd>
+        <ru><![CDATA[$1: черный список]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: authors invisible list of $1</nerd>
+        <ru><![CDATA[$1: список участников, чьи работы скрыты в галереи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: bookmarked photos of $1</nerd>
+        <ru><![CDATA[$1: работы в закладках]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Friends of $1</nerd>
+        <ru><![CDATA[$1: список друзей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: favorite members of $1</nerd>
+        <ru><![CDATA[$1: избранные пользователи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: favorite photos of $1</nerd>
+        <ru><![CDATA[$1: избранные работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Notifications about new comments</nerd>
+        <ru><![CDATA[Работы, новые комментарии которых отслеживаются]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: $1: notifications about new comments</nerd>
+        <ru><![CDATA[$1: работы, новые комментарии которых отслеживаются]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: $1: Notifications about new photos</nerd>
+        <ru><![CDATA[Пользователи, новые работы которых отслеживаются]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: $1: notifications about new photos</nerd>
+        <ru><![CDATA[$1: пользователи, новые работы которых отслеживаются]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Photos was appraised $1 by $2</nerd>
+        <ru><![CDATA[Работы, оцененные по критерию '$1' пользователем $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: $1: show all photos of user</nerd>
+        <ru><![CDATA[$1: все работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Show all photos of user</nerd>
+        <ru><![CDATA[Все работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: The team member of user: $1 - $2</nerd>
+        <ru><![CDATA[Член команды пользователя: $1 - $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo card link: $1</nerd>
+        <ru><![CDATA[Карточка работы: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job template: $1 link title</nerd>
+        <ru><![CDATA[Шаблон задачи: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Edit scheduler task $1: '$2'</nerd>
+        <ru><![CDATA[Редактировать задачу планировщика $1: '$2']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Links: Send private message</nerd>
+        <ru><![CDATA[Отправить личное сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

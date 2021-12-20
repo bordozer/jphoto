@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>UsersGenresRanksRecalculationJob: You have bees given a new rank $1 in category $2 ( the previous one was $3 )</nerd>
+        <ru><![CDATA[Вам был присвоен новый ранг $1 в разделе $2 ( предыдущий был $3 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )</nerd>
+        <ru><![CDATA[Пользователю $1 был присвоен новый ранг $2 в разделе $3 ( предыдущий был $4 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 is going to do the action for another photo of $2</nerd>
+        <ru><![CDATA[Пользователь $1 решил повторить действие для другой работы $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently</nerd>
+        <ru><![CDATA[Пользователь $1 решил повторить действие для другой работы $2 потому, что $3 оценил его рабоу недавно]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 has left a comment for photo $2 ( time: $3 )</nerd>
+        <ru><![CDATA[Пользователь $1 оставил комментарий к работу $2 ( время: $3 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 has seen photo $2 ( time: $3 )</nerd>
+        <ru><![CDATA[Пользователь $1 посмотрел работу $2 ( время: $3 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 has appraised photo $2 of $3 ( time: $4 )</nerd>
+        <ru><![CDATA[Пользователь $1 оценил работу $2 автора $3 ( время: $4 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User $1 has voted for $2's rank in $3 ( $4 )</nerd>
+        <ru><![CDATA[Пользователь $1 проголосовал за ранг $2 в разделе $3 ( $4 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Error creating user $1</nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserStatusRecalculationJob: Member $1 has got new status: $2</nerd>
+        <ru><![CDATA[Пользователь $1 получил новый статус: $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserStatusRecalculationJob: You have bees given a new club status: $1</nerd>
+        <ru><![CDATA[Вам присвоен новый статус в клубе: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job $1 is performed successfully</nerd>
+        <ru><![CDATA[Задача $1 выполнена успешно]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job DateRangeParameters: $1 $2 days</nerd>
+        <ru><![CDATA[$1 $2 дня(дней)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job DateRangeParameters: Time: $1</nerd>
+        <ru><![CDATA[Время: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo actions job parameters: Actions type</nerd>
+        <ru><![CDATA[Тип действия]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo actions job parameters: Photos</nerd>
+        <ru><![CDATA[К-во работ из последних]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo actions job parameters: Leave empty to select all photos</nerd>
+        <ru><![CDATA[Чтобы включить в обработку все работы, оставьте поле пустым]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo actions job parameters: Photos action to generate</nerd>
+        <ru><![CDATA[К-во действий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job: Job name</nerd>
+        <ru><![CDATA[Имя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job: This is an active job</nerd>
+        <ru><![CDATA[Задача активна]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job: Save "$1" as copy?</nerd>
+        <ru><![CDATA[Сохранить "$1" как копию?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job: Run "$1?"</nerd>
+        <ru><![CDATA[Выполнить "$1?"]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Job parameters</nerd>
+        <ru><![CDATA[Параметры задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job / Photo rating recalculation: Recalculate rating for period</nerd>
+        <ru><![CDATA[Пересчитать рейтинг работ за период]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job / Date range</nerd>
+        <ru><![CDATA[Период времени]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Save job $1 as copy</nerd>
+        <ru><![CDATA[Сохранить задачу '$1' как копию]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Save job $1</nerd>
+        <ru><![CDATA[Сохранить задачу '$1']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Run job $1</nerd>
+        <ru><![CDATA[Выполнить задачу '$1']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Already imported photo #$1 found. Skipping the import of the com.bordozer.jphoto.rest photos of $2</nerd>
+        <ru><![CDATA[Найдена ранее импортированная работа #$1. Импорт остальных работ $2 пропущен.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job execution log</nerd>
+        <ru><![CDATA[Лог выполнения задач]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Execution time</nerd>
+        <ru><![CDATA[Время выполнения]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Existing user found. Login: $1</nerd>
+        <ru><![CDATA[Найден существующий пользователью Логин: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Existing user found. Name: $1</nerd>
+        <ru><![CDATA[Найден существующий пользователь. Имя: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User picker: Found member:</nerd>
+        <ru><![CDATA[Найденный пользователь]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User picker: Reset found member in user picker</nerd>
+        <ru><![CDATA[Сбросить пользователя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Job progress</nerd>
+        <ru><![CDATA[Прогресс выполнения задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Job type</nerd>
+        <ru><![CDATA[Тип задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: total users</nerd>
+        <ru><![CDATA[Всего пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: total Photos</nerd>
+        <ru><![CDATA[Всего работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>New user has been created: $1</nerd>
+        <ru><![CDATA[Создан новый пользователь: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job execution log: Job execution log</nerd>
+        <ru><![CDATA[Лог выполнения задач]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job execution log: Job not found. It must be finished.</nerd>
+        <ru><![CDATA[Задача не найдена. Вероятно, она завершила свое выполнение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job execution log: No messages found</nerd>
+        <ru><![CDATA[Записей в логе выполнения нет]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Performed $1 from $2</nerd>
+        <ru><![CDATA[Выполнено $1 из $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The job execution finished</nerd>
+        <ru><![CDATA[Выполнение задачи завершено]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>There are active jobs</nerd>
+        <ru><![CDATA[Есть выполняющиеся задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User generation job: Users count to generate</nerd>
+        <ru><![CDATA[К-во пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User generation job: Avatar dir</nerd>
+        <ru><![CDATA[Каталог с аватарами]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The folder must contain male and female folders with avatars (case does matter)</nerd>
+        <ru><![CDATA[Папка с аватарами должна содержать две другие папки <b>male</b> и <b>female</b> в нижнем регистре]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Start time</nerd>
+        <ru><![CDATA[Время начала]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Stop the job?</nerd>
+        <ru><![CDATA[Прервать выполнение задачи?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job JSP: Stop the Job button title</nerd>
+        <ru><![CDATA[Прервать выполнение задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>jobListHeader: Show active jobs</nerd>
+        <ru><![CDATA[Показать активные задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job steps qty: Calculating...</nerd>
+        <ru><![CDATA[Высчитывается...]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>NoParametersAbstractJob: No parameters</nerd>
+        <ru><![CDATA[Параметров нет]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The job has no parameters</nerd>
+        <ru><![CDATA[Задача не имеет параметров]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>One or more jobs of this type is active now</nerd>
+        <ru><![CDATA[Есть активные задачи этого типа]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job $1 is stopped by user</nerd>
+        <ru><![CDATA[Задача $1 прервана пользователем]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>'$1' - progress</nerd>
+        <ru><![CDATA['$1' - прогресс выполнения]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Delete job '$1'</nerd>
+        <ru><![CDATA[Удалить задачу '$1']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Stopped by parent job #$1</nerd>
+        <ru><![CDATA[Остановлена родительской задачей #$1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job '$1' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job</nerd>
+        <ru><![CDATA[Задача '$1' не может быть удалена. Вероятно, она используется планировщиком или является подзадачей комплексной задачи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>FavoritesJob: Total job steps</nerd>
+        <ru><![CDATA[К-во действий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>FavoritesJob: Photos</nerd>
+        <ru><![CDATA[К-во последних работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>FavoritesJob: Favorite entries</nerd>
+        <ru><![CDATA[Типы избранного]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>RankVotingJob: Actions count</nerd>
+        <ru><![CDATA[К-во действий]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job DateRangeParameters: from</nerd>
+        <ru><![CDATA[с]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job DateRangeParameters: to</nerd>
+        <ru><![CDATA[по]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Each action generates one of selected favorite entries randomly</nerd>
+        <ru><![CDATA[Генерирование случайным образом одной из выбранных закладок]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Enter $1</nerd>
+        <ru><![CDATA[Введите $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Select at least one $1</nerd>
+        <ru><![CDATA[Выберите хотя бы одно значение: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job is stopped because of error in child job #$1</nerd>
+        <ru><![CDATA[Задача была прервана т.к. выполнение подзадачи #$1 завершилось ошибкой]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Job list: filter by task type</nerd>
+        <ru><![CDATA[Показать только задачи типа]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

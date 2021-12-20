@@ -1,3 +1,0 @@
-<tr>
-	<jsp:doBody />
-</tr>

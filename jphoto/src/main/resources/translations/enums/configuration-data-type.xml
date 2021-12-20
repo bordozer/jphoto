@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>ConfigurationDataType: Int number</nerd>
+        <ru><![CDATA[Целое число]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ConfigurationDataType: String</nerd>
+        <ru><![CDATA[Строка]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ConfigurationDataType: Bytes</nerd>
+        <ru><![CDATA[Байт]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ConfigurationDataType: Float number</nerd>
+        <ru><![CDATA[Дробное число]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ConfigurationDataType: String array</nerd>
+        <ru><![CDATA[Массив строк]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ConfigurationDataType: Integer Array</nerd>
+        <ru><![CDATA[Целочисленный массив]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ConfigurationDataType: Yes/No</nerd>
+        <ru><![CDATA[Да/Нет]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

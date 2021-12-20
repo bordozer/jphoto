@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>JobExecutionHistoryCleanupJob: Delete entries that finished early then</nerd>
+        <ru><![CDATA[Удалять записи о задачах, выполнение которых закончилось раньше чем]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>JobExecutionHistoryCleanupJob: Job statuses to delete</nerd>
+        <ru><![CDATA[Удалять записи со статусами]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>JobExecutionHistoryCleanupJob: Delete entries that finished early then $1 day(s) ago</nerd>
+        <ru><![CDATA[Удалять записи о задачах, выполнение которых закончилось раньше чем $1 дня(ней)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>JobExecutionHistoryCleanupJob: All job execution statuses</nerd>
+        <ru><![CDATA[Все статусы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

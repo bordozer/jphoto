@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Must contains one digit from 0-9</nerd>
+        <ru><![CDATA[Пароль должен содержать как минимум одну цифру от 0 до 9]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[Must contains one digit from 0-9]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Must contains one lowercase characters</nerd>
+        <ru><![CDATA[Пароль должен содержать как минимум одну букву английского алфавита в нижнем регистре]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[Must contains one lowercase characters]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Must contains one uppercase characters</nerd>
+        <ru><![CDATA[Пароль должен содержать как минимум одну букву английского алфавита в верхнем регистре]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[Must contains one uppercase characters]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Must contains one special symbols from the list</nerd>
+        <ru><![CDATA[Пароль должен содержать как минимум один символ из списка]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[Must contains one special symbols from the list]]></en>
+    </translation>
+
+    <translation>
+        <nerd>No whitespace allowed in the entire string</nerd>
+        <ru><![CDATA[Недопустимо использовать пробелы в пароле]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[No whitespace allowed in the entire string]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Randomly generated passwords (you can use one of them):</nerd>
+        <ru><![CDATA[Примеры случайно сгенерированных паролей (можно использовать в качестве вашего пароля)]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[Randomly generated passwords (you can use one of them):]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Minimal secure password example</nerd>
+        <ru><![CDATA[Пример пароля, минимально удовлетворяющий требованиям]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[Minimal secure password example]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Good password example</nerd>
+        <ru><![CDATA[Пример хорошего пароля]]></ru>
+        <ua><![CDATA[Приклад гарного пароля]]></ua>
+        <en><![CDATA[Good password example]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Excellent password example</nerd>
+        <ru><![CDATA[Пример отличного пароля]]></ru>
+        <ua><![CDATA[Приклад вiдмiнного пароля]]></ua>
+        <en><![CDATA[Excellent password example]]></en>
+    </translation>
+
+    <translation>
+        <nerd>User data edit: Photo appraisal allowance by default</nerd>
+        <ru><![CDATA[По умолчанию при загрузке работ выставлять значение поля 'Возможность оценивать работу']]></ru>
+        <en><![CDATA[Photo upload: voting allowance by default]]></en>
+    </translation>
+
+    <translation>
+        <nerd>User data edit: Comments allowance by default</nerd>
+        <ru><![CDATA[По умолчанию при загрузке работ выставлять значение поля 'Возможность оставлять комментарии']]></ru>
+        <en><![CDATA[Photo upload: voting allowance by default]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Your login should have length $1-$2, a-z, A-Z, 0-9 or _.</nerd>
+        <ru><![CDATA[Логин должен быть от $1 до $2 и содержать большие и маленькие английские буквы (a-z, A-Z), цивры (0-9) или символ подчеркивания _]]></ru>
+        <en><![CDATA[Your login should have length $1-$2, a-z, A-Z, 0-9 or _.]]></en>
+    </translation>
+
+    <translation>
+        <nerd>User data edit: photos on page - auto</nerd>
+        <ru><![CDATA[авто]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+        <!--<ua><![CDATA[]]></ua>-->
+        <en><![CDATA[]]></en>
+    </translation>
+
+</translations>

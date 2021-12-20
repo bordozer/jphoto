@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>The rank could not correspond gotten voices due to ranks in categories are recalculated periodically.</nerd>
+        <ru><![CDATA[Текущий ранг пользователя может не совпадать с показанным т.к. ранги в категориях пересчитываются периодически, а не 'налету']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Current points: $1</nerd>
+        <ru><![CDATA[Текущее к-во голосов: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>New rank: $1</nerd>
+        <ru><![CDATA[Присвоен новый ранг: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Total points:</nerd>
+        <ru><![CDATA[Всего голосов за ранг]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Voting for $1 rank in category $2</nerd>
+        <ru><![CDATA[История голосования за ранг $1 в категории $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

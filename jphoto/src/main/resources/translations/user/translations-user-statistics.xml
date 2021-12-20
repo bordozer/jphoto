@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>User Statistics: The user is added in favorite members by</nerd>
+        <ru><![CDATA[В избранных у пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: The list of users who added $1 to the favorite members</nerd>
+        <ru><![CDATA[Список пользователей, кто добавил $1 в избранные пользователи]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: User's received comments</nerd>
+        <ru><![CDATA[Полученные комментарии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Comments to $1's photos</nerd>
+        <ru><![CDATA[Комментарии к работам пользователя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: User's received unread comments</nerd>
+        <ru><![CDATA[Полученные непрочитанные комментарии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Unread by $1 comments</nerd>
+        <ru><![CDATA[Комментарии к работам $1, непрочитанные автором]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Written by user comments</nerd>
+        <ru><![CDATA[Написанные комменарии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Written by $1 comments</nerd>
+        <ru><![CDATA[Комментарии, которые $1 оставил к работам]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Photos of user's favorite members</nerd>
+        <ru><![CDATA[Работы избранных пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Photos of $1's favorite members</nerd>
+        <ru><![CDATA[$1: работы избранных пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: $1 marked $2 photo(s) as $3</nerd>
+        <ru><![CDATA[$1 отметил $2 работ(ы) критерием '$3']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Summary marks set for $1: $2</nerd>
+        <ru><![CDATA[Суммарный выставленный балл по критерию '$1': $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Tab: Last set marks</nerd>
+        <ru><![CDATA[Выставленные оценки]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Tab: Photo albums</nerd>
+        <ru><![CDATA[Альбомы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Tab: Team</nerd>
+        <ru><![CDATA[Коданда]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User Statistics: Tab: Statistics</nerd>
+        <ru><![CDATA[Статистика]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

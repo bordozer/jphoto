@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<upgraderegistry>
+
+    <release name="1.0.0">
+        <!--<task name="main.java.com.bordozer.jphoto.admin.upgrade.tasks.example.FirstTestUpgradeTask"/>-->
+        <!--<task name="main.java.com.bordozer.jphoto.admin.upgrade.tasks.example.SecondTestUpgradeTask"/>-->
+
+        <!--<task name="main.java.com.bordozer.jphoto.admin.upgrade.tasks.PhotoCommentsReadMarkUpgradeTask"/>-->
+        <!--<task name="main.java.com.bordozer.jphoto.admin.upgrade.tasks.PhotoVotingMaxAccessibleMarkUpgradeTask"/>-->
+
+    </release>
+
+</upgraderegistry>

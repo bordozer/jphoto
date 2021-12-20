@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>ActivityStreamCleanupJob: Delete activities older then $1 days</nerd>
+        <ru><![CDATA[Удалять записи ленты событий старше чем $1 дня(ней)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityStreamCleanupJob: Activity types to delete</nerd>
+        <ru><![CDATA[Типы активности к удалению]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityStreamCleanupJob: All activity types</nerd>
+        <ru><![CDATA[Все типы активности]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityStreamCleanupJob: Delete activities older then</nerd>
+        <ru><![CDATA[Удалять записи ленты событий старше чем]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>ComplaintReasonType: Spam</nerd>
+        <ru><![CDATA[Спам]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ComplaintReasonType: Sword words</nerd>
+        <ru><![CDATA[Оскорбления]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ComplaintReasonType: Custom complaint</nerd>
+        <ru><![CDATA[Жалоба]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ComplaintReasonType: Photo copyright complaint</nerd>
+        <ru><![CDATA[Нарушение копирайта]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>$1</nerd>
+        <ru><![CDATA[$1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System login form: Login</nerd>
+        <ru><![CDATA[Логин]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System login form: Logout</nerd>
+        <ru><![CDATA[Выход]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System login form: Remember me</nerd>
+        <ru><![CDATA[Запомнить меня]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Sorry, but you do not have permission to perform this operation</nerd>
+        <ru><![CDATA[Извините, но у вас нет доступа к данной функциональности]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System login form: Password</nerd>
+        <ru><![CDATA[Пароль]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Sorry, but page not found on the server</nerd>
+        <ru><![CDATA[Извините, но такой страницы на сервере нет]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>$1 - selected UI language</nerd>
+        <ru><![CDATA[$1 - установить язык интерфейса]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>System slogan: Post your soul here</nerd>
+        <ru><![CDATA[Опубликуй мечту здесь]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Login info: Your card</nerd>
+        <ru><![CDATA[Ваша карточка]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ROD PLURAL photos</nerd>
+        <ru><![CDATA[работ(ы)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PLURAL marks</nerd>
+        <ru><![CDATA[баллов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PLURAL voices</nerd>
+        <ru><![CDATA[голосов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ROD PLURAL marks</nerd>
+        <ru><![CDATA[балл(ов)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ROD PLURAL days</nerd>
+        <ru><![CDATA[дня(ей)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>$1: $2</nerd>
+        <ru><![CDATA[$1: $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send private message: UI notification: The message has been sent to</nerd>
+        <ru><![CDATA[Сообщение отправлено]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send private message: Form title: Send private message to</nerd>
+        <ru><![CDATA[Отправить личное сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send private message: Button text: Send message</nerd>
+        <ru><![CDATA[Отправить]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Access denied page title</nerd>
+        <ru><![CDATA[Вы не имеете доступа к этой страничке]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>second(s)</nerd>
+        <ru><![CDATA[секунд(ы)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send complaint form: Message</nerd>
+        <ru><![CDATA[Сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Private message form: Title</nerd>
+        <ru><![CDATA[Сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Private message form: Text</nerd>
+        <ru><![CDATA[Текст сообщения]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Translator: Translated</nerd>
+        <ru><![CDATA[Переведенные]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Translator: Untranslated</nerd>
+        <ru><![CDATA[Непереведенные]]></ru>
+    </translation>
+    <translation>
+        <nerd>Translator: unused translations</nerd>
+        <ru><![CDATA[С нулевым индексом использования]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Error 404 - Page not found</nerd>
+        <ru><![CDATA[Ошибка 404 - Страница не найдена]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>second(s)</nerd>
+        <ru><![CDATA[секунд(ы)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send Complaint Message: Send complaint message dialog title</nerd>
+        <ru><![CDATA[Пожаловаться]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send Complaint Message: The message has been sent</nerd>
+        <ru><![CDATA[Сообщение отправлено]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Send Complaint Message: Send message button text</nerd>
+        <ru><![CDATA[Отправить]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Paging: Pages $1 - $2</nerd>
+        <ru><![CDATA[Страницы $1 - $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photos in category '$1': $2</nerd>
+        <ru><![CDATA[Работ в раздере '$1': $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>second(s)</nerd>
+        <ru><![CDATA[секунд(ы)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>id</nerd>
+        <ru><![CDATA[Код]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Translations have been reloaded</nerd>
+        <ru><![CDATA[Переводы загружены заново]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>General exception: Oops!</nerd>
+        <ru><![CDATA[Ой!]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>px</nerd>
+        <ru><![CDATA[пикс]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Kb</nerd>
+        <ru><![CDATA[Кб]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Do NOT show nude content</nerd>
+        <ru><![CDATA[НЕ показывать НЮ контент]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>I am over 18. Show nude content</nerd>
+        <ru><![CDATA[Я старше 18 лет. Показывать работы, содержащие НЮ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Nude content warning</nerd>
+        <ru><![CDATA[Предупреждение: 'взрослый' контент]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>* If you want to switch nude content on by default, you can do this in the settings of your account</nerd>
+        <ru><![CDATA[Если вы хоте, чтобы НЮ контент отображался по-умолчанию, включите соответствующуу опцию в настройках вашего профайла]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>* This choice of NUDE visibility will be applied for all photos for your current session</nerd>
+        <ru><![CDATA[Данный выбор будет автоматически применяться ко всем работам в рамках вашей текущей сессии]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ADMIN submenu text</nerd>
+        <ru><![CDATA[АДМИН]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Error executing ajax query</nerd>
+        <ru><![CDATA[Ошибка выполнения AJAX-запроса]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Enter $1.</nerd>
+        <ru><![CDATA[Введите $1.]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Successfully removed from $1</nerd>
+        <ru><![CDATA[Удалено из $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Successfully added to $1</nerd>
+        <ru><![CDATA[Добавлено в $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Max $1 dimension is $2 x $3, but uploaded file is $4 x $5</nerd>
+        <ru><![CDATA[$1: разрешение должно быть не больше чем $2 x $3, загруженный файл имеет $4 x $5]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Min $1 dimension is $2 x $3, but uploaded file is $4 x $5</nerd>
+        <ru><![CDATA[$1: разрешение должно быть не меньше чем $2 x $3, загруженный файл имеет $4 x $5]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>File field name: File</nerd>
+        <ru><![CDATA[Файл]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Move photo to the selected category?</nerd>
+        <ru><![CDATA[Переместить работу в выбранную категорию?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>$1 is moved your photo '$2' to genre '$3'</nerd>
+        <ru><![CDATA[$1 переместил(а) вашу работу '$2' в раздел '$3']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Logged user only area</nerd>
+        <ru><![CDATA[Территория авторизированных пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Sorry, this operation can perform only logged users</nerd>
+        <ru><![CDATA[Извините, но данная операция доступна только авторизированным пользователям]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The entry is already in $1. You mush have already added it.</nerd>
+        <ru><![CDATA[Уже находится в $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The entry is not in $1. You mush have already removed it.</nerd>
+        <ru><![CDATA[Не найдено в $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: photos in genre count</nerd>
+        <ru><![CDATA[К-во работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Genre list: LAst uploaded photo. Author $1</nerd>
+        <ru><![CDATA[Последняя загруженная работа. Автор - $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>$1 - photo info</nerd>
+        <ru><![CDATA[$1 - информация о работе]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>$1 '$2' should be more then $3 symbols</nerd>
+        <ru><![CDATA[$1 '$2' должно быть длиннее $3 символов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The UI language has been changed for this session only. Set preferred a language in your profile settings for permanent basement</nerd>
+        <ru>
+            <![CDATA[Язык интерфейса был изменен только на период текущей сессии. Измените язык в ваших настройках, если вы хотите постоянно пользоваться этим языком]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Photo category points staircase:</nerd>
+        <ru><![CDATA[Лестница рангов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>There is necessary to have $1 votes to get rank $2 in a photo category</nerd>
+        <ru><![CDATA[Чтобы получить $2 ранг, необходимо набрать $1 голосов]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>The page is under construction</nerd>
+        <ru><![CDATA[Страница на стадии разработки]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Select $1</nerd>
+        <ru><![CDATA[Выберите $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ANONYMOUS_USER_NAME</nerd>
+        <ru><![CDATA[Анонимно]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

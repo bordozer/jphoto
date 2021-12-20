@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>User list filter: Members search</nerd>
+        <ru><![CDATA[Поиск пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User list filter: Member name</nerd>
+        <ru><![CDATA[Имя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User list filter: Membership type</nerd>
+        <ru><![CDATA[Тип участия пользователя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User list filter: Search members</nerd>
+        <ru><![CDATA[Искать]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>User list filter: Reset filter</nerd>
+        <ru><![CDATA[Очистить форму фильтра]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

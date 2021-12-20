@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>Control panel: Statistics tab</nerd>
+        <ru><![CDATA[Статистика]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: System tab</nerd>
+        <ru><![CDATA[Система]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Users total</nerd>
+        <ru><![CDATA[Всего пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Registration graph</nerd>
+        <ru><![CDATA[График регистрации]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Photos total</nerd>
+        <ru><![CDATA[Всего работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Photo previews total</nerd>
+        <ru><![CDATA[Всего просмотров]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Photo comments total</nerd>
+        <ru><![CDATA[Всего комментариев]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Private messages total</nerd>
+        <ru><![CDATA[Всего личных сообщений]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Reload system properties</nerd>
+        <ru><![CDATA[Перегрузить системные настройки из System.properties]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Reload translations</nerd>
+        <ru><![CDATA[Перезагрузить переводы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Clear system cache</nerd>
+        <ru><![CDATA[Сбросить системный кеш]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Delete user photos</nerd>
+        <ru><![CDATA[Удаление работ пользователя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: Delete user photos?</nerd>
+        <ru><![CDATA[Удалить ВСЕ работы пользователя?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Control panel: delete photos</nerd>
+        <ru><![CDATA[Удалить работы]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

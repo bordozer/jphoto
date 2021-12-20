@@ -1,0 +1,40 @@
+.gradle
+/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+rebel.xml
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# webapp
+/src/main/webapp/build/
+/src/main/webapp/node_modules/
+
+### npm
+node_modules/
+target/
+db_storage/
+
+# terraform
+*.tfstate
+*.backup
+terraform/**/.terraform

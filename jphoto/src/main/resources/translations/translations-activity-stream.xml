@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>activity stream: uploaded photo $1</nerd>
+        <ru><![CDATA[загрузил(а) работу '$1']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: New member registration</nerd>
+        <ru><![CDATA[Регистрация новых пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: New photo upload</nerd>
+        <ru><![CDATA[Загрузка работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Photo voting</nerd>
+        <ru><![CDATA[Оценка работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Photo comment</nerd>
+        <ru><![CDATA[Комментирование работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Photo preview</nerd>
+        <ru><![CDATA[Просмотры работ]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Favorite action</nerd>
+        <ru><![CDATA[Добавление в закладки]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Voting for user rank in genre</nerd>
+        <ru><![CDATA[Голосование за ранг пользователей в фото категориях]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Member status</nerd>
+        <ru><![CDATA[Изменение статуса пользователей]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>ActivityType: Member's rank in genre changed</nerd>
+        <ru><![CDATA[Изменение ранга пользователей в фото категориях]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Reset activity filter</nerd>
+        <ru><![CDATA[Сбросить фильтр]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Show full member activity stream (short)</nerd>
+        <ru><![CDATA[Все]]></ru>
+        <ua><![CDATA[Усi]]></ua>
+    </translation>
+
+    <translation>
+        <nerd>Show full member activity stream</nerd>
+        <ru><![CDATA[Показать всю ленту событий пользователя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: rank in category '$1' has changed from $2 to $3</nerd>
+        <ru><![CDATA[ранг в разделе '$1' изменен с $2 на $3]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>user registration activity stream: registered</nerd>
+        <ru><![CDATA[зарегистрировался(лась)]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: voted for rank of $1 in category $2 ( $3 )</nerd>
+        <ru><![CDATA[проголосовал(а) за за изменение ранга $1 в разделе '$2' ( $3 )]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: the status in the club has been changed from $1 to $2</nerd>
+        <ru><![CDATA[статус в клубе изменен с '$1' на '$2']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: uploaded photo $1</nerd>
+        <ru><![CDATA[загрузил(а) работу $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream: uploaded photo $1</nerd>
+        <ru><![CDATA[загрузил(а) $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: viewed photo $1</nerd>
+        <ru><![CDATA[посмотрел(а) работу$1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: commented photo $1</nerd>
+        <ru><![CDATA[оставил(а) комментарий к работе $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: added $1 to $2</nerd>
+        <ru><![CDATA[добавил(а) $1 в $2]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>activity stream entry: appraised photo $1</nerd>
+        <ru><![CDATA[оценил(а) работу '$1']]></ru>
+    </translation>
+
+    <translation>
+        <nerd>Activity stream: There is no any activity yet</nerd>
+        <ru><![CDATA[Нет активности по данному критерию]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

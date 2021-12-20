@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: jphoto
+  profiles:
+    active: dev
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+app:
+  projectName: JPhoto
+  projectUrl: http://localhost:8555
+  language:
+    active: RU,UA,NERD
+    default: RU
+  systemDateFormat: yyyy-MM-dd
+  systemTimeFormat: HH:mm:ss
+  systemTimeFormatShort: HH:mm
+  jsDateFormat: yy-mm-dd
+  superAdminUserIDs: 1
+  devMode: true
+  scheduler:
+    enabled: true
+  adminPrefix: /admin
+  photoStoragePath: /home/blu/temp/jphoto/storage
+  systemTempFolder: /tmp
+  remotePhotoSitesCachePath: /home/blu/temp/jphoto/cache
+
+org:
+  quartz:
+    scheduler:
+      instanceName: MyScheduler
+    threadPool:
+      threadCount: 10
+    jobStore:
+      class: org.quartz.simpl.RAMJobStore
+
+
+server:
+  port: 8555
+
+security:
+  basic:
+    enabled: false
+management:
+  security:
+    enabled: false
+
+---
+spring:
+  profiles: dev
+  jpa:
+    database: MYSQL
+  datasource:
+    url: jdbc:mysql://localhost:3300/jphoto_db
+    username: root
+    password: ohcuc3Teew5aeReReex9oi7eeV4ka5ee

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>UserTeamMemberEditData: Member parameters</nerd>
+        <ru><![CDATA[Параметры]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserTeamMemberEditData: Team member custom name</nerd>
+        <ru><![CDATA[Имя]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserTeamMemberEditData: Model type</nerd>
+        <ru><![CDATA[Тип]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserTeamMemberEditData: Member</nerd>
+        <ru><![CDATA[Пользователь клуба]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>UserTeamMemberEditData: Save button text</nerd>
+        <ru><![CDATA[Сохранить]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>

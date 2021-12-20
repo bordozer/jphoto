@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<translations>
+
+    <translation>
+        <nerd>PrivateMessage: New</nerd>
+        <ru><![CDATA[Новое]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: $1 read this message at</nerd>
+        <ru><![CDATA[$1 прочитал(а) это сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: $1 has not read this message yet</nerd>
+        <ru><![CDATA[$1 еще не прочитал(а) это сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: You read this message at</nerd>
+        <ru><![CDATA[Вы прочитали это сообщение]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: From</nerd>
+        <ru><![CDATA[от]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: To</nerd>
+        <ru><![CDATA[к]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Delete ALL $1</nerd>
+        <ru><![CDATA[Удалить все $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Delete ALL $1?</nerd>
+        <ru><![CDATA[Удалить все $1?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Delete selected messages</nerd>
+        <ru><![CDATA[Удалить выделенные сообщения]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Delete selected messages?</nerd>
+        <ru><![CDATA[Удалить выделенные сообщения?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Mark ALL $1 as read</nerd>
+        <ru><![CDATA[Пометить все $1 как прочитанные]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Mark all $1 as read?</nerd>
+        <ru><![CDATA[Пометить все $1 как прочитанные?]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Total messages</nerd>
+        <ru><![CDATA[Всего сообщений]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: New messages</nerd>
+        <ru><![CDATA[Новых сообщений]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Show messaging with $1</nerd>
+        <ru><![CDATA[Показать переписку с $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Sent: $1</nerd>
+        <ru><![CDATA[Отправленных: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd>PrivateMessage: Received: $1</nerd>
+        <ru><![CDATA[Полученных: $1]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+    <translation>
+        <nerd></nerd>
+        <ru><![CDATA[]]></ru>
+    </translation>
+
+</translations>
