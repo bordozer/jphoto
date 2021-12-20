@@ -10,6 +10,7 @@ import com.bordozer.jphoto.core.general.photo.ValidationResult;
 import com.bordozer.jphoto.core.general.user.User;
 import com.bordozer.jphoto.core.general.user.UserPhotoVote;
 import com.bordozer.jphoto.core.log.LogHelper;
+import com.bordozer.jphoto.core.services.translator.Language;
 import com.bordozer.jphoto.core.services.translator.message.TranslatableMessage;
 import com.bordozer.jphoto.core.services.utils.DateUtilsService;
 import com.bordozer.jphoto.core.services.utils.EntityLinkUtilsService;
@@ -37,7 +38,7 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
             return false;
         }
 
-        final ValidationResult validationResult = services.getSecurityService().validateUserCanVoteForPhoto(user, photo, actionTime, getSystemDefaultLanguage());
+        final ValidationResult validationResult = services.getSecurityService().validateUserCanVoteForPhoto(user, photo, actionTime, Language.RU); // TODO: read language from properties
         if (validationResult.isValidationFailed()) {
             //				getLog().debug( String.format( "Voting fot a photo: %s", validation.getValidationMessage() ) );
             return false;

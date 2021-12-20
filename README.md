@@ -16,3 +16,6 @@ cd jphoto
 cd jphoto
 ./deploy-local.sh
 ```
+
+
+[<img src="https://user-images.githubusercontent.com/11032280/146773196-d0b1a64f-66fd-4b64-9013-606f8429de79.png">]

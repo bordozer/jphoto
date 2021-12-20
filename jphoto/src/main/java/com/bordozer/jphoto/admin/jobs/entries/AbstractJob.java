@@ -16,7 +16,6 @@ import com.bordozer.jphoto.core.services.translator.message.TranslatableMessage;
 import com.bordozer.jphoto.core.services.utils.sql.PhotoListQueryBuilder;
 import com.bordozer.jphoto.utils.ErrorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 import java.util.List;
@@ -42,9 +41,6 @@ public abstract class AbstractJob extends Thread {
 
     @Autowired
     protected Services services;
-
-    @Value("${app.language.default}")
-    private String defaultLanguage;
 
     protected final LogHelper log;
 
@@ -349,10 +345,6 @@ public abstract class AbstractJob extends Thread {
 
     public void setScheduledTaskId(final int scheduledTaskId) {
         this.scheduledTaskId = scheduledTaskId;
-    }
-
-    protected Language getSystemDefaultLanguage() {
-        return Language.getByCode(defaultLanguage);
     }
 
     protected String translate(final String actions) {

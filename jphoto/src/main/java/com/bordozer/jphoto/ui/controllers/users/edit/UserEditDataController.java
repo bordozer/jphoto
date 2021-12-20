@@ -45,7 +45,7 @@ import static com.google.common.collect.Sets.newHashSet;
 @RequestMapping(UrlUtilsServiceImpl.USERS_URL)
 public class UserEditDataController {
 
-    public static final String DEFAULT_USER_PASSWORD = "eM2&gCyRuJX";
+    public static final String DEFAULT_USER_PASSWORD = "sP7%QJ";
 
     private static final String VIEW = "users/edit/UserEditData";
 
